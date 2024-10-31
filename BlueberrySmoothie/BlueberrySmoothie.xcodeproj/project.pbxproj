@@ -7,63 +7,65 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		128F56AC2CC1F05F0010A7AF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 128F56AB2CC1F05F0010A7AF /* AppDelegate.swift */; };
-		128F56AE2CC1F05F0010A7AF /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 128F56AD2CC1F05F0010A7AF /* GameScene.sks */; };
-		128F56B02CC1F05F0010A7AF /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 128F56AF2CC1F05F0010A7AF /* Actions.sks */; };
-		128F56B22CC1F05F0010A7AF /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 128F56B12CC1F05F0010A7AF /* GameScene.swift */; };
-		128F56B42CC1F05F0010A7AF /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 128F56B32CC1F05F0010A7AF /* GameViewController.swift */; };
-		128F56B72CC1F05F0010A7AF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 128F56B52CC1F05F0010A7AF /* Main.storyboard */; };
-		128F56B92CC1F0600010A7AF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 128F56B82CC1F0600010A7AF /* Assets.xcassets */; };
-		128F56BC2CC1F0600010A7AF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 128F56BA2CC1F0600010A7AF /* LaunchScreen.storyboard */; };
+		1232B3B02CD1D3DE00C48414 /* BlueBerrySmoothieApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1232B3AF2CD1D3DE00C48414 /* BlueBerrySmoothieApp.swift */; };
+		1232B3B22CD1D3DE00C48414 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1232B3B12CD1D3DE00C48414 /* ContentView.swift */; };
+		1232B3B42CD1D3DF00C48414 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1232B3B32CD1D3DF00C48414 /* Assets.xcassets */; };
+		1232B3B72CD1D3DF00C48414 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1232B3B62CD1D3DF00C48414 /* Preview Assets.xcassets */; };
+		1232B3DB2CD1D40500C48414 /* DummyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1232B3DA2CD1D40500C48414 /* DummyModel.swift */; };
+		1232B3DE2CD1D41600C48414 /* DummyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1232B3DD2CD1D41600C48414 /* DummyView.swift */; };
+		1232B3E12CD1D46500C48414 /* DummyHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1232B3E02CD1D46500C48414 /* DummyHelper.swift */; };
+		1232B3E42CD1D48600C48414 /* DummyNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1232B3E32CD1D48600C48414 /* DummyNetwork.swift */; };
+		1232B3E72CD1D4A300C48414 /* DummyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1232B3E62CD1D4A300C48414 /* DummyManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		128F56C22CC1F0600010A7AF /* PBXContainerItemProxy */ = {
+		1232B3BD2CD1D3DF00C48414 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 128F56A02CC1F05F0010A7AF /* Project object */;
+			containerPortal = 1232B3A42CD1D3DE00C48414 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 128F56A72CC1F05F0010A7AF;
-			remoteInfo = BlueberrySmoothie;
+			remoteGlobalIDString = 1232B3AB2CD1D3DE00C48414;
+			remoteInfo = BlueBerrySmoothie;
 		};
-		128F56CC2CC1F0600010A7AF /* PBXContainerItemProxy */ = {
+		1232B3C72CD1D3DF00C48414 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 128F56A02CC1F05F0010A7AF /* Project object */;
+			containerPortal = 1232B3A42CD1D3DE00C48414 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 128F56A72CC1F05F0010A7AF;
-			remoteInfo = BlueberrySmoothie;
+			remoteGlobalIDString = 1232B3AB2CD1D3DE00C48414;
+			remoteInfo = BlueBerrySmoothie;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		128F56A82CC1F05F0010A7AF /* BlueberrySmoothie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BlueberrySmoothie.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		128F56AB2CC1F05F0010A7AF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		128F56AD2CC1F05F0010A7AF /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
-		128F56AF2CC1F05F0010A7AF /* Actions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Actions.sks; sourceTree = "<group>"; };
-		128F56B12CC1F05F0010A7AF /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
-		128F56B32CC1F05F0010A7AF /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
-		128F56B62CC1F05F0010A7AF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		128F56B82CC1F0600010A7AF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		128F56BB2CC1F0600010A7AF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		128F56C12CC1F0600010A7AF /* BlueberrySmoothieTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BlueberrySmoothieTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		128F56CB2CC1F0600010A7AF /* BlueberrySmoothieUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BlueberrySmoothieUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		1232B3AC2CD1D3DE00C48414 /* BlueBerrySmoothie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BlueBerrySmoothie.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1232B3AF2CD1D3DE00C48414 /* BlueBerrySmoothieApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlueBerrySmoothieApp.swift; sourceTree = "<group>"; };
+		1232B3B12CD1D3DE00C48414 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		1232B3B32CD1D3DF00C48414 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		1232B3B62CD1D3DF00C48414 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		1232B3BC2CD1D3DF00C48414 /* BlueBerrySmoothieTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BlueBerrySmoothieTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		1232B3C62CD1D3DF00C48414 /* BlueBerrySmoothieUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BlueBerrySmoothieUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		1232B3DA2CD1D40500C48414 /* DummyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyModel.swift; sourceTree = "<group>"; };
+		1232B3DD2CD1D41600C48414 /* DummyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyView.swift; sourceTree = "<group>"; };
+		1232B3E02CD1D46500C48414 /* DummyHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyHelper.swift; sourceTree = "<group>"; };
+		1232B3E32CD1D48600C48414 /* DummyNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyNetwork.swift; sourceTree = "<group>"; };
+		1232B3E62CD1D4A300C48414 /* DummyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		128F56A52CC1F05F0010A7AF /* Frameworks */ = {
+		1232B3A92CD1D3DE00C48414 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		128F56BE2CC1F0600010A7AF /* Frameworks */ = {
+		1232B3B92CD1D3DF00C48414 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		128F56C82CC1F0600010A7AF /* Frameworks */ = {
+		1232B3C32CD1D3DF00C48414 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -73,119 +75,184 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		128F569F2CC1F05F0010A7AF = {
+		1232B3A32CD1D3DE00C48414 = {
 			isa = PBXGroup;
 			children = (
-				128F56AA2CC1F05F0010A7AF /* BlueberrySmoothie */,
-				128F56A92CC1F05F0010A7AF /* Products */,
+				1232B3AE2CD1D3DE00C48414 /* BlueBerrySmoothie */,
+				1232B3AD2CD1D3DE00C48414 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		128F56A92CC1F05F0010A7AF /* Products */ = {
+		1232B3AD2CD1D3DE00C48414 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				128F56A82CC1F05F0010A7AF /* BlueberrySmoothie.app */,
-				128F56C12CC1F0600010A7AF /* BlueberrySmoothieTests.xctest */,
-				128F56CB2CC1F0600010A7AF /* BlueberrySmoothieUITests.xctest */,
+				1232B3AC2CD1D3DE00C48414 /* BlueBerrySmoothie.app */,
+				1232B3BC2CD1D3DF00C48414 /* BlueBerrySmoothieTests.xctest */,
+				1232B3C62CD1D3DF00C48414 /* BlueBerrySmoothieUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		128F56AA2CC1F05F0010A7AF /* BlueberrySmoothie */ = {
+		1232B3AE2CD1D3DE00C48414 /* BlueBerrySmoothie */ = {
 			isa = PBXGroup;
 			children = (
-				128F56AB2CC1F05F0010A7AF /* AppDelegate.swift */,
-				128F56AD2CC1F05F0010A7AF /* GameScene.sks */,
-				128F56AF2CC1F05F0010A7AF /* Actions.sks */,
-				128F56B12CC1F05F0010A7AF /* GameScene.swift */,
-				128F56B32CC1F05F0010A7AF /* GameViewController.swift */,
-				128F56B52CC1F05F0010A7AF /* Main.storyboard */,
-				128F56B82CC1F0600010A7AF /* Assets.xcassets */,
-				128F56BA2CC1F0600010A7AF /* LaunchScreen.storyboard */,
+				1232B3E92CD1D4E800C48414 /* App */,
+				1232B3E82CD1D4B900C48414 /* Component */,
+				1232B3E52CD1D49000C48414 /* Manager */,
+				1232B3E22CD1D46E00C48414 /* Network */,
+				1232B3DF2CD1D45A00C48414 /* Helper */,
+				1232B3DC2CD1D40800C48414 /* View */,
+				1232B3D92CD1D3F700C48414 /* Model */,
+				1232B3B12CD1D3DE00C48414 /* ContentView.swift */,
+				1232B3B32CD1D3DF00C48414 /* Assets.xcassets */,
+				1232B3B52CD1D3DF00C48414 /* Preview Content */,
 			);
-			path = BlueberrySmoothie;
+			path = BlueBerrySmoothie;
+			sourceTree = "<group>";
+		};
+		1232B3B52CD1D3DF00C48414 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				1232B3B62CD1D3DF00C48414 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		1232B3D92CD1D3F700C48414 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				1232B3DA2CD1D40500C48414 /* DummyModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		1232B3DC2CD1D40800C48414 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				1232B3DD2CD1D41600C48414 /* DummyView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		1232B3DF2CD1D45A00C48414 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				1232B3E02CD1D46500C48414 /* DummyHelper.swift */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
+		1232B3E22CD1D46E00C48414 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				1232B3E32CD1D48600C48414 /* DummyNetwork.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		1232B3E52CD1D49000C48414 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				1232B3E62CD1D4A300C48414 /* DummyManager.swift */,
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
+		1232B3E82CD1D4B900C48414 /* Component */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Component;
+			sourceTree = "<group>";
+		};
+		1232B3E92CD1D4E800C48414 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				1232B3AF2CD1D3DE00C48414 /* BlueBerrySmoothieApp.swift */,
+			);
+			path = App;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		128F56A72CC1F05F0010A7AF /* BlueberrySmoothie */ = {
+		1232B3AB2CD1D3DE00C48414 /* BlueBerrySmoothie */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 128F56D52CC1F0600010A7AF /* Build configuration list for PBXNativeTarget "BlueberrySmoothie" */;
+			buildConfigurationList = 1232B3D02CD1D3DF00C48414 /* Build configuration list for PBXNativeTarget "BlueBerrySmoothie" */;
 			buildPhases = (
-				128F56A42CC1F05F0010A7AF /* Sources */,
-				128F56A52CC1F05F0010A7AF /* Frameworks */,
-				128F56A62CC1F05F0010A7AF /* Resources */,
+				1232B3A82CD1D3DE00C48414 /* Sources */,
+				1232B3A92CD1D3DE00C48414 /* Frameworks */,
+				1232B3AA2CD1D3DE00C48414 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = BlueberrySmoothie;
-			productName = BlueberrySmoothie;
-			productReference = 128F56A82CC1F05F0010A7AF /* BlueberrySmoothie.app */;
+			name = BlueBerrySmoothie;
+			productName = BlueBerrySmoothie;
+			productReference = 1232B3AC2CD1D3DE00C48414 /* BlueBerrySmoothie.app */;
 			productType = "com.apple.product-type.application";
 		};
-		128F56C02CC1F0600010A7AF /* BlueberrySmoothieTests */ = {
+		1232B3BB2CD1D3DF00C48414 /* BlueBerrySmoothieTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 128F56D82CC1F0600010A7AF /* Build configuration list for PBXNativeTarget "BlueberrySmoothieTests" */;
+			buildConfigurationList = 1232B3D32CD1D3DF00C48414 /* Build configuration list for PBXNativeTarget "BlueBerrySmoothieTests" */;
 			buildPhases = (
-				128F56BD2CC1F0600010A7AF /* Sources */,
-				128F56BE2CC1F0600010A7AF /* Frameworks */,
-				128F56BF2CC1F0600010A7AF /* Resources */,
+				1232B3B82CD1D3DF00C48414 /* Sources */,
+				1232B3B92CD1D3DF00C48414 /* Frameworks */,
+				1232B3BA2CD1D3DF00C48414 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				128F56C32CC1F0600010A7AF /* PBXTargetDependency */,
+				1232B3BE2CD1D3DF00C48414 /* PBXTargetDependency */,
 			);
-			name = BlueberrySmoothieTests;
-			productName = BlueberrySmoothieTests;
-			productReference = 128F56C12CC1F0600010A7AF /* BlueberrySmoothieTests.xctest */;
+			name = BlueBerrySmoothieTests;
+			productName = BlueBerrySmoothieTests;
+			productReference = 1232B3BC2CD1D3DF00C48414 /* BlueBerrySmoothieTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		128F56CA2CC1F0600010A7AF /* BlueberrySmoothieUITests */ = {
+		1232B3C52CD1D3DF00C48414 /* BlueBerrySmoothieUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 128F56DB2CC1F0600010A7AF /* Build configuration list for PBXNativeTarget "BlueberrySmoothieUITests" */;
+			buildConfigurationList = 1232B3D62CD1D3DF00C48414 /* Build configuration list for PBXNativeTarget "BlueBerrySmoothieUITests" */;
 			buildPhases = (
-				128F56C72CC1F0600010A7AF /* Sources */,
-				128F56C82CC1F0600010A7AF /* Frameworks */,
-				128F56C92CC1F0600010A7AF /* Resources */,
+				1232B3C22CD1D3DF00C48414 /* Sources */,
+				1232B3C32CD1D3DF00C48414 /* Frameworks */,
+				1232B3C42CD1D3DF00C48414 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				128F56CD2CC1F0600010A7AF /* PBXTargetDependency */,
+				1232B3C82CD1D3DF00C48414 /* PBXTargetDependency */,
 			);
-			name = BlueberrySmoothieUITests;
-			productName = BlueberrySmoothieUITests;
-			productReference = 128F56CB2CC1F0600010A7AF /* BlueberrySmoothieUITests.xctest */;
+			name = BlueBerrySmoothieUITests;
+			productName = BlueBerrySmoothieUITests;
+			productReference = 1232B3C62CD1D3DF00C48414 /* BlueBerrySmoothieUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		128F56A02CC1F05F0010A7AF /* Project object */ = {
+		1232B3A42CD1D3DE00C48414 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1520;
 				LastUpgradeCheck = 1520;
 				TargetAttributes = {
-					128F56A72CC1F05F0010A7AF = {
+					1232B3AB2CD1D3DE00C48414 = {
 						CreatedOnToolsVersion = 15.2;
 					};
-					128F56C02CC1F0600010A7AF = {
+					1232B3BB2CD1D3DF00C48414 = {
 						CreatedOnToolsVersion = 15.2;
-						TestTargetID = 128F56A72CC1F05F0010A7AF;
+						TestTargetID = 1232B3AB2CD1D3DE00C48414;
 					};
-					128F56CA2CC1F0600010A7AF = {
+					1232B3C52CD1D3DF00C48414 = {
 						CreatedOnToolsVersion = 15.2;
-						TestTargetID = 128F56A72CC1F05F0010A7AF;
+						TestTargetID = 1232B3AB2CD1D3DE00C48414;
 					};
 				};
 			};
-			buildConfigurationList = 128F56A32CC1F05F0010A7AF /* Build configuration list for PBXProject "BlueberrySmoothie" */;
+			buildConfigurationList = 1232B3A72CD1D3DE00C48414 /* Build configuration list for PBXProject "BlueBerrySmoothie" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -193,39 +260,36 @@
 				en,
 				Base,
 			);
-			mainGroup = 128F569F2CC1F05F0010A7AF;
-			productRefGroup = 128F56A92CC1F05F0010A7AF /* Products */;
+			mainGroup = 1232B3A32CD1D3DE00C48414;
+			productRefGroup = 1232B3AD2CD1D3DE00C48414 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				128F56A72CC1F05F0010A7AF /* BlueberrySmoothie */,
-				128F56C02CC1F0600010A7AF /* BlueberrySmoothieTests */,
-				128F56CA2CC1F0600010A7AF /* BlueberrySmoothieUITests */,
+				1232B3AB2CD1D3DE00C48414 /* BlueBerrySmoothie */,
+				1232B3BB2CD1D3DF00C48414 /* BlueBerrySmoothieTests */,
+				1232B3C52CD1D3DF00C48414 /* BlueBerrySmoothieUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		128F56A62CC1F05F0010A7AF /* Resources */ = {
+		1232B3AA2CD1D3DE00C48414 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				128F56B72CC1F05F0010A7AF /* Main.storyboard in Resources */,
-				128F56AE2CC1F05F0010A7AF /* GameScene.sks in Resources */,
-				128F56B92CC1F0600010A7AF /* Assets.xcassets in Resources */,
-				128F56BC2CC1F0600010A7AF /* LaunchScreen.storyboard in Resources */,
-				128F56B02CC1F05F0010A7AF /* Actions.sks in Resources */,
+				1232B3B72CD1D3DF00C48414 /* Preview Assets.xcassets in Resources */,
+				1232B3B42CD1D3DF00C48414 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		128F56BF2CC1F0600010A7AF /* Resources */ = {
+		1232B3BA2CD1D3DF00C48414 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		128F56C92CC1F0600010A7AF /* Resources */ = {
+		1232B3C42CD1D3DF00C48414 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -235,24 +299,28 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		128F56A42CC1F05F0010A7AF /* Sources */ = {
+		1232B3A82CD1D3DE00C48414 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				128F56B22CC1F05F0010A7AF /* GameScene.swift in Sources */,
-				128F56B42CC1F05F0010A7AF /* GameViewController.swift in Sources */,
-				128F56AC2CC1F05F0010A7AF /* AppDelegate.swift in Sources */,
+				1232B3E12CD1D46500C48414 /* DummyHelper.swift in Sources */,
+				1232B3DB2CD1D40500C48414 /* DummyModel.swift in Sources */,
+				1232B3DE2CD1D41600C48414 /* DummyView.swift in Sources */,
+				1232B3E42CD1D48600C48414 /* DummyNetwork.swift in Sources */,
+				1232B3B22CD1D3DE00C48414 /* ContentView.swift in Sources */,
+				1232B3E72CD1D4A300C48414 /* DummyManager.swift in Sources */,
+				1232B3B02CD1D3DE00C48414 /* BlueBerrySmoothieApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		128F56BD2CC1F0600010A7AF /* Sources */ = {
+		1232B3B82CD1D3DF00C48414 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		128F56C72CC1F0600010A7AF /* Sources */ = {
+		1232B3C22CD1D3DF00C48414 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -262,39 +330,20 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		128F56C32CC1F0600010A7AF /* PBXTargetDependency */ = {
+		1232B3BE2CD1D3DF00C48414 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 128F56A72CC1F05F0010A7AF /* BlueberrySmoothie */;
-			targetProxy = 128F56C22CC1F0600010A7AF /* PBXContainerItemProxy */;
+			target = 1232B3AB2CD1D3DE00C48414 /* BlueBerrySmoothie */;
+			targetProxy = 1232B3BD2CD1D3DF00C48414 /* PBXContainerItemProxy */;
 		};
-		128F56CD2CC1F0600010A7AF /* PBXTargetDependency */ = {
+		1232B3C82CD1D3DF00C48414 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 128F56A72CC1F05F0010A7AF /* BlueberrySmoothie */;
-			targetProxy = 128F56CC2CC1F0600010A7AF /* PBXContainerItemProxy */;
+			target = 1232B3AB2CD1D3DE00C48414 /* BlueBerrySmoothie */;
+			targetProxy = 1232B3C72CD1D3DF00C48414 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
-/* Begin PBXVariantGroup section */
-		128F56B52CC1F05F0010A7AF /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				128F56B62CC1F05F0010A7AF /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		128F56BA2CC1F0600010A7AF /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				128F56BB2CC1F0600010A7AF /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
-
 /* Begin XCBuildConfiguration section */
-		128F56D32CC1F0600010A7AF /* Debug */ = {
+		1232B3CE2CD1D3DF00C48414 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -357,7 +406,7 @@
 			};
 			name = Debug;
 		};
-		128F56D42CC1F0600010A7AF /* Release */ = {
+		1232B3CF2CD1D3DF00C48414 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -413,19 +462,20 @@
 			};
 			name = Release;
 		};
-		128F56D62CC1F0600010A7AF /* Debug */ = {
+		1232B3D12CD1D3DF00C48414 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"BlueBerrySmoothie/Preview Content\"";
 				DEVELOPMENT_TEAM = H54Z863265;
+				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UIStatusBarHidden = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -433,7 +483,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = Yeggggi.BlueberrySmoothie;
+				PRODUCT_BUNDLE_IDENTIFIER = Yeggggi.BlueBerrySmoothie;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -441,19 +491,20 @@
 			};
 			name = Debug;
 		};
-		128F56D72CC1F0600010A7AF /* Release */ = {
+		1232B3D22CD1D3DF00C48414 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"BlueBerrySmoothie/Preview Content\"";
 				DEVELOPMENT_TEAM = H54Z863265;
+				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UIStatusBarHidden = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -461,7 +512,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = Yeggggi.BlueberrySmoothie;
+				PRODUCT_BUNDLE_IDENTIFIER = Yeggggi.BlueBerrySmoothie;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -469,7 +520,7 @@
 			};
 			name = Release;
 		};
-		128F56D92CC1F0600010A7AF /* Debug */ = {
+		1232B3D42CD1D3DF00C48414 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
@@ -480,16 +531,16 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = Yeggggi.BlueberrySmoothieTests;
+				PRODUCT_BUNDLE_IDENTIFIER = Yeggggi.BlueBerrySmoothieTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BlueberrySmoothie.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/BlueberrySmoothie";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BlueBerrySmoothie.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/BlueBerrySmoothie";
 			};
 			name = Debug;
 		};
-		128F56DA2CC1F0600010A7AF /* Release */ = {
+		1232B3D52CD1D3DF00C48414 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
@@ -500,16 +551,16 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = Yeggggi.BlueberrySmoothieTests;
+				PRODUCT_BUNDLE_IDENTIFIER = Yeggggi.BlueBerrySmoothieTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BlueberrySmoothie.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/BlueberrySmoothie";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BlueBerrySmoothie.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/BlueBerrySmoothie";
 			};
 			name = Release;
 		};
-		128F56DC2CC1F0600010A7AF /* Debug */ = {
+		1232B3D72CD1D3DF00C48414 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
@@ -518,16 +569,16 @@
 				DEVELOPMENT_TEAM = H54Z863265;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = Yeggggi.BlueberrySmoothieUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = Yeggggi.BlueBerrySmoothieUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = BlueberrySmoothie;
+				TEST_TARGET_NAME = BlueBerrySmoothie;
 			};
 			name = Debug;
 		};
-		128F56DD2CC1F0600010A7AF /* Release */ = {
+		1232B3D82CD1D3DF00C48414 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
@@ -536,55 +587,55 @@
 				DEVELOPMENT_TEAM = H54Z863265;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = Yeggggi.BlueberrySmoothieUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = Yeggggi.BlueBerrySmoothieUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = BlueberrySmoothie;
+				TEST_TARGET_NAME = BlueBerrySmoothie;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		128F56A32CC1F05F0010A7AF /* Build configuration list for PBXProject "BlueberrySmoothie" */ = {
+		1232B3A72CD1D3DE00C48414 /* Build configuration list for PBXProject "BlueBerrySmoothie" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				128F56D32CC1F0600010A7AF /* Debug */,
-				128F56D42CC1F0600010A7AF /* Release */,
+				1232B3CE2CD1D3DF00C48414 /* Debug */,
+				1232B3CF2CD1D3DF00C48414 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		128F56D52CC1F0600010A7AF /* Build configuration list for PBXNativeTarget "BlueberrySmoothie" */ = {
+		1232B3D02CD1D3DF00C48414 /* Build configuration list for PBXNativeTarget "BlueBerrySmoothie" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				128F56D62CC1F0600010A7AF /* Debug */,
-				128F56D72CC1F0600010A7AF /* Release */,
+				1232B3D12CD1D3DF00C48414 /* Debug */,
+				1232B3D22CD1D3DF00C48414 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		128F56D82CC1F0600010A7AF /* Build configuration list for PBXNativeTarget "BlueberrySmoothieTests" */ = {
+		1232B3D32CD1D3DF00C48414 /* Build configuration list for PBXNativeTarget "BlueBerrySmoothieTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				128F56D92CC1F0600010A7AF /* Debug */,
-				128F56DA2CC1F0600010A7AF /* Release */,
+				1232B3D42CD1D3DF00C48414 /* Debug */,
+				1232B3D52CD1D3DF00C48414 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		128F56DB2CC1F0600010A7AF /* Build configuration list for PBXNativeTarget "BlueberrySmoothieUITests" */ = {
+		1232B3D62CD1D3DF00C48414 /* Build configuration list for PBXNativeTarget "BlueBerrySmoothieUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				128F56DC2CC1F0600010A7AF /* Debug */,
-				128F56DD2CC1F0600010A7AF /* Release */,
+				1232B3D72CD1D3DF00C48414 /* Debug */,
+				1232B3D82CD1D3DF00C48414 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 128F56A02CC1F05F0010A7AF /* Project object */;
+	rootObject = 1232B3A42CD1D3DE00C48414 /* Project object */;
 }
