@@ -11,7 +11,7 @@ import SwiftUI
 struct BlueBerrySmoothieApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            SelectCityView()
         }
     }
 }
