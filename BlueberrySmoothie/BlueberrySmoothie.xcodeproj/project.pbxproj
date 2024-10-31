@@ -16,6 +16,7 @@
 		1232B3E12CD1D46500C48414 /* DummyHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1232B3E02CD1D46500C48414 /* DummyHelper.swift */; };
 		1232B3E42CD1D48600C48414 /* DummyNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1232B3E32CD1D48600C48414 /* DummyNetwork.swift */; };
 		1232B3E72CD1D4A300C48414 /* DummyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1232B3E62CD1D4A300C48414 /* DummyManager.swift */; };
+		12D2B6C12CD3533E005CF771 /* DummyComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D2B6C02CD3533E005CF771 /* DummyComponent.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +49,7 @@
 		1232B3E02CD1D46500C48414 /* DummyHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyHelper.swift; sourceTree = "<group>"; };
 		1232B3E32CD1D48600C48414 /* DummyNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyNetwork.swift; sourceTree = "<group>"; };
 		1232B3E62CD1D4A300C48414 /* DummyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyManager.swift; sourceTree = "<group>"; };
+		12D2B6C02CD3533E005CF771 /* DummyComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyComponent.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,8 +98,8 @@
 		1232B3AE2CD1D3DE00C48414 /* BlueBerrySmoothie */ = {
 			isa = PBXGroup;
 			children = (
+				12D2B6BF2CD3532F005CF771 /* Component */,
 				1232B3E92CD1D4E800C48414 /* App */,
-				1232B3E82CD1D4B900C48414 /* Component */,
 				1232B3E52CD1D49000C48414 /* Manager */,
 				1232B3E22CD1D46E00C48414 /* Network */,
 				1232B3DF2CD1D45A00C48414 /* Helper */,
@@ -158,19 +160,20 @@
 			path = Manager;
 			sourceTree = "<group>";
 		};
-		1232B3E82CD1D4B900C48414 /* Component */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Component;
-			sourceTree = "<group>";
-		};
 		1232B3E92CD1D4E800C48414 /* App */ = {
 			isa = PBXGroup;
 			children = (
 				1232B3AF2CD1D3DE00C48414 /* BlueBerrySmoothieApp.swift */,
 			);
 			path = App;
+			sourceTree = "<group>";
+		};
+		12D2B6BF2CD3532F005CF771 /* Component */ = {
+			isa = PBXGroup;
+			children = (
+				12D2B6C02CD3533E005CF771 /* DummyComponent.swift */,
+			);
+			path = Component;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -309,6 +312,7 @@
 				1232B3E42CD1D48600C48414 /* DummyNetwork.swift in Sources */,
 				1232B3B22CD1D3DE00C48414 /* ContentView.swift in Sources */,
 				1232B3E72CD1D4A300C48414 /* DummyManager.swift in Sources */,
+				12D2B6C12CD3533E005CF771 /* DummyComponent.swift in Sources */,
 				1232B3B02CD1D3DE00C48414 /* BlueBerrySmoothieApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
