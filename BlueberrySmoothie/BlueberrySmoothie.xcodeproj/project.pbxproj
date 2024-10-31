@@ -17,6 +17,13 @@
 		1232B3E42CD1D48600C48414 /* FetchBusAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1232B3E32CD1D48600C48414 /* FetchBusAPI.swift */; };
 		1232B3E72CD1D4A300C48414 /* DummyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1232B3E62CD1D4A300C48414 /* DummyManager.swift */; };
 		12D2B6C12CD3533E005CF771 /* DummyComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D2B6C02CD3533E005CF771 /* DummyComponent.swift */; };
+		12D2B6C62CD36E70005CF771 /* SelectBusStopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D2B6C52CD36E70005CF771 /* SelectBusStopView.swift */; };
+		12D2B6C82CD36E94005CF771 /* BusStopModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D2B6C72CD36E94005CF771 /* BusStopModel.swift */; };
+		12D2B6CA2CD36ED8005CF771 /* BusStopDecoderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D2B6C92CD36ED8005CF771 /* BusStopDecoderModel.swift */; };
+		12D2B6CC2CD3706F005CF771 /* fetchBusStopAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D2B6CB2CD3706F005CF771 /* fetchBusStopAPI.swift */; };
+		12D2B6CF2CD3ABAF005CF771 /* BusStopViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D2B6CE2CD3ABAF005CF771 /* BusStopViewModel.swift */; };
+		12D2B6D12CD3B104005CF771 /* NetworkHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D2B6D02CD3B104005CF771 /* NetworkHelper.swift */; };
+		12D2B6D42CD3F5BE005CF771 /* getAPIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D2B6D32CD3F5BD005CF771 /* getAPIKey.swift */; };
 		9DEA523F2CD362CA00A3AE68 /* SelectBusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEA523E2CD362C100A3AE68 /* SelectBusView.swift */; };
 		9DEA52412CD3630200A3AE68 /* CityDecoderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEA52402CD362FC00A3AE68 /* CityDecoderModel.swift */; };
 		9DEA52432CD3637C00A3AE68 /* BusModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEA52422CD3637900A3AE68 /* BusModel.swift */; };
@@ -55,6 +62,14 @@
 		1232B3E32CD1D48600C48414 /* FetchBusAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchBusAPI.swift; sourceTree = "<group>"; };
 		1232B3E62CD1D4A300C48414 /* DummyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyManager.swift; sourceTree = "<group>"; };
 		12D2B6C02CD3533E005CF771 /* DummyComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyComponent.swift; sourceTree = "<group>"; };
+		12D2B6C52CD36E70005CF771 /* SelectBusStopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectBusStopView.swift; sourceTree = "<group>"; };
+		12D2B6C72CD36E94005CF771 /* BusStopModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusStopModel.swift; sourceTree = "<group>"; };
+		12D2B6C92CD36ED8005CF771 /* BusStopDecoderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusStopDecoderModel.swift; sourceTree = "<group>"; };
+		12D2B6CB2CD3706F005CF771 /* fetchBusStopAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fetchBusStopAPI.swift; sourceTree = "<group>"; };
+		12D2B6CE2CD3ABAF005CF771 /* BusStopViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusStopViewModel.swift; sourceTree = "<group>"; };
+		12D2B6D02CD3B104005CF771 /* NetworkHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkHelper.swift; sourceTree = "<group>"; };
+		12D2B6D22CD3F50F005CF771 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
+		12D2B6D32CD3F5BD005CF771 /* getAPIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getAPIKey.swift; sourceTree = "<group>"; };
 		9DEA523E2CD362C100A3AE68 /* SelectBusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectBusView.swift; sourceTree = "<group>"; };
 		9DEA52402CD362FC00A3AE68 /* CityDecoderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityDecoderModel.swift; sourceTree = "<group>"; };
 		9DEA52422CD3637900A3AE68 /* BusModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusModel.swift; sourceTree = "<group>"; };
@@ -109,6 +124,7 @@
 		1232B3AE2CD1D3DE00C48414 /* BlueBerrySmoothie */ = {
 			isa = PBXGroup;
 			children = (
+				12D2B6D22CD3F50F005CF771 /* Config.xcconfig */,
 				9DEA52482CD3649600A3AE68 /* Info.plist */,
 				12D2B6BF2CD3532F005CF771 /* Component */,
 				1232B3E92CD1D4E800C48414 /* App */,
@@ -116,8 +132,8 @@
 				1232B3E22CD1D46E00C48414 /* Network */,
 				1232B3DF2CD1D45A00C48414 /* Helper */,
 				1232B3DC2CD1D40800C48414 /* View */,
+				12D2B6CD2CD3AB97005CF771 /* ViewModel */,
 				1232B3D92CD1D3F700C48414 /* Model */,
-				1232B3B12CD1D3DE00C48414 /* ContentView.swift */,
 				1232B3B32CD1D3DF00C48414 /* Assets.xcassets */,
 				1232B3B52CD1D3DF00C48414 /* Preview Content */,
 			);
@@ -139,6 +155,8 @@
 				9DEA52442CD3638E00A3AE68 /* CityModel.swift */,
 				1232B3DA2CD1D40500C48414 /* BusDecoderModel.swift */,
 				9DEA52422CD3637900A3AE68 /* BusModel.swift */,
+				12D2B6C72CD36E94005CF771 /* BusStopModel.swift */,
+				12D2B6C92CD36ED8005CF771 /* BusStopDecoderModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -148,6 +166,8 @@
 			children = (
 				9DEA523E2CD362C100A3AE68 /* SelectBusView.swift */,
 				1232B3DD2CD1D41600C48414 /* SelectCityView.swift */,
+				12D2B6C52CD36E70005CF771 /* SelectBusStopView.swift */,
+				1232B3B12CD1D3DE00C48414 /* ContentView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -156,6 +176,8 @@
 			isa = PBXGroup;
 			children = (
 				1232B3E02CD1D46500C48414 /* DummyHelper.swift */,
+				12D2B6D02CD3B104005CF771 /* NetworkHelper.swift */,
+				12D2B6D32CD3F5BD005CF771 /* getAPIKey.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -165,6 +187,7 @@
 			children = (
 				1232B3E32CD1D48600C48414 /* FetchBusAPI.swift */,
 				9DEA52462CD363A100A3AE68 /* FetchCityAPI.swift */,
+				12D2B6CB2CD3706F005CF771 /* fetchBusStopAPI.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -191,6 +214,14 @@
 				12D2B6C02CD3533E005CF771 /* DummyComponent.swift */,
 			);
 			path = Component;
+			sourceTree = "<group>";
+		};
+		12D2B6CD2CD3AB97005CF771 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				12D2B6CE2CD3ABAF005CF771 /* BusStopViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -324,18 +355,25 @@
 			buildActionMask = 2147483647;
 			files = (
 				1232B3E12CD1D46500C48414 /* DummyHelper.swift in Sources */,
+				12D2B6D42CD3F5BE005CF771 /* getAPIKey.swift in Sources */,
 				1232B3DB2CD1D40500C48414 /* BusDecoderModel.swift in Sources */,
 				9DEA523F2CD362CA00A3AE68 /* SelectBusView.swift in Sources */,
 				9DEA52432CD3637C00A3AE68 /* BusModel.swift in Sources */,
 				9DEA52412CD3630200A3AE68 /* CityDecoderModel.swift in Sources */,
 				1232B3DE2CD1D41600C48414 /* SelectCityView.swift in Sources */,
+				12D2B6CC2CD3706F005CF771 /* fetchBusStopAPI.swift in Sources */,
 				1232B3E42CD1D48600C48414 /* FetchBusAPI.swift in Sources */,
 				1232B3B22CD1D3DE00C48414 /* ContentView.swift in Sources */,
+				12D2B6D12CD3B104005CF771 /* NetworkHelper.swift in Sources */,
 				9DEA52472CD363AD00A3AE68 /* FetchCityAPI.swift in Sources */,
 				9DEA52452CD3639100A3AE68 /* CityModel.swift in Sources */,
 				1232B3E72CD1D4A300C48414 /* DummyManager.swift in Sources */,
+				12D2B6CA2CD36ED8005CF771 /* BusStopDecoderModel.swift in Sources */,
 				12D2B6C12CD3533E005CF771 /* DummyComponent.swift in Sources */,
+				12D2B6C82CD36E94005CF771 /* BusStopModel.swift in Sources */,
 				1232B3B02CD1D3DE00C48414 /* BlueBerrySmoothieApp.swift in Sources */,
+				12D2B6C62CD36E70005CF771 /* SelectBusStopView.swift in Sources */,
+				12D2B6CF2CD3ABAF005CF771 /* BusStopViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -490,13 +528,14 @@
 		};
 		1232B3D12CD1D3DF00C48414 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 12D2B6D22CD3F50F005CF771 /* Config.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"BlueBerrySmoothie/Preview Content\"";
-				DEVELOPMENT_TEAM = UW9295Z57Q;
+				DEVELOPMENT_TEAM = H54Z863265;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BlueBerrySmoothie/Info.plist;
@@ -520,13 +559,14 @@
 		};
 		1232B3D22CD1D3DF00C48414 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 12D2B6D22CD3F50F005CF771 /* Config.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"BlueBerrySmoothie/Preview Content\"";
-				DEVELOPMENT_TEAM = UW9295Z57Q;
+				DEVELOPMENT_TEAM = H54Z863265;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BlueBerrySmoothie/Info.plist;

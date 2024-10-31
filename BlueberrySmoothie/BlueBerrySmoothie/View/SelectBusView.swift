@@ -34,14 +34,16 @@ struct SelectBusView: View {
             .padding()
 
             List(buses) { bus in // 버스 목록을 리스트로 표시
-                VStack(alignment: .leading) {
-                    Text("노선 번호: \(bus.routeno)")
-                    Text("노선 ID: \(bus.routeid)")
-                    Text("출발 정류장: \(bus.startnodenm)")
-                    Text("도착 정류장: \(bus.endnodenm)")
-                    Text("출발 시간: \(bus.startvehicletime)")
-                    Text("도착 시간: \(bus.endvehicletime)")
-                    Text("노선 타입: \(bus.routetp)")
+                NavigationLink(destination: SelectBusStopView(city: city, bus: bus)) {
+                    VStack(alignment: .leading) {
+                        Text("노선 번호: \(bus.routeno)")
+                        Text("노선 ID: \(bus.routeid)")
+                        Text("출발 정류장: \(bus.startnodenm)")
+                        Text("도착 정류장: \(bus.endnodenm)")
+                        Text("출발 시간: \(bus.startvehicletime)")
+                        Text("도착 시간: \(bus.endvehicletime)")
+                        Text("노선 타입: \(bus.routetp)")
+                    }
                 }
             }
         }

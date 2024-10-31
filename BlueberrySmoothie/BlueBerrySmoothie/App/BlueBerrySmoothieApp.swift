@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct BlueBerrySmoothieApp: App {
+    @StateObject private var busStopViewModel = BusStopViewModel()
+    
     var body: some Scene {
         WindowGroup {
             SelectCityView()
+                .environmentObject(busStopViewModel)
         }
     }
 }

@@ -6,3 +6,11 @@
 //
 
 import Foundation
+
+enum APIError: Error {
+    case invalidAPI
+    case invalidURL
+    case requestFailed(statusCode: Int)
+    case dataLoadingError(underlyingError: Error)
+    case decodingError(underlyingError: Error)
+}
