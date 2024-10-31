@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>location</string>
+	</array>
+    
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>주변 장소를 보여주기 위해 위치 정보가 필요합니다.</string>
+    <key>NSLocationAlwaysUsageDescription</key>
+    <string>앱이 백그라운드에서도 주변 장소를 보여주기 위해 위치 정보가 필요합니다.</string>
+    <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+    <string>주변 장소를 보여주기 위해 위치 정보가 필요합니다.</string>
+</dict>
+</plist>
