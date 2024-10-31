@@ -98,14 +98,13 @@
 		1232B3AE2CD1D3DE00C48414 /* BlueBerrySmoothie */ = {
 			isa = PBXGroup;
 			children = (
-				12D2B6BF2CD3532F005CF771 /* Component */,
 				1232B3E92CD1D4E800C48414 /* App */,
+				12D2B6BF2CD3532F005CF771 /* Component */,
 				1232B3E52CD1D49000C48414 /* Manager */,
 				1232B3E22CD1D46E00C48414 /* Network */,
 				1232B3DF2CD1D45A00C48414 /* Helper */,
 				1232B3DC2CD1D40800C48414 /* View */,
 				1232B3D92CD1D3F700C48414 /* Model */,
-				1232B3B12CD1D3DE00C48414 /* ContentView.swift */,
 				1232B3B32CD1D3DF00C48414 /* Assets.xcassets */,
 				1232B3B52CD1D3DF00C48414 /* Preview Content */,
 			);
@@ -131,6 +130,7 @@
 		1232B3DC2CD1D40800C48414 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				1232B3B12CD1D3DE00C48414 /* ContentView.swift */,
 				1232B3DD2CD1D41600C48414 /* DummyView.swift */,
 			);
 			path = View;
