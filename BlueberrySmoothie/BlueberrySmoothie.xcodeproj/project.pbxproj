@@ -17,6 +17,12 @@
 		1232B3E42CD1D48600C48414 /* DummyNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1232B3E32CD1D48600C48414 /* DummyNetwork.swift */; };
 		1232B3E72CD1D4A300C48414 /* DummyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1232B3E62CD1D4A300C48414 /* DummyManager.swift */; };
 		12D2B6C12CD3533E005CF771 /* DummyComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D2B6C02CD3533E005CF771 /* DummyComponent.swift */; };
+		1C8402732CD3D82000EFC024 /* SpoqaHanSansNeo-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1C84026F2CD3D82000EFC024 /* SpoqaHanSansNeo-Light.otf */; };
+		1C8402742CD3D82000EFC024 /* SpoqaHanSansNeo-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1C84026E2CD3D82000EFC024 /* SpoqaHanSansNeo-Bold.otf */; };
+		1C8402752CD3D82000EFC024 /* SpoqaHanSansNeo-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1C8402722CD3D82000EFC024 /* SpoqaHanSansNeo-Thin.otf */; };
+		1C8402762CD3D82000EFC024 /* SpoqaHanSansNeo-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1C8402702CD3D82000EFC024 /* SpoqaHanSansNeo-Medium.otf */; };
+		1C8402772CD3D82000EFC024 /* SpoqaHanSansNeo-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1C8402712CD3D82000EFC024 /* SpoqaHanSansNeo-Regular.otf */; };
+		1C84027A2CD3D9E300EFC024 /* UIfont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C8402792CD3D9DA00EFC024 /* UIfont.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +56,13 @@
 		1232B3E32CD1D48600C48414 /* DummyNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyNetwork.swift; sourceTree = "<group>"; };
 		1232B3E62CD1D4A300C48414 /* DummyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyManager.swift; sourceTree = "<group>"; };
 		12D2B6C02CD3533E005CF771 /* DummyComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyComponent.swift; sourceTree = "<group>"; };
+		1C84026E2CD3D82000EFC024 /* SpoqaHanSansNeo-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Bold.otf"; sourceTree = "<group>"; };
+		1C84026F2CD3D82000EFC024 /* SpoqaHanSansNeo-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Light.otf"; sourceTree = "<group>"; };
+		1C8402702CD3D82000EFC024 /* SpoqaHanSansNeo-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Medium.otf"; sourceTree = "<group>"; };
+		1C8402712CD3D82000EFC024 /* SpoqaHanSansNeo-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Regular.otf"; sourceTree = "<group>"; };
+		1C8402722CD3D82000EFC024 /* SpoqaHanSansNeo-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Thin.otf"; sourceTree = "<group>"; };
+		1C8402782CD3D8BB00EFC024 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		1C8402792CD3D9DA00EFC024 /* UIfont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIfont.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +111,7 @@
 		1232B3AE2CD1D3DE00C48414 /* BlueBerrySmoothie */ = {
 			isa = PBXGroup;
 			children = (
+				1C8402782CD3D8BB00EFC024 /* Info.plist */,
 				1232B3E92CD1D4E800C48414 /* App */,
 				12D2B6BF2CD3532F005CF771 /* Component */,
 				1232B3E52CD1D49000C48414 /* Manager */,
@@ -106,6 +120,7 @@
 				1232B3DC2CD1D40800C48414 /* View */,
 				1232B3D92CD1D3F700C48414 /* Model */,
 				1232B3B32CD1D3DF00C48414 /* Assets.xcassets */,
+				1C84026D2CD3D7C300EFC024 /* Fonts */,
 				1232B3B52CD1D3DF00C48414 /* Preview Content */,
 			);
 			path = BlueBerrySmoothie;
@@ -174,6 +189,19 @@
 				12D2B6C02CD3533E005CF771 /* DummyComponent.swift */,
 			);
 			path = Component;
+			sourceTree = "<group>";
+		};
+		1C84026D2CD3D7C300EFC024 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				1C8402792CD3D9DA00EFC024 /* UIfont.swift */,
+				1C84026E2CD3D82000EFC024 /* SpoqaHanSansNeo-Bold.otf */,
+				1C84026F2CD3D82000EFC024 /* SpoqaHanSansNeo-Light.otf */,
+				1C8402702CD3D82000EFC024 /* SpoqaHanSansNeo-Medium.otf */,
+				1C8402712CD3D82000EFC024 /* SpoqaHanSansNeo-Regular.otf */,
+				1C8402722CD3D82000EFC024 /* SpoqaHanSansNeo-Thin.otf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -255,7 +283,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 1232B3A72CD1D3DE00C48414 /* Build configuration list for PBXProject "BlueBerrySmoothie" */;
+			buildConfigurationList = 1232B3A72CD1D3DE00C48414 /* Build configuration list for PBXProject "BlueberrySmoothie" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -281,6 +309,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				1232B3B72CD1D3DF00C48414 /* Preview Assets.xcassets in Resources */,
+				1C8402732CD3D82000EFC024 /* SpoqaHanSansNeo-Light.otf in Resources */,
+				1C8402742CD3D82000EFC024 /* SpoqaHanSansNeo-Bold.otf in Resources */,
+				1C8402752CD3D82000EFC024 /* SpoqaHanSansNeo-Thin.otf in Resources */,
+				1C8402762CD3D82000EFC024 /* SpoqaHanSansNeo-Medium.otf in Resources */,
+				1C8402772CD3D82000EFC024 /* SpoqaHanSansNeo-Regular.otf in Resources */,
 				1232B3B42CD1D3DF00C48414 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -310,6 +343,7 @@
 				1232B3DB2CD1D40500C48414 /* DummyModel.swift in Sources */,
 				1232B3DE2CD1D41600C48414 /* DummyView.swift in Sources */,
 				1232B3E42CD1D48600C48414 /* DummyNetwork.swift in Sources */,
+				1C84027A2CD3D9E300EFC024 /* UIfont.swift in Sources */,
 				1232B3B22CD1D3DE00C48414 /* ContentView.swift in Sources */,
 				1232B3E72CD1D4A300C48414 /* DummyManager.swift in Sources */,
 				12D2B6C12CD3533E005CF771 /* DummyComponent.swift in Sources */,
@@ -477,6 +511,7 @@
 				DEVELOPMENT_TEAM = H54Z863265;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = BlueBerrySmoothie/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -506,6 +541,7 @@
 				DEVELOPMENT_TEAM = H54Z863265;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = BlueBerrySmoothie/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -603,7 +639,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		1232B3A72CD1D3DE00C48414 /* Build configuration list for PBXProject "BlueBerrySmoothie" */ = {
+		1232B3A72CD1D3DE00C48414 /* Build configuration list for PBXProject "BlueberrySmoothie" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1232B3CE2CD1D3DF00C48414 /* Debug */,
