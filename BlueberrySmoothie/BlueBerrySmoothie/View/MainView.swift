@@ -88,6 +88,7 @@ struct AlertListCell: View {
                 locationManager.manager.startUpdatingLocation()
 //                notificationManager.scheduleTestNotification()
                 notificationManager.requestLocationNotification()
+                
             }, label: {
                 Text("활성화하기")
             })

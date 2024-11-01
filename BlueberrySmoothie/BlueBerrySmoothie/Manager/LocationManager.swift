@@ -25,34 +25,37 @@ class LocationManager: NSObject, ObservableObject {
     @Published var lastRefreshTime: Date = Date()
     
     private let targetRegion = CLCircularRegion(
-        center: CLLocationCoordinate2D(latitude: 36.013972, longitude: 129.325996),
+        center: CLLocationCoordinate2D(latitude: 36.014324, longitude: 129.325603),
         radius: 5.0,
         identifier: "POIRegion")
     
     override init() {
         super.init()
         manager.delegate = self
-        manager.desiredAccuracy = kCLLocationAccuracyBest
-        manager.allowsBackgroundLocationUpdates = true
+        manager.desiredAccuracy = kCLLocationAccuracyBest // locationManager의 정확도를 최고로 설정
+        manager.allowsBackgroundLocationUpdates = true // 백그라운드에서도 위치를 업데이트하도록 설정
         checkIfLocationServicesIsEnabled()
-        startAutoRefresh()
+        startAutoRefresh() // 10초마다 자동으로 위치를 갱신하도록 타이머 설정
     }
     
     deinit {
         stopAutoRefresh()
     }
     
+    /// 10초마다 refreshLocation()을 호출하는 타이머를 설정
     func startAutoRefresh() {
-        timer = Timer.scheduledTimer(withTimeInterval: 10.0, repeats: true) { [weak self] _ in
+        timer = Timer.scheduledTimer(withTimeInterval: 6.0, repeats: true) { [weak self] _ in
             self?.refreshLocation()
         }
     }
     
+    /// 타이머를 중지하고 해제
     func stopAutoRefresh() {
         timer?.invalidate()
         timer = nil
     }
     
+    /// 위치 업데이트를 시작하고, 현재 위치가 targetRegion 안에 있는지 확인해 결과를 콘솔에 출력합니다.
     func refreshLocation() {
         address = "위치 찾는 중…"
         lastRefreshTime = Date()
@@ -69,6 +72,7 @@ class LocationManager: NSObject, ObservableObject {
         }
     }
     
+    /// 위치 서비스가 활성화되었는지 확인하고, 활성화되지 않았을 경우 오류 메시지를 설정
     func checkIfLocationServicesIsEnabled() {
         if CLLocationManager.locationServicesEnabled() {
             manager.delegate = self
@@ -78,6 +82,7 @@ class LocationManager: NSObject, ObservableObject {
         }
     }
     
+    /// 현재 위치 권한 상태를 확인하고, 권한이 없을 경우 요청
     private func checkLocationAuthorization() {
         switch manager.authorizationStatus {
         case .notDetermined:
@@ -118,6 +123,9 @@ struct AddressDetail {
 }
 
 extension LocationManager: CLLocationManagerDelegate {
+    
+    /// 위치가 업데이트될 때마다 호출되는 함수
+    /// 위치가 유효한 경우(horizontalAccuracy > 0), 위치 데이터를 저장하고, CLGeocoder를 통해 주소를 역지오코딩하여 address와 detailedAddress를 업데이트
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.last else { return }
         
@@ -155,6 +163,7 @@ extension LocationManager: CLLocationManagerDelegate {
         }
     }
     
+    /// 위치 갱신 실패 시 오류 메시지를 설정하고 콘솔에 출력
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("Location error: \(error.localizedDescription)")
         errorMessage = "위치를 찾을 수 없습니다: \(error.localizedDescription)"
