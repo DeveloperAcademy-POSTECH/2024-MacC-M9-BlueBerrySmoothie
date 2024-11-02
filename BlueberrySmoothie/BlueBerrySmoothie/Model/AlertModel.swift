@@ -10,7 +10,7 @@ import SwiftUI
 
 struct Alert: Identifiable {
     var id = UUID()
-    var cityCode: Double // 도시코드 부산(21)
+    var cityCode: Double // 도시코드
     var bus: Bus // 버스 번호, 노선 id 저장되어있음
     var arrivalBusStop: BusStop // 도착 정류장
     var alertBusStop: Int // 알람 줄 정류장
