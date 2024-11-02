@@ -61,7 +61,7 @@ class NotificationManager: NSObject, CLLocationManagerDelegate {
         content.subtitle = "일어나서 내릴 준비를 해야해요!"
         content.sound = .default
         
-        let center = CLLocationCoordinate2D(latitude: 36.014324, longitude: 129.325603)
+        let center = CLLocationCoordinate2D(latitude: 36.015175, longitude: 129.325121) //포스텍 버스정류장(기숙사 맞은편)
         let region = CLCircularRegion(center: center, radius: 5.0, identifier: "POIRegion")
         region.notifyOnEntry = true // 설정한 지역 구간에 들어왔을 때
         region.notifyOnExit = true // 설정한 지역 구간을 나갈 때

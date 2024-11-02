@@ -15,7 +15,7 @@ class LocationManager: NSObject, ObservableObject {
     
     @Published var location: CLLocation?
     @Published var region = MKCoordinateRegion(
-        center: CLLocationCoordinate2D(latitude: 37.5665, longitude: 126.9780),
+        center: CLLocationCoordinate2D(latitude: 37.5665, longitude: 126.9780), //초기화 값.업데이트 시, 실제 사용자 위치로 업데이트 됨
         span: MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005)  // 배율 확대
     )
     @Published var locationStatus: CLAuthorizationStatus?
@@ -25,7 +25,7 @@ class LocationManager: NSObject, ObservableObject {
     @Published var lastRefreshTime: Date = Date()
     
     private let targetRegion = CLCircularRegion(
-        center: CLLocationCoordinate2D(latitude: 36.014324, longitude: 129.325603),
+        center: CLLocationCoordinate2D(latitude: 36.015175, longitude: 129.325121), //포스텍 버스정류장(기숙사 맞은편)
         radius: 5.0,
         identifier: "POIRegion")
     
