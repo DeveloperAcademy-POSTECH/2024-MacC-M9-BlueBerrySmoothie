@@ -18,12 +18,12 @@ class NetworkManager: ObservableObject {
         return response.response.body.items?.item ?? []
     }
     
-    // fetchBusStopData를 제네릭에서 BusStopResponse로 변경
+    // API에서 받아온 응답 중 BusStopRensponse를 추출하여 반환
     private func fetchBusStopData(cityCode: Int, routeId: String) async throws -> BusStopResponse {
         
         guard let serviceKey = getAPIKey() else {
-                    throw APIError.invalidAPI // API 키를 가져오지 못한 경우 예외 처리
-                }
+            throw APIError.invalidAPI // API 키를 가져오지 못한 경우 예외 처리
+        }
         
         let urlString = "http://apis.data.go.kr/1613000/BusRouteInfoInqireService/getRouteAcctoThrghSttnList?serviceKey=\(serviceKey)&_type=json&cityCode=\(cityCode)&routeId=\(routeId)&numOfRows=999"
         
