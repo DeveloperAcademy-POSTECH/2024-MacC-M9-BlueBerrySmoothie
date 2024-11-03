@@ -17,6 +17,7 @@
 		1232B3E42CD1D48600C48414 /* FetchBusAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1232B3E32CD1D48600C48414 /* FetchBusAPI.swift */; };
 		1232B3E72CD1D4A300C48414 /* DummyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1232B3E62CD1D4A300C48414 /* DummyManager.swift */; };
 		12D2B6C12CD3533E005CF771 /* DummyComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D2B6C02CD3533E005CF771 /* DummyComponent.swift */; };
+		9D64A9E02CD7583300718CC8 /* Enrollment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D64A9DF2CD7582A00718CC8 /* Enrollment.swift */; };
 		9DEA523F2CD362CA00A3AE68 /* SelectBusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEA523E2CD362C100A3AE68 /* SelectBusView.swift */; };
 		9DEA52412CD3630200A3AE68 /* CityDecoderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEA52402CD362FC00A3AE68 /* CityDecoderModel.swift */; };
 		9DEA52432CD3637C00A3AE68 /* BusModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEA52422CD3637900A3AE68 /* BusModel.swift */; };
@@ -55,6 +56,7 @@
 		1232B3E32CD1D48600C48414 /* FetchBusAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchBusAPI.swift; sourceTree = "<group>"; };
 		1232B3E62CD1D4A300C48414 /* DummyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyManager.swift; sourceTree = "<group>"; };
 		12D2B6C02CD3533E005CF771 /* DummyComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyComponent.swift; sourceTree = "<group>"; };
+		9D64A9DF2CD7582A00718CC8 /* Enrollment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enrollment.swift; sourceTree = "<group>"; };
 		9DEA523E2CD362C100A3AE68 /* SelectBusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectBusView.swift; sourceTree = "<group>"; };
 		9DEA52402CD362FC00A3AE68 /* CityDecoderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityDecoderModel.swift; sourceTree = "<group>"; };
 		9DEA52422CD3637900A3AE68 /* BusModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusModel.swift; sourceTree = "<group>"; };
@@ -146,6 +148,7 @@
 		1232B3DC2CD1D40800C48414 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				9D64A9DF2CD7582A00718CC8 /* Enrollment.swift */,
 				9DEA523E2CD362C100A3AE68 /* SelectBusView.swift */,
 				1232B3DD2CD1D41600C48414 /* SelectCityView.swift */,
 			);
@@ -326,6 +329,7 @@
 				1232B3E12CD1D46500C48414 /* DummyHelper.swift in Sources */,
 				1232B3DB2CD1D40500C48414 /* BusDecoderModel.swift in Sources */,
 				9DEA523F2CD362CA00A3AE68 /* SelectBusView.swift in Sources */,
+				9D64A9E02CD7583300718CC8 /* Enrollment.swift in Sources */,
 				9DEA52432CD3637C00A3AE68 /* BusModel.swift in Sources */,
 				9DEA52412CD3630200A3AE68 /* CityDecoderModel.swift in Sources */,
 				1232B3DE2CD1D41600C48414 /* SelectCityView.swift in Sources */,

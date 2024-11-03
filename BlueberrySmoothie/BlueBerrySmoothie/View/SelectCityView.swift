@@ -6,6 +6,7 @@
 //
 import SwiftUI
 
+
 struct SelectCityView: View {
     @State private var cities: [City] = []
     
