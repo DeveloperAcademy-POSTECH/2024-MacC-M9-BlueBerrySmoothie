@@ -6,11 +6,12 @@
 //
 import SwiftUI
 
+
 struct SelectCityView: View {
     @State private var cities: [City] = []
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             List(cities) { city in
                 NavigationLink(destination: SelectBusView(city: city)) {
                     Text(city.cityname)
