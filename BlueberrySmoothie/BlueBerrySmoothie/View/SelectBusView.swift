@@ -159,6 +159,7 @@ struct SelectBusView: View {
                 fetchAllBusData(citycode: city.citycode) { fetchedBuses in
                     self.allBuses = fetchedBuses
                     self.filteredBuses = fetchedBuses // 초기 필터링된 버스 목록 설정
+
                 }
             }
         }
