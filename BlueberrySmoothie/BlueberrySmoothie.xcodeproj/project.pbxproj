@@ -23,6 +23,9 @@
 		1C8402762CD3D82000EFC024 /* SpoqaHanSansNeo-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1C8402702CD3D82000EFC024 /* SpoqaHanSansNeo-Medium.otf */; };
 		1C8402772CD3D82000EFC024 /* SpoqaHanSansNeo-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1C8402712CD3D82000EFC024 /* SpoqaHanSansNeo-Regular.otf */; };
 		1C84027A2CD3D9E300EFC024 /* UIfont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C8402792CD3D9DA00EFC024 /* UIfont.swift */; };
+		D9CB8C2E2CD45B480054F739 /* alertSettingMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9CB8C2D2CD45B480054F739 /* alertSettingMain.swift */; };
+		D9CB8C302CD45BD00054F739 /* SavedBus.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9CB8C2F2CD45BD00054F739 /* SavedBus.swift */; };
+		D9CB8C322CD45C4A0054F739 /* ActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9CB8C312CD45C4A0054F739 /* ActionButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +66,9 @@
 		1C8402722CD3D82000EFC024 /* SpoqaHanSansNeo-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Thin.otf"; sourceTree = "<group>"; };
 		1C8402782CD3D8BB00EFC024 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		1C8402792CD3D9DA00EFC024 /* UIfont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIfont.swift; sourceTree = "<group>"; };
+		D9CB8C2D2CD45B480054F739 /* alertSettingMain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = alertSettingMain.swift; sourceTree = "<group>"; };
+		D9CB8C2F2CD45BD00054F739 /* SavedBus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedBus.swift; sourceTree = "<group>"; };
+		D9CB8C312CD45C4A0054F739 /* ActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,6 +152,7 @@
 			isa = PBXGroup;
 			children = (
 				1232B3B12CD1D3DE00C48414 /* ContentView.swift */,
+				D9CB8C2D2CD45B480054F739 /* alertSettingMain.swift */,
 				1232B3DD2CD1D41600C48414 /* DummyView.swift */,
 			);
 			path = View;
@@ -187,6 +194,8 @@
 			isa = PBXGroup;
 			children = (
 				12D2B6C02CD3533E005CF771 /* DummyComponent.swift */,
+				D9CB8C2F2CD45BD00054F739 /* SavedBus.swift */,
+				D9CB8C312CD45C4A0054F739 /* ActionButton.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -343,11 +352,14 @@
 				1232B3DB2CD1D40500C48414 /* DummyModel.swift in Sources */,
 				1232B3DE2CD1D41600C48414 /* DummyView.swift in Sources */,
 				1232B3E42CD1D48600C48414 /* DummyNetwork.swift in Sources */,
+				D9CB8C2E2CD45B480054F739 /* alertSettingMain.swift in Sources */,
 				1C84027A2CD3D9E300EFC024 /* UIfont.swift in Sources */,
+				D9CB8C302CD45BD00054F739 /* SavedBus.swift in Sources */,
 				1232B3B22CD1D3DE00C48414 /* ContentView.swift in Sources */,
 				1232B3E72CD1D4A300C48414 /* DummyManager.swift in Sources */,
 				12D2B6C12CD3533E005CF771 /* DummyComponent.swift in Sources */,
 				1232B3B02CD1D3DE00C48414 /* BlueBerrySmoothieApp.swift in Sources */,
+				D9CB8C322CD45C4A0054F739 /* ActionButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
