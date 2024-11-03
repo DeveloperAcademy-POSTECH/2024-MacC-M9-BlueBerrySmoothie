@@ -1,3 +1,11 @@
+//
+//  BusDetailView.swift
+//  BlueberrySmoothie
+//
+//  Created by 문재윤 on 11/1/24.
+//
+
+
 import SwiftUI
 
 // 가정: BusDetailView는 Bus 객체를 받아서 상세 정보를 표시하는 View입니다.
