@@ -1,8 +1,8 @@
 //
-//  DummyNetwork.swift
+//  FetchBusAPI.swift
 //  BlueBerrySmoothie
 //
-//  Created by Yeji Seo on 10/30/24.
+//  Created by 문재윤 on 10/30/24.
 //
 
 import Foundation
@@ -10,11 +10,11 @@ import Foundation
 // 버스 데이터를 가져오는 함수
 func fetchBusData(citycode: Int, routeNo: String, completion: @escaping ([Bus]) -> Void) {
     
-    do{
+    
+    do {
         guard let serviceKey = getAPIKey() else {
             throw APIError.invalidAPI // API 키를 가져오지 못한 경우 예외 처리
         }
-        
         
         let urlString = "http://apis.data.go.kr/1613000/BusRouteInfoInqireService/getRouteNoList?serviceKey=\(serviceKey)&_type=json&cityCode=\(citycode)&routeNo=\(routeNo)&numOfRows=9999&pageNo=1"
         

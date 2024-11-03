@@ -23,11 +23,17 @@
 		12D2B6CF2CD3ABAF005CF771 /* BusStopViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D2B6CE2CD3ABAF005CF771 /* BusStopViewModel.swift */; };
 		12D2B6D12CD3B104005CF771 /* NetworkHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D2B6D02CD3B104005CF771 /* NetworkHelper.swift */; };
 		12D2B6D42CD3F5BE005CF771 /* getAPIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D2B6D32CD3F5BD005CF771 /* getAPIKey.swift */; };
+		12D2B6D82CD63D6A005CF771 /* AlertModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D2B6D72CD63D6A005CF771 /* AlertModel.swift */; };
 		9DEA523F2CD362CA00A3AE68 /* SelectBusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEA523E2CD362C100A3AE68 /* SelectBusView.swift */; };
 		9DEA52412CD3630200A3AE68 /* CityDecoderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEA52402CD362FC00A3AE68 /* CityDecoderModel.swift */; };
 		9DEA52432CD3637C00A3AE68 /* BusModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEA52422CD3637900A3AE68 /* BusModel.swift */; };
 		9DEA52452CD3639100A3AE68 /* CityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEA52442CD3638E00A3AE68 /* CityModel.swift */; };
 		9DEA52472CD363AD00A3AE68 /* FetchCityAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEA52462CD363A100A3AE68 /* FetchCityAPI.swift */; };
+		9DEA524C2CD3B79B00A3AE68 /* ScrollingTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEA524B2CD3B79B00A3AE68 /* ScrollingTextView.swift */; };
+		9DEA524E2CD46EF400A3AE68 /* BusDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEA524D2CD46EF400A3AE68 /* BusDetailView.swift */; };
+		9DEA52502CD4D56400A3AE68 /* busColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEA524F2CD4D56400A3AE68 /* busColor.swift */; };
+		9DEA52522CD4D57A00A3AE68 /* filterBuses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEA52512CD4D57A00A3AE68 /* filterBuses.swift */; };
+		9DEA52542CD4D5B500A3AE68 /* FetchAllBusData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEA52532CD4D5B500A3AE68 /* FetchAllBusData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,12 +74,18 @@
 		12D2B6D02CD3B104005CF771 /* NetworkHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkHelper.swift; sourceTree = "<group>"; };
 		12D2B6D22CD3F50F005CF771 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		12D2B6D32CD3F5BD005CF771 /* getAPIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getAPIKey.swift; sourceTree = "<group>"; };
+		12D2B6D72CD63D6A005CF771 /* AlertModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertModel.swift; sourceTree = "<group>"; };
 		9DEA523E2CD362C100A3AE68 /* SelectBusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectBusView.swift; sourceTree = "<group>"; };
 		9DEA52402CD362FC00A3AE68 /* CityDecoderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityDecoderModel.swift; sourceTree = "<group>"; };
 		9DEA52422CD3637900A3AE68 /* BusModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusModel.swift; sourceTree = "<group>"; };
 		9DEA52442CD3638E00A3AE68 /* CityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityModel.swift; sourceTree = "<group>"; };
 		9DEA52462CD363A100A3AE68 /* FetchCityAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchCityAPI.swift; sourceTree = "<group>"; };
 		9DEA52482CD3649600A3AE68 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		9DEA524B2CD3B79B00A3AE68 /* ScrollingTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollingTextView.swift; sourceTree = "<group>"; };
+		9DEA524D2CD46EF400A3AE68 /* BusDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusDetailView.swift; sourceTree = "<group>"; };
+		9DEA524F2CD4D56400A3AE68 /* busColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = busColor.swift; sourceTree = "<group>"; };
+		9DEA52512CD4D57A00A3AE68 /* filterBuses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = filterBuses.swift; sourceTree = "<group>"; };
+		9DEA52532CD4D5B500A3AE68 /* FetchAllBusData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchAllBusData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,6 +167,7 @@
 				9DEA52422CD3637900A3AE68 /* BusModel.swift */,
 				12D2B6C72CD36E94005CF771 /* BusStopModel.swift */,
 				12D2B6C92CD36ED8005CF771 /* BusStopDecoderModel.swift */,
+				12D2B6D72CD63D6A005CF771 /* AlertModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -162,6 +175,9 @@
 		1232B3DC2CD1D40800C48414 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				9D64A9DD2CD755F400718CC8 /* Untitled.swift */,
+				9DEA524D2CD46EF400A3AE68 /* BusDetailView.swift */,
+				9DEA524B2CD3B79B00A3AE68 /* ScrollingTextView.swift */,
 				9DEA523E2CD362C100A3AE68 /* SelectBusView.swift */,
 				1232B3DD2CD1D41600C48414 /* SelectCityView.swift */,
 				12D2B6C52CD36E70005CF771 /* SelectBusStopView.swift */,
@@ -193,6 +209,9 @@
 		1232B3E52CD1D49000C48414 /* Manager */ = {
 			isa = PBXGroup;
 			children = (
+				9DEA52532CD4D5B500A3AE68 /* FetchAllBusData.swift */,
+				9DEA52512CD4D57A00A3AE68 /* filterBuses.swift */,
+				9DEA524F2CD4D56400A3AE68 /* busColor.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -355,15 +374,23 @@
 				12D2B6D42CD3F5BE005CF771 /* getAPIKey.swift in Sources */,
 				1232B3DB2CD1D40500C48414 /* BusDecoderModel.swift in Sources */,
 				9DEA523F2CD362CA00A3AE68 /* SelectBusView.swift in Sources */,
+				12D2B6D82CD63D6A005CF771 /* AlertModel.swift in Sources */,
+				9D64A9E02CD7583300718CC8 /* Enrollment.swift in Sources */,
 				9DEA52432CD3637C00A3AE68 /* BusModel.swift in Sources */,
 				9DEA52412CD3630200A3AE68 /* CityDecoderModel.swift in Sources */,
+				9DEA52502CD4D56400A3AE68 /* busColor.swift in Sources */,
+				9DEA524E2CD46EF400A3AE68 /* BusDetailView.swift in Sources */,
 				1232B3DE2CD1D41600C48414 /* SelectCityView.swift in Sources */,
 				12D2B6CC2CD3706F005CF771 /* fetchBusStopAPI.swift in Sources */,
 				1232B3E42CD1D48600C48414 /* FetchBusAPI.swift in Sources */,
+				9DEA52522CD4D57A00A3AE68 /* filterBuses.swift in Sources */,
 				1232B3B22CD1D3DE00C48414 /* ContentView.swift in Sources */,
 				12D2B6D12CD3B104005CF771 /* NetworkHelper.swift in Sources */,
 				9DEA52472CD363AD00A3AE68 /* FetchCityAPI.swift in Sources */,
+				9D64A9DE2CD755F600718CC8 /* Untitled.swift in Sources */,
+				9DEA524C2CD3B79B00A3AE68 /* ScrollingTextView.swift in Sources */,
 				9DEA52452CD3639100A3AE68 /* CityModel.swift in Sources */,
+				9DEA52542CD4D5B500A3AE68 /* FetchAllBusData.swift in Sources */,
 				12D2B6CA2CD36ED8005CF771 /* BusStopDecoderModel.swift in Sources */,
 				12D2B6C12CD3533E005CF771 /* DummyComponent.swift in Sources */,
 				12D2B6C82CD36E94005CF771 /* BusStopModel.swift in Sources */,

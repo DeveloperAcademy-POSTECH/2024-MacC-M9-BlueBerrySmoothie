@@ -18,7 +18,7 @@ class NetworkManager: ObservableObject {
         return response.response.body.items?.item ?? []
     }
     
-    // fetchBusStopData를 제네릭에서 BusStopResponse로 변경
+    // API에서 받아온 응답 중 BusStopRensponse를 추출하여 반환
     private func fetchBusStopData(cityCode: Int, routeId: String) async throws -> BusStopResponse {
         
         guard let serviceKey = getAPIKey() else {

@@ -12,7 +12,7 @@ func fetchCityData(completion: @escaping ([City]) -> Void) {
     
     do{
         guard let serviceKey = getAPIKey() else {
-            throw APIError.invalidAPI // API 키를 가져오지 못한 경우 예외 처리
+            throw APIError.invalidAPI
         }
         
         guard let url = URL(string: "http://apis.data.go.kr/1613000/BusRouteInfoInqireService/getCtyCodeList?serviceKey=\(serviceKey)&_type=json") else { return }
@@ -27,6 +27,7 @@ func fetchCityData(completion: @escaping ([City]) -> Void) {
             }
         }.resume()
     } catch {
+        
         print("API serviceKey Error")
     }
 }

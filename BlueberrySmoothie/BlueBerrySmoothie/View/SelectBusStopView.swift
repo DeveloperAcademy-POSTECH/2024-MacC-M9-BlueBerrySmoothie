@@ -10,11 +10,9 @@ import SwiftUI
 struct SelectBusStopView: View {
     @EnvironmentObject var busStopViewModel: BusStopViewModel
     
-    let city: City // 도시 정보
-    let bus: Bus
-//    @State private var busStops: [BusStop] = [] // 버스 목록을 저장하는 상태 변수
-    //    @State private var routeNo: String = "" // 입력된 노선 번호를 저장하는 상태 변수
-    
+    let city: City // 도시
+    let bus: Bus // 버스
+
     var body: some View {
         VStack(spacing: 20) {
             Text("도시 이름: \(city.cityname)")
@@ -42,10 +40,8 @@ struct SelectBusStopView: View {
         }
         .padding()
         .navigationTitle("버스정류장들 정보")
-        .onAppear{
-            Task{
-                await busStopViewModel.getBusStopData(cityCode: city.citycode, routeId: bus.routeid)
-            }
+        .task {
+            await busStopViewModel.getBusStopData(cityCode: city.citycode, routeId: bus.routeid)
         }
     }
 }
