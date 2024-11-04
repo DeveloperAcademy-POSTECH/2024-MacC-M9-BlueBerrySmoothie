@@ -80,7 +80,6 @@
 		1C8402702CD3D82000EFC024 /* SpoqaHanSansNeo-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Medium.otf"; sourceTree = "<group>"; };
 		1C8402712CD3D82000EFC024 /* SpoqaHanSansNeo-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Regular.otf"; sourceTree = "<group>"; };
 		1C8402722CD3D82000EFC024 /* SpoqaHanSansNeo-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Thin.otf"; sourceTree = "<group>"; };
-		1C8402782CD3D8BB00EFC024 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		1C8402792CD3D9DA00EFC024 /* UIfont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIfont.swift; sourceTree = "<group>"; };
 		D9CB8C2D2CD45B480054F739 /* alertSettingMain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = alertSettingMain.swift; sourceTree = "<group>"; };
 		D9CB8C2F2CD45BD00054F739 /* SavedBus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedBus.swift; sourceTree = "<group>"; };
@@ -153,7 +152,7 @@
 		1232B3AE2CD1D3DE00C48414 /* BlueBerrySmoothie */ = {
 			isa = PBXGroup;
 			children = (
-				1C8402782CD3D8BB00EFC024 /* Info.plist */,
+				9DEA52482CD3649600A3AE68 /* Info.plist */,
 				12D2B6D22CD3F50F005CF771 /* Config.xcconfig */,
 				1232B3E92CD1D4E800C48414 /* App */,
 				12D2B6BF2CD3532F005CF771 /* Component */,
