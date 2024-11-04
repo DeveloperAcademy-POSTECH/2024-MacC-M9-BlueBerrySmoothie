@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+
 //import SwiftData
 //
 //@Model
@@ -36,6 +37,7 @@ struct BusStopLocal {
     var gpslati: Double
     var gpslong: Double
     var updowncd: Int
+
 }
 //struct Alert: Identifiable {
 //    var id = UUID()
