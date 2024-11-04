@@ -33,7 +33,7 @@
 		9DEA52502CD4D56400A3AE68 /* busColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEA524F2CD4D56400A3AE68 /* busColor.swift */; };
 		9DEA52522CD4D57A00A3AE68 /* filterBuses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEA52512CD4D57A00A3AE68 /* filterBuses.swift */; };
 		9DEA52542CD4D5B500A3AE68 /* FetchAllBusData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEA52532CD4D5B500A3AE68 /* FetchAllBusData.swift */; };
-		D90E0C1A2CD89CB20089883F /* alertSettingMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = D90E0C192CD89CB20089883F /* alertSettingMain.swift */; };
+		D90E0C1A2CD89CB20089883F /* AlertSettingMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = D90E0C192CD89CB20089883F /* AlertSettingMain.swift */; };
 		D968D5C62CD89EC4002DF70B /* ActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D968D5C52CD89EC4002DF70B /* ActionButton.swift */; };
 		D968D5C82CD89EF4002DF70B /* SavedBus.swift in Sources */ = {isa = PBXBuildFile; fileRef = D968D5C72CD89EF4002DF70B /* SavedBus.swift */; };
 /* End PBXBuildFile section */
@@ -93,7 +93,7 @@
 		D90E0C152CD89C950089883F /* SpoqaHanSansNeo-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Regular.otf"; sourceTree = "<group>"; };
 		D90E0C162CD89C950089883F /* SpoqaHanSansNeo-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Thin.otf"; sourceTree = "<group>"; };
 		D90E0C172CD89C950089883F /* UIfont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIfont.swift; sourceTree = "<group>"; };
-		D90E0C192CD89CB20089883F /* alertSettingMain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = alertSettingMain.swift; sourceTree = "<group>"; };
+		D90E0C192CD89CB20089883F /* AlertSettingMain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertSettingMain.swift; sourceTree = "<group>"; };
 		D968D5C52CD89EC4002DF70B /* ActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionButton.swift; sourceTree = "<group>"; };
 		D968D5C72CD89EF4002DF70B /* SavedBus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedBus.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -186,7 +186,7 @@
 		1232B3DC2CD1D40800C48414 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				D90E0C192CD89CB20089883F /* alertSettingMain.swift */,
+				D90E0C192CD89CB20089883F /* AlertSettingMain.swift */,
 				9DEA524D2CD46EF400A3AE68 /* BusDetailView.swift */,
 				9DEA524B2CD3B79B00A3AE68 /* ScrollingTextView.swift */,
 				9DEA523E2CD362C100A3AE68 /* SelectBusView.swift */,
@@ -399,7 +399,7 @@
 				12D2B6D42CD3F5BE005CF771 /* getAPIKey.swift in Sources */,
 				1232B3DB2CD1D40500C48414 /* BusDecoderModel.swift in Sources */,
 				9DEA523F2CD362CA00A3AE68 /* SelectBusView.swift in Sources */,
-				D90E0C1A2CD89CB20089883F /* alertSettingMain.swift in Sources */,
+				D90E0C1A2CD89CB20089883F /* AlertSettingMain.swift in Sources */,
 				12D2B6D82CD63D6A005CF771 /* AlertModel.swift in Sources */,
 				9DEA52432CD3637C00A3AE68 /* BusModel.swift in Sources */,
 				9DEA52412CD3630200A3AE68 /* CityDecoderModel.swift in Sources */,

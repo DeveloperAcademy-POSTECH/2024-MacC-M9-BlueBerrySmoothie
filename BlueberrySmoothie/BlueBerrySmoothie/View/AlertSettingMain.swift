@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct alertSettingMain: View {
+struct AlertSettingMain: View {
     
     @State private var label: String = ""
     @State private var showSheet: Bool = false
@@ -257,5 +257,5 @@ struct StationPickerModal: View {
 }
 
 #Preview {
-    alertSettingMain()
+    AlertSettingMain()
 }
