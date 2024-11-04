@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SelectBusView: View {
-    let city: City // 도시 정보
+    let city: City = City(citycode: 21, cityname: "부산") // 도시 정보
     @State private var allBuses: [Bus] = [] // 전체 버스 목록
     @State private var filteredBuses: [Bus] = [] // 필터링된 버스 목록
     @State private var routeNo: String = "" // 입력된 노선 번호를 저장하는 상태 변수
@@ -82,6 +82,6 @@ struct SelectBusView: View {
 
 struct SelectBusView_Previews: PreviewProvider {
     static var previews: some View {
-        SelectBusView(city: City(citycode: 21, cityname: "부산"))
+        SelectBusView()
     }
 }
