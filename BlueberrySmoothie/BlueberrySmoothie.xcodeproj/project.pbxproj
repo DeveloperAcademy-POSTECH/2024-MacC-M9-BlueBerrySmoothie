@@ -24,6 +24,8 @@
 		12D2B6D12CD3B104005CF771 /* NetworkHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D2B6D02CD3B104005CF771 /* NetworkHelper.swift */; };
 		12D2B6D42CD3F5BE005CF771 /* getAPIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D2B6D32CD3F5BD005CF771 /* getAPIKey.swift */; };
 		12D2B6D82CD63D6A005CF771 /* AlertModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D2B6D72CD63D6A005CF771 /* AlertModel.swift */; };
+		9D64A9E22CD7A85C00718CC8 /* AlarmStartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D64A9E12CD7A85C00718CC8 /* AlarmStartView.swift */; };
+		9D64A9E42CD7AB3400718CC8 /* BusStopListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D64A9E32CD7AB3400718CC8 /* BusStopListView.swift */; };
 		9DEA523F2CD362CA00A3AE68 /* SelectBusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEA523E2CD362C100A3AE68 /* SelectBusView.swift */; };
 		9DEA52412CD3630200A3AE68 /* CityDecoderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEA52402CD362FC00A3AE68 /* CityDecoderModel.swift */; };
 		9DEA52432CD3637C00A3AE68 /* BusModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEA52422CD3637900A3AE68 /* BusModel.swift */; };
@@ -75,6 +77,8 @@
 		12D2B6D22CD3F50F005CF771 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		12D2B6D32CD3F5BD005CF771 /* getAPIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getAPIKey.swift; sourceTree = "<group>"; };
 		12D2B6D72CD63D6A005CF771 /* AlertModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertModel.swift; sourceTree = "<group>"; };
+		9D64A9E12CD7A85C00718CC8 /* AlarmStartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmStartView.swift; sourceTree = "<group>"; };
+		9D64A9E32CD7AB3400718CC8 /* BusStopListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusStopListView.swift; sourceTree = "<group>"; };
 		9DEA523E2CD362C100A3AE68 /* SelectBusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectBusView.swift; sourceTree = "<group>"; };
 		9DEA52402CD362FC00A3AE68 /* CityDecoderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityDecoderModel.swift; sourceTree = "<group>"; };
 		9DEA52422CD3637900A3AE68 /* BusModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusModel.swift; sourceTree = "<group>"; };
@@ -175,7 +179,8 @@
 		1232B3DC2CD1D40800C48414 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				9D64A9DD2CD755F400718CC8 /* Untitled.swift */,
+				9D64A9E32CD7AB3400718CC8 /* BusStopListView.swift */,
+				9D64A9E12CD7A85C00718CC8 /* AlarmStartView.swift */,
 				9DEA524D2CD46EF400A3AE68 /* BusDetailView.swift */,
 				9DEA524B2CD3B79B00A3AE68 /* ScrollingTextView.swift */,
 				9DEA523E2CD362C100A3AE68 /* SelectBusView.swift */,
@@ -373,9 +378,9 @@
 				1232B3E12CD1D46500C48414 /* DummyHelper.swift in Sources */,
 				12D2B6D42CD3F5BE005CF771 /* getAPIKey.swift in Sources */,
 				1232B3DB2CD1D40500C48414 /* BusDecoderModel.swift in Sources */,
+				9D64A9E22CD7A85C00718CC8 /* AlarmStartView.swift in Sources */,
 				9DEA523F2CD362CA00A3AE68 /* SelectBusView.swift in Sources */,
 				12D2B6D82CD63D6A005CF771 /* AlertModel.swift in Sources */,
-				9D64A9E02CD7583300718CC8 /* Enrollment.swift in Sources */,
 				9DEA52432CD3637C00A3AE68 /* BusModel.swift in Sources */,
 				9DEA52412CD3630200A3AE68 /* CityDecoderModel.swift in Sources */,
 				9DEA52502CD4D56400A3AE68 /* busColor.swift in Sources */,
@@ -387,10 +392,10 @@
 				1232B3B22CD1D3DE00C48414 /* ContentView.swift in Sources */,
 				12D2B6D12CD3B104005CF771 /* NetworkHelper.swift in Sources */,
 				9DEA52472CD363AD00A3AE68 /* FetchCityAPI.swift in Sources */,
-				9D64A9DE2CD755F600718CC8 /* Untitled.swift in Sources */,
 				9DEA524C2CD3B79B00A3AE68 /* ScrollingTextView.swift in Sources */,
 				9DEA52452CD3639100A3AE68 /* CityModel.swift in Sources */,
 				9DEA52542CD4D5B500A3AE68 /* FetchAllBusData.swift in Sources */,
+				9D64A9E42CD7AB3400718CC8 /* BusStopListView.swift in Sources */,
 				12D2B6CA2CD36ED8005CF771 /* BusStopDecoderModel.swift in Sources */,
 				12D2B6C12CD3533E005CF771 /* DummyComponent.swift in Sources */,
 				12D2B6C82CD36E94005CF771 /* BusStopModel.swift in Sources */,
@@ -558,7 +563,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"BlueBerrySmoothie/Preview Content\"";
-				DEVELOPMENT_TEAM = H54Z863265;
+				DEVELOPMENT_TEAM = UW9295Z57Q;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BlueBerrySmoothie/Info.plist;
@@ -589,7 +594,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"BlueBerrySmoothie/Preview Content\"";
-				DEVELOPMENT_TEAM = H54Z863265;
+				DEVELOPMENT_TEAM = UW9295Z57Q;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BlueBerrySmoothie/Info.plist;
