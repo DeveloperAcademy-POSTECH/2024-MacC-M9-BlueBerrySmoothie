@@ -29,7 +29,7 @@ struct SelectBusStopView: View {
                 ForEach(busStopViewModel.busStopList, id: \.self) { busStop in
                     Button(action: {
                         print("Button 1")
-                        var alert: Alert = Alert(cityCode: city.citycode, bus: bus, arrivalBusStop: busStop, alertBusStop: 3, alertLabel: "Test")
+                        var alert: BusStopAlert = BusStopAlert(cityCode: Double(city.citycode), bus: bus, arrivalBusStop: busStop, alertBusStop: 3, alertLabel: "Test")
                         
                         // 상행의 최대 순번 구하기
                         if let maxUpwardNodeord = busStopViewModel.busStopList.filter({ $0.updowncd == 0 }).map({ $0.nodeord }).max() {
@@ -38,11 +38,10 @@ struct SelectBusStopView: View {
                             storeBeforeBusStops(for: busStop, alert: &alert, busStops: busStopViewModel.busStopList, maxUpwardNodeord: maxUpwardNodeord)
                         }
                         
-                        //                        print(alert)
-                        print(alert.arrivalBusStop)
-                        print(alert.firstBeforeBusStop ?? nil)
-                        print(alert.secondBeforeBusStop ?? nil)
-                        print(alert.thirdBeforeBusStop ?? nil)
+//                        print(alert.arrivalBusStop)
+//                        print(alert.firstBeforeBusStop ?? "There's no first previous busStop")
+//                        print(alert.secondBeforeBusStop ?? "There's no second previous busStop")
+//                        print(alert.thirdBeforeBusStop ?? "There's no third previous busStop")
                         
                     }){
                         VStack(alignment: .leading) {
@@ -66,7 +65,7 @@ struct SelectBusStopView: View {
         }
     }
     
-    private func storeBeforeBusStops(for busStop: BusStop, alert: inout Alert, busStops: [BusStop], maxUpwardNodeord: Int) {
+    private func storeBeforeBusStops(for busStop: BusStop, alert: inout BusStopAlert, busStops: [BusStop], maxUpwardNodeord: Int) {
         
         let currentIndex: Int // 선택한 정류장 이전의 정류장이 몇 개 남아있는지 확인하는 용도
         
