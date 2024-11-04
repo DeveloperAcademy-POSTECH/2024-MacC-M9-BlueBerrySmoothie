@@ -2,7 +2,7 @@
 //  ActionButton.swift
 //  BlueBerrySmoothie
 //
-//  Created by 문호 on 11/1/24.
+//  Created by 문호 on 11/4/24.
 //
 
 import SwiftUI
@@ -21,8 +21,7 @@ struct ActionButton: View {
                 .padding()
         }
         .fixedSize(horizontal: false, vertical: true)
-    }
-}
+    }}
 
 #Preview {
     ActionButton()
