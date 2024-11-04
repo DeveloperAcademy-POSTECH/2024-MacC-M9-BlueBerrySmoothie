@@ -16,6 +16,15 @@
 		1232B3E12CD1D46500C48414 /* DummyHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1232B3E02CD1D46500C48414 /* DummyHelper.swift */; };
 		1232B3E42CD1D48600C48414 /* FetchBusAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1232B3E32CD1D48600C48414 /* FetchBusAPI.swift */; };
 		12D2B6C12CD3533E005CF771 /* DummyComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D2B6C02CD3533E005CF771 /* DummyComponent.swift */; };
+		1C8402732CD3D82000EFC024 /* SpoqaHanSansNeo-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1C84026F2CD3D82000EFC024 /* SpoqaHanSansNeo-Light.otf */; };
+		1C8402742CD3D82000EFC024 /* SpoqaHanSansNeo-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1C84026E2CD3D82000EFC024 /* SpoqaHanSansNeo-Bold.otf */; };
+		1C8402752CD3D82000EFC024 /* SpoqaHanSansNeo-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1C8402722CD3D82000EFC024 /* SpoqaHanSansNeo-Thin.otf */; };
+		1C8402762CD3D82000EFC024 /* SpoqaHanSansNeo-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1C8402702CD3D82000EFC024 /* SpoqaHanSansNeo-Medium.otf */; };
+		1C8402772CD3D82000EFC024 /* SpoqaHanSansNeo-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1C8402712CD3D82000EFC024 /* SpoqaHanSansNeo-Regular.otf */; };
+		1C84027A2CD3D9E300EFC024 /* UIfont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C8402792CD3D9DA00EFC024 /* UIfont.swift */; };
+		D9CB8C2E2CD45B480054F739 /* alertSettingMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9CB8C2D2CD45B480054F739 /* alertSettingMain.swift */; };
+		D9CB8C302CD45BD00054F739 /* SavedBus.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9CB8C2F2CD45BD00054F739 /* SavedBus.swift */; };
+		D9CB8C322CD45C4A0054F739 /* ActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9CB8C312CD45C4A0054F739 /* ActionButton.swift */; };
 		12D2B6C62CD36E70005CF771 /* SelectBusStopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D2B6C52CD36E70005CF771 /* SelectBusStopView.swift */; };
 		12D2B6C82CD36E94005CF771 /* BusStopModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D2B6C72CD36E94005CF771 /* BusStopModel.swift */; };
 		12D2B6CA2CD36ED8005CF771 /* BusStopDecoderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D2B6C92CD36ED8005CF771 /* BusStopDecoderModel.swift */; };
@@ -66,6 +75,16 @@
 		1232B3E02CD1D46500C48414 /* DummyHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyHelper.swift; sourceTree = "<group>"; };
 		1232B3E32CD1D48600C48414 /* FetchBusAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchBusAPI.swift; sourceTree = "<group>"; };
 		12D2B6C02CD3533E005CF771 /* DummyComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyComponent.swift; sourceTree = "<group>"; };
+		1C84026E2CD3D82000EFC024 /* SpoqaHanSansNeo-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Bold.otf"; sourceTree = "<group>"; };
+		1C84026F2CD3D82000EFC024 /* SpoqaHanSansNeo-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Light.otf"; sourceTree = "<group>"; };
+		1C8402702CD3D82000EFC024 /* SpoqaHanSansNeo-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Medium.otf"; sourceTree = "<group>"; };
+		1C8402712CD3D82000EFC024 /* SpoqaHanSansNeo-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Regular.otf"; sourceTree = "<group>"; };
+		1C8402722CD3D82000EFC024 /* SpoqaHanSansNeo-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Thin.otf"; sourceTree = "<group>"; };
+		1C8402782CD3D8BB00EFC024 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		1C8402792CD3D9DA00EFC024 /* UIfont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIfont.swift; sourceTree = "<group>"; };
+		D9CB8C2D2CD45B480054F739 /* alertSettingMain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = alertSettingMain.swift; sourceTree = "<group>"; };
+		D9CB8C2F2CD45BD00054F739 /* SavedBus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedBus.swift; sourceTree = "<group>"; };
+		D9CB8C312CD45C4A0054F739 /* ActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionButton.swift; sourceTree = "<group>"; };
 		12D2B6C52CD36E70005CF771 /* SelectBusStopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectBusStopView.swift; sourceTree = "<group>"; };
 		12D2B6C72CD36E94005CF771 /* BusStopModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusStopModel.swift; sourceTree = "<group>"; };
 		12D2B6C92CD36ED8005CF771 /* BusStopDecoderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusStopDecoderModel.swift; sourceTree = "<group>"; };
@@ -134,10 +153,10 @@
 		1232B3AE2CD1D3DE00C48414 /* BlueBerrySmoothie */ = {
 			isa = PBXGroup;
 			children = (
+				1C8402782CD3D8BB00EFC024 /* Info.plist */,
 				12D2B6D22CD3F50F005CF771 /* Config.xcconfig */,
-				9DEA52482CD3649600A3AE68 /* Info.plist */,
-				12D2B6BF2CD3532F005CF771 /* Component */,
 				1232B3E92CD1D4E800C48414 /* App */,
+				12D2B6BF2CD3532F005CF771 /* Component */,
 				1232B3E52CD1D49000C48414 /* Manager */,
 				1232B3E22CD1D46E00C48414 /* Network */,
 				1232B3DF2CD1D45A00C48414 /* Helper */,
@@ -145,6 +164,7 @@
 				12D2B6CD2CD3AB97005CF771 /* ViewModel */,
 				1232B3D92CD1D3F700C48414 /* Model */,
 				1232B3B32CD1D3DF00C48414 /* Assets.xcassets */,
+				1C84026D2CD3D7C300EFC024 /* Fonts */,
 				1232B3B52CD1D3DF00C48414 /* Preview Content */,
 			);
 			path = BlueBerrySmoothie;
@@ -175,6 +195,8 @@
 		1232B3DC2CD1D40800C48414 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				D9CB8C2D2CD45B480054F739 /* alertSettingMain.swift */,
+				1232B3DD2CD1D41600C48414 /* DummyView.swift */,
 				9D64A9DD2CD755F400718CC8 /* Untitled.swift */,
 				9DEA524D2CD46EF400A3AE68 /* BusDetailView.swift */,
 				9DEA524B2CD3B79B00A3AE68 /* ScrollingTextView.swift */,
@@ -228,10 +250,23 @@
 			isa = PBXGroup;
 			children = (
 				12D2B6C02CD3533E005CF771 /* DummyComponent.swift */,
+				D9CB8C2F2CD45BD00054F739 /* SavedBus.swift */,
+				D9CB8C312CD45C4A0054F739 /* ActionButton.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
 		};
+		1C84026D2CD3D7C300EFC024 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				1C8402792CD3D9DA00EFC024 /* UIfont.swift */,
+				1C84026E2CD3D82000EFC024 /* SpoqaHanSansNeo-Bold.otf */,
+				1C84026F2CD3D82000EFC024 /* SpoqaHanSansNeo-Light.otf */,
+				1C8402702CD3D82000EFC024 /* SpoqaHanSansNeo-Medium.otf */,
+				1C8402712CD3D82000EFC024 /* SpoqaHanSansNeo-Regular.otf */,
+				1C8402722CD3D82000EFC024 /* SpoqaHanSansNeo-Thin.otf */,
+			);
+			path = Fonts;
 		12D2B6CD2CD3AB97005CF771 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -345,6 +380,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				1232B3B72CD1D3DF00C48414 /* Preview Assets.xcassets in Resources */,
+				1C8402732CD3D82000EFC024 /* SpoqaHanSansNeo-Light.otf in Resources */,
+				1C8402742CD3D82000EFC024 /* SpoqaHanSansNeo-Bold.otf in Resources */,
+				1C8402752CD3D82000EFC024 /* SpoqaHanSansNeo-Thin.otf in Resources */,
+				1C8402762CD3D82000EFC024 /* SpoqaHanSansNeo-Medium.otf in Resources */,
+				1C8402772CD3D82000EFC024 /* SpoqaHanSansNeo-Regular.otf in Resources */,
 				1232B3B42CD1D3DF00C48414 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -371,6 +411,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				1232B3E12CD1D46500C48414 /* DummyHelper.swift in Sources */,
+				1232B3DB2CD1D40500C48414 /* DummyModel.swift in Sources */,
+				1232B3DE2CD1D41600C48414 /* DummyView.swift in Sources */,
+				1232B3E42CD1D48600C48414 /* DummyNetwork.swift in Sources */,
+				D9CB8C2E2CD45B480054F739 /* alertSettingMain.swift in Sources */,
+				1C84027A2CD3D9E300EFC024 /* UIfont.swift in Sources */,
+				D9CB8C302CD45BD00054F739 /* SavedBus.swift in Sources */,
 				12D2B6D42CD3F5BE005CF771 /* getAPIKey.swift in Sources */,
 				1232B3DB2CD1D40500C48414 /* BusDecoderModel.swift in Sources */,
 				9DEA523F2CD362CA00A3AE68 /* SelectBusView.swift in Sources */,
@@ -395,6 +441,7 @@
 				12D2B6C12CD3533E005CF771 /* DummyComponent.swift in Sources */,
 				12D2B6C82CD36E94005CF771 /* BusStopModel.swift in Sources */,
 				1232B3B02CD1D3DE00C48414 /* BlueBerrySmoothieApp.swift in Sources */,
+				D9CB8C322CD45C4A0054F739 /* ActionButton.swift in Sources */,
 				12D2B6C62CD36E70005CF771 /* SelectBusStopView.swift in Sources */,
 				12D2B6CF2CD3ABAF005CF771 /* BusStopViewModel.swift in Sources */,
 			);
