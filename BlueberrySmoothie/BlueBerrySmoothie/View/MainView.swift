@@ -56,11 +56,10 @@ struct ListAlertView: View {
     var body: some View {
         ScrollView {
             LazyVGrid(columns: columns, spacing: 8) {
-                ForEach(alerts, id: \.busStopID) { alert in
+                ForEach(alerts, id: \.alertID) { alert in
                     AlertListCell(alert: alert, onDelete: { deleteAlert(alert)})
                 }
             }
-            //            .padding()
         }
     }
 }
