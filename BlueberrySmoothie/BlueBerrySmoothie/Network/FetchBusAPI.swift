@@ -10,6 +10,7 @@ import Foundation
 // 버스 데이터를 가져오는 함수
 func fetchBusData(citycode: Int, routeNo: String, completion: @escaping ([Bus]) -> Void) {
     
+    
     do {
         guard let serviceKey = getAPIKey() else {
             throw APIError.invalidAPI // API 키를 가져오지 못한 경우 예외 처리
@@ -61,7 +62,7 @@ func fetchBusData(citycode: Int, routeNo: String, completion: @escaping ([Bus]) 
                 completion([]) // Return empty array if no items found in both attempts
             }
         }.resume() // Start the data task
-    }    catch{
-        
+    } catch {
+        print("API serviceKey Error")
     }
 }

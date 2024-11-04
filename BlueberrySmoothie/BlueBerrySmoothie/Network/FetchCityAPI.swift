@@ -9,9 +9,10 @@ import Foundation
 
 // View 외부에 fetchCityData 함수 정의
 func fetchCityData(completion: @escaping ([City]) -> Void) {
+    
     do{
         guard let serviceKey = getAPIKey() else {
-            throw APIError.invalidAPI 
+            throw APIError.invalidAPI
         }
         
         guard let url = URL(string: "http://apis.data.go.kr/1613000/BusRouteInfoInqireService/getCtyCodeList?serviceKey=\(serviceKey)&_type=json") else { return }
@@ -27,6 +28,6 @@ func fetchCityData(completion: @escaping ([City]) -> Void) {
         }.resume()
     } catch {
         
+        print("API serviceKey Error")
     }
-    
 }

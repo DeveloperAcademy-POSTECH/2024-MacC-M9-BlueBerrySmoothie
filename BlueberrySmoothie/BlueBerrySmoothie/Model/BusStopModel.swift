@@ -47,4 +47,16 @@ struct BusStop: Codable, Identifiable, Hashable {
                 nodeno = try? container.decode(Int.self, forKey: .nodeno)
             }
         }
+    
+       // 기본 이니셜라이저 추가
+       init(routeid: String, nodeid: String, nodenm: String, nodeno: Int?, nodeord: Int, gpslati: Double, gpslong: Double, updowncd: Int) {
+           self.routeid = routeid
+           self.nodeid = nodeid
+           self.nodenm = nodenm
+           self.nodeno = nodeno
+           self.nodeord = nodeord
+           self.gpslati = gpslati
+           self.gpslong = gpslong
+           self.updowncd = updowncd
+       }
 }

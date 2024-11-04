@@ -62,6 +62,7 @@ struct SelectBusStopView: View {
         .navigationTitle("버스정류장들 정보")
         .task {
             await busStopViewModel.getBusStopData(cityCode: city.citycode, routeId: bus.routeid)
+
         }
     }
     
@@ -87,4 +88,5 @@ struct SelectBusStopView: View {
         alert.thirdBeforeBusStop = currentIndex > 3 ? busStops[busStop.nodeord - 4] : nil
     }
 }
+
 

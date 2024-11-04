@@ -49,4 +49,6 @@ struct Bus: Codable, Identifiable {
         endnodenm = (try? container.decode(String.self, forKey: .endnodenm)) ?? "알 수 없음"
         routetp = (try? container.decode(String.self, forKey: .routetp)) ?? "알 수 없음"
     }
+    
+
 }
