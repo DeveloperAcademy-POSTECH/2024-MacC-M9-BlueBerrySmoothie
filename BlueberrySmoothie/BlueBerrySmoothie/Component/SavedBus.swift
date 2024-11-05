@@ -18,37 +18,21 @@ struct SavedBus: View {
                         .stroke(Color(red: 104 / 255, green: 144 / 255, blue: 255 / 255), lineWidth: 2)
                 }
             VStack {
-                Spacer()
-                HStack {
-                    ZStack {
-                        Rectangle()
-                            .foregroundColor(.clear)
-                            .background(Color(white: 238 / 255))
-                            .cornerRadius(20)
-                            .frame(width: 48, height: 24)
-                            
-                        Text("207")
-                            .font(.system(size: 14))
-                            .foregroundColor(Color(white: 170 / 255))
-
-                    }
+                HStack(alignment: .bottom) {
+                        Text("출근하는 거 힘들다")
+                            .font(.system(size: 12))
+                            .foregroundColor(Color(white: 128 / 255))
                     Spacer()
                     Image(systemName: "ellipsis")
+                        .font(.system(size: 24))
                         .foregroundColor(Color(white: 212 / 255))
+                        .padding(.vertical, 20)
                 }
-                .padding(.bottom, 4)
-                
                 HStack {
-                    Text("시외버스 터미널")
-                        .font(.system(size: 24, weight: .bold))
-                    Spacer()
-                }
-                .padding(.bottom, 4)
-                
-                HStack {
-                    Text("엄마보러가자")
-                        .font(.system(size: 16))
-                        .foregroundColor(Color(white: 170 / 255))
+                    Text("207")
+                        .font(.system(size: 20, weight: .regular))
+                    Text("포스텍")
+                        .font(.system(size: 20, weight: .regular))
                     Spacer()
                 }
                 .padding(.bottom, 4)
@@ -57,16 +41,26 @@ struct SavedBus: View {
                 
                 HStack(spacing: 4) {
                     Image(systemName: "bell.fill")
-                        .font(.system(size: 12.0))
+                        .font(.system(size: 12))
+                        .foregroundColor(Color(red: 104 / 255, green: 144 / 255, blue: 255 / 255))
                     Text("3 정류장 전 알람")
-                        .font(.system(size: 14.0))
+                        .font(.system(size: 14))
+                        .foregroundColor(Color(red: 104 / 255, green: 144 / 255, blue: 255 / 255))
+                    
+                    Rectangle()
+                        .foregroundColor(.clear)
+                        .frame(width: 2, height: 12)
+                        .background(Color(white: 238 / 255))
+                    
+                    Text("행정복지센터")
+                        .font(.system(size: 14))
+                        .foregroundColor(Color(white: 170 / 255))
+
                     Spacer()
                 }
-                .foregroundColor(Color(white: 128 / 255))
                 
                 Spacer()
             }
-            .padding(.top, 12)
             .padding(.horizontal)
             .padding(.bottom, 20)
         }
