@@ -4,15 +4,13 @@ import SwiftUI
 
 struct SelectBusStopView: View {
     @EnvironmentObject var busStopViewModel: BusStopViewModel
-
+    
     let city: City // 도시 정보
     let bus: Bus // 선택된 버스 정보
-//    @Binding var selectedBus: Bus?
-    @Binding var selectedBusStop: BusStop? // 상위 뷰에 선택된 정류장 전달을 위한 바인딩
-    @Binding var allBusStops: [BusStop]
+    @Binding var busStopAlert: BusStopAlert?
     
     @Environment(\.dismiss) private var dismiss
-
+    
     var body: some View {
         VStack(spacing: 20) {
             // 기본 정보 출력
@@ -27,9 +25,16 @@ struct SelectBusStopView: View {
             List(busStopViewModel.busStopList, id: \.self) { busStop in
                 Button(action: {
                     // 정류장 선택 시
-//                    selectedBus = bus
-                    selectedBusStop = busStop // 상위 뷰에 선택된 정류장 전달
-                    allBusStops = busStopViewModel.busStopList
+                    
+                    if let maxUpwardNodeord = busStopViewModel.busStopList.filter({ $0.updowncd == 0 }).map({ $0.nodeord }).max() {
+                        
+                        busStopAlert = BusStopAlert(cityCode: Double(city.citycode), bus: bus, allBusStop: busStopViewModel.busStopList, arrivalBusStop: busStop, alertBusStop: 0)
+                        
+                        // 이전 정류장 (1~3번째) 저장
+                        if var unwrappedBusStopAlert = busStopAlert {
+                            storeBeforeBusStops(for: busStop, alert: &unwrappedBusStopAlert, busStops: busStopViewModel.busStopList, maxUpwardNodeord: maxUpwardNodeord)
+                        }
+                    }
                     dismiss()
                 }) {
                     // 정류장 정보를 표시하는 뷰
@@ -46,21 +51,44 @@ struct SelectBusStopView: View {
         .padding()
         .navigationTitle("정류장 선택")
         .task {
-            print("\(bus.routeno)\n\n\n\n\n\n\n\n\n\n\n")
             // 최신 버스 데이터를 기반으로 버스 정류장 데이터 로드
-            await loadBusStops()
-            print("\(bus.routeno)\n\n\n\n\n\n\n\n\n\n\n\n\n")
-            
+            //            await loadBusStops()
+            await busStopViewModel.getBusStopData(cityCode: city.citycode, routeId: bus.routeid)
         }
-       
-       
+        
+        
     }
     
-    private func loadBusStops() async {
-        do {
-            try await busStopViewModel.getBusStopData(cityCode: city.citycode, routeId: bus.routeid)
-        } catch {
-            print("Error loading bus stop data: \(error)") // 오류 핸들링
+    //    private func loadBusStops() async {
+    //        do {
+    //            try await busStopViewModel.getBusStopData(cityCode: city.citycode, routeId: bus.routeid)
+    //        } catch {
+    //            print("Error loading bus stop data: \(error)") // 오류 핸들링
+    //        }
+    //    }
+    
+    
+    private func storeBeforeBusStops(for busStop: BusStop, alert: inout BusStopAlert, busStops: [BusStop], maxUpwardNodeord: Int) {
+        
+        let currentIndex: Int // 선택한 정류장 이전의 정류장이 몇 개 남아있는지 확인하는 용도
+        
+        // 현재 정류장이 상행이면
+        if busStop.updowncd == 0 {
+            // 상행의 순번을 넣고
+            currentIndex = busStop.nodeord
+        } else { // 현재 정류장이 하행이면
+            // 하행의 순번에서 상행의 최대 순번을 뺀다
+            // 최대 순번을 뺀 수가 3이하일 경우를 아래 이전 정류장 저장 부분에서 처리하기 위함
+            currentIndex = busStop.nodeord - maxUpwardNodeord
         }
+        
+        //일반적인 경우엔 위의 과정을 거쳐와도 currentIndex가 3보다 작지 않기 때문에 아무 상관 없음
+        
+        // 이전 정류장을 최대 3개까지 저장함
+        // beforeBusStop이 nil이면 선택지에서 비활성화 되어있게 하는 것도 좋을듯
+        // nodeord가 1부터 시작해서 n+1 만큼 빼주어야함
+        alert.firstBeforeBusStop = currentIndex > 1 ? busStops[busStop.nodeord - 2] : nil
+        alert.secondBeforeBusStop = currentIndex > 2 ? busStops[busStop.nodeord - 3] : nil
+        alert.thirdBeforeBusStop = currentIndex > 3 ? busStops[busStop.nodeord - 4] : nil
     }
 }

@@ -198,11 +198,11 @@
 				9D0C411A2CDA3D780005A6CC /* StationPickerModal.swift */,
 				9D64A9E32CD7AB3400718CC8 /* BusStopListView.swift */,
 				9D64A9E12CD7A85C00718CC8 /* AlarmStartView.swift */,
-				D90E0C192CD89CB20089883F /* AlertSettingMain.swift */,
 				9DEA524D2CD46EF400A3AE68 /* BusDetailView.swift */,
-				9DEA523E2CD362C100A3AE68 /* SelectBusView.swift */,
 				9DEA524B2CD3B79B00A3AE68 /* ScrollingTextView.swift */,
 				1232B3DD2CD1D41600C48414 /* SelectCityView.swift */,
+				D90E0C192CD89CB20089883F /* AlertSettingMain.swift */,
+				9DEA523E2CD362C100A3AE68 /* SelectBusView.swift */,
 				12D2B6C52CD36E70005CF771 /* SelectBusStopView.swift */,
 				1232B3B12CD1D3DE00C48414 /* ContentView.swift */,
 			);

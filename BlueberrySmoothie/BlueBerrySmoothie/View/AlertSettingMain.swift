@@ -16,18 +16,19 @@ struct AlertSettingMain: View {
     @State private var label: String = ""
     @State private var showSheet: Bool = false
     @State private var selectedStation: String = "정거장 수"
-    @State private var selectedBus: Bus?  // Bus 구조체를 저장하는 변수
-    @State private var selectedBusStop: BusStop? // 선택된 정류장을 위한 State
-    @State private var allBusstop: [BusStop] = []
+//    @State private var selectedBus: Bus?  // Bus 구조체를 저장하는 변수
+//    @State private var selectedBusStop: BusStop? // 선택된 정류장을 위한 State
+//    @State private var allBusstop: [BusStop] = []
+    @State private var busStopAlert: BusStopAlert?
 
     var body: some View {
         NavigationStack {
             VStack {
                 // 데이터 확인 버튼
                 Button(action: {
-                    print("\(selectedBus?.routeno ?? "선택 안됨")")
-                    print("\(selectedBus?.routeid ?? "선택 안됨")")
-                    print("\(selectedBusStop?.nodeid ?? "선택 안됨")")
+                    print("\(busStopAlert?.bus.routeno ?? "선택 안됨")")
+                    print("\(busStopAlert?.bus.routeid ?? "선택 안됨")")
+                    print("\(busStopAlert?.arrivalBusStop.nodeid ?? "선택 안됨")")
                 }) {
                     Text("데이터 확인")
                         .font(.system(size: 16, weight: .bold))
@@ -86,7 +87,7 @@ struct AlertSettingMain: View {
                                         .stroke(Color(white: 212 / 255), lineWidth: 1)
                                 }
                             HStack {
-                                Text(selectedBus?.routeno ?? "선택 안됨")  // 선택된 버스 표시
+                                Text(busStopAlert?.bus.routeno ?? "선택 안됨")  // 선택된 버스 표시
                                     .font(.system(size: 16))
                                     .padding(.horizontal, 12)
                                     .padding(.vertical, 10)
@@ -95,7 +96,7 @@ struct AlertSettingMain: View {
                         }
                         .fixedSize(horizontal: false, vertical: true)
 
-                        NavigationLink(destination: SelectBusView(selectedBus: $selectedBus, selectedBusStop: $selectedBusStop, allBusStops: $allBusstop)) {  // 선택된 버스를 전달받음
+                        NavigationLink(destination: SelectBusView( busStopAlert: $busStopAlert)) {  // 선택된 버스를 전달받음
                             ZStack {
                                 Rectangle()
                                     .foregroundColor(Color(red: 237 / 255, green: 239 / 255, blue: 246 / 255))
@@ -139,7 +140,7 @@ struct AlertSettingMain: View {
                                     .stroke(Color(white: 212 / 255), lineWidth: 1)
                             }
                         HStack {
-                            Text("\(selectedBusStop?.nodenm ?? "선택해주세요")")
+                            Text("\(busStopAlert?.arrivalBusStop.nodenm ?? "선택해주세요")")
                                 .font(.system(size: 16))
                                 .padding(.horizontal, 12)
                                 .padding(.vertical, 10)
@@ -228,8 +229,8 @@ struct AlertSettingMain: View {
     
     // 알람 저장 함수
     private func saveAlert() {
-        guard let selectedBus = selectedBus,
-              let selectedBusStop = selectedBusStop else {
+        guard let selectedBus = busStopAlert?.bus,
+              let selectedBusStop = busStopAlert?.arrivalBusStop else {
             print("버스와 정류장을 선택하세요.")
             return
         }
@@ -259,24 +260,24 @@ struct AlertSettingMain: View {
     
     
     private func saveBusstop() {
-        guard !allBusstop.isEmpty else {
+        guard !(busStopAlert?.allBusStop.isEmpty)! else {
             print("버스를 선택하세요.")
             return
         }
         
         // selectedBus.routeid가 이미 존재하는지 확인
         let routeExists = busStopLocal.contains { existingBusStop in
-            existingBusStop.routeid == selectedBus?.routeid
+            existingBusStop.routeid == busStopAlert?.bus.routeid
         }
 
         // 같은 routeid가 존재하면 저장하지 않음
         if routeExists {
-            print("routeid \(selectedBus?.routeid ?? "알 수 없음")이 이미 존재합니다. 저장하지 않았습니다.")
+            print("routeid \(busStopAlert?.bus.routeid ?? "알 수 없음")이 이미 존재합니다. 저장하지 않았습니다.")
             return // 중복된 경우, 함수 종료
         }
 
         // routeid가 존재하지 않으면 저장
-        for busStop in allBusstop {
+        for busStop in busStopAlert!.allBusStop {
             let newBusStopLocal = BusStopLocal(
                 id: UUID().uuidString,
                 routeid: busStop.routeid,
