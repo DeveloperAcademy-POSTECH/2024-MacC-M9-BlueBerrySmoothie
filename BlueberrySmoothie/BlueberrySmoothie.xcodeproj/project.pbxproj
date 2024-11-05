@@ -23,6 +23,8 @@
 		12D2B6D12CD3B104005CF771 /* NetworkHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D2B6D02CD3B104005CF771 /* NetworkHelper.swift */; };
 		12D2B6D42CD3F5BE005CF771 /* getAPIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D2B6D32CD3F5BD005CF771 /* getAPIKey.swift */; };
 		12D2B6D82CD63D6A005CF771 /* AlertModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D2B6D72CD63D6A005CF771 /* AlertModel.swift */; };
+		9D0C411B2CDA3D780005A6CC /* StationPickerModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D0C411A2CDA3D780005A6CC /* StationPickerModal.swift */; };
+		9D0C411D2CDA452E0005A6CC /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D0C411C2CDA452E0005A6CC /* DetailView.swift */; };
 		9D64A9E22CD7A85C00718CC8 /* AlarmStartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D64A9E12CD7A85C00718CC8 /* AlarmStartView.swift */; };
 		9D64A9E42CD7AB3400718CC8 /* BusStopListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D64A9E32CD7AB3400718CC8 /* BusStopListView.swift */; };
 		9DEA523F2CD362CA00A3AE68 /* SelectBusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEA523E2CD362C100A3AE68 /* SelectBusView.swift */; };
@@ -78,6 +80,8 @@
 		12D2B6D22CD3F50F005CF771 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		12D2B6D32CD3F5BD005CF771 /* getAPIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getAPIKey.swift; sourceTree = "<group>"; };
 		12D2B6D72CD63D6A005CF771 /* AlertModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertModel.swift; sourceTree = "<group>"; };
+		9D0C411A2CDA3D780005A6CC /* StationPickerModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationPickerModal.swift; sourceTree = "<group>"; };
+		9D0C411C2CDA452E0005A6CC /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		9D64A9E12CD7A85C00718CC8 /* AlarmStartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmStartView.swift; sourceTree = "<group>"; };
 		9D64A9E32CD7AB3400718CC8 /* BusStopListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusStopListView.swift; sourceTree = "<group>"; };
 		9DEA523E2CD362C100A3AE68 /* SelectBusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectBusView.swift; sourceTree = "<group>"; };
@@ -190,12 +194,14 @@
 		1232B3DC2CD1D40800C48414 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				9D0C411C2CDA452E0005A6CC /* DetailView.swift */,
+				9D0C411A2CDA3D780005A6CC /* StationPickerModal.swift */,
 				9D64A9E32CD7AB3400718CC8 /* BusStopListView.swift */,
 				9D64A9E12CD7A85C00718CC8 /* AlarmStartView.swift */,
 				D90E0C192CD89CB20089883F /* AlertSettingMain.swift */,
 				9DEA524D2CD46EF400A3AE68 /* BusDetailView.swift */,
-				9DEA524B2CD3B79B00A3AE68 /* ScrollingTextView.swift */,
 				9DEA523E2CD362C100A3AE68 /* SelectBusView.swift */,
+				9DEA524B2CD3B79B00A3AE68 /* ScrollingTextView.swift */,
 				1232B3DD2CD1D41600C48414 /* SelectCityView.swift */,
 				12D2B6C52CD36E70005CF771 /* SelectBusStopView.swift */,
 				1232B3B12CD1D3DE00C48414 /* ContentView.swift */,
@@ -413,9 +419,11 @@
 				9DEA52502CD4D56400A3AE68 /* busColor.swift in Sources */,
 				9DEA524E2CD46EF400A3AE68 /* BusDetailView.swift in Sources */,
 				1232B3DE2CD1D41600C48414 /* SelectCityView.swift in Sources */,
+				9D0C411B2CDA3D780005A6CC /* StationPickerModal.swift in Sources */,
 				12D2B6CC2CD3706F005CF771 /* fetchBusStopAPI.swift in Sources */,
 				1232B3E42CD1D48600C48414 /* FetchBusAPI.swift in Sources */,
 				9DEA52522CD4D57A00A3AE68 /* filterBuses.swift in Sources */,
+				9D0C411D2CDA452E0005A6CC /* DetailView.swift in Sources */,
 				1232B3B22CD1D3DE00C48414 /* ContentView.swift in Sources */,
 				D968D5C62CD89EC4002DF70B /* ActionButton.swift in Sources */,
 				12D2B6D12CD3B104005CF771 /* NetworkHelper.swift in Sources */,

@@ -1,46 +1,51 @@
-////
-////  SelectBusView.swift
-////  BlueberrySmoothie
-////
-////  Created by 문재윤 on 10/31/24.
-////
 
 import SwiftUI
 
 struct SelectBusView: View {
-    let city: City = City(citycode: 21, cityname: "부산") // 도시 정보
-    @State private var allBuses: [Bus] = [] // 전체 버스 목록
-    @State private var filteredBuses: [Bus] = [] // 필터링된 버스 목록
-    @State private var routeNo: String = "" // 입력된 노선 번호를 저장하는 상태 변수
+    @Binding var selectedBus: Bus? // 선택된 버스를 전달하는 바인딩
+    @Binding var selectedBusStop: BusStop?
+    @Binding var allBusStops: [BusStop]
+    
+    let city: City = City(citycode: 21, cityname: "부산")
+    @State private var allBuses: [Bus] = []
+    @State private var filteredBuses: [Bus] = []
+    @State private var routeNo: String = ""
     @FocusState private var isTextFieldFocused: Bool
     
+    // 선택된 버스에 따라 SelectBusStopView로 네비게이션하기 위한 상태
+    @State private var navigateToBusStopView = false
+
     var body: some View {
         NavigationStack {
             VStack(spacing: 20) {
                 HStack {
-                    TextField("버스 번호 입력", text: $routeNo) // 노선 번호 입력 필드
+                    TextField("버스 번호 입력", text: $routeNo)
                         .font(.system(size: 25))
                         .textFieldStyle(.plain)
                         .focused($isTextFieldFocused)
                         .keyboardType(.numberPad)
                         .onChange(of: routeNo) { newRouteNo in
-                            filteredBuses = filterBuses(by: newRouteNo, from: allBuses) // 노선 번호에 따라 필터링
+                            filteredBuses = filterBuses(by: newRouteNo, from: allBuses)
                         }
                     Image(systemName: "magnifyingglass")
-                        .foregroundColor(isTextFieldFocused ? .blue : .gray2)
+                        .foregroundColor(isTextFieldFocused ? .blue : .gray)
                 }
                 .padding(.horizontal, 36)
                 .padding(.bottom, -8)
                 .padding(.top, 30)
                 
                 Rectangle()
-                    .foregroundColor(isTextFieldFocused ? .blue : .gray2)
+                    .foregroundColor(isTextFieldFocused ? .blue : .gray)
                     .frame(height: 2)
                     .padding(.horizontal, 20)
                 
                 ScrollView(showsIndicators: false) {
-                    ForEach(filteredBuses) { bus in // 필터링된 버스 목록을 ForEach로 표시
-                        NavigationLink(destination: SelectBusStopView(city: city, bus: bus)) {
+                    ForEach(filteredBuses) { bus in
+                        Button(action: {
+                            // 선택된 버스를 설정하고 네비게이션 활성화
+                            selectedBus = bus
+                            navigateToBusStopView = true
+                        }) {
                             VStack(alignment: .leading) {
                                 Spacer()
                                 VStack(alignment: .leading) {
@@ -63,25 +68,36 @@ struct SelectBusView: View {
                     }
                 }
                 .padding(.horizontal, 20)
-            }
+                
+             
+                // 네비게이션 링크: 선택된 버스가 있을 때 SelectBusStopView로 이동
+                NavigationLink(
+                       destination: Group {
+                           if let bus = selectedBus { // 안전하게 선택된 버스를 확인
+                               SelectBusStopView(city: city, bus: bus, selectedBusStop: $selectedBusStop, allBusStops: $allBusStops)
+                           }
+                       },
+                       isActive: $navigateToBusStopView
+                   ) {
+                       EmptyView()
+                   }
+                   .hidden() // 빈 뷰로 숨기기
+                           }
             .onTapGesture {
                 isTextFieldFocused = false // 다른 곳 클릭 시 키보드 숨김
             }
-            .navigationTitle("버스 검색") // 네비게이션 타이틀 설정
+            .navigationTitle("버스 검색")
             .navigationBarTitleDisplayMode(.inline)
             .onAppear {
                 fetchAllBusData(citycode: city.citycode) { fetchedBuses in
                     self.allBuses = fetchedBuses
-                    self.filteredBuses = fetchedBuses // 초기 필터링된 버스 목록 설정
-
+                    self.filteredBuses = fetchedBuses
                 }
             }
         }
     }
-}
-
-struct SelectBusView_Previews: PreviewProvider {
-    static var previews: some View {
-        SelectBusView()
+    
+    private func filterBuses(by routeNo: String, from buses: [Bus]) -> [Bus] {
+        return buses.filter { $0.routeno.contains(routeNo) }
     }
 }

@@ -1,91 +1,66 @@
-//
-//  SelectBusStopView.swift
-//  BlueBerrySmoothie
-//
-//  Created by Yeji Seo on 10/31/24.
-//
+
 
 import SwiftUI
 
 struct SelectBusStopView: View {
     @EnvironmentObject var busStopViewModel: BusStopViewModel
+
+    let city: City // 도시 정보
+    let bus: Bus // 선택된 버스 정보
+//    @Binding var selectedBus: Bus?
+    @Binding var selectedBusStop: BusStop? // 상위 뷰에 선택된 정류장 전달을 위한 바인딩
+    @Binding var allBusStops: [BusStop]
     
-    let city: City // 도시
-    let bus: Bus // 버스
-    
-    
+    @Environment(\.dismiss) private var dismiss
+
     var body: some View {
         VStack(spacing: 20) {
-            Text("도시 이름: \(city.cityname)")
-            Text("도시 코드: \(city.citycode)")
-                .foregroundColor(.gray)
+            // 기본 정보 출력
+            Text("도시: \(city.cityname)")
             Text("버스 번호: \(bus.routeno)")
-                .foregroundColor(.gray)
+                .font(.headline)
+                .foregroundColor(.blue)
             Text("노선 ID: \(bus.routeid)")
                 .foregroundColor(.gray)
             
-            Text("상행:0 ,하행:1")
-            List {
-                ForEach(busStopViewModel.busStopList, id: \.self) { busStop in
-                    Button(action: {
-                        print("Button 1")
-                        var alert: BusStopAlert = BusStopAlert(cityCode: Double(city.citycode), bus: bus, arrivalBusStop: busStop, alertBusStop: 3, alertLabel: "Test")
-                        
-                        // 상행의 최대 순번 구하기
-                        if let maxUpwardNodeord = busStopViewModel.busStopList.filter({ $0.updowncd == 0 }).map({ $0.nodeord }).max() {
-                            
-                            // 이전 정류장 (1~3번째) 저장
-                            storeBeforeBusStops(for: busStop, alert: &alert, busStops: busStopViewModel.busStopList, maxUpwardNodeord: maxUpwardNodeord)
-                        }
-                        
-//                        print(alert.arrivalBusStop)
-//                        print(alert.firstBeforeBusStop ?? "There's no first previous busStop")
-//                        print(alert.secondBeforeBusStop ?? "There's no second previous busStop")
-//                        print(alert.thirdBeforeBusStop ?? "There's no third previous busStop")
-                        
-                    }){
-                        VStack(alignment: .leading) {
-                            Text("정류소ID: \(busStop.nodeid)")
-                            Text("정류소명: \(busStop.nodenm)")
-                            Text("정류소번호: \(busStop.nodeno ?? 0)")
-                            Text("정류소순번: \(busStop.nodeord)")
-                            Text("x,y 좌표: \(busStop.gpslati), \(busStop.gpslong)")
-                            Text("상하행구분코드: \(busStop.updowncd)")
-                        }
+            // 정류장 목록 출력
+            List(busStopViewModel.busStopList, id: \.self) { busStop in
+                Button(action: {
+                    // 정류장 선택 시
+//                    selectedBus = bus
+                    selectedBusStop = busStop // 상위 뷰에 선택된 정류장 전달
+                    allBusStops = busStopViewModel.busStopList
+                    dismiss()
+                }) {
+                    // 정류장 정보를 표시하는 뷰
+                    VStack(alignment: .leading) {
+                        Text("정류소 ID: \(busStop.nodeid)")
+                        Text("정류소 이름: \(busStop.nodenm)")
+                        Text("정류소 번호: \(busStop.nodeno ?? 0)")
+                        Text("정류소 순번: \(busStop.nodeord)")
                     }
                 }
             }
-            .listStyle(.plain)
+            .listStyle(PlainListStyle()) // 플레인 스타일의 리스트 사용
         }
         .padding()
-        .navigationTitle("버스정류장들 정보")
+        .navigationTitle("정류장 선택")
         .task {
-            await busStopViewModel.getBusStopData(cityCode: city.citycode, routeId: bus.routeid)
-
+            print("\(bus.routeno)\n\n\n\n\n\n\n\n\n\n\n")
+            // 최신 버스 데이터를 기반으로 버스 정류장 데이터 로드
+            await loadBusStops()
+            print("\(bus.routeno)\n\n\n\n\n\n\n\n\n\n\n\n\n")
+            
         }
+       
+       
     }
     
-    private func storeBeforeBusStops(for busStop: BusStop, alert: inout BusStopAlert, busStops: [BusStop], maxUpwardNodeord: Int) {
-        
-        let currentIndex: Int // 선택한 정류장 이전의 정류장이 몇 개 남아있는지 확인하는 용도
-        
-        // 현재 정류장이 상행이면
-        if busStop.updowncd == 0 {
-            // 상행의 순번을 넣고
-            currentIndex = busStop.nodeord
-        } else { // 현재 정류장이 하행이면
-            // 하행의 순번에서 상행의 최대 순번을 뺀다
-            // 최대 순번을 뺀 수가 3이하일 경우를 아래 이전 정류장 저장 부분에서 처리하기 위함
-            currentIndex = busStop.nodeord - maxUpwardNodeord
+    private func loadBusStops() async {
+        do {
+            try await busStopViewModel.getBusStopData(cityCode: city.citycode, routeId: bus.routeid)
+        } catch {
+            print("Error loading bus stop data: \(error)") // 오류 핸들링
         }
-        
-        
-        // 이전 정류장을 최대 3개까지 저장함
-        // beforeBusStop이 nil이면 선택지에서 비활성화 되어있게 하는 것도 좋을듯
-        alert.firstBeforeBusStop = currentIndex > 1 ? busStops[busStop.nodeord - 2] : nil
-        alert.secondBeforeBusStop = currentIndex > 2 ? busStops[busStop.nodeord - 3] : nil
-        alert.thirdBeforeBusStop = currentIndex > 3 ? busStops[busStop.nodeord - 4] : nil
     }
 }
-
-
