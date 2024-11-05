@@ -24,17 +24,8 @@ struct SelectBusStopView: View {
             // 정류장 목록 출력
             List(busStopViewModel.busStopList, id: \.self) { busStop in
                 Button(action: {
-                    // 정류장 선택 시
-                    
-                    if let maxUpwardNodeord = busStopViewModel.busStopList.filter({ $0.updowncd == 0 }).map({ $0.nodeord }).max() {
-                        
-                        busStopAlert = BusStopAlert(cityCode: Double(city.citycode), bus: bus, allBusStop: busStopViewModel.busStopList, arrivalBusStop: busStop, alertBusStop: 0)
-                        
-                        // 이전 정류장 (1~3번째) 저장
-                        if var unwrappedBusStopAlert = busStopAlert {
-                            storeBeforeBusStops(for: busStop, alert: &unwrappedBusStopAlert, busStops: busStopViewModel.busStopList, maxUpwardNodeord: maxUpwardNodeord)
-                        }
-                    }
+                    // 정류장 저장
+                    storeBusStop(busStop: busStop)
                     dismiss()
                 }) {
                     // 정류장 정보를 표시하는 뷰
@@ -67,6 +58,19 @@ struct SelectBusStopView: View {
     //        }
     //    }
     
+    func storeBusStop(busStop: BusStop){
+        // 상행의 가장 큰 order 구함
+        if let maxUpwardNodeord = busStopViewModel.busStopList.filter({ $0.updowncd == 0 }).map({ $0.nodeord }).max() {
+            
+            // 기본 busStopAlert 데이터 저장
+            busStopAlert = BusStopAlert(cityCode: Double(city.citycode), bus: bus, allBusStop: busStopViewModel.busStopList, arrivalBusStop: busStop, alertBusStop: 0)
+            
+            // 이전 정류장 (1~3번째) 저장
+            if var unwrappedBusStopAlert = busStopAlert {
+                storeBeforeBusStops(for: busStop, alert: &unwrappedBusStopAlert, busStops: busStopViewModel.busStopList, maxUpwardNodeord: maxUpwardNodeord)
+            }
+        }
+    }
     
     private func storeBeforeBusStops(for busStop: BusStop, alert: inout BusStopAlert, busStops: [BusStop], maxUpwardNodeord: Int) {
         

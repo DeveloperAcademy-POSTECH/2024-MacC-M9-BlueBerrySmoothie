@@ -293,7 +293,7 @@ struct AlertSettingMain: View {
             // 데이터베이스에 저장
             do {
                 try modelContext.insert(newBusStopLocal) // 모델 컨텍스트에 추가
-                print("버스 정류장이 저장되었습니다.")
+//                print("버스 정류장이 저장되었습니다.")
             } catch {
                 print("버스 정류장 저장 실패: \(error)")
             }
