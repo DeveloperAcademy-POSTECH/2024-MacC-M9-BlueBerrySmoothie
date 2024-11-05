@@ -8,28 +8,42 @@
 import Foundation
 import SwiftUI
 
-//import SwiftData
-//
-//@Model
-// 알람 사용뷰에서 사용할 Alert 모델
-struct Alert {
-/*    @Attribute(.primaryKey)*/ var id: String
+import SwiftData
+
+@Model
+class BusAlert {
+    var id: String
     var cityCode: Double // 도시코드
     var busNo: String
     var routeid: String
     var arrivalBusStopID: String
+    var arrivalBusStopNm: String
     var alertBusStop: Int // 알람 줄 정류장
     var alertLabel: String // 알람 이름
-    var alertSound: Bool // 알람 사운드 (옵셔널)
-    var alertHaptic: Bool // 알람 진동 (옵셔널)
-    var alertCycle: Double // 알람 주기 (옵셔널)
+    var alertSound: Bool? // 알람 사운드 (옵셔널)
+    var alertHaptic: Bool? // 알람 진동 (옵셔널)
+    var alertCycle: Double? // 알람 주기 (옵셔널)
+    var updowncd: Int
     
+    init(id: String, cityCode: Double, busNo: String, routeid: String, arrivalBusStopID: String, arrivalBusStopNm: String, alertBusStop: Int, alertLabel: String, alertSound: Bool? = nil, alertHaptic: Bool? = nil, alertCycle: Double? = nil, updowncd: Int) {
+        self.id = id
+        self.cityCode = cityCode
+        self.busNo = busNo
+        self.routeid = routeid
+        self.arrivalBusStopID = arrivalBusStopID
+        self.arrivalBusStopNm = arrivalBusStopNm
+        self.alertBusStop = alertBusStop
+        self.alertLabel = alertLabel
+        self.alertSound = alertSound
+        self.alertHaptic = alertHaptic
+        self.alertCycle = alertCycle
+        self.updowncd = updowncd
+    }
 }
 
-
-//@Model
-struct BusStopLocal {
-/*    @Attribute(.primaryKey) */var id: String
+@Model
+class BusStopLocal {
+    var id: String
     var routeid: String
     var nodeid: String
     var nodenm: String
@@ -38,8 +52,21 @@ struct BusStopLocal {
     var gpslati: Double
     var gpslong: Double
     var updowncd: Int
-
+    
+    init(id: String, routeid: String, nodeid: String, nodenm: String, nodeno: Int? = nil, nodeord: Int, gpslati: Double, gpslong: Double, updowncd: Int) {
+        self.id = id
+        self.routeid = routeid
+        self.nodeid = nodeid
+        self.nodenm = nodenm
+        self.nodeno = nodeno
+        self.nodeord = nodeord
+        self.gpslati = gpslati
+        self.gpslong = gpslong
+        self.updowncd = updowncd
+    }
 }
+
+
 
 // 알람 등록뷰에서 사용할 Alert 모델
 struct BusStopAlert: Identifiable {
