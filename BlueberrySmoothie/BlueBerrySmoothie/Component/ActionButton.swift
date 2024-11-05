@@ -18,7 +18,7 @@ struct ActionButton: View {
             Text("시작하기")
                 .font(.system(size: 16, weight: .bold))
                 .foregroundColor(.white)
-                .padding()
+                .padding(20)
         }
         .fixedSize(horizontal: false, vertical: true)
     }}

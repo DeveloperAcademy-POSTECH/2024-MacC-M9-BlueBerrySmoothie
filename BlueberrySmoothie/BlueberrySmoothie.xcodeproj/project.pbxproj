@@ -26,7 +26,7 @@
 		9D0C411B2CDA3D780005A6CC /* StationPickerModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D0C411A2CDA3D780005A6CC /* StationPickerModal.swift */; };
 		9D0C411D2CDA452E0005A6CC /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D0C411C2CDA452E0005A6CC /* DetailView.swift */; };
 		9D64A9E22CD7A85C00718CC8 /* AlarmStartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D64A9E12CD7A85C00718CC8 /* AlarmStartView.swift */; };
-		9D64A9E42CD7AB3400718CC8 /* BusStopListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D64A9E32CD7AB3400718CC8 /* BusStopListView.swift */; };
+		9D64A9E42CD7AB3400718CC8 /* UsingAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D64A9E32CD7AB3400718CC8 /* UsingAlertView.swift */; };
 		9DEA523F2CD362CA00A3AE68 /* SelectBusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEA523E2CD362C100A3AE68 /* SelectBusView.swift */; };
 		9DEA52412CD3630200A3AE68 /* CityDecoderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEA52402CD362FC00A3AE68 /* CityDecoderModel.swift */; };
 		9DEA52432CD3637C00A3AE68 /* BusModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEA52422CD3637900A3AE68 /* BusModel.swift */; };
@@ -40,6 +40,7 @@
 		D90E0C1A2CD89CB20089883F /* AlertSettingMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = D90E0C192CD89CB20089883F /* AlertSettingMain.swift */; };
 		D968D5C62CD89EC4002DF70B /* ActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D968D5C52CD89EC4002DF70B /* ActionButton.swift */; };
 		D968D5C82CD89EF4002DF70B /* SavedBus.swift in Sources */ = {isa = PBXBuildFile; fileRef = D968D5C72CD89EF4002DF70B /* SavedBus.swift */; };
+		D968D5CA2CD912C5002DF70B /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D968D5C92CD912C5002DF70B /* MainView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,7 +84,7 @@
 		9D0C411A2CDA3D780005A6CC /* StationPickerModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationPickerModal.swift; sourceTree = "<group>"; };
 		9D0C411C2CDA452E0005A6CC /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		9D64A9E12CD7A85C00718CC8 /* AlarmStartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmStartView.swift; sourceTree = "<group>"; };
-		9D64A9E32CD7AB3400718CC8 /* BusStopListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusStopListView.swift; sourceTree = "<group>"; };
+		9D64A9E32CD7AB3400718CC8 /* UsingAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsingAlertView.swift; sourceTree = "<group>"; };
 		9DEA523E2CD362C100A3AE68 /* SelectBusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectBusView.swift; sourceTree = "<group>"; };
 		9DEA52402CD362FC00A3AE68 /* CityDecoderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityDecoderModel.swift; sourceTree = "<group>"; };
 		9DEA52422CD3637900A3AE68 /* BusModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusModel.swift; sourceTree = "<group>"; };
@@ -104,6 +105,7 @@
 		D90E0C192CD89CB20089883F /* AlertSettingMain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertSettingMain.swift; sourceTree = "<group>"; };
 		D968D5C52CD89EC4002DF70B /* ActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionButton.swift; sourceTree = "<group>"; };
 		D968D5C72CD89EF4002DF70B /* SavedBus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedBus.swift; sourceTree = "<group>"; };
+		D968D5C92CD912C5002DF70B /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -194,6 +196,7 @@
 		1232B3DC2CD1D40800C48414 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				9D64A9E32CD7AB3400718CC8 /* UsingAlertView.swift */,
 				9D0C411C2CDA452E0005A6CC /* DetailView.swift */,
 				9D0C411A2CDA3D780005A6CC /* StationPickerModal.swift */,
 				9D64A9E32CD7AB3400718CC8 /* BusStopListView.swift */,
@@ -205,6 +208,7 @@
 				9DEA523E2CD362C100A3AE68 /* SelectBusView.swift */,
 				12D2B6C52CD36E70005CF771 /* SelectBusStopView.swift */,
 				1232B3B12CD1D3DE00C48414 /* ContentView.swift */,
+				D968D5C92CD912C5002DF70B /* MainView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -421,6 +425,7 @@
 				1232B3DE2CD1D41600C48414 /* SelectCityView.swift in Sources */,
 				9D0C411B2CDA3D780005A6CC /* StationPickerModal.swift in Sources */,
 				12D2B6CC2CD3706F005CF771 /* fetchBusStopAPI.swift in Sources */,
+				D968D5CA2CD912C5002DF70B /* MainView.swift in Sources */,
 				1232B3E42CD1D48600C48414 /* FetchBusAPI.swift in Sources */,
 				9DEA52522CD4D57A00A3AE68 /* filterBuses.swift in Sources */,
 				9D0C411D2CDA452E0005A6CC /* DetailView.swift in Sources */,
@@ -432,7 +437,7 @@
 				9DEA52452CD3639100A3AE68 /* CityModel.swift in Sources */,
 				D968D5C82CD89EF4002DF70B /* SavedBus.swift in Sources */,
 				9DEA52542CD4D5B500A3AE68 /* FetchAllBusData.swift in Sources */,
-				9D64A9E42CD7AB3400718CC8 /* BusStopListView.swift in Sources */,
+				9D64A9E42CD7AB3400718CC8 /* UsingAlertView.swift in Sources */,
 				12D2B6CA2CD36ED8005CF771 /* BusStopDecoderModel.swift in Sources */,
 				12D2B6C82CD36E94005CF771 /* BusStopModel.swift in Sources */,
 				1232B3B02CD1D3DE00C48414 /* BlueBerrySmoothieApp.swift in Sources */,
