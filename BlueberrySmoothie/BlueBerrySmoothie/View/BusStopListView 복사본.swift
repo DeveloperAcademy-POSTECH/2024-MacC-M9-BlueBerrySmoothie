@@ -1,6 +1,12 @@
+//
+//  BusStopListView.swift
+//  BlueberrySmoothie
+//
+//  Created by 문재윤 on 11/3/24.
+//
 import SwiftUI
 
-struct UsingAlertView: View {
+struct BusStopListView: View {
     let busStops: [BusStopLocal] // 정류소 정보 배열
     let alert: Alert // 관련된 알림 정보
     @State private var isAlertEnabled: Bool = false // 스위치 상태 관리
@@ -108,6 +114,6 @@ struct BusStopView_Previews: PreviewProvider {
         let alert = Alert(id: "1", cityCode: 12345, busNo: "43", routeid: "BSB5200002000", arrivalBusStopID: "BSB178050301", alertBusStop: 1, alertLabel: "재윤이의 행복한 출근길", alertSound: true, alertHaptic: true, alertCycle: 5.0)
 
         // 미리보기에서 사용할 정류소 배열
-        UsingAlertView(busStops: busStops, alert: alert)
+        BusStopListView(busStops: busStops, alert: alert)
     }
 }

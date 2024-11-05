@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftData
 
 @main
 struct BlueBerrySmoothieApp: App {
@@ -13,8 +14,9 @@ struct BlueBerrySmoothieApp: App {
     
     var body: some Scene {
         WindowGroup {
-            SelectCityView()
+            ContentView()
                 .environmentObject(busStopViewModel)
+                .modelContainer(for: [BusAlert.self, BusStopLocal.self])
         }
     }
 }
