@@ -1,8 +1,8 @@
 
 
 import SwiftUI
-
-struct SelectBusStopView: View {
+//
+//struct SelectBusStopView: View {
     @EnvironmentObject var busStopViewModel: BusStopViewModel
     
     let city: City // 도시 정보

@@ -24,37 +24,6 @@ struct AlertSettingMain: View {
     var body: some View {
         NavigationStack {
             VStack {
-                // 데이터 확인 버튼
-                Button(action: {
-                    print("\(busStopAlert?.bus.routeno ?? "선택 안됨")")
-                    print("\(busStopAlert?.bus.routeid ?? "선택 안됨")")
-                    print("\(busStopAlert?.arrivalBusStop.nodeid ?? "선택 안됨")")
-                }) {
-                    Text("데이터 확인")
-                        .font(.system(size: 16, weight: .bold))
-                        .frame(maxWidth: .infinity)
-                        .padding()
-                        .background(Color.blue)
-                        .foregroundColor(.white)
-                        .cornerRadius(8)
-                }
-                
-                // 저장 버튼
-                Button(action: {
-                    saveAlert()
-                    saveBusstop()
-                    
-                    
-                }) {
-                    Text("저장")
-                        .font(.system(size: 16, weight: .bold))
-                        .frame(maxWidth: .infinity)
-                        .padding()
-                        .background(Color.blue)
-                        .foregroundColor(.white)
-                        .cornerRadius(8)
-                }
-                
                 HStack {
                     Text("알람 설정")
                         .font(.system(size: 24, weight: .semibold))
@@ -224,7 +193,20 @@ struct AlertSettingMain: View {
                     StationPickerModal(isPresented: $showSheet, selectedStation: $selectedStation)
                 }
             }
+            Spacer()
         }
+        .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) { // 네비게이션 바 오른쪽에 배치
+                    Button(action: {
+                        saveAlert() // 알람 저장 함수 호출
+                        saveBusstop() // 버스 정류장 저장 함수 호출
+                    }) {
+                        Text("저장")
+                            .font(.system(size: 16, weight: .bold)) // 버튼 텍스트 스타일
+                            .foregroundColor(.blue) // 버튼 텍스트 색상
+                    }
+                }
+            }
     }
     
     // 알람 저장 함수
