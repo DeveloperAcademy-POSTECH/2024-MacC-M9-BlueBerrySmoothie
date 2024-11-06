@@ -115,5 +115,5 @@ struct InputViewDaisy: View {
 }
 
 #Preview {
-    InputView()
+    BellaBellaView()
 }
