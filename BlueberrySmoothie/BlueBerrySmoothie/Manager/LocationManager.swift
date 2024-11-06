@@ -10,6 +10,7 @@ import CoreLocation
 import MapKit
 
 class LocationManager: NSObject, ObservableObject {
+    static let instance = LocationManager() //Singleton 인스턴스 생성
     let manager = CLLocationManager()
     private var timer: Timer?
     
@@ -25,8 +26,9 @@ class LocationManager: NSObject, ObservableObject {
     @Published var lastRefreshTime: Date = Date()
     
     private let targetRegion = CLCircularRegion(
-        center: CLLocationCoordinate2D(latitude: 36.015175, longitude: 129.325121), //포스텍 버스정류장(기숙사 맞은편)
-        radius: 5.0,
+        center: CLLocationCoordinate2D(latitude: 36.017449, longitude: 129.322232), //기숙사
+        //        center: CLLocationCoordinate2D(latitude: 36.015175, longitude: 129.325121), //포스텍 버스정류장(기숙사 맞은편)
+        radius: 4.0,
         identifier: "POIRegion")
     
     override init() {
@@ -35,12 +37,26 @@ class LocationManager: NSObject, ObservableObject {
         manager.desiredAccuracy = kCLLocationAccuracyBest // locationManager의 정확도를 최고로 설정
         manager.allowsBackgroundLocationUpdates = true // 백그라운드에서도 위치를 업데이트하도록 설정
         checkIfLocationServicesIsEnabled()
-        startAutoRefresh() // 10초마다 자동으로 위치를 갱신하도록 타이머 설정
+        //        startAutoRefresh() // 10초마다 자동으로 위치를 갱신하도록 타이머 설정
     }
     
-    deinit {
-        stopAutoRefresh()
+    // 위치 업데이트 시작 함수
+    func startLocationUpdates() {
+        print("Starting location updates")
+        manager.startUpdatingLocation()
+        startAutoRefresh() // 위치 자동 갱신 타이머 시작
     }
+    
+    // 위치 업데이트 중지 함수
+    func stopLocationUpdates() {
+        print("Stopping location updates")
+        manager.stopUpdatingLocation()
+        stopAutoRefresh() // 위치 자동 갱신 타이머 중지
+    }
+    
+//    deinit {
+//        stopAutoRefresh()
+//    }
     
     /// 10초마다 refreshLocation()을 호출하는 타이머를 설정
     func startAutoRefresh() {
@@ -51,15 +67,20 @@ class LocationManager: NSObject, ObservableObject {
     
     /// 타이머를 중지하고 해제
     func stopAutoRefresh() {
-        timer?.invalidate()
-        timer = nil
+        //        timer?.invalidate()
+        //        timer = nil
+        if timer != nil {
+            print("Auto refresh timer invalidated")
+            timer?.invalidate()
+            timer = nil
+        }
     }
     
     /// 위치 업데이트를 시작하고, 현재 위치가 targetRegion 안에 있는지 확인해 결과를 콘솔에 출력합니다.
     func refreshLocation() {
         address = "위치 찾는 중…"
         lastRefreshTime = Date()
-        manager.startUpdatingLocation()
+        //        manager.startUpdatingLocation()
         print(manager.location ?? "실시간 location")
         
         // 위치가 region 안에 있는지 확인

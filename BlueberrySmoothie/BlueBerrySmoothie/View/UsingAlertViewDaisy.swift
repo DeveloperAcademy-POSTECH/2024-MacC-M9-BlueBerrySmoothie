@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct UsingAlertView: View {
+struct UsingAlertViewDaisy: View {
     // NotificationManager 인스턴스 감지
     @ObservedObject var notificationManager = NotificationManager.instance
     
@@ -27,9 +27,9 @@ struct UsingAlertView: View {
             }
             
             // EndView로의 네비게이션
-//            NavigationLink(destination: EndView(alert: alert), isActive: $navigateToEndView) {
-//                EmptyView()
-//            }
+            NavigationLink(destination: EndViewDaisy(alert: alert), isActive: $navigateToEndView) {
+                EmptyView()
+            }
         }
 //        .onAppear{
 //            if notificationManager.notificationReceived == true {

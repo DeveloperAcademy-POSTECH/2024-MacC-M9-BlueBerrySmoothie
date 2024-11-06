@@ -1,5 +1,5 @@
 //
-//  BusStop.swift
+//  Alert.swift
 //  Macro_Study_SwiftData
 //
 //  Created by 원주연 on 10/28/24.
@@ -10,7 +10,7 @@ import SwiftData
 
 @Model
 class Alert {
-    @Attribute(.unique) var alertID: UUID //알람코드
+    @Attribute(.unique) var alertID = UUID() //알람코드
     var busNumber: String //버스번호
     var busStopName: String // 정류장이름
     var busStopOrd: Int //정류장순번
@@ -44,7 +44,7 @@ class Alert {
 //    var alertSound: UNNotificationSound? // 알람 사운드 (옵셔널)
 //    var alertHaptic: UIImpactFeedbackGenerator.FeedbackStyle? //알람 진동 (옵셔널)
 //    var alertCycle: Double //알람 주기 (옵셔널)
-
+//
 //    init(id: UUID, cityCode: Double, bus: Bus, arrivalBusStop: BusStop, alertBusStop: Int, alertLabel: String, firstBeforeBusStop: BusStop?, secondBeforeBusStop: BusStop?, thirdBeforeBusStop: BusStop?, alertSound: UNNotificationSound?, alertHaptic: UIImpactFeedbackGenerator.FeedbackStyle?, alertCycle: Double) {
 //      self.id = id
 //      self.cityCode = cityCode

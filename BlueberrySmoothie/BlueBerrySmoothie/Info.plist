@@ -5,13 +5,7 @@
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>location</string>
+		<string>remote-notification</string>
 	</array>
-    
-    <key>NSLocationWhenInUseUsageDescription</key>
-    <string>주변 장소를 보여주기 위해 위치 정보가 필요합니다.</string>
-    <key>NSLocationAlwaysUsageDescription</key>
-    <string>앱이 백그라운드에서도 주변 장소를 보여주기 위해 위치 정보가 필요합니다.</string>
-    <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-    <string>주변 장소를 보여주기 위해 위치 정보가 필요합니다.</string>
 </dict>
 </plist>

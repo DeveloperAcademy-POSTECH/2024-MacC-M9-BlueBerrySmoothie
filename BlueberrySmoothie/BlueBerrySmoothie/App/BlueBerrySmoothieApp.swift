@@ -10,7 +10,9 @@ import SwiftData
 
 @main
 struct Macro_Study_SwiftDataApp: App {
-        
+    // AppDelegate 역할 클래스와 연결
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    
     // MARK: - SwfitData
     var modelContainer: ModelContainer = {
         // 1. Schema 생성
@@ -30,8 +32,22 @@ struct Macro_Study_SwiftDataApp: App {
     var body: some Scene {
         WindowGroup {
             MainView()
+                .onAppear {
+                    // 필요시 추가 초기화 작업
+                    NotificationManager.instance.requestAuthorization() // 권한 요청 예시
+                }
         }
         // 전역적으로 사용한 영구 데이터이기 때문에, WindowGroup에 주입
         .modelContainer(modelContainer)
+    }
+}
+
+class AppDelegate: NSObject, UIApplicationDelegate {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
+        
+        // UNUserNotificationCenter의 delegate를 NotificationManager로 설정
+        UNUserNotificationCenter.current().delegate = NotificationManager.instance
+        
+        return true
     }
 }

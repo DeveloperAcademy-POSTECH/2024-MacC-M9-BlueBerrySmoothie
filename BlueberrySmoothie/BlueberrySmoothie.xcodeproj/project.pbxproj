@@ -17,12 +17,15 @@
 		1232B3E42CD1D48600C48414 /* DummyNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1232B3E32CD1D48600C48414 /* DummyNetwork.swift */; };
 		1232B3E72CD1D4A300C48414 /* DummyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1232B3E62CD1D4A300C48414 /* DummyManager.swift */; };
 		12D2B6C12CD3533E005CF771 /* DummyComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D2B6C02CD3533E005CF771 /* DummyComponent.swift */; };
-		8BF2EFA42CD3A78A008A6644 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF2EFA32CD3A78A008A6644 /* MainView.swift */; };
-		8BF2EFA62CD3A7B0008A6644 /* InputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF2EFA52CD3A7B0008A6644 /* InputView.swift */; };
+		8BF2EFA42CD3A78A008A6644 /* MainViewDaisy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF2EFA32CD3A78A008A6644 /* MainViewDaisy.swift */; };
+		8BF2EFA62CD3A7B0008A6644 /* InputViewDaisy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF2EFA52CD3A7B0008A6644 /* InputViewDaisy.swift */; };
 		8BF2EFA82CD3A7F2008A6644 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF2EFA72CD3A7F2008A6644 /* Alert.swift */; };
 		8BF2EFAA2CD3AA2B008A6644 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF2EFA92CD3AA2B008A6644 /* NotificationManager.swift */; };
 		8BF2EFAC2CD3AA44008A6644 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF2EFAB2CD3AA44008A6644 /* LocationManager.swift */; };
 		8BF2EFAE2CD3AA5F008A6644 /* LocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF2EFAD2CD3AA5F008A6644 /* LocationView.swift */; };
+		8BF2EFB12CD86C93008A6644 /* UsingAlertViewDaisy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF2EFB02CD86C93008A6644 /* UsingAlertViewDaisy.swift */; };
+		8BF2EFB52CD92BE0008A6644 /* HapticHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF2EFB42CD92BE0008A6644 /* HapticHelper.swift */; };
+		8BF2EFB72CD9B34A008A6644 /* EndViewDaisy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF2EFB62CD9B34A008A6644 /* EndViewDaisy.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,13 +40,16 @@
 		1232B3E32CD1D48600C48414 /* DummyNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyNetwork.swift; sourceTree = "<group>"; };
 		1232B3E62CD1D4A300C48414 /* DummyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyManager.swift; sourceTree = "<group>"; };
 		12D2B6C02CD3533E005CF771 /* DummyComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyComponent.swift; sourceTree = "<group>"; };
-		8BF2EFA32CD3A78A008A6644 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
-		8BF2EFA52CD3A7B0008A6644 /* InputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputView.swift; sourceTree = "<group>"; };
+		8BF2EFA32CD3A78A008A6644 /* MainViewDaisy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewDaisy.swift; sourceTree = "<group>"; };
+		8BF2EFA52CD3A7B0008A6644 /* InputViewDaisy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputViewDaisy.swift; sourceTree = "<group>"; };
 		8BF2EFA72CD3A7F2008A6644 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		8BF2EFA92CD3AA2B008A6644 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		8BF2EFAB2CD3AA44008A6644 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		8BF2EFAD2CD3AA5F008A6644 /* LocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationView.swift; sourceTree = "<group>"; };
 		8BF2EFAF2CD3AABF008A6644 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		8BF2EFB02CD86C93008A6644 /* UsingAlertViewDaisy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsingAlertViewDaisy.swift; sourceTree = "<group>"; };
+		8BF2EFB42CD92BE0008A6644 /* HapticHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticHelper.swift; sourceTree = "<group>"; };
+		8BF2EFB62CD9B34A008A6644 /* EndViewDaisy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndViewDaisy.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,9 +118,11 @@
 			children = (
 				1232B3B12CD1D3DE00C48414 /* ContentView.swift */,
 				1232B3DD2CD1D41600C48414 /* DummyView.swift */,
-				8BF2EFA32CD3A78A008A6644 /* MainView.swift */,
-				8BF2EFA52CD3A7B0008A6644 /* InputView.swift */,
+				8BF2EFA32CD3A78A008A6644 /* MainViewDaisy.swift */,
+				8BF2EFA52CD3A7B0008A6644 /* InputViewDaisy.swift */,
 				8BF2EFAD2CD3AA5F008A6644 /* LocationView.swift */,
+				8BF2EFB02CD86C93008A6644 /* UsingAlertViewDaisy.swift */,
+				8BF2EFB62CD9B34A008A6644 /* EndViewDaisy.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -123,6 +131,7 @@
 			isa = PBXGroup;
 			children = (
 				1232B3E02CD1D46500C48414 /* DummyHelper.swift */,
+				8BF2EFB42CD92BE0008A6644 /* HapticHelper.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -232,19 +241,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				1232B3E12CD1D46500C48414 /* DummyHelper.swift in Sources */,
-				8BF2EFA42CD3A78A008A6644 /* MainView.swift in Sources */,
+				8BF2EFA42CD3A78A008A6644 /* MainViewDaisy.swift in Sources */,
 				1232B3DB2CD1D40500C48414 /* DummyModel.swift in Sources */,
 				1232B3DE2CD1D41600C48414 /* DummyView.swift in Sources */,
 				1232B3E42CD1D48600C48414 /* DummyNetwork.swift in Sources */,
 				1232B3B22CD1D3DE00C48414 /* ContentView.swift in Sources */,
+				8BF2EFB72CD9B34A008A6644 /* EndViewDaisy.swift in Sources */,
+				8BF2EFB52CD92BE0008A6644 /* HapticHelper.swift in Sources */,
 				8BF2EFAA2CD3AA2B008A6644 /* NotificationManager.swift in Sources */,
 				1232B3E72CD1D4A300C48414 /* DummyManager.swift in Sources */,
-				8BF2EFA62CD3A7B0008A6644 /* InputView.swift in Sources */,
+				8BF2EFA62CD3A7B0008A6644 /* InputViewDaisy.swift in Sources */,
 				8BF2EFA82CD3A7F2008A6644 /* Alert.swift in Sources */,
 				12D2B6C12CD3533E005CF771 /* DummyComponent.swift in Sources */,
 				8BF2EFAE2CD3AA5F008A6644 /* LocationView.swift in Sources */,
 				1232B3B02CD1D3DE00C48414 /* BlueBerrySmoothieApp.swift in Sources */,
 				8BF2EFAC2CD3AA44008A6644 /* LocationManager.swift in Sources */,
+				8BF2EFB12CD86C93008A6644 /* UsingAlertViewDaisy.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -382,9 +394,9 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BlueBerrySmoothie/Info.plist;
-				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "위치 정보를 사용하기 위해 권한허용이 필요합니다.";
-				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "위치 정보를 사용하기 위해 권한허용이 필요합니다.";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "위치 정보를 사용하기 위해 권한허용이 필요합니다.";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "주변 장소를 보여주기 위해 위치 정보가 필요합니다.";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "앱이 백그라운드에서도 주변 장소를 보여주기 위해 위치 정보가 필요합니다.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "주변 장소를 보여주기 위해 위치 정보가 필요합니다.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -415,9 +427,9 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BlueBerrySmoothie/Info.plist;
-				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "위치 정보를 사용하기 위해 권한허용이 필요합니다.";
-				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "위치 정보를 사용하기 위해 권한허용이 필요합니다.";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "위치 정보를 사용하기 위해 권한허용이 필요합니다.";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "주변 장소를 보여주기 위해 위치 정보가 필요합니다.";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "앱이 백그라운드에서도 주변 장소를 보여주기 위해 위치 정보가 필요합니다.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "주변 장소를 보여주기 위해 위치 정보가 필요합니다.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
