@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct SavedBus: View {
+    let busAlert: BusAlert
+    var isSelected: Bool = false
+    
     var body: some View {
         ZStack {
             Rectangle()
@@ -19,19 +22,23 @@ struct SavedBus: View {
                 }
             VStack {
                 HStack(alignment: .bottom) {
-                        Text("출근하는 거 힘들다")
+                    Text(busAlert.alertLabel)
                             .font(.system(size: 12))
                             .foregroundColor(Color(white: 128 / 255))
                     Spacer()
-                    Image(systemName: "ellipsis")
-                        .font(.system(size: 24))
-                        .foregroundColor(Color(white: 212 / 255))
-                        .padding(.vertical, 20)
+                    Button(action: {
+                        
+                    }, label: {
+                        Image(systemName: "ellipsis")
+                            .font(.system(size: 24))
+                            .foregroundColor(Color(white: 212 / 255))
+                            .padding(.vertical, 20)
+                    })
                 }
                 HStack {
-                    Text("207")
+                    Text(busAlert.busNo)
                         .font(.system(size: 20, weight: .regular))
-                    Text("포스텍")
+                    Text(busAlert.arrivalBusStopNm)
                         .font(.system(size: 20, weight: .regular))
                     Spacer()
                 }
@@ -43,7 +50,7 @@ struct SavedBus: View {
                     Image(systemName: "bell.fill")
                         .font(.system(size: 12))
                         .foregroundColor(Color(red: 104 / 255, green: 144 / 255, blue: 255 / 255))
-                    Text("3 정류장 전 알람")
+                    Text("\(busAlert.alertBusStop) 정류장 전 알람")
                         .font(.system(size: 14))
                         .foregroundColor(Color(red: 104 / 255, green: 144 / 255, blue: 255 / 255))
                     
@@ -52,7 +59,7 @@ struct SavedBus: View {
                         .frame(width: 2, height: 12)
                         .background(Color(white: 238 / 255))
                     
-                    Text("행정복지센터")
+                    Text(busAlert.arrivalBusStopNm)
                         .font(.system(size: 14))
                         .foregroundColor(Color(white: 170 / 255))
 
@@ -68,6 +75,3 @@ struct SavedBus: View {
     }
 }
 
-#Preview {
-    SavedBus()
-}
