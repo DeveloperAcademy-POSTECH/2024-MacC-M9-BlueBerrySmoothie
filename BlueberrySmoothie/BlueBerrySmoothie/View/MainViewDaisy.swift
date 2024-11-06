@@ -8,20 +8,17 @@
 import SwiftUI
 import SwiftData
 
-struct MainView: View {
+struct MainViewDaisy: View {
     
     @Environment(\.modelContext) private var modelContext
     // 전체 alert 데이터 반환
     @Query var alerts: [Alert]
-//    @StateObject private var locationManager = LocationManager()
+    //    @StateObject private var locationManager = LocationManager()
     
     
     var body: some View {
         NavigationView {
             VStack{
-                NavigationLink("내 위치 찾기"){
-                    LocationView()
-                }
                 HStack {
                     ListAlertView(alerts: alerts)
                     
@@ -30,7 +27,7 @@ struct MainView: View {
                 .toolbar {
                     ToolbarItem {
                         NavigationLink("추가") {
-                            InputView()
+                            InputViewDaisy()
                         }
                     }
                 }
@@ -69,9 +66,11 @@ struct AlertListCell: View {
     var onDelete: () -> Void // 삭제 핸들러
     @State private var isEditing = false
     @State private var alertShowing = false
-    let notificationManager = NotificationManager()
+    @State private var isUsingAlertViewActive = false // UsingAlertView로의 이동 상태
+    let notificationManager = NotificationManager.instance
+    //    let notificationManager = NotificationManager()
     @StateObject private var locationManager = LocationManager()
-
+    
     
     var body: some View {
         VStack {
@@ -79,20 +78,29 @@ struct AlertListCell: View {
             Text("정류장 이름: \(alert.busStopName)")
             Text("\(alert.alertStopsBefore)정류장 전에 알람")
             
+            NavigationLink(
+                destination: UsingAlertViewDaisy(alert: alert),
+                isActive: $isUsingAlertViewActive
+            ) {
+                EmptyView()
+            }
+            
             // 활성화하기 버튼
             Button(action: {
                 print("활성화하기")
                 alert.isActivating = true
                 notificationManager.requestAuthorization()
-                locationManager.manager.startUpdatingLocation()
-//                notificationManager.scheduleTestNotification()
-                notificationManager.requestLocationNotification()
+//                locationManager.manager.startUpdatingLocation()
+                locationManager.startLocationUpdates()
+                notificationManager.scheduleTestNotification(for: alert)
+                //                notificationManager.requestLocationNotification()
                 
+                isUsingAlertViewActive = true
             }, label: {
                 Text("활성화하기")
             })
             .padding(.top, 8)
-        
+            
             
             // 수정하기 버튼
             Button(action: {
@@ -102,7 +110,7 @@ struct AlertListCell: View {
             })
             .padding(.top, 8)
             .sheet(isPresented: $isEditing) {
-                InputView(alert: alert)
+                InputViewDaisy(alert: alert)
             }
             
             // 삭제하기 버튼 (+alert)
@@ -130,5 +138,5 @@ struct AlertListCell: View {
 }
 
 #Preview {
-    MainView()
+    MainViewDaisy()
 }

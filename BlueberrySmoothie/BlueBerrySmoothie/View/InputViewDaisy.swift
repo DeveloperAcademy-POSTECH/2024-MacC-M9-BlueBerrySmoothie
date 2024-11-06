@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct InputView: View {
+struct InputViewDaisy: View {
     
     //알람을 수정할 때 편집할 Alert 데이터
     var alert: Alert? = nil
@@ -62,7 +62,7 @@ struct InputView: View {
                 alertStopsBefore: newAlertStopsBefore,
                 isActivating: false)
             
-//            let newAlert = Aelrt(
+//            let newAlert = Alert(
 //                id: UUID(),
 //                cityCode: newCityCode,
 //                bus: newBus,
