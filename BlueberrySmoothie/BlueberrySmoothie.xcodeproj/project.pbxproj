@@ -14,15 +14,6 @@
 		1232B3DB2CD1D40500C48414 /* BusDecoderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1232B3DA2CD1D40500C48414 /* BusDecoderModel.swift */; };
 		1232B3DE2CD1D41600C48414 /* SelectCityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1232B3DD2CD1D41600C48414 /* SelectCityView.swift */; };
 		1232B3E12CD1D46500C48414 /* DummyHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1232B3E02CD1D46500C48414 /* DummyHelper.swift */; };
-		8BF2EFA42CD3A78A008A6644 /* MainViewDaisy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF2EFA32CD3A78A008A6644 /* MainViewDaisy.swift */; };
-		8BF2EFA62CD3A7B0008A6644 /* InputViewDaisy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF2EFA52CD3A7B0008A6644 /* InputViewDaisy.swift */; };
-		8BF2EFA82CD3A7F2008A6644 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF2EFA72CD3A7F2008A6644 /* Alert.swift */; };
-		8BF2EFAA2CD3AA2B008A6644 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF2EFA92CD3AA2B008A6644 /* NotificationManager.swift */; };
-		8BF2EFAC2CD3AA44008A6644 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF2EFAB2CD3AA44008A6644 /* LocationManager.swift */; };
-		8BF2EFAE2CD3AA5F008A6644 /* LocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF2EFAD2CD3AA5F008A6644 /* LocationView.swift */; };
-		8BF2EFB12CD86C93008A6644 /* UsingAlertViewDaisy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF2EFB02CD86C93008A6644 /* UsingAlertViewDaisy.swift */; };
-		8BF2EFB52CD92BE0008A6644 /* HapticHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF2EFB42CD92BE0008A6644 /* HapticHelper.swift */; };
-		8BF2EFB72CD9B34A008A6644 /* EndViewDaisy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF2EFB62CD9B34A008A6644 /* EndViewDaisy.swift */; };
 		1232B3E42CD1D48600C48414 /* FetchBusAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1232B3E32CD1D48600C48414 /* FetchBusAPI.swift */; };
 		12D2B6C62CD36E70005CF771 /* SelectBusStopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D2B6C52CD36E70005CF771 /* SelectBusStopView.swift */; };
 		12D2B6C82CD36E94005CF771 /* BusStopModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D2B6C72CD36E94005CF771 /* BusStopModel.swift */; };
@@ -32,6 +23,15 @@
 		12D2B6D12CD3B104005CF771 /* NetworkHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D2B6D02CD3B104005CF771 /* NetworkHelper.swift */; };
 		12D2B6D42CD3F5BE005CF771 /* getAPIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D2B6D32CD3F5BD005CF771 /* getAPIKey.swift */; };
 		12D2B6D82CD63D6A005CF771 /* AlertModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D2B6D72CD63D6A005CF771 /* AlertModel.swift */; };
+		8BF2EFA42CD3A78A008A6644 /* MainViewDaisy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF2EFA32CD3A78A008A6644 /* MainViewDaisy.swift */; };
+		8BF2EFA62CD3A7B0008A6644 /* InputViewDaisy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF2EFA52CD3A7B0008A6644 /* InputViewDaisy.swift */; };
+		8BF2EFA82CD3A7F2008A6644 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF2EFA72CD3A7F2008A6644 /* Alert.swift */; };
+		8BF2EFAA2CD3AA2B008A6644 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF2EFA92CD3AA2B008A6644 /* NotificationManager.swift */; };
+		8BF2EFAC2CD3AA44008A6644 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF2EFAB2CD3AA44008A6644 /* LocationManager.swift */; };
+		8BF2EFAE2CD3AA5F008A6644 /* LocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF2EFAD2CD3AA5F008A6644 /* LocationView.swift */; };
+		8BF2EFB12CD86C93008A6644 /* UsingAlertViewDaisy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF2EFB02CD86C93008A6644 /* UsingAlertViewDaisy.swift */; };
+		8BF2EFB52CD92BE0008A6644 /* HapticHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF2EFB42CD92BE0008A6644 /* HapticHelper.swift */; };
+		8BF2EFB72CD9B34A008A6644 /* EndViewDaisy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF2EFB62CD9B34A008A6644 /* EndViewDaisy.swift */; };
 		9D0C411B2CDA3D780005A6CC /* StationPickerModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D0C411A2CDA3D780005A6CC /* StationPickerModal.swift */; };
 		9D0C411D2CDA452E0005A6CC /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D0C411C2CDA452E0005A6CC /* DetailView.swift */; };
 		9D64A9E22CD7A85C00718CC8 /* AlarmStartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D64A9E12CD7A85C00718CC8 /* AlarmStartView.swift */; };
@@ -58,18 +58,6 @@
 		1232B3B12CD1D3DE00C48414 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		1232B3B32CD1D3DF00C48414 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1232B3B62CD1D3DF00C48414 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		8BF2EFA32CD3A78A008A6644 /* MainViewDaisy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewDaisy.swift; sourceTree = "<group>"; };
-		8BF2EFA52CD3A7B0008A6644 /* InputViewDaisy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputViewDaisy.swift; sourceTree = "<group>"; };
-		8BF2EFA72CD3A7F2008A6644 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
-		8BF2EFA92CD3AA2B008A6644 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
-		8BF2EFAB2CD3AA44008A6644 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
-		8BF2EFAD2CD3AA5F008A6644 /* LocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationView.swift; sourceTree = "<group>"; };
-		8BF2EFAF2CD3AABF008A6644 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		8BF2EFB02CD86C93008A6644 /* UsingAlertViewDaisy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsingAlertViewDaisy.swift; sourceTree = "<group>"; };
-		8BF2EFB42CD92BE0008A6644 /* HapticHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticHelper.swift; sourceTree = "<group>"; };
-		8BF2EFB62CD9B34A008A6644 /* EndViewDaisy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndViewDaisy.swift; sourceTree = "<group>"; };
-		1232B3BC2CD1D3DF00C48414 /* BlueBerrySmoothieTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BlueBerrySmoothieTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		1232B3C62CD1D3DF00C48414 /* BlueBerrySmoothieUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BlueBerrySmoothieUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1232B3DA2CD1D40500C48414 /* BusDecoderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusDecoderModel.swift; sourceTree = "<group>"; };
 		1232B3DD2CD1D41600C48414 /* SelectCityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCityView.swift; sourceTree = "<group>"; };
 		1232B3E02CD1D46500C48414 /* DummyHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyHelper.swift; sourceTree = "<group>"; };
@@ -83,6 +71,16 @@
 		12D2B6D22CD3F50F005CF771 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		12D2B6D32CD3F5BD005CF771 /* getAPIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getAPIKey.swift; sourceTree = "<group>"; };
 		12D2B6D72CD63D6A005CF771 /* AlertModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertModel.swift; sourceTree = "<group>"; };
+		8BF2EFA32CD3A78A008A6644 /* MainViewDaisy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewDaisy.swift; sourceTree = "<group>"; };
+		8BF2EFA52CD3A7B0008A6644 /* InputViewDaisy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputViewDaisy.swift; sourceTree = "<group>"; };
+		8BF2EFA72CD3A7F2008A6644 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
+		8BF2EFA92CD3AA2B008A6644 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
+		8BF2EFAB2CD3AA44008A6644 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		8BF2EFAD2CD3AA5F008A6644 /* LocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationView.swift; sourceTree = "<group>"; };
+		8BF2EFAF2CD3AABF008A6644 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		8BF2EFB02CD86C93008A6644 /* UsingAlertViewDaisy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsingAlertViewDaisy.swift; sourceTree = "<group>"; };
+		8BF2EFB42CD92BE0008A6644 /* HapticHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticHelper.swift; sourceTree = "<group>"; };
+		8BF2EFB62CD9B34A008A6644 /* EndViewDaisy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndViewDaisy.swift; sourceTree = "<group>"; };
 		9D0C411A2CDA3D780005A6CC /* StationPickerModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationPickerModal.swift; sourceTree = "<group>"; };
 		9D0C411C2CDA452E0005A6CC /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		9D64A9E12CD7A85C00718CC8 /* AlarmStartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmStartView.swift; sourceTree = "<group>"; };
@@ -182,10 +180,9 @@
 		1232B3DC2CD1D40800C48414 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				9D64A9E32CD7AB3400718CC8 /* UsingAlertView.swift */,
 				9D0C411C2CDA452E0005A6CC /* DetailView.swift */,
 				9D0C411A2CDA3D780005A6CC /* StationPickerModal.swift */,
-				9D64A9E32CD7AB3400718CC8 /* BusStopListView.swift */,
+				9D64A9E32CD7AB3400718CC8 /* UsingAlertView.swift */,
 				9D64A9E12CD7A85C00718CC8 /* AlarmStartView.swift */,
 				9DEA524D2CD46EF400A3AE68 /* BusDetailView.swift */,
 				9DEA524B2CD3B79B00A3AE68 /* ScrollingTextView.swift */,
@@ -389,20 +386,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		1232B3B82CD1D3DF00C48414 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		1232B3C22CD1D3DF00C48414 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
@@ -534,7 +517,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"BlueBerrySmoothie/Preview Content\"";
-				DEVELOPMENT_TEAM = UW9295Z57Q;
+				DEVELOPMENT_TEAM = H54Z863265;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BlueBerrySmoothie/Info.plist;
@@ -551,7 +534,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.SSan.Blueberry;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Ssan.Blueberry;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -568,7 +551,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"BlueBerrySmoothie/Preview Content\"";
-				DEVELOPMENT_TEAM = UW9295Z57Q;
+				DEVELOPMENT_TEAM = H54Z863265;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BlueBerrySmoothie/Info.plist;
@@ -585,7 +568,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.SSan.Blueberry;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Ssan.Blueberry;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
