@@ -27,7 +27,8 @@ struct StationPickerModal: View {
                 VStack {
                     HStack {
                         Text("목적지 전 정류장에서 알람")
-                            .foregroundColor(Color(white: 72 / 255))
+                            .foregroundColor(Color.black)
+                            .font(.regular16)
                             .padding(.top, 20)
                             .padding(.horizontal, 20)
                             .padding(.bottom, 12)
@@ -36,14 +37,15 @@ struct StationPickerModal: View {
                     
                     
                     Divider()
-                        .foregroundColor(Color(white: 212 / 255))
+                        .foregroundColor(Color.gray4)
                         .padding(.horizontal, 20)
                         .padding(.bottom, 20)
                     
                     ForEach(stations, id: \.self) { station in
                         HStack {
                             Text(station)
-                                .foregroundColor(Color(white: 128 / 255))
+                                .foregroundColor(Color.gray2)
+                                .font(.regular16)
                                 .onTapGesture {
                                     selectedStation = station
                                     withAnimation {
