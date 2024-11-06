@@ -9,11 +9,12 @@ import SwiftUI
 import SwiftData
 
 @main
-struct Macro_Study_SwiftDataApp: App {
-    // AppDelegate 역할 클래스와 연결
+
+struct BlueBerrySmoothieApp: App {
+    @StateObject private var busStopViewModel = BusStopViewModel()// AppDelegate 역할 클래스와 연결
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
-    
-    // MARK: - SwfitData
+  
+  // MARK: - SwfitData
     var modelContainer: ModelContainer = {
         // 1. Schema 생성
         let schema = Schema([Alert.self])
@@ -31,8 +32,10 @@ struct Macro_Study_SwiftDataApp: App {
     
     var body: some Scene {
         WindowGroup {
-            MainView()
-                .onAppear {
+            ContentView()
+                .environmentObject(busStopViewModel)
+                .modelContainer(for: [BusAlert.self, BusStopLocal.self])
+          .onAppear {
                     // 필요시 추가 초기화 작업
                     NotificationManager.instance.requestAuthorization() // 권한 요청 예시
                 }
