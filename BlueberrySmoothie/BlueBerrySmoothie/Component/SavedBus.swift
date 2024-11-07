@@ -24,7 +24,7 @@ struct SavedBus: View {
                 HStack(alignment: .bottom) {
                     Text(busAlert.alertLabel)
                             .font(.regular12)
-                        .foregroundColor(Color.brand)
+                        .foregroundColor(Color.gray2)
                     Spacer()
                     Button(action: {
                         

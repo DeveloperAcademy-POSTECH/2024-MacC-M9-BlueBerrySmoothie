@@ -12,7 +12,7 @@ struct ActionButton: View {
         ZStack {
             Rectangle()
                 .foregroundColor(.clear)
-                .background(Color.brand)
+                .background(Color.black)
                 .cornerRadius(10.0)
             
             Text("시작하기")
