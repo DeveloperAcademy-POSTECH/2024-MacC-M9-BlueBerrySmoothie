@@ -11,14 +11,14 @@ import SwiftData
 // AlertSettingMain 뷰
 struct AlertSettingMain: View {
     @Environment(\.modelContext) private var modelContext // ModelContext를 가져옴
-
+    
     @Environment(\.dismiss) private var dismiss
-
+    
     @Query var busStopLocal: [BusStopLocal]
     @State private var label: String = ""
     @State private var showSheet: Bool = false
     @State private var selectedStation: String = "정류장 수"
-
+    
     @State private var busStopAlert: BusStopAlert?
     
     var body: some View {
@@ -224,10 +224,10 @@ struct AlertSettingMain: View {
             ToolbarItem {
                 Button(action: {
                     if selectedStation != "정류장 수" && label != "" {
-                            saveAlert()
-                            saveBusstop()
-                            dismiss()
-                        }
+                        saveAlert()
+                        saveBusstop()
+                        dismiss()
+                    }
                 }) {
                     Text("저장")
                         .font(.regular16)
@@ -304,7 +304,7 @@ struct AlertSettingMain: View {
             do {
                 try modelContext.insert(newBusStopLocal) // 모델 컨텍스트에 추가
                 print("버스 정류장이 저장되었습니다.")
-
+                
             } catch {
                 print("버스 정류장 저장 실패: \(error)")
             }

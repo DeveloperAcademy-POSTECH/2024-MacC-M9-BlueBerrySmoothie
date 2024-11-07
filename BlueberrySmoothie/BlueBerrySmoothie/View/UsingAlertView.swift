@@ -79,7 +79,8 @@ struct UsingAlertView: View {
                     Spacer()
                 }
             }
-        }.navigationTitle("출근하기")
-            .background(.doublelightbrand)
+        }
+        .navigationTitle("출근하기")
+        .background(Color.black)
     }
 }
