@@ -12,7 +12,9 @@ import SwiftData
 struct AlertSettingMain: View {
     
     @Environment(\.modelContext) private var modelContext // ModelContext를 가져옴
+
     @Environment(\.dismiss) private var dismiss
+
     @Query var busStopLocal: [BusStopLocal]
     @State private var label: String = ""
     @State private var showSheet: Bool = false
@@ -41,29 +43,6 @@ struct AlertSettingMain: View {
                 //                        .foregroundColor(.white)
                 //                        .cornerRadius(8)
                 //                }
-                
-                // 저장 버튼
-                HStack {
-                    Button(action: {
-                        dismiss()
-                    }) {
-                        Image(systemName: "chevron.left")
-                    }
-                    
-                    Spacer()
-                    
-                    Button(action: {
-                        if selectedStation != "정류장 수" && label != "" {
-                            saveAlert()
-                            saveBusstop()
-                            dismiss()
-                        }
-                    }) {
-                        Text("저장")
-                            .font(.system(size: 16, weight: .bold))
-                            .foregroundColor(Color("brand"))
-                    }
-                }
                 
                 HStack {
                     Text("알람 설정")
@@ -242,6 +221,21 @@ struct AlertSettingMain: View {
                 }
             }
         }
+        .toolbar {
+            ToolbarItem {
+                Button(action: {
+                    if selectedStation != "정류장 수" && label != "" {
+                            saveAlert()
+                            saveBusstop()
+                            dismiss()
+                        }
+                }) {
+                    Text("저장")
+                        .font(.system(size: 16, weight: .regular))
+                        .foregroundColor(Color(red: 104 / 255, green: 144 / 255, blue: 255 / 255))
+                }
+            }
+        }
     }
     
     // 알람 저장 함수
@@ -310,14 +304,14 @@ struct AlertSettingMain: View {
             // 데이터베이스에 저장
             do {
                 try modelContext.insert(newBusStopLocal) // 모델 컨텍스트에 추가
-                //                print("버스 정류장이 저장되었습니다.")
+                print("버스 정류장이 저장되었습니다.")
+
             } catch {
                 print("버스 정류장 저장 실패: \(error)")
             }
         }
     }
 }
-
 
 
 #Preview {
