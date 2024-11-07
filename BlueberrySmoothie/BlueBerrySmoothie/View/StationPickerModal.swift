@@ -31,7 +31,8 @@ struct StationPickerModal: View {
                 VStack {
                     HStack {
                         Text("목적지 전 정류장에서 알람")
-                            .foregroundColor(Color(white: 72 / 255))
+                            .foregroundColor(Color.black)
+                            .font(.regular16)
                             .padding(.top, 20)
                             .padding(.horizontal, 20)
                             .padding(.bottom, 12)
@@ -39,7 +40,7 @@ struct StationPickerModal: View {
                     }
                     
                     Divider()
-                        .foregroundColor(Color(white: 212 / 255))
+                        .foregroundColor(Color.gray4)
                         .padding(.horizontal, 20)
                         .padding(.bottom, 20)
                     
@@ -98,7 +99,8 @@ struct StationPickerModal: View {
     private func stationRow(stationText: String, isEnabled: Bool, action: (() -> Void)? = nil) -> some View {
         HStack {
             Text(stationText)
-                .foregroundColor(isEnabled ? Color(white: 128 / 255) : Color(white: 212 / 255))
+              .foregroundColor(isEnabled ? Color.gray2 : Color.gray6)
+               .font(.regular16)
                 .onTapGesture {
                     if isEnabled, let action = action {
                         action()
