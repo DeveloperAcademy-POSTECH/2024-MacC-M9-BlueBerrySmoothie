@@ -1,10 +1,3 @@
-//
-//  BusLocationListView.swift
-//  BlueBerrySmoothie
-//
-//  Created by 문재윤 on 11/7/24.
-//
-
 
 //
 //  NowBusLocationResponse.swift
@@ -268,7 +261,3 @@ func fetchNowBusLocationData(cityCode: Int, routeId: String, completion: @escapi
         print("API serviceKey Error: \(error)")
     }
 }
-
-
-
-
