@@ -50,24 +50,12 @@
 		D968D5C62CD89EC4002DF70B /* ActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D968D5C52CD89EC4002DF70B /* ActionButton.swift */; };
 		D968D5C82CD89EF4002DF70B /* SavedBus.swift in Sources */ = {isa = PBXBuildFile; fileRef = D968D5C72CD89EF4002DF70B /* SavedBus.swift */; };
 		D968D5CA2CD912C5002DF70B /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D968D5C92CD912C5002DF70B /* MainView.swift */; };
-		D968D5FA2CDB165B002DF70B /* SpoqaHanSansNeo-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = D968D5F32CDB165B002DF70B /* SpoqaHanSansNeo-Bold.otf */; };
-		D968D5FB2CDB165B002DF70B /* SpoqaHanSansNeo-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = D968D5F52CDB165B002DF70B /* SpoqaHanSansNeo-Medium.otf */; };
-		D968D5FC2CDB165B002DF70B /* SpoqaHanSansNeo-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = D968D5F42CDB165B002DF70B /* SpoqaHanSansNeo-Light.otf */; };
-		D968D5FD2CDB165B002DF70B /* SpoqaHanSansNeo-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = D968D5F72CDB165B002DF70B /* SpoqaHanSansNeo-Thin.otf */; };
-		D968D5FE2CDB165B002DF70B /* SpoqaHanSansNeo-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = D968D5F62CDB165B002DF70B /* SpoqaHanSansNeo-Regular.otf */; };
-		D968D5FF2CDB165B002DF70B /* UIfont.swift in Sources */ = {isa = PBXBuildFile; fileRef = D968D5F82CDB165B002DF70B /* UIfont.swift */; };
 		D968D6002CDB165B002DF70B /* UIfont.swift in Sources */ = {isa = PBXBuildFile; fileRef = D968D5F82CDB165B002DF70B /* UIfont.swift */; };
 		D968D6012CDB165B002DF70B /* SpoqaHanSansNeo-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = D968D5F32CDB165B002DF70B /* SpoqaHanSansNeo-Bold.otf */; };
 		D968D6022CDB165B002DF70B /* SpoqaHanSansNeo-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = D968D5F52CDB165B002DF70B /* SpoqaHanSansNeo-Medium.otf */; };
 		D968D6032CDB165B002DF70B /* SpoqaHanSansNeo-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = D968D5F42CDB165B002DF70B /* SpoqaHanSansNeo-Light.otf */; };
 		D968D6042CDB165B002DF70B /* SpoqaHanSansNeo-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = D968D5F72CDB165B002DF70B /* SpoqaHanSansNeo-Thin.otf */; };
 		D968D6052CDB165B002DF70B /* SpoqaHanSansNeo-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = D968D5F62CDB165B002DF70B /* SpoqaHanSansNeo-Regular.otf */; };
-		D968D6062CDB165B002DF70B /* SpoqaHanSansNeo-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = D968D5F32CDB165B002DF70B /* SpoqaHanSansNeo-Bold.otf */; };
-		D968D6072CDB165B002DF70B /* SpoqaHanSansNeo-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = D968D5F52CDB165B002DF70B /* SpoqaHanSansNeo-Medium.otf */; };
-		D968D6082CDB165B002DF70B /* SpoqaHanSansNeo-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = D968D5F42CDB165B002DF70B /* SpoqaHanSansNeo-Light.otf */; };
-		D968D6092CDB165B002DF70B /* SpoqaHanSansNeo-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = D968D5F72CDB165B002DF70B /* SpoqaHanSansNeo-Thin.otf */; };
-		D968D60A2CDB165B002DF70B /* SpoqaHanSansNeo-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = D968D5F62CDB165B002DF70B /* SpoqaHanSansNeo-Regular.otf */; };
-		D968D60B2CDB165B002DF70B /* UIfont.swift in Sources */ = {isa = PBXBuildFile; fileRef = D968D5F82CDB165B002DF70B /* UIfont.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -358,30 +346,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		1232B3BA2CD1D3DF00C48414 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				D968D5FA2CDB165B002DF70B /* SpoqaHanSansNeo-Bold.otf in Resources */,
-				D968D5FB2CDB165B002DF70B /* SpoqaHanSansNeo-Medium.otf in Resources */,
-				D968D5FC2CDB165B002DF70B /* SpoqaHanSansNeo-Light.otf in Resources */,
-				D968D5FD2CDB165B002DF70B /* SpoqaHanSansNeo-Thin.otf in Resources */,
-				D968D5FE2CDB165B002DF70B /* SpoqaHanSansNeo-Regular.otf in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		1232B3C42CD1D3DF00C48414 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				D968D6062CDB165B002DF70B /* SpoqaHanSansNeo-Bold.otf in Resources */,
-				D968D6072CDB165B002DF70B /* SpoqaHanSansNeo-Medium.otf in Resources */,
-				D968D6082CDB165B002DF70B /* SpoqaHanSansNeo-Light.otf in Resources */,
-				D968D6092CDB165B002DF70B /* SpoqaHanSansNeo-Thin.otf in Resources */,
-				D968D60A2CDB165B002DF70B /* SpoqaHanSansNeo-Regular.otf in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -431,22 +395,6 @@
 				12D2B6C82CD36E94005CF771 /* BusStopModel.swift in Sources */,
 				12D2B6C62CD36E70005CF771 /* SelectBusStopView.swift in Sources */,
 				12D2B6CF2CD3ABAF005CF771 /* BusStopViewModel.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		1232B3B82CD1D3DF00C48414 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				D968D5FF2CDB165B002DF70B /* UIfont.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		1232B3C22CD1D3DF00C48414 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				D968D60B2CDB165B002DF70B /* UIfont.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -581,7 +529,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"BlueBerrySmoothie/Preview Content\"";
-				DEVELOPMENT_TEAM = GF3B5LP7RQ;
+				DEVELOPMENT_TEAM = H54Z863265;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BlueBerrySmoothie/Info.plist;
@@ -615,7 +563,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"BlueBerrySmoothie/Preview Content\"";
-				DEVELOPMENT_TEAM = GF3B5LP7RQ;
+				DEVELOPMENT_TEAM = H54Z863265;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BlueBerrySmoothie/Info.plist;

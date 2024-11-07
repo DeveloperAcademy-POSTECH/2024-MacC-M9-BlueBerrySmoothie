@@ -191,6 +191,7 @@ struct SelectBusStopView: View {
             // 이전 정류장 (1~3번째) 저장
             if var unwrappedBusStopAlert = busStopAlert {
                 storeBeforeBusStops(for: busStop, alert: &unwrappedBusStopAlert, busStops: busStopViewModel.busStopList, maxUpwardNodeord: maxUpwardNodeord)
+                busStopAlert = unwrappedBusStopAlert
             }
         }
     }
