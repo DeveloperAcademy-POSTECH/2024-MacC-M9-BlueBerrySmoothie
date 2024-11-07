@@ -2,9 +2,7 @@
 import SwiftUI
 
 struct SelectBusView: View {
-    @Binding var selectedBus: Bus? // 선택된 버스를 전달하는 바인딩
-    @Binding var selectedBusStop: BusStop?
-    @Binding var allBusStops: [BusStop]
+    @Binding var busStopAlert: BusStopAlert?
     
     let city: City = City(citycode: 21, cityname: "부산")
     @State private var allBuses: [Bus] = []
@@ -12,9 +10,6 @@ struct SelectBusView: View {
     @State private var routeNo: String = ""
     @FocusState private var isTextFieldFocused: Bool
     
-    // 선택된 버스에 따라 SelectBusStopView로 네비게이션하기 위한 상태
-    @State private var navigateToBusStopView = false
-
     var body: some View {
         NavigationStack {
             VStack(spacing: 20) {
@@ -43,46 +38,36 @@ struct SelectBusView: View {
                     ForEach(filteredBuses) { bus in
                         Button(action: {
                             // 선택된 버스를 설정하고 네비게이션 활성화
-                            selectedBus = bus
-                            navigateToBusStopView = true
+                            busStopAlert?.bus = bus
+                            
                         }) {
-                            VStack(alignment: .leading) {
-                                Spacer()
+                            // 네비게이션 링크: 선택된 버스가 있을 때 SelectBusStopView로 이동
+                            NavigationLink(destination: SelectBusStopView(city: city, bus: bus, busStopAlert: $busStopAlert)){
                                 VStack(alignment: .leading) {
-                                    Text("\(bus.routeno)")
-                                        .font(.system(size: 20))
-                                        .foregroundColor(busColor(for: bus.routetp))
-                                    HStack {
-                                        Text("\(bus.startnodenm) - \(bus.endnodenm)")
-                                            .foregroundStyle(.gray)
+                                    Spacer()
+                                    VStack(alignment: .leading) {
+                                        Text("\(bus.routeno)")
+                                            .font(.system(size: 20))
+                                            .foregroundColor(busColor(for: bus.routetp))
+                                        HStack {
+                                            Text("\(bus.startnodenm) - \(bus.endnodenm)")
+                                                .foregroundStyle(.gray)
+                                        }
                                     }
+                                    .padding(.horizontal, 16)
+                                    Spacer()
+                                    
+                                    Divider()
+                                        .padding(.top, 16)
+                                        .padding(.bottom, 20)
                                 }
-                                .padding(.horizontal, 16)
-                                Spacer()
-                                
-                                Divider()
-                                    .padding(.top, 16)
-                                    .padding(.bottom, 20)
                             }
                         }
                     }
                 }
                 .padding(.horizontal, 20)
                 
-             
-                // 네비게이션 링크: 선택된 버스가 있을 때 SelectBusStopView로 이동
-                NavigationLink(
-                       destination: Group {
-                           if let bus = selectedBus { // 안전하게 선택된 버스를 확인
-                               SelectBusStopView(city: city, bus: bus, selectedBusStop: $selectedBusStop, allBusStops: $allBusStops)
-                           }
-                       },
-                       isActive: $navigateToBusStopView
-                   ) {
-                       EmptyView()
-                   }
-                   .hidden() // 빈 뷰로 숨기기
-                           }
+            }
             .onTapGesture {
                 isTextFieldFocused = false // 다른 곳 클릭 시 키보드 숨김
             }

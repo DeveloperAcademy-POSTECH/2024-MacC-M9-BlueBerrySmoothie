@@ -6,10 +6,14 @@
 //
 import SwiftUI
 
+import SwiftUI
+
+import SwiftUI
+
 struct StationPickerModal: View {
     @Binding var isPresented: Bool
     @Binding var selectedStation: String
-    let stations = ["1 정거장 전", "2 정거장 전", "3 정거장 전"]
+    @Binding var alert: BusStopAlert? // BusStopAlert 값을 받아옴
     
     var body: some View {
         ZStack(alignment: .bottom) {
@@ -35,28 +39,48 @@ struct StationPickerModal: View {
                         Spacer()
                     }
                     
-                    
                     Divider()
                         .foregroundColor(Color.gray4)
                         .padding(.horizontal, 20)
                         .padding(.bottom, 20)
                     
-                    ForEach(stations, id: \.self) { station in
-                        HStack {
-                            Text(station)
-                                .foregroundColor(Color.gray2)
-                                .font(.regular16)
-                                .onTapGesture {
-                                    selectedStation = station
-                                    withAnimation {
-                                        isPresented = false
-                                    }
-                                }
-                                .padding(.horizontal, 20)
-                                .padding(.bottom, 24)
-                            Spacer()
+                    // 각 정류장 선택지
+                    if let first = alert?.firstBeforeBusStop {
+                        stationRow(stationText: "1 정거장 전", isEnabled: true) {
+                            selectedStation = "1 정거장 전"
+                            alert?.alertBusStop = 1
+                            withAnimation {
+                                isPresented = false
+                            }
                         }
+                    } else {
+                        stationRow(stationText: "1 정거장 전", isEnabled: false)
                     }
+                    
+                    if let second = alert?.secondBeforeBusStop {
+                        stationRow(stationText: "2 정거장 전", isEnabled: true) {
+                            selectedStation = "2 정거장 전"
+                            alert?.alertBusStop = 2
+                            withAnimation {
+                                isPresented = false
+                            }
+                        }
+                    } else {
+                        stationRow(stationText: "2 정거장 전", isEnabled: false)
+                    }
+                    
+                    if let third = alert?.thirdBeforeBusStop {
+                        stationRow(stationText: "3 정거장 전", isEnabled: true) {
+                            selectedStation = "3 정거장 전"
+                            alert?.alertBusStop = 3
+                            withAnimation {
+                                isPresented = false
+                            }
+                        }
+                    } else {
+                        stationRow(stationText: "3 정거장 전", isEnabled: false)
+                    }
+                    
                     Spacer()
                 }
                 .frame(maxWidth: .infinity)
@@ -68,6 +92,23 @@ struct StationPickerModal: View {
                 .transition(.move(edge: .bottom))
             }
             .ignoresSafeArea()
+        }
+    }
+    
+    // 선택지 행 뷰 구성 함수
+    private func stationRow(stationText: String, isEnabled: Bool, action: (() -> Void)? = nil) -> some View {
+        HStack {
+            Text(stationText)
+              .foregroundColor(isEnabled ? Color.gray2 : Color.gray6)
+               .font(.regular16)
+                .onTapGesture {
+                    if isEnabled, let action = action {
+                        action()
+                    }
+                }
+                .padding(.horizontal, 20)
+                .padding(.bottom, 24)
+            Spacer()
         }
     }
 }

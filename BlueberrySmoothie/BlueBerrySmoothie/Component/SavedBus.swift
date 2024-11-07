@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct SavedBus: View {
+    let busAlert: BusAlert
+    var isSelected: Bool = false
+    
     var body: some View {
         ZStack {
             Rectangle()
@@ -19,20 +22,25 @@ struct SavedBus: View {
                 }
             VStack {
                 HStack(alignment: .bottom) {
-                        Text("출근하는 거 힘들다")
-                        .font(.regular12)
+                    Text(busAlert.alertLabel)
+                            .font(.regular12)
                         .foregroundColor(Color.brand)
                     Spacer()
-                    Image(systemName: "ellipsis")
+                    Button(action: {
+                        
+                    }, label: {
+                        Image(systemName: "ellipsis")
                         .font(.regular20)
                         .foregroundColor(Color.gray4)
                         .padding(.vertical, 20)
+                    })
                 }
                 HStack {
-                    Text("207")
+                    Text(busAlert.busNo)
                         .font(.regular20)
-                    Text("포스텍")
+                    Text(busAlert.arrivalBusStopNm)
                         .font(.regular20)
+
                     Spacer()
                 }
                 .foregroundColor(Color.black)
@@ -44,7 +52,7 @@ struct SavedBus: View {
                     Image(systemName: "bell.fill")
                         .font(.regular12)
                         .foregroundColor(Color.brand)
-                    Text("3 정류장 전 알람")
+                    Text("\(busAlert.alertBusStop) 정류장 전 알람")
                         .font(.regular14)
                         .foregroundColor(Color.brand)
                     
@@ -53,7 +61,8 @@ struct SavedBus: View {
                         .frame(width: 2, height: 12)
                         .background(Color.gray5)
                     
-                    Text("행정복지센터")
+
+                    Text(busAlert.arrivalBusStopNm)
                         .font(.regular14)
                         .foregroundColor(Color.gray3)
 
@@ -69,6 +78,3 @@ struct SavedBus: View {
     }
 }
 
-#Preview {
-    SavedBus()
-}
