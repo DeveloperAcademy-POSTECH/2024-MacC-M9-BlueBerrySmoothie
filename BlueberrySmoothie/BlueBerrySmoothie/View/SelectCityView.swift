@@ -13,7 +13,7 @@ struct SelectCityView: View {
     var body: some View {
         NavigationStack {
             List(cities) { city in
-                NavigationLink(destination: SelectBusView()) {
+                NavigationLink(destination: ContentView()) {
                     Text(city.cityname)
                         .font(.headline)
                         .padding()

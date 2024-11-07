@@ -15,10 +15,8 @@ class BusStopViewModel: ObservableObject {
     func getBusStopData(cityCode: Int, routeId: String) async {
         do {
             let data = try await networkManager.getBusStopData(cityCode: cityCode, routeId: routeId)
-            print("받아온 데이터: \(data)") // 데이터 출력
             DispatchQueue.main.async {
                 self.busStopList = data
-            
             }
         } catch {
             print("Error calling getBusStopData API in busStopViewModel")

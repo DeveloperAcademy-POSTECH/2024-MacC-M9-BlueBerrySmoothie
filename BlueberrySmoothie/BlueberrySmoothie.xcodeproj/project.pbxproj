@@ -24,8 +24,19 @@
 		12D2B6D42CD3F5BE005CF771 /* getAPIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D2B6D32CD3F5BD005CF771 /* getAPIKey.swift */; };
 		12D2B6D82CD63D6A005CF771 /* AlertModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D2B6D72CD63D6A005CF771 /* AlertModel.swift */; };
 		632D06802CD9A19500A7685C /* AlarmEndView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632D067F2CD9A19500A7685C /* AlarmEndView.swift */; };
+		8BF2EFA42CD3A78A008A6644 /* MainViewDaisy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF2EFA32CD3A78A008A6644 /* MainViewDaisy.swift */; };
+		8BF2EFA62CD3A7B0008A6644 /* InputViewDaisy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF2EFA52CD3A7B0008A6644 /* InputViewDaisy.swift */; };
+		8BF2EFA82CD3A7F2008A6644 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF2EFA72CD3A7F2008A6644 /* Alert.swift */; };
+		8BF2EFAA2CD3AA2B008A6644 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF2EFA92CD3AA2B008A6644 /* NotificationManager.swift */; };
+		8BF2EFAC2CD3AA44008A6644 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF2EFAB2CD3AA44008A6644 /* LocationManager.swift */; };
+		8BF2EFAE2CD3AA5F008A6644 /* LocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF2EFAD2CD3AA5F008A6644 /* LocationView.swift */; };
+		8BF2EFB12CD86C93008A6644 /* UsingAlertViewDaisy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF2EFB02CD86C93008A6644 /* UsingAlertViewDaisy.swift */; };
+		8BF2EFB52CD92BE0008A6644 /* HapticHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF2EFB42CD92BE0008A6644 /* HapticHelper.swift */; };
+		8BF2EFB72CD9B34A008A6644 /* EndViewDaisy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF2EFB62CD9B34A008A6644 /* EndViewDaisy.swift */; };
+		9D0C411B2CDA3D780005A6CC /* StationPickerModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D0C411A2CDA3D780005A6CC /* StationPickerModal.swift */; };
+		9D0C411D2CDA452E0005A6CC /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D0C411C2CDA452E0005A6CC /* DetailView.swift */; };
 		9D64A9E22CD7A85C00718CC8 /* AlarmStartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D64A9E12CD7A85C00718CC8 /* AlarmStartView.swift */; };
-		9D64A9E42CD7AB3400718CC8 /* BusStopListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D64A9E32CD7AB3400718CC8 /* BusStopListView.swift */; };
+		9D64A9E42CD7AB3400718CC8 /* UsingAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D64A9E32CD7AB3400718CC8 /* UsingAlertView.swift */; };
 		9DEA523F2CD362CA00A3AE68 /* SelectBusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEA523E2CD362C100A3AE68 /* SelectBusView.swift */; };
 		9DEA52412CD3630200A3AE68 /* CityDecoderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEA52402CD362FC00A3AE68 /* CityDecoderModel.swift */; };
 		9DEA52432CD3637C00A3AE68 /* BusModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEA52422CD3637900A3AE68 /* BusModel.swift */; };
@@ -39,6 +50,25 @@
 		D90E0C1A2CD89CB20089883F /* AlertSettingMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = D90E0C192CD89CB20089883F /* AlertSettingMain.swift */; };
 		D968D5C62CD89EC4002DF70B /* ActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D968D5C52CD89EC4002DF70B /* ActionButton.swift */; };
 		D968D5C82CD89EF4002DF70B /* SavedBus.swift in Sources */ = {isa = PBXBuildFile; fileRef = D968D5C72CD89EF4002DF70B /* SavedBus.swift */; };
+		D968D5CA2CD912C5002DF70B /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D968D5C92CD912C5002DF70B /* MainView.swift */; };
+		D968D5FA2CDB165B002DF70B /* SpoqaHanSansNeo-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = D968D5F32CDB165B002DF70B /* SpoqaHanSansNeo-Bold.otf */; };
+		D968D5FB2CDB165B002DF70B /* SpoqaHanSansNeo-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = D968D5F52CDB165B002DF70B /* SpoqaHanSansNeo-Medium.otf */; };
+		D968D5FC2CDB165B002DF70B /* SpoqaHanSansNeo-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = D968D5F42CDB165B002DF70B /* SpoqaHanSansNeo-Light.otf */; };
+		D968D5FD2CDB165B002DF70B /* SpoqaHanSansNeo-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = D968D5F72CDB165B002DF70B /* SpoqaHanSansNeo-Thin.otf */; };
+		D968D5FE2CDB165B002DF70B /* SpoqaHanSansNeo-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = D968D5F62CDB165B002DF70B /* SpoqaHanSansNeo-Regular.otf */; };
+		D968D5FF2CDB165B002DF70B /* UIfont.swift in Sources */ = {isa = PBXBuildFile; fileRef = D968D5F82CDB165B002DF70B /* UIfont.swift */; };
+		D968D6002CDB165B002DF70B /* UIfont.swift in Sources */ = {isa = PBXBuildFile; fileRef = D968D5F82CDB165B002DF70B /* UIfont.swift */; };
+		D968D6012CDB165B002DF70B /* SpoqaHanSansNeo-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = D968D5F32CDB165B002DF70B /* SpoqaHanSansNeo-Bold.otf */; };
+		D968D6022CDB165B002DF70B /* SpoqaHanSansNeo-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = D968D5F52CDB165B002DF70B /* SpoqaHanSansNeo-Medium.otf */; };
+		D968D6032CDB165B002DF70B /* SpoqaHanSansNeo-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = D968D5F42CDB165B002DF70B /* SpoqaHanSansNeo-Light.otf */; };
+		D968D6042CDB165B002DF70B /* SpoqaHanSansNeo-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = D968D5F72CDB165B002DF70B /* SpoqaHanSansNeo-Thin.otf */; };
+		D968D6052CDB165B002DF70B /* SpoqaHanSansNeo-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = D968D5F62CDB165B002DF70B /* SpoqaHanSansNeo-Regular.otf */; };
+		D968D6062CDB165B002DF70B /* SpoqaHanSansNeo-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = D968D5F32CDB165B002DF70B /* SpoqaHanSansNeo-Bold.otf */; };
+		D968D6072CDB165B002DF70B /* SpoqaHanSansNeo-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = D968D5F52CDB165B002DF70B /* SpoqaHanSansNeo-Medium.otf */; };
+		D968D6082CDB165B002DF70B /* SpoqaHanSansNeo-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = D968D5F42CDB165B002DF70B /* SpoqaHanSansNeo-Light.otf */; };
+		D968D6092CDB165B002DF70B /* SpoqaHanSansNeo-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = D968D5F72CDB165B002DF70B /* SpoqaHanSansNeo-Thin.otf */; };
+		D968D60A2CDB165B002DF70B /* SpoqaHanSansNeo-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = D968D5F62CDB165B002DF70B /* SpoqaHanSansNeo-Regular.otf */; };
+		D968D60B2CDB165B002DF70B /* UIfont.swift in Sources */ = {isa = PBXBuildFile; fileRef = D968D5F82CDB165B002DF70B /* UIfont.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -61,28 +91,40 @@
 		12D2B6D32CD3F5BD005CF771 /* getAPIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getAPIKey.swift; sourceTree = "<group>"; };
 		12D2B6D72CD63D6A005CF771 /* AlertModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertModel.swift; sourceTree = "<group>"; };
 		632D067F2CD9A19500A7685C /* AlarmEndView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmEndView.swift; sourceTree = "<group>"; };
+		8BF2EFA32CD3A78A008A6644 /* MainViewDaisy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewDaisy.swift; sourceTree = "<group>"; };
+		8BF2EFA52CD3A7B0008A6644 /* InputViewDaisy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputViewDaisy.swift; sourceTree = "<group>"; };
+		8BF2EFA72CD3A7F2008A6644 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
+		8BF2EFA92CD3AA2B008A6644 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
+		8BF2EFAB2CD3AA44008A6644 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		8BF2EFAD2CD3AA5F008A6644 /* LocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationView.swift; sourceTree = "<group>"; };
+		8BF2EFAF2CD3AABF008A6644 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		8BF2EFB02CD86C93008A6644 /* UsingAlertViewDaisy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsingAlertViewDaisy.swift; sourceTree = "<group>"; };
+		8BF2EFB42CD92BE0008A6644 /* HapticHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticHelper.swift; sourceTree = "<group>"; };
+		8BF2EFB62CD9B34A008A6644 /* EndViewDaisy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndViewDaisy.swift; sourceTree = "<group>"; };
+		9D0C411A2CDA3D780005A6CC /* StationPickerModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationPickerModal.swift; sourceTree = "<group>"; };
+		9D0C411C2CDA452E0005A6CC /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		9D64A9E12CD7A85C00718CC8 /* AlarmStartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmStartView.swift; sourceTree = "<group>"; };
-		9D64A9E32CD7AB3400718CC8 /* BusStopListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusStopListView.swift; sourceTree = "<group>"; };
+		9D64A9E32CD7AB3400718CC8 /* UsingAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsingAlertView.swift; sourceTree = "<group>"; };
 		9DEA523E2CD362C100A3AE68 /* SelectBusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectBusView.swift; sourceTree = "<group>"; };
 		9DEA52402CD362FC00A3AE68 /* CityDecoderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityDecoderModel.swift; sourceTree = "<group>"; };
 		9DEA52422CD3637900A3AE68 /* BusModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusModel.swift; sourceTree = "<group>"; };
 		9DEA52442CD3638E00A3AE68 /* CityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityModel.swift; sourceTree = "<group>"; };
 		9DEA52462CD363A100A3AE68 /* FetchCityAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchCityAPI.swift; sourceTree = "<group>"; };
-		9DEA52482CD3649600A3AE68 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		9DEA524B2CD3B79B00A3AE68 /* ScrollingTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollingTextView.swift; sourceTree = "<group>"; };
 		9DEA524D2CD46EF400A3AE68 /* BusDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusDetailView.swift; sourceTree = "<group>"; };
 		9DEA524F2CD4D56400A3AE68 /* busColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = busColor.swift; sourceTree = "<group>"; };
 		9DEA52512CD4D57A00A3AE68 /* filterBuses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = filterBuses.swift; sourceTree = "<group>"; };
 		9DEA52532CD4D5B500A3AE68 /* FetchAllBusData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchAllBusData.swift; sourceTree = "<group>"; };
-		D90E0C122CD89C950089883F /* SpoqaHanSansNeo-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Bold.otf"; sourceTree = "<group>"; };
-		D90E0C132CD89C950089883F /* SpoqaHanSansNeo-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Light.otf"; sourceTree = "<group>"; };
-		D90E0C142CD89C950089883F /* SpoqaHanSansNeo-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Medium.otf"; sourceTree = "<group>"; };
-		D90E0C152CD89C950089883F /* SpoqaHanSansNeo-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Regular.otf"; sourceTree = "<group>"; };
-		D90E0C162CD89C950089883F /* SpoqaHanSansNeo-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Thin.otf"; sourceTree = "<group>"; };
-		D90E0C172CD89C950089883F /* UIfont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIfont.swift; sourceTree = "<group>"; };
 		D90E0C192CD89CB20089883F /* AlertSettingMain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertSettingMain.swift; sourceTree = "<group>"; };
 		D968D5C52CD89EC4002DF70B /* ActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionButton.swift; sourceTree = "<group>"; };
 		D968D5C72CD89EF4002DF70B /* SavedBus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedBus.swift; sourceTree = "<group>"; };
+		D968D5C92CD912C5002DF70B /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		D968D5F32CDB165B002DF70B /* SpoqaHanSansNeo-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Bold.otf"; sourceTree = "<group>"; };
+		D968D5F42CDB165B002DF70B /* SpoqaHanSansNeo-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Light.otf"; sourceTree = "<group>"; };
+		D968D5F52CDB165B002DF70B /* SpoqaHanSansNeo-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Medium.otf"; sourceTree = "<group>"; };
+		D968D5F62CDB165B002DF70B /* SpoqaHanSansNeo-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Regular.otf"; sourceTree = "<group>"; };
+		D968D5F72CDB165B002DF70B /* SpoqaHanSansNeo-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Thin.otf"; sourceTree = "<group>"; };
+		D968D5F82CDB165B002DF70B /* UIfont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIfont.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,10 +157,10 @@
 		1232B3AE2CD1D3DE00C48414 /* BlueBerrySmoothie */ = {
 			isa = PBXGroup;
 			children = (
-				D90E0C182CD89C950089883F /* Fonts */,
+				D968D5F92CDB165B002DF70B /* Fonts */,
+				8BF2EFAF2CD3AABF008A6644 /* Info.plist */,
 				D90E0C112CD89C620089883F /* Component */,
 				12D2B6D22CD3F50F005CF771 /* Config.xcconfig */,
-				9DEA52482CD3649600A3AE68 /* Info.plist */,
 				1232B3E92CD1D4E800C48414 /* App */,
 				1232B3E52CD1D49000C48414 /* Manager */,
 				1232B3E22CD1D46E00C48414 /* Network */,
@@ -143,6 +185,7 @@
 		1232B3D92CD1D3F700C48414 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				8BF2EFA72CD3A7F2008A6644 /* Alert.swift */,
 				9DEA52402CD362FC00A3AE68 /* CityDecoderModel.swift */,
 				9DEA52442CD3638E00A3AE68 /* CityModel.swift */,
 				1232B3DA2CD1D40500C48414 /* BusDecoderModel.swift */,
@@ -157,16 +200,24 @@
 		1232B3DC2CD1D40800C48414 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				9D64A9E32CD7AB3400718CC8 /* BusStopListView.swift */,
+				9D0C411C2CDA452E0005A6CC /* DetailView.swift */,
+				9D0C411A2CDA3D780005A6CC /* StationPickerModal.swift */,
+				9D64A9E32CD7AB3400718CC8 /* UsingAlertView.swift */,
 				9D64A9E12CD7A85C00718CC8 /* AlarmStartView.swift */,
 				632D067F2CD9A19500A7685C /* AlarmEndView.swift */,
-				D90E0C192CD89CB20089883F /* AlertSettingMain.swift */,
 				9DEA524D2CD46EF400A3AE68 /* BusDetailView.swift */,
 				9DEA524B2CD3B79B00A3AE68 /* ScrollingTextView.swift */,
-				9DEA523E2CD362C100A3AE68 /* SelectBusView.swift */,
 				1232B3DD2CD1D41600C48414 /* SelectCityView.swift */,
+				D90E0C192CD89CB20089883F /* AlertSettingMain.swift */,
+				9DEA523E2CD362C100A3AE68 /* SelectBusView.swift */,
 				12D2B6C52CD36E70005CF771 /* SelectBusStopView.swift */,
 				1232B3B12CD1D3DE00C48414 /* ContentView.swift */,
+				8BF2EFA32CD3A78A008A6644 /* MainViewDaisy.swift */,
+				8BF2EFA52CD3A7B0008A6644 /* InputViewDaisy.swift */,
+				8BF2EFAD2CD3AA5F008A6644 /* LocationView.swift */,
+				8BF2EFB02CD86C93008A6644 /* UsingAlertViewDaisy.swift */,
+				8BF2EFB62CD9B34A008A6644 /* EndViewDaisy.swift */,
+				D968D5C92CD912C5002DF70B /* MainView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -175,6 +226,7 @@
 			isa = PBXGroup;
 			children = (
 				1232B3E02CD1D46500C48414 /* DummyHelper.swift */,
+				8BF2EFB42CD92BE0008A6644 /* HapticHelper.swift */,
 				12D2B6D02CD3B104005CF771 /* NetworkHelper.swift */,
 				12D2B6D32CD3F5BD005CF771 /* getAPIKey.swift */,
 			);
@@ -194,6 +246,8 @@
 		1232B3E52CD1D49000C48414 /* Manager */ = {
 			isa = PBXGroup;
 			children = (
+				8BF2EFA92CD3AA2B008A6644 /* NotificationManager.swift */,
+				8BF2EFAB2CD3AA44008A6644 /* LocationManager.swift */,
 				9DEA52532CD4D5B500A3AE68 /* FetchAllBusData.swift */,
 				9DEA52512CD4D57A00A3AE68 /* filterBuses.swift */,
 				9DEA524F2CD4D56400A3AE68 /* busColor.swift */,
@@ -226,15 +280,15 @@
 			path = Component;
 			sourceTree = "<group>";
 		};
-		D90E0C182CD89C950089883F /* Fonts */ = {
+		D968D5F92CDB165B002DF70B /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
-				D90E0C122CD89C950089883F /* SpoqaHanSansNeo-Bold.otf */,
-				D90E0C132CD89C950089883F /* SpoqaHanSansNeo-Light.otf */,
-				D90E0C142CD89C950089883F /* SpoqaHanSansNeo-Medium.otf */,
-				D90E0C152CD89C950089883F /* SpoqaHanSansNeo-Regular.otf */,
-				D90E0C162CD89C950089883F /* SpoqaHanSansNeo-Thin.otf */,
-				D90E0C172CD89C950089883F /* UIfont.swift */,
+				D968D5F32CDB165B002DF70B /* SpoqaHanSansNeo-Bold.otf */,
+				D968D5F42CDB165B002DF70B /* SpoqaHanSansNeo-Light.otf */,
+				D968D5F52CDB165B002DF70B /* SpoqaHanSansNeo-Medium.otf */,
+				D968D5F62CDB165B002DF70B /* SpoqaHanSansNeo-Regular.otf */,
+				D968D5F72CDB165B002DF70B /* SpoqaHanSansNeo-Thin.otf */,
+				D968D5F82CDB165B002DF70B /* UIfont.swift */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -297,8 +351,38 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D968D6012CDB165B002DF70B /* SpoqaHanSansNeo-Bold.otf in Resources */,
+				D968D6022CDB165B002DF70B /* SpoqaHanSansNeo-Medium.otf in Resources */,
+				D968D6032CDB165B002DF70B /* SpoqaHanSansNeo-Light.otf in Resources */,
+				D968D6042CDB165B002DF70B /* SpoqaHanSansNeo-Thin.otf in Resources */,
+				D968D6052CDB165B002DF70B /* SpoqaHanSansNeo-Regular.otf in Resources */,
 				1232B3B72CD1D3DF00C48414 /* Preview Assets.xcassets in Resources */,
 				1232B3B42CD1D3DF00C48414 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+
+		1232B3BA2CD1D3DF00C48414 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D968D5FA2CDB165B002DF70B /* SpoqaHanSansNeo-Bold.otf in Resources */,
+				D968D5FB2CDB165B002DF70B /* SpoqaHanSansNeo-Medium.otf in Resources */,
+				D968D5FC2CDB165B002DF70B /* SpoqaHanSansNeo-Light.otf in Resources */,
+				D968D5FD2CDB165B002DF70B /* SpoqaHanSansNeo-Thin.otf in Resources */,
+				D968D5FE2CDB165B002DF70B /* SpoqaHanSansNeo-Regular.otf in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1232B3C42CD1D3DF00C48414 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D968D6062CDB165B002DF70B /* SpoqaHanSansNeo-Bold.otf in Resources */,
+				D968D6072CDB165B002DF70B /* SpoqaHanSansNeo-Medium.otf in Resources */,
+				D968D6082CDB165B002DF70B /* SpoqaHanSansNeo-Light.otf in Resources */,
+				D968D6092CDB165B002DF70B /* SpoqaHanSansNeo-Thin.otf in Resources */,
+				D968D60A2CDB165B002DF70B /* SpoqaHanSansNeo-Regular.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -310,6 +394,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				1232B3E12CD1D46500C48414 /* DummyHelper.swift in Sources */,
+				8BF2EFA42CD3A78A008A6644 /* MainViewDaisy.swift in Sources */,
+				8BF2EFB72CD9B34A008A6644 /* EndViewDaisy.swift in Sources */,
+				8BF2EFB52CD92BE0008A6644 /* HapticHelper.swift in Sources */,
+				8BF2EFAA2CD3AA2B008A6644 /* NotificationManager.swift in Sources */,
+				8BF2EFA62CD3A7B0008A6644 /* InputViewDaisy.swift in Sources */,
+				8BF2EFA82CD3A7F2008A6644 /* Alert.swift in Sources */,
+				8BF2EFAE2CD3AA5F008A6644 /* LocationView.swift in Sources */,
+				1232B3B02CD1D3DE00C48414 /* BlueBerrySmoothieApp.swift in Sources */,
+				8BF2EFAC2CD3AA44008A6644 /* LocationManager.swift in Sources */,
+				8BF2EFB12CD86C93008A6644 /* UsingAlertViewDaisy.swift in Sources */,
 				12D2B6D42CD3F5BE005CF771 /* getAPIKey.swift in Sources */,
 				632D06802CD9A19500A7685C /* AlarmEndView.swift in Sources */,
 				1232B3DB2CD1D40500C48414 /* BusDecoderModel.swift in Sources */,
@@ -322,9 +416,12 @@
 				9DEA52502CD4D56400A3AE68 /* busColor.swift in Sources */,
 				9DEA524E2CD46EF400A3AE68 /* BusDetailView.swift in Sources */,
 				1232B3DE2CD1D41600C48414 /* SelectCityView.swift in Sources */,
+				9D0C411B2CDA3D780005A6CC /* StationPickerModal.swift in Sources */,
 				12D2B6CC2CD3706F005CF771 /* fetchBusStopAPI.swift in Sources */,
+				D968D5CA2CD912C5002DF70B /* MainView.swift in Sources */,
 				1232B3E42CD1D48600C48414 /* FetchBusAPI.swift in Sources */,
 				9DEA52522CD4D57A00A3AE68 /* filterBuses.swift in Sources */,
+				9D0C411D2CDA452E0005A6CC /* DetailView.swift in Sources */,
 				1232B3B22CD1D3DE00C48414 /* ContentView.swift in Sources */,
 				D968D5C62CD89EC4002DF70B /* ActionButton.swift in Sources */,
 				12D2B6D12CD3B104005CF771 /* NetworkHelper.swift in Sources */,
@@ -333,12 +430,28 @@
 				9DEA52452CD3639100A3AE68 /* CityModel.swift in Sources */,
 				D968D5C82CD89EF4002DF70B /* SavedBus.swift in Sources */,
 				9DEA52542CD4D5B500A3AE68 /* FetchAllBusData.swift in Sources */,
-				9D64A9E42CD7AB3400718CC8 /* BusStopListView.swift in Sources */,
+				9D64A9E42CD7AB3400718CC8 /* UsingAlertView.swift in Sources */,
 				12D2B6CA2CD36ED8005CF771 /* BusStopDecoderModel.swift in Sources */,
+				D968D6002CDB165B002DF70B /* UIfont.swift in Sources */,
 				12D2B6C82CD36E94005CF771 /* BusStopModel.swift in Sources */,
-				1232B3B02CD1D3DE00C48414 /* BlueBerrySmoothieApp.swift in Sources */,
 				12D2B6C62CD36E70005CF771 /* SelectBusStopView.swift in Sources */,
 				12D2B6CF2CD3ABAF005CF771 /* BusStopViewModel.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1232B3B82CD1D3DF00C48414 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D968D5FF2CDB165B002DF70B /* UIfont.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1232B3C22CD1D3DF00C48414 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D968D60B2CDB165B002DF70B /* UIfont.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -473,10 +586,13 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"BlueBerrySmoothie/Preview Content\"";
-				DEVELOPMENT_TEAM = 6Q3GG57US3;
+				DEVELOPMENT_TEAM = GF3B5LP7RQ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BlueBerrySmoothie/Info.plist;
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "주변 장소를 보여주기 위해 위치 정보가 필요합니다.";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "앱이 백그라운드에서도 주변 장소를 보여주기 위해 위치 정보가 필요합니다.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "주변 장소를 보여주기 위해 위치 정보가 필요합니다.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -487,7 +603,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.Bella.Blueberry;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Ssan.Blueberry;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -504,10 +620,13 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"BlueBerrySmoothie/Preview Content\"";
-				DEVELOPMENT_TEAM = 6Q3GG57US3;
+				DEVELOPMENT_TEAM = GF3B5LP7RQ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BlueBerrySmoothie/Info.plist;
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "주변 장소를 보여주기 위해 위치 정보가 필요합니다.";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "앱이 백그라운드에서도 주변 장소를 보여주기 위해 위치 정보가 필요합니다.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "주변 장소를 보여주기 위해 위치 정보가 필요합니다.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -518,7 +637,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.Bella.Blueberry;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Ssan.Blueberry;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

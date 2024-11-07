@@ -12,13 +12,13 @@ struct ActionButton: View {
         ZStack {
             Rectangle()
                 .foregroundColor(.clear)
-                .background(Color(red: 104.0 / 255.0, green: 144.0 / 255.0, blue: 1.0))
+                .background(Color.brand)
                 .cornerRadius(10.0)
             
             Text("시작하기")
-                .font(.system(size: 16, weight: .bold))
+                .font(.medium16)
                 .foregroundColor(.white)
-                .padding()
+                .padding(20)
         }
         .fixedSize(horizontal: false, vertical: true)
     }}

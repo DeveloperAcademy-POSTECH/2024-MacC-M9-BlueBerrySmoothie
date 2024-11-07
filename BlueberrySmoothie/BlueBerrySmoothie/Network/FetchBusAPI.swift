@@ -34,7 +34,6 @@ func fetchBusData(citycode: Int, routeNo: String, completion: @escaping ([Bus]) 
                 let response = try JSONDecoder().decode(BusResponse.self, from: data)
                 if let items = response.response.body.items?.item {
                     DispatchQueue.main.async {
-                        print("여러개") // Multiple bus objects found
                         completion(items) // Return array of Bus objects
                     }
                     return // Exit the function after a successful completion
