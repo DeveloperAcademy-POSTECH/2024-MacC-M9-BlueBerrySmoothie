@@ -23,6 +23,7 @@ struct SelectBusStopView: View {
 
         VStack{
             VStack {
+                
                 HStack {
                     Text("\(bus.routeno)")
                         .padding(.leading, 15)
@@ -142,6 +143,7 @@ struct SelectBusStopView: View {
                                      Text("\(busstop.nodeid)")
                                          .font(.system(size: 10))
                                          .foregroundStyle(.gray)
+                                    
                                      Spacer()
                                  }
                                  Spacer()

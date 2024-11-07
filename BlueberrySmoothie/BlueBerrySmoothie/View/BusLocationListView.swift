@@ -1,4 +1,12 @@
 //
+//  BusLocationListView.swift
+//  BlueBerrySmoothie
+//
+//  Created by 문재윤 on 11/7/24.
+//
+
+
+//
 //  NowBusLocationResponse.swift
 //  BlueBerrySmoothie
 //
