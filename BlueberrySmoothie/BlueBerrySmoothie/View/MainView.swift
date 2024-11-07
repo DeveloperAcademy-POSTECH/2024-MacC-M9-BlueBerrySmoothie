@@ -58,14 +58,6 @@ struct MainView: View {
                 }
             }
             
-            // NavigationLink for UsingAlertView
-//            NavigationLink(
-//                destination: selectedAlert.map { UsingAlertView(busStops: busStopLocal, busAlert: $0) },
-//                isActive: $isUsingAlertActive
-//            ) {
-//                EmptyView()
-//            }
-            
         }
         .onAppear(){
             print(busAlerts)
@@ -83,11 +75,6 @@ struct MainView: View {
                 }
             }
         }
-        
-        // Extracted destination for UsingAlertView
-//        private func usingAlertDestination() -> some View {
-//            UsingAlertView(busStops: busStopLocal, busAlert: selectedAlert!)
-//        }
 }
 
 

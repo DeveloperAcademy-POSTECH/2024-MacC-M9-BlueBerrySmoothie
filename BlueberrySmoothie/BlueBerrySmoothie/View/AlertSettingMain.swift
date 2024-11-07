@@ -19,10 +19,7 @@ struct AlertSettingMain: View {
     @State private var label: String = ""
     @State private var showSheet: Bool = false
     @State private var selectedStation: String = "정류장 수"
-    
-    //    @State private var selectedBus: Bus?  // Bus 구조체를 저장하는 변수
-    //    @State private var selectedBusStop: BusStop? // 선택된 정류장을 위한 State
-    //    @State private var allBusstop: [BusStop] = []
+
     @State private var busStopAlert: BusStopAlert?
     
     var body: some View {
@@ -219,20 +216,7 @@ struct AlertSettingMain: View {
                         .foregroundColor(Color(red: 104 / 255, green: 144 / 255, blue: 255 / 255))
                 }
             }
-            Spacer()
         }
-        .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) { // 네비게이션 바 오른쪽에 배치
-                    Button(action: {
-                        saveAlert() // 알람 저장 함수 호출
-                        saveBusstop() // 버스 정류장 저장 함수 호출
-                    }) {
-                        Text("저장")
-                            .font(.system(size: 16, weight: .bold)) // 버튼 텍스트 스타일
-                            .foregroundColor(.blue) // 버튼 텍스트 색상
-                    }
-                }
-            }
     }
     
     // 알람 저장 함수
