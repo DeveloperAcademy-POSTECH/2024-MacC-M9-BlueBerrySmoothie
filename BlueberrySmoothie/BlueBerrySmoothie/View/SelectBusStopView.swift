@@ -18,6 +18,7 @@ struct SelectBusStopView: View {
     @EnvironmentObject var busStopViewModel: BusStopViewModel
     @State private var stop: String = ""
     @State private var updowncdselection: Int = 1
+    @Binding var isFirstViewActive: Bool
 
     var body: some View {
 
@@ -132,7 +133,8 @@ struct SelectBusStopView: View {
                      ForEach(busStopViewModel.busStopList, id: \.self) { busstop in
                          Button(action: {
                              storeBusStop(busStop: busstop)
-                             dismiss()
+//                             dismiss()
+                             isFirstViewActive = false
                          }) {
                              VStack {
                                  Spacer()
@@ -165,6 +167,7 @@ struct SelectBusStopView: View {
          }
          .padding(.horizontal, 20)
          .navigationTitle("정류장 선택")
+         .navigationBarBackButtonHidden(true)
          .task {
              await busStopViewModel.getBusStopData(cityCode: city.citycode, routeId: bus.routeid)
          }
