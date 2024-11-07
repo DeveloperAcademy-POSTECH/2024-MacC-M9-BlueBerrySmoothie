@@ -81,6 +81,6 @@ struct UsingAlertView: View {
             }
         }
         .navigationTitle("출근하기")
-        .background(Color.black)
+//        .background(Color.black)
     }
 }
