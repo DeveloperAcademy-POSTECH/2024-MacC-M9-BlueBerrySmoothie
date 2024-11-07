@@ -14,24 +14,21 @@ import SwiftData
 
 class NotificationManager: NSObject, CLLocationManagerDelegate, ObservableObject, UNUserNotificationCenterDelegate {
     static let instance = NotificationManager() //Singleton
-    
     @Published var notificationReceived = false // 알림 수신 상태
-    
-//    private let locationManager = CLLocationManager()
     var locationManager = LocationManager.instance
-
+    
     
     // 새로운 초기화 메서드 추가
-        init(locationManager: LocationManager) {
-            super.init()
-            self.locationManager = locationManager
-            UNUserNotificationCenter.current().delegate = self
-        }
+    init(locationManager: LocationManager) {
+        super.init()
+        self.locationManager = locationManager
+        UNUserNotificationCenter.current().delegate = self
+    }
     
     override init() {
         super.init()
-//        locationManager.delegate = self
-//        locationManager.requestAlwaysAuthorization()
+        //        locationManager.delegate = self
+        //        locationManager.requestAlwaysAuthorization()
         UNUserNotificationCenter.current().delegate = self // Set the delegate for notification handling
     }
     
@@ -49,11 +46,9 @@ class NotificationManager: NSObject, CLLocationManagerDelegate, ObservableObject
     }
     
     // 타이머 기반 notification
-    func scheduleTestNotification(for alert: Alert) {
+    func scheduleTestNotification(for busAlert: BusAlert) {
         let content = UNMutableNotificationContent()
-//        content.title = "알람이 울립니다"
-//        content.body = "10초 뒤로 설정한 알람입니다."
-        content.title = "\(alert.busStopName) \(alert.alertStopsBefore)정거장 전입니다."
+        content.title = "\(busAlert.arrivalBusStopNm) \(busAlert.alertBusStop) 정거장 전입니다."
         content.subtitle = "일어나서 내릴 준비를 해야해요!"
         content.sound = .defaultCritical
         
@@ -70,23 +65,24 @@ class NotificationManager: NSObject, CLLocationManagerDelegate, ObservableObject
         }
     }
     
-    func requestLocationNotification(for alert: Alert) {
-            let content = UNMutableNotificationContent()
-            content.title = "\(alert.busStopName) \(alert.alertStopsBefore)정거장 전입니다."
-            content.subtitle = "일어나서 내릴 준비를 해야해요!"
-            content.sound = .default
-            
-            let center = CLLocationCoordinate2D(latitude: alert.busStopGpsX, longitude: alert.busStopGpsY)
-            let region = CLCircularRegion(center: center, radius: 4.0, identifier: "POIRegion")
-            region.notifyOnEntry = true // 설정한 지역 구간에 들어왔을 때
-            region.notifyOnExit = false // 설정한 지역 구간을 나갈 때
+    func requestLocationNotification(for busAlert: BusAlert, for busStopLocal: BusStopLocal) {
+        // 고유한 identifier 생성 (예: 알림의 ID)
+        let identifier = "\(busAlert.id)-\(busStopLocal.id)"
         
-//        locationManager.startMonitoring(for: region)
+        let content = UNMutableNotificationContent()
+        content.title = "\(busAlert.arrivalBusStopNm) \(busAlert.alertBusStop) 정거장 전입니다."
+        content.subtitle = "일어나서 내릴 준비를 해야해요!"
+        content.sound = .default
         
+        let center = CLLocationCoordinate2D(latitude: busStopLocal.gpslati, longitude: busStopLocal.gpslong)
+        let region = CLCircularRegion(center: center, radius: 4.0, identifier: "POIRegion")
+        region.notifyOnEntry = true // 설정한 지역 구간에 들어왔을 때
+        region.notifyOnExit = false // 설정한 지역 구간을 나갈 때
+                
         let trigger = UNLocationNotificationTrigger(region: region, repeats: true)
         
         let request = UNNotificationRequest(
-            identifier: UUID().uuidString,
+            identifier: identifier,
             content: content,
             trigger: trigger)
         
@@ -100,10 +96,18 @@ class NotificationManager: NSObject, CLLocationManagerDelegate, ObservableObject
         
     }
     
+    /// 특정 알림을 비활성화하는 메서드
+        func cancelLocationNotification(for busAlert: BusAlert, for busStopLocal: BusStopLocal) {
+            let identifier = "\(busAlert.id)-\(busStopLocal.id)"
+            UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [identifier])
+            print("Location notification canceled for \(identifier)")
+        }
+    
+    
     // Foreground(앱 켜진 상태)에서도 알림 오는 설정
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         print("Foreground 상태에서 알림 수신") // Foreground 상태에서 알림 수신 확인
-//        HapticHelper.shared.impact(style: .medium)
+        //        HapticHelper.shared.impact(style: .medium)
         notificationReceived = true // 알림 수신 상태 업데이트
         locationManager.stopLocationUpdates()
         completionHandler([.list, .sound, .banner])

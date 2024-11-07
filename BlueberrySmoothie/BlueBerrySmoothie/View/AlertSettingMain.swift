@@ -245,6 +245,34 @@ struct AlertSettingMain: View {
             return
         }
         
+        var selectedAlertBusStop: BusStop?
+        
+        if busStopAlert!.alertBusStop == 1 {
+            guard let alertBusStop = busStopAlert?.firstBeforeBusStop else {
+                print("다시")
+                return
+            }
+            selectedAlertBusStop = alertBusStop
+        } else if busStopAlert!.alertBusStop == 2 {
+            guard let alertBusStop = busStopAlert?.secondBeforeBusStop else {
+                print("다시")
+                return
+            }
+            selectedAlertBusStop = alertBusStop
+        } else {
+            guard let alertBusStop = busStopAlert?.thirdBeforeBusStop else {
+                print("다시")
+                return
+            }
+            selectedAlertBusStop = alertBusStop
+        }
+        
+        // Ensure selectedAlertBusStop is non-nil before proceeding
+            guard let finalAlertBusStop = selectedAlertBusStop else {
+                print("알람 정류장 선택 오류")
+                return
+            }
+                
         // 알람 객체 생성
         let newAlert = BusAlert(id: UUID().uuidString,
                                 cityCode: 21, // 예시로 cityCode 설정
@@ -253,6 +281,8 @@ struct AlertSettingMain: View {
                                 arrivalBusStopID: selectedBusStop.nodeid, // 선택된 정류장의 ID
                                 arrivalBusStopNm: selectedBusStop.nodenm,
                                 alertBusStop: busStopAlert!.alertBusStop, // 사용자가 설정한 알람 줄 정류장
+                                alertBusStopID: finalAlertBusStop.nodeid,
+                                alertBusStopNm: finalAlertBusStop.nodenm ,
                                 alertLabel: label, // 사용자가 입력한 알람 레이블
                                 alertSound: true, // 알람 사운드 활성화
                                 alertHaptic: true, // 해프틱 피드백 활성화

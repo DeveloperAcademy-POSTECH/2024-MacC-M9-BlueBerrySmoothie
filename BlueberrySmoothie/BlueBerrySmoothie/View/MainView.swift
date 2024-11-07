@@ -13,7 +13,7 @@ struct MainView: View {
     @Query var busStopLocal: [BusStopLocal]
     @State private var selectedAlert: BusAlert? // State to store the selected BusAlert
     @State private var isUsingAlertActive: Bool = false // Controls navigation to UsingAlertView
-    
+    let notificationManager = NotificationManager.instance
     
     var body: some View {
         NavigationView {
@@ -22,29 +22,46 @@ struct MainView: View {
                 
                 Spacer()
                 
-                NavigationLink {
-                    //여기 수정하기... ㅠㅠ busAlert에 selectedAlert 넣는 방법!
-                    selectedAlert.map { UsingAlertView(busStops: busStopLocal, busAlert: $0)}
-                } label: {
-                    ActionButton()
-                }.onTapGesture {
-                    isUsingAlertActive = true // Activate navigation
-                    print(selectedAlert?.alertLabel)
-                }
+                //데이지데이지데이지데이지데이지데이지
+                let alertBusStopLocal = busStopLocal.filter{$0.nodeid == selectedAlert?.alertBusStopID}.first
+                let arrivalBusStopLocal = busStopLocal.filter{$0.nodeid == selectedAlert?.arrivalBusStopID}.first
                 
-//                Button(action: {
-//                    NavigationLink(ActionButton()){
-//                        UsingAlertView(busStops: busStopLocal, busAlert: <#T##BusAlert#>, isAlertEnabled: <#T##Bool#>)
-//                    }
-//                    guard selectedAlert != nil else {
-//                        print("No alert selected")
-//                        return
-//                    }
+                NavigationLink(
+                    destination: selectedAlert.flatMap { alert in
+                        if let alertBusStopLocal = alertBusStopLocal,
+                           let arrivalBusStopLocal = arrivalBusStopLocal {
+                            return UsingAlertView(busAlert: alert, alertBusStopLocal: alertBusStopLocal, arrivalBusStopLocal: arrivalBusStopLocal)
+                        } else {
+                            return nil
+                        }
+                    },
+                    isActive: $isUsingAlertActive
+                ) {
+                    EmptyView()
+                }
+
+                
+                // 시작하기 버튼
+                Button(action: {
+                    // 선택된 alert와 해당 busStop들을 안전하게 언래핑합니다.
+                    guard let selectedAlert = selectedAlert,
+                          let alertBusStopLocal = alertBusStopLocal,
+                          let arrivalBusStopLocal = arrivalBusStopLocal else {
+                        print("선택된 알람 또는 버스 정류장이 설정되지 않았습니다.")
+                        return
+                    }
                     
-//                }, label: {
-//                    ActionButton()
-//                })
-//                .disabled(selectedAlert == nil) // Disable button if no alert is selected
+                    isUsingAlertActive = true // Activate navigation
+                    print(selectedAlert.alertLabel)
+                    notificationManager.requestAuthorization()
+                    notificationManager.scheduleTestNotification(for: selectedAlert)
+                    notificationManager.requestLocationNotification(for: selectedAlert, for: alertBusStopLocal)
+                    notificationManager.requestLocationNotification(for: selectedAlert, for: arrivalBusStopLocal)
+                    isUsingAlertActive = true
+                }, label: {
+                    ActionButton()
+                })
+                
             }
             .padding(20)
             .navigationTitle("버스 알람: 핫!챠")
@@ -59,22 +76,20 @@ struct MainView: View {
             }
             
         }
-        .onAppear(){
-            print(busAlerts)
-        }
     }
     
     private func alertListView() -> some View {
-            ScrollView {
-                ForEach(busAlerts, id: \.id) { alert in
-                    SavedBus(busAlert: alert, isSelected: selectedAlert?.id == alert.id)
-                        .onTapGesture {
-                            selectedAlert = alert // Set the selected alert
-                        }
-                        .padding(.bottom, 8)
-                }
+        ScrollView {
+            ForEach(busAlerts, id: \.id) { alert in
+                SavedBus(busAlert: alert, isSelected: selectedAlert?.id == alert.id)
+                    .onTapGesture {
+                        selectedAlert = alert // Set the selected alert
+                        print(selectedAlert?.alertLabel)
+                    }
+                    .padding(.bottom, 8)
             }
         }
+    }
 }
 
 

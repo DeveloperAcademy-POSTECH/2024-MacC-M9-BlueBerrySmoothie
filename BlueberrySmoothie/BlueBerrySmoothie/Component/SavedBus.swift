@@ -61,8 +61,7 @@ struct SavedBus: View {
                         .frame(width: 2, height: 12)
                         .background(Color.gray5)
                     
-
-                    Text(busAlert.arrivalBusStopNm)
+                    Text(busAlert.alertBusStopNm)
                         .font(.regular14)
                         .foregroundColor(Color.gray3)
 
