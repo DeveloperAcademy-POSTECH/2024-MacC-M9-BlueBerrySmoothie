@@ -117,6 +117,7 @@ class NotificationManager: NSObject, CLLocationManagerDelegate, ObservableObject
     // 사용자가 Notification을 탭하면 호출되는 메서드
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         print("알림 수신")
+//        hapticManager.playPattern()
         notificationReceived = true // 알림 수신 상태 업데이트
         locationManager.stopLocationUpdates()
         completionHandler()

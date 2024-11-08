@@ -13,15 +13,19 @@ struct AlertSettingMain: View {
     @Environment(\.modelContext) private var modelContext // ModelContext를 가져옴
     @Environment(\.dismiss) private var dismiss
     @Query var busStopLocal: [BusStopLocal]
-    // 파라미터로 `BusAlert`를 받아 초기화할 때 사용
-    var busAlert: BusAlert?
+    var busAlert: BusAlert? // 편집을 위한 `busAlert` 매개변수 추가
     
     // 초기화 데이터들
     @State private var label: String = ""
     @State private var selectedStation: String = "정류장 수"
     @State private var busStopAlert: BusStopAlert? // 사용자 선택 사항
-    
     @State private var showSheet: Bool = false
+    @State private var selectedBus: Bus? // 선택된 버스를 저장할 변수
+    @State private var selectedArrivalBusStop: BusStop? // 선택된 도착 정류장
+    
+    init(busAlert: BusAlert? = nil) {
+        self.busAlert = busAlert
+    }
     
     var body: some View {
         NavigationStack {
@@ -210,7 +214,20 @@ struct AlertSettingMain: View {
             }
             .padding(20)
             .onAppear {
-                loadData() // 저장된 데이터 로드
+                //                loadData() // 저장된 데이터 로드
+                if let busAlert = busAlert {
+                    // `busAlert` 데이터로 초기 상태 설정
+                    label = busAlert.alertLabel
+                    selectedStation = "\(busAlert.alertBusStop) 정류장 전 알람"
+                    
+                    busStopAlert = BusStopAlert(
+                        cityCode: busAlert.cityCode,
+                        bus: Bus(routeno: busAlert.busNo, routeid: busAlert.routeid),
+                        allBusStop: [],
+                        arrivalBusStop: BusStop(nodeid: busAlert.arrivalBusStopID, nodenm: busAlert.arrivalBusStopNm),
+                        alertBusStop: busAlert.alertBusStop // 필요에 따라 전체 정류장 데이터 설정
+                    )
+                }
             }
             .overlay {
                 if showSheet {
@@ -224,41 +241,56 @@ struct AlertSettingMain: View {
                     selectedStation = "정류장 수"
                 }
             }
-        }
-        .toolbar {
-            ToolbarItem {
-                Button(action: {
-                    if selectedStation != "정류장 수" && label != "" {
-                        saveAlert()
-                        saveBusstop()
-                        dismiss()
+            .toolbar {
+                ToolbarItem {
+                    Button(action: {
+                        if selectedStation != "정류장 수" && label != "" {
+                            //                            saveAlert()
+                            saveOrUpdateAlert()
+                            saveBusstop()
+                            dismiss()
+                        }
+                    }) {
+                        Text("저장")
+                            .font(.regular16)
+                            .foregroundColor(Color(red: 104 / 255, green: 144 / 255, blue: 255 / 255))
                     }
-                }) {
-                    Text("저장")
-                        .font(.regular16)
-                        .foregroundColor(Color(red: 104 / 255, green: 144 / 255, blue: 255 / 255))
                 }
             }
         }
     }
     
     // 저장된 `BusAlert` 데이터를 불러와 UI에 반영하는 메서드
-    private func loadData() {
-        guard let busAlert = busAlert else { return }
-        
-        // 기본적으로 `BusAlert` 데이터를 UI 상태에 반영
-        label = busAlert.alertLabel
-        selectedStation = "\(busAlert.alertBusStop) 정류장 전 알람"
-        
-        // `BusStopAlert`로 변환하여 사용
-//        busStopAlert = BusStopAlert(
-//            bus: Bus(routeid: busAlert.routeid, routeno: busAlert.busNo),
-//            arrivalBusStop: BusStop(
-//                nodeid: busAlert.arrivalBusStopID,
-//                nodenm: busAlert.arrivalBusStopNm
-//            ),
-//            alertBusStop: busAlert.alertBusStop
-//        )
+    //    private func loadData() {
+    //        guard let busAlert = busAlert else { return }
+    //
+    //        // 기본적으로 `BusAlert` 데이터를 UI 상태에 반영
+    //        label = busAlert.alertLabel
+    //        selectedStation = "\(busAlert.alertBusStop) 정류장 전 알람"
+    //
+    //        // `BusStopAlert`로 변환하여 사용
+    //        busStopAlert = BusStopAlert(
+    //            cityCode: busAlert.cityCode, bus: Bus(routeid: busAlert.routeid, routeno: busAlert.busNo),
+    //            arrivalBusStop: BusStop(
+    //                nodeid: busAlert.arrivalBusStopID,
+    //                nodenm: busAlert.arrivalBusStopNm
+    //            ),
+    //            alertBusStop: busAlert.alertBusStop, // cityCode 추가
+    //                    allBusStop: [] // allBusStop은 빈 배열로 초기화하거나 필요한 값으로 설정
+    //        )
+    //    }
+    
+    private func saveOrUpdateAlert() {
+        if let busAlert = busAlert {
+            // 기존 `busAlert` 업데이트
+            busAlert.alertLabel = label
+            busAlert.alertBusStop = Int(selectedStation) ?? busAlert.alertBusStop
+            // 추가 필드 업데이트
+            print("알람이 업데이트되었습니다.")
+        } else {
+            // 새 알림을 저장 (편집 모드가 아닌 경우)
+            saveAlert()
+        }
     }
     
     // 알람 저장 함수

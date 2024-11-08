@@ -9,13 +9,12 @@ import SwiftUI
 import SwiftData
 
 struct MainView: View {
-    @Query var busAlerts: [BusAlert]
+    @Query var busAlerts: [BusAlert] // 알람 데이터를 바인딩
     @Query var busStopLocal: [BusStopLocal]
     @State private var selectedAlert: BusAlert? // State to store the selected BusAlert
     @State private var isUsingAlertActive: Bool = false // Controls navigation to UsingAlertView
     
     @Environment(\.modelContext) private var context // SwiftData의 ModelContext 가져오기
-
     let notificationManager = NotificationManager.instance
     
     private func deleteBusAlert(_ busAlert: BusAlert) {

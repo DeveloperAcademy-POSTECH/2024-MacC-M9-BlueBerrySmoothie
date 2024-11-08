@@ -10,7 +10,7 @@
 //struct InputViewDaisy: View {
 //    
 //    //알람을 수정할 때 편집할 Alert 데이터
-//    var alert: Alert? = nil
+//    var editAlert: Alert? = nil
 //    
 //    @State private var newBusNumber: String = ""
 //    @State private var newBusStopName: String = ""
@@ -36,7 +36,7 @@
 //    
 //    
 //    init(alert: Alert? = nil) {
-//        self.alert = alert
+//        self.editAlert = alert
 //        //알람 데이터를 편집모드로 불러온 경우 해당 데이터로 초기화
 //        if let alert = alert {
 //            _newBusNumber = State(initialValue: alert.busNumber)
@@ -47,7 +47,7 @@
 //    
 //    func saveAlert() {
 //        // 기존 알람이 있으면 수정, 없으면 새로 추가
-//        if let alert = alert {
+//        if let alert = editAlert {
 //            alert.busNumber = newBusNumber
 //            alert.busStopName = newBusStopName
 //            alert.alertStopsBefore = newAlertStopsBefore
