@@ -71,7 +71,7 @@ struct MainView: View {
     }
     
     private func alertListView() -> some View {
-        ScrollView(showsIndicators: false) {
+        ScrollView {
             ForEach(busAlerts, id: \.id) { alert in
                 SavedBus(busAlert: alert, isSelected: selectedAlert?.id == alert.id)
                     .onTapGesture {
