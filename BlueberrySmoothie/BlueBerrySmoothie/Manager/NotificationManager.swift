@@ -16,6 +16,7 @@ class NotificationManager: NSObject, CLLocationManagerDelegate, ObservableObject
     static let instance = NotificationManager() //Singleton
     @Published var notificationReceived = false // 알림 수신 상태
     var locationManager = LocationManager.instance
+    let hapticManager = HapticManager()
     
     
     // 새로운 초기화 메서드 추가
@@ -107,7 +108,7 @@ class NotificationManager: NSObject, CLLocationManagerDelegate, ObservableObject
     // Foreground(앱 켜진 상태)에서도 알림 오는 설정
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         print("Foreground 상태에서 알림 수신") // Foreground 상태에서 알림 수신 확인
-        //        HapticHelper.shared.impact(style: .medium)
+        hapticManager.playPattern()
         notificationReceived = true // 알림 수신 상태 업데이트
         locationManager.stopLocationUpdates()
         completionHandler([.list, .sound, .banner])

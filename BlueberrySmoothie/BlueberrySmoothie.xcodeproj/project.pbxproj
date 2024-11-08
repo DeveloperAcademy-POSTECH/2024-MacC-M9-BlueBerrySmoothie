@@ -23,6 +23,7 @@
 		12D2B6D12CD3B104005CF771 /* NetworkHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D2B6D02CD3B104005CF771 /* NetworkHelper.swift */; };
 		12D2B6D42CD3F5BE005CF771 /* getAPIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D2B6D32CD3F5BD005CF771 /* getAPIKey.swift */; };
 		12D2B6D82CD63D6A005CF771 /* AlertModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D2B6D72CD63D6A005CF771 /* AlertModel.swift */; };
+		8B0860F72CDDA237007C109A /* HapticManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0860F62CDDA237007C109A /* HapticManager.swift */; };
 		8BF2EFA42CD3A78A008A6644 /* MainViewDaisy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF2EFA32CD3A78A008A6644 /* MainViewDaisy.swift */; };
 		8BF2EFA62CD3A7B0008A6644 /* InputViewDaisy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF2EFA52CD3A7B0008A6644 /* InputViewDaisy.swift */; };
 		8BF2EFA82CD3A7F2008A6644 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF2EFA72CD3A7F2008A6644 /* Alert.swift */; };
@@ -77,6 +78,7 @@
 		12D2B6D22CD3F50F005CF771 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		12D2B6D32CD3F5BD005CF771 /* getAPIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getAPIKey.swift; sourceTree = "<group>"; };
 		12D2B6D72CD63D6A005CF771 /* AlertModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertModel.swift; sourceTree = "<group>"; };
+		8B0860F62CDDA237007C109A /* HapticManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticManager.swift; sourceTree = "<group>"; };
 		8BF2EFA32CD3A78A008A6644 /* MainViewDaisy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewDaisy.swift; sourceTree = "<group>"; };
 		8BF2EFA52CD3A7B0008A6644 /* InputViewDaisy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputViewDaisy.swift; sourceTree = "<group>"; };
 		8BF2EFA72CD3A7F2008A6644 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
@@ -236,6 +238,7 @@
 				9DEA52532CD4D5B500A3AE68 /* FetchAllBusData.swift */,
 				9DEA52512CD4D57A00A3AE68 /* filterBuses.swift */,
 				9DEA524F2CD4D56400A3AE68 /* busColor.swift */,
+				8B0860F62CDDA237007C109A /* HapticManager.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -356,6 +359,7 @@
 				1232B3E12CD1D46500C48414 /* DummyHelper.swift in Sources */,
 				8BF2EFA42CD3A78A008A6644 /* MainViewDaisy.swift in Sources */,
 				8BF2EFB72CD9B34A008A6644 /* EndViewDaisy.swift in Sources */,
+				8B0860F72CDDA237007C109A /* HapticManager.swift in Sources */,
 				8BF2EFB52CD92BE0008A6644 /* HapticHelper.swift in Sources */,
 				8BF2EFAA2CD3AA2B008A6644 /* NotificationManager.swift in Sources */,
 				8BF2EFA62CD3A7B0008A6644 /* InputViewDaisy.swift in Sources */,

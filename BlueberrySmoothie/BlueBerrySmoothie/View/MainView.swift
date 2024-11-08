@@ -13,7 +13,18 @@ struct MainView: View {
     @Query var busStopLocal: [BusStopLocal]
     @State private var selectedAlert: BusAlert? // State to store the selected BusAlert
     @State private var isUsingAlertActive: Bool = false // Controls navigation to UsingAlertView
+    
+    @Environment(\.modelContext) private var context // SwiftData의 ModelContext 가져오기
+
     let notificationManager = NotificationManager.instance
+    
+    private func deleteBusAlert(_ busAlert: BusAlert) {
+            // SwiftData의 ModelContext를 통해 객체 삭제
+            context.delete(busAlert)
+            
+            // SwiftData는 별도의 save() 없이 자동으로 변경 사항을 처리합니다.
+            print("Bus alert \(busAlert.alertLabel) deleted.")
+        }
     
     var body: some View {
         NavigationView {
@@ -81,7 +92,10 @@ struct MainView: View {
     private func alertListView() -> some View {
         ScrollView {
             ForEach(busAlerts, id: \.id) { alert in
-                SavedBus(busAlert: alert, isSelected: selectedAlert?.id == alert.id)
+//                SavedBus(busAlert: alert, isSelected: selectedAlert?.id == alert.id)
+                SavedBus(busAlert: alert, isSelected: selectedAlert?.id == alert.id, onDelete: {
+                                    deleteBusAlert(alert) // 삭제 동작 전달
+                                })
                     .onTapGesture {
                         selectedAlert = alert // Set the selected alert
                         print(selectedAlert?.alertLabel)

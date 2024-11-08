@@ -11,15 +11,17 @@ import SwiftData
 // AlertSettingMain 뷰
 struct AlertSettingMain: View {
     @Environment(\.modelContext) private var modelContext // ModelContext를 가져옴
-    
     @Environment(\.dismiss) private var dismiss
-    
     @Query var busStopLocal: [BusStopLocal]
-    @State private var label: String = ""
-    @State private var showSheet: Bool = false
-    @State private var selectedStation: String = "정류장 수"
+    // 파라미터로 `BusAlert`를 받아 초기화할 때 사용
+    var busAlert: BusAlert?
     
-    @State private var busStopAlert: BusStopAlert?
+    // 초기화 데이터들
+    @State private var label: String = ""
+    @State private var selectedStation: String = "정류장 수"
+    @State private var busStopAlert: BusStopAlert? // 사용자 선택 사항
+    
+    @State private var showSheet: Bool = false
     
     var body: some View {
         NavigationStack {
@@ -207,6 +209,9 @@ struct AlertSettingMain: View {
                 Spacer()
             }
             .padding(20)
+            .onAppear {
+                loadData() // 저장된 데이터 로드
+            }
             .overlay {
                 if showSheet {
                     StationPickerModal(isPresented: $showSheet, selectedStation: $selectedStation, alert: $busStopAlert)
@@ -235,6 +240,25 @@ struct AlertSettingMain: View {
                 }
             }
         }
+    }
+    
+    // 저장된 `BusAlert` 데이터를 불러와 UI에 반영하는 메서드
+    private func loadData() {
+        guard let busAlert = busAlert else { return }
+        
+        // 기본적으로 `BusAlert` 데이터를 UI 상태에 반영
+        label = busAlert.alertLabel
+        selectedStation = "\(busAlert.alertBusStop) 정류장 전 알람"
+        
+        // `BusStopAlert`로 변환하여 사용
+//        busStopAlert = BusStopAlert(
+//            bus: Bus(routeid: busAlert.routeid, routeno: busAlert.busNo),
+//            arrivalBusStop: BusStop(
+//                nodeid: busAlert.arrivalBusStopID,
+//                nodenm: busAlert.arrivalBusStopNm
+//            ),
+//            alertBusStop: busAlert.alertBusStop
+//        )
     }
     
     // 알람 저장 함수
@@ -268,11 +292,11 @@ struct AlertSettingMain: View {
         }
         
         // Ensure selectedAlertBusStop is non-nil before proceeding
-            guard let finalAlertBusStop = selectedAlertBusStop else {
-                print("알람 정류장 선택 오류")
-                return
-            }
-                
+        guard let finalAlertBusStop = selectedAlertBusStop else {
+            print("알람 정류장 선택 오류")
+            return
+        }
+        
         // 알람 객체 생성
         let newAlert = BusAlert(id: UUID().uuidString,
                                 cityCode: 21, // 예시로 cityCode 설정

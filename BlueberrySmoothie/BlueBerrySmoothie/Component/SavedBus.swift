@@ -10,6 +10,10 @@ import SwiftUI
 struct SavedBus: View {
     let busAlert: BusAlert
     var isSelected: Bool = false
+    var onDelete: () -> Void // 삭제 핸들러
+    @State private var alertShowing = false
+    @State private var isEditing = false
+    
     
     var body: some View {
         ZStack {
@@ -23,24 +27,50 @@ struct SavedBus: View {
             VStack {
                 HStack(alignment: .bottom) {
                     Text(busAlert.alertLabel)
-                            .font(.regular12)
+                        .font(.regular12)
                         .foregroundColor(Color.brand)
                     Spacer()
-                    Button(action: {
+                    Menu {
+                        Button(action: {
+                            // 수정
+                            isEditing = true
+                        }, label: {
+                            Label("수정", systemImage: "pencil")
+                        })
+//                        .sheet(isPresented: $isEditing) {
+//                            AlertSettingMain()
+//                        }
                         
-                    }, label: {
+                        Button(action: {
+                            // 삭제
+                            alertShowing = true
+                        }, label: {
+                            Label("삭제", systemImage: "trash")
+                                .foregroundStyle(.red)
+                        })
+//                        .alert("알람 삭제", isPresented: $alertShowing) {
+//                            Button("삭제", role: .destructive) {
+//                                onDelete()
+//                            }
+//                            Button("취소", role: .cancel){}
+//                        } message: {
+//                            Text("알람을 삭제하시겠습니까?")
+//                        }
+                        
+                    } label: {
                         Image(systemName: "ellipsis")
-                        .font(.regular20)
-                        .foregroundColor(Color.gray4)
-                        .padding(.vertical, 20)
-                    })
+                            .font(.regular20)
+                            .foregroundColor(Color.gray4)
+                            .padding(.vertical, 20)
+                    }
+                    
                 }
                 HStack {
                     Text(busAlert.busNo)
                         .font(.regular20)
                     Text(busAlert.arrivalBusStopNm)
                         .font(.regular20)
-
+                    
                     Spacer()
                 }
                 .foregroundColor(Color.black)
@@ -64,7 +94,7 @@ struct SavedBus: View {
                     Text(busAlert.alertBusStopNm)
                         .font(.regular14)
                         .foregroundColor(Color.gray3)
-
+                    
                     Spacer()
                 }
                 
@@ -74,6 +104,18 @@ struct SavedBus: View {
             .padding(.bottom, 20)
         }
         .fixedSize(horizontal: false, vertical: true)
+        .sheet(isPresented: $isEditing) {
+//            AlertSettingMain()
+            AlertSettingMain(busAlert: busAlert) // `busAlert` 데이터 전달
+        }
+        .alert("알람 삭제", isPresented: $alertShowing) {
+            Button("삭제", role: .destructive) {
+                onDelete()
+            }
+            Button("취소", role: .cancel){}
+        } message: {
+            Text("알람을 삭제하시겠습니까?")
+        }
     }
 }
 
