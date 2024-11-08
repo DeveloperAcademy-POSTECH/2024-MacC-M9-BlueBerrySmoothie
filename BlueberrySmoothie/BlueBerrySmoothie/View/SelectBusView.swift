@@ -3,8 +3,6 @@ import SwiftUI
 
 struct SelectBusView: View {
     @Binding var busStopAlert: BusStopAlert?
-    @Binding var isFirstViewActive: Bool
-    @State private var isThirdViewActive = false
     
     let city: City = City(citycode: 21, cityname: "부산")
     @State private var allBuses: [Bus] = []
@@ -25,14 +23,14 @@ struct SelectBusView: View {
                             filteredBuses = filterBuses(by: newRouteNo, from: allBuses)
                         }
                     Image(systemName: "magnifyingglass")
-                        .foregroundColor(isTextFieldFocused ? .brand : .gray)
+                        .foregroundColor(isTextFieldFocused ? .blue : .gray)
                 }
                 .padding(.horizontal, 36)
                 .padding(.bottom, -8)
                 .padding(.top, 30)
                 
                 Rectangle()
-                    .foregroundColor(isTextFieldFocused ? .brand : .gray)
+                    .foregroundColor(isTextFieldFocused ? .blue : .gray)
                     .frame(height: 2)
                     .padding(.horizontal, 20)
                 
@@ -44,7 +42,7 @@ struct SelectBusView: View {
                             
                         }) {
                             // 네비게이션 링크: 선택된 버스가 있을 때 SelectBusStopView로 이동
-                            NavigationLink(destination: SelectBusStopView(city: city, bus: bus, busStopAlert: $busStopAlert, isFirstViewActive: $isFirstViewActive), isActive: $isThirdViewActive){
+                            NavigationLink(destination: SelectBusStopView(city: city, bus: bus, busStopAlert: $busStopAlert)){
                                 VStack(alignment: .leading) {
                                     Spacer()
                                     VStack(alignment: .leading) {
@@ -74,7 +72,6 @@ struct SelectBusView: View {
                 isTextFieldFocused = false // 다른 곳 클릭 시 키보드 숨김
             }
             .navigationTitle("버스 검색")
-            .navigationBarBackButtonHidden(true)
             .navigationBarTitleDisplayMode(.inline)
             .onAppear {
                 fetchAllBusData(citycode: city.citycode) { fetchedBuses in
