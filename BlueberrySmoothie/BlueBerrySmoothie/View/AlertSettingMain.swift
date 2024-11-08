@@ -11,6 +11,7 @@ import SwiftData
 // AlertSettingMain 뷰
 struct AlertSettingMain: View {
     @Environment(\.modelContext) private var modelContext // ModelContext를 가져옴
+    @State private var isFirstViewActive = false // 뷰이동
     
     @Environment(\.dismiss) private var dismiss
     
@@ -74,7 +75,7 @@ struct AlertSettingMain: View {
                             Spacer()
                             Spacer()
                             
-                            NavigationLink(destination: SelectBusView( busStopAlert: $busStopAlert)) {  // 선택된 버스를 전달받음
+                            NavigationLink(destination: SelectBusView( busStopAlert: $busStopAlert, isFirstViewActive: $isFirstViewActive), isActive: $isFirstViewActive) {  // 선택된 버스를 전달받음
                                 ZStack {
                                     Rectangle()
                                         .foregroundColor(Color.lightbrand)
