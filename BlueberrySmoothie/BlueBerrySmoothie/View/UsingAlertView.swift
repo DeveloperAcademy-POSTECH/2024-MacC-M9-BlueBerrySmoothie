@@ -119,7 +119,7 @@ struct UsingAlertView: View {
 
                 // EndView로 이동
                 navigateToEndView = true
-                notificationManager.locationManager.stopLocationUpdates()
+//                notificationManager.locationManager.stopLocationUpdates()
             }, label: {
                 Text("종료")
                     .foregroundStyle(.white)

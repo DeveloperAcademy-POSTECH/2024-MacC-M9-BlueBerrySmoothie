@@ -96,7 +96,7 @@ struct MainView: View {
                                     deleteBusAlert(alert) // 삭제 동작 전달
                                 })
                     .onTapGesture {
-                        selectedAlert = alert // Set the selected alert
+                        selectedAlert = alert // Set the selected alert 
                         print(selectedAlert?.alertLabel)
                     }
                     .padding(.bottom, 8)
