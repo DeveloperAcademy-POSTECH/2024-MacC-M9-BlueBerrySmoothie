@@ -1,10 +1,3 @@
-//
-//  UsingAlertView 2.swift
-//  BlueBerrySmoothie
-//
-//  Created by 문재윤 on 11/7/24.
-//
-
 import SwiftUI
 import SwiftData
 
@@ -28,10 +21,11 @@ struct UsingAlertView: View {
     private let refreshTimer = Timer.publish(every: 10, on: .main, in: .common).autoconnect()
     
     var body: some View {
-        ZStack{
+        ZStack {
+            // 기존 콘텐츠 부분
             VStack {
                 VStack {
-                    VStack{
+                    VStack {
                         HStack {
                             Text("\(busAlert.busNo)")
                                 .foregroundColor(Color.gray3)
@@ -43,20 +37,6 @@ struct UsingAlertView: View {
                                 .foregroundColor(Color.gray2)
                                 .font(.regular20)
                             Spacer()
-                            //                        VStack {
-                            //                            if let refreshTime = lastRefreshTime {
-                            //                                Text("마지막 새로고침: \(refreshTime, formatter: dateFormatter)")
-                            //                                    .font(.caption)
-                            //                                    .foregroundColor(.gray)
-                            //                            }
-                            //                            // 새로고침 버튼
-                            //                            Button(action: refreshData) {
-                            //                                Image(systemName: "arrow.clockwise")
-                            //                                    .font(.title3)
-                            //                            }
-                            //                            .disabled(isRefreshing) // 로딩 중에는 비활성화
-                            //                        }
-                            
                         }
                         .padding(.bottom, 26)
                         
@@ -78,24 +58,19 @@ struct UsingAlertView: View {
                                     .foregroundColor(Color.midbrand)
                             }
                             Text("\(busAlert.arrivalBusStopNm)")
-                            //                        Text("\(busAlert.alertBusStopNm)") // n번째 전 정거장 값
                                 .foregroundColor(Color.black)
                                 .font(.medium30)
                             Spacer()
-                            //                        Toggle(isOn: $isAlertEnabled) { }
-                            //                            .toggleStyle(SwitchToggleStyle(tint: .brand))
                         }
-                        
+
                     }
                     .padding(.horizontal, 20)
                     .padding(.top)
                     .padding(.bottom, 28)
                 }
                 .background(Color.lightbrand)
-                
-                
+                   
                 //버스 노선 스크롤뷰
-                
                 ScrollView(showsIndicators: false) {
                     VStack(alignment: .leading, spacing: 0) {
                         if let closestBus = viewModel.closestBusLocation {
@@ -158,6 +133,7 @@ struct UsingAlertView: View {
                                 .font(.regular16)
                         }
                         Spacer()
+
                     }
                     .background(.clear)
                 }
@@ -174,6 +150,25 @@ struct UsingAlertView: View {
             .onReceive(refreshTimer) { _ in
                 refreshData()
             }
+
+// 새로고침 버튼을 화면 오른쪽 아래에 배치
+            VStack {
+                Spacer() // 화면 상단에 공간을 줘서 버튼을 하단으로 밀어냄
+                HStack {
+                    Spacer() // 오른쪽에 공간을 두어 버튼을 오른쪽 끝에 오도록 함
+                    Button(action: refreshData) {
+                        Image(systemName: "arrow.clockwise")
+                            .font(.title3)
+                            .padding()
+                            .background(Color.black) // 배경색을 검정색으로 설정
+                            .clipShape(Circle())
+                            .foregroundColor(.white) // 화살표 색상 유지 (하얀색)
+                    }
+                    .disabled(isRefreshing) // 로딩 중에는 비활성화
+                    .padding() // 버튼과 화면 가장자리를 분리
+                }
+            }
+            .padding()
             
             // 알람종료 오버레이 뷰
             if notificationManager.notificationReceived {
@@ -185,8 +180,6 @@ struct UsingAlertView: View {
             NavigationLink(destination: EndViewDaisy(busAlert: busAlert), isActive: $navigateToEndView) {
                 EmptyView()
             }
-            
-            
         }
     }
     // 새로고침 함수
