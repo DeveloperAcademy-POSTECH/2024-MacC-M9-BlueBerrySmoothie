@@ -4,11 +4,15 @@ import SwiftUI
 struct SelectBusView: View {
     @Binding var busStopAlert: BusStopAlert?
     
+    
     let city: City = City(citycode: 21, cityname: "부산")
     @State private var allBuses: [Bus] = []
     @State private var filteredBuses: [Bus] = []
     @State private var routeNo: String = ""
     @FocusState private var isTextFieldFocused: Bool
+    @Environment(\.dismiss) private var dismiss
+    @Binding var showSelectBusSheet: Bool
+
     
     var body: some View {
         NavigationStack {
@@ -23,14 +27,14 @@ struct SelectBusView: View {
                             filteredBuses = filterBuses(by: newRouteNo, from: allBuses)
                         }
                     Image(systemName: "magnifyingglass")
-                        .foregroundColor(isTextFieldFocused ? .blue : .gray)
+                        .foregroundColor(isTextFieldFocused ? .brand : .gray)
                 }
                 .padding(.horizontal, 36)
                 .padding(.bottom, -8)
                 .padding(.top, 30)
                 
                 Rectangle()
-                    .foregroundColor(isTextFieldFocused ? .blue : .gray)
+                    .foregroundColor(isTextFieldFocused ? .brand : .gray)
                     .frame(height: 2)
                     .padding(.horizontal, 20)
                 
@@ -42,7 +46,7 @@ struct SelectBusView: View {
                             
                         }) {
                             // 네비게이션 링크: 선택된 버스가 있을 때 SelectBusStopView로 이동
-                            NavigationLink(destination: SelectBusStopView(city: city, bus: bus, busStopAlert: $busStopAlert)){
+                            NavigationLink(destination: SelectBusStopView(city: city, bus: bus, busStopAlert: $busStopAlert, showSelectBusSheet: $showSelectBusSheet)){
                                 VStack(alignment: .leading) {
                                     Spacer()
                                     VStack(alignment: .leading) {
@@ -73,11 +77,25 @@ struct SelectBusView: View {
             }
             .navigationTitle("버스 검색")
             .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                
+                // 닫기 버튼
+                   ToolbarItem(placement: .navigationBarLeading) {
+                       Button(action: {
+                           dismiss()  // 현재 화면을 닫는 동작
+                       }) {
+                           Text("닫기")
+                               .font(.regular16)
+                               .foregroundColor(Color.brand) // 원하는 색상으로 변경 가능
+                       }
+                   }
+            }
             .onAppear {
                 fetchAllBusData(citycode: city.citycode) { fetchedBuses in
                     self.allBuses = fetchedBuses
                     self.filteredBuses = fetchedBuses
                 }
+                showSelectBusSheet = true
             }
         }
     }

@@ -9,6 +9,7 @@ import SwiftUI
 import SwiftData
 
 struct MainView: View {
+    @State private var showSetting: Bool = false 
     @Query var busAlerts: [BusAlert] // 알람 데이터를 바인딩
     @Query var busStopLocal: [BusStopLocal]
     @State private var selectedAlert: BusAlert? // State to store the selected BusAlert
@@ -64,7 +65,6 @@ struct MainView: View {
                         print("선택된 알람 또는 버스 정류장이 설정되지 않았습니다.")
                         return
                     }
-                    
                     isUsingAlertActive = true // Activate navigation
                     print(selectedAlert.alertLabel)
                     notificationManager.requestAuthorization()
@@ -79,12 +79,19 @@ struct MainView: View {
             .padding(20)
             .navigationTitle("버스 알람: 핫!챠")
             .toolbar {
-                ToolbarItem {
-                    NavigationLink("추가") {
-                        AlertSettingMain(isEditing: false)
-                    }
-                  .font(.medium16)
-                        .foregroundColor(Color.brand)
+                 ToolbarItem(placement: .navigationBarTrailing) { // 위치를 명확히 지정
+                        Button(action: {
+                            showSetting = true // sheet 표시 상태를 true로 설정
+                        }) {
+                            Text("추가")
+                                .font(.system(size: 16, weight: .medium))
+                                .foregroundColor(Color.brand)
+                        }
+                        .sheet(isPresented: $showSetting) {
+                            NavigationView {
+                                AlertSettingMain(showSetting: $showSetting)
+                            }
+                        }
                 }
             }
             .background(Color.white)
