@@ -1,5 +1,5 @@
 //
-//  UsingAlertView 2.swift
+//  UsingAlertView.swift
 //  BlueBerrySmoothie
 //
 //  Created by 문재윤 on 11/7/24.
@@ -19,113 +19,122 @@ struct UsingAlertView: View {
     private let refreshTimer = Timer.publish(every: 10, on: .main, in: .common).autoconnect()
     
     var body: some View {
-        VStack {
+        ZStack {
             VStack {
-                VStack { }
                 VStack {
-                    HStack {
-                        Text("\(busAlert.busNo)")
-                        Image(systemName: "suit.diamond.fill")
-                            .font(.system(size: 10))
-                            .foregroundStyle(.midbrand)
-                        Text("\(busAlert.alertLabel)")
-                        Spacer()
-                        VStack {
-                            if let refreshTime = lastRefreshTime {
-                                Text("마지막 새로고침: \(refreshTime, formatter: dateFormatter)")
-                                    .font(.caption)
-                                    .foregroundColor(.gray)
+                    VStack { }
+                    VStack {
+                        HStack {
+                            Text("\(busAlert.busNo)")
+                            Image(systemName: "suit.diamond.fill")
+                                .font(.system(size: 10))
+                                .foregroundStyle(.midbrand)
+                            Text("\(busAlert.alertLabel)")
+                            Spacer()
+                            VStack {
+                                if let refreshTime = lastRefreshTime {
+                                    Text("마지막 새로고침: \(refreshTime, formatter: dateFormatter)")
+                                        .font(.caption)
+                                        .foregroundColor(.gray)
+                                }
                             }
-                            // 새로고침 버튼
-                            Button(action: refreshData) {
-                                Image(systemName: "arrow.clockwise")
-                                    .font(.title3)
-                            }
-                            .disabled(isRefreshing) // 로딩 중에는 비활성화
                         }
+                        .font(.title3)
+                        .foregroundStyle(.gray2)
+                        
+                        HStack {
+                            Text("\(busAlert.alertBusStop)정류장 전 알림")
+                                .foregroundStyle(.gray3)
+                            Spacer()
+                        }
+                        HStack {
+                            Image(systemName: "bell.circle")
+                                .font(.system(size: 20))
+                                .foregroundStyle(.midbrand)
+                            Text("\(busAlert.arrivalBusStopNm)")
+                            Toggle(isOn: $isAlertEnabled) { }
+                                .toggleStyle(SwitchToggleStyle(tint: .brand))
+                        }
+                        .font(.title)
                     }
-                    .font(.title3)
-                    .foregroundStyle(.gray2)
-                    
-                    HStack {
-                        Text("\(busAlert.alertBusStop)정류장 전 알림")
-                            .foregroundStyle(.gray3)
-                        Spacer()
-                    }
-                    HStack {
-                        Image(systemName: "bell.circle")
-                            .font(.system(size: 20))
-                            .foregroundStyle(.midbrand)
-                        Text("\(busAlert.arrivalBusStopNm)")
-                        Toggle(isOn: $isAlertEnabled) { }
-                            .toggleStyle(SwitchToggleStyle(tint: .brand))
-                    }
-                    .font(.title)
+                    .padding(.horizontal, 20)
+                    .padding(.top)
+                    .padding(.bottom, 28)
                 }
-                .padding(.horizontal, 20)
-                .padding(.top)
-                .padding(.bottom, 28)
-            }
-            .background(Color.white)
-            
-            ScrollView(showsIndicators: false) {
-                VStack(alignment: .leading, spacing: 0) {
-                    if let closestBus = viewModel.closestBusLocation {
-                        ForEach(busStops.filter { $0.routeid == busAlert.routeid }.sorted(by: { $0.nodeord < $1.nodeord }), id: \.id) { busStop in
-                            HStack {
-                                if busStop.nodeid == closestBus.nodeid {
-                                    Image(systemName: "bus.fill")
-                                        .foregroundStyle(.brand)
-                                        .padding(.leading, 10)
-                                } else {
-                                    Image(systemName: "bus.fill")
-                                        .opacity(0)
-                                        .padding(.leading, 10)
-                                }
-                                VStack {
-                                    if busStop.nodeid == busAlert.arrivalBusStopID {
-                                        Image(systemName: "mappin.and.ellipse")
+                .background(Color.white)
+                
+                ScrollView(showsIndicators: false) {
+                    VStack(alignment: .leading, spacing: 0) {
+                        if let closestBus = viewModel.closestBusLocation {
+                            ForEach(busStops.filter { $0.routeid == busAlert.routeid }.sorted(by: { $0.nodeord < $1.nodeord }), id: \.id) { busStop in
+                                HStack {
+                                    if busStop.nodeid == closestBus.nodeid {
+                                        Image(systemName: "bus.fill")
+                                            .foregroundStyle(.brand)
+                                            .padding(.leading, 10)
                                     } else {
-                                        Rectangle()
-                                            .frame(width: 1)
-                                            .foregroundStyle(.gray5)
-                                        Image(systemName: "circle.fill")
-                                            .foregroundStyle(busStop.nodeid == closestBus.nodeid ? .red : .brand)
-                                            .font(.system(size: 5))
-                                            .padding(.vertical, 2)
-                                        Rectangle()
-                                            .frame(width: 1)
-                                            .foregroundStyle(.gray5)
+                                        Image(systemName: "bus.fill")
+                                            .opacity(0)
+                                            .padding(.leading, 10)
                                     }
+                                    VStack {
+                                        if busStop.nodeid == busAlert.arrivalBusStopID {
+                                            Image(systemName: "mappin.and.ellipse")
+                                        } else {
+                                            Rectangle()
+                                                .frame(width: 1)
+                                                .foregroundStyle(.gray5)
+                                            Image(systemName: "circle.fill")
+                                                .foregroundStyle(busStop.nodeid == closestBus.nodeid ? .red : .brand)
+                                                .font(.system(size: 5))
+                                                .padding(.vertical, 2)
+                                            Rectangle()
+                                                .frame(width: 1)
+                                                .foregroundStyle(.gray5)
+                                        }
+                                    }
+                                    .foregroundStyle(.gray)
+                                    .padding(.leading, 10)
+                                    
+                                    Text(busStop.nodenm) // 정류소 이름 표시
+                                        .padding(.leading, 25)
+                                        .font(.system(size: 16))
+                                    Spacer()
                                 }
-                                .foregroundStyle(.gray)
-                                .padding(.leading, 10)
-                                
-                                Text(busStop.nodenm) // 정류소 이름 표시
-                                    .padding(.leading, 25)
-                                    .font(.system(size: 16))
-                                Spacer()
+                                .frame(height: 60)
                             }
-                            .frame(height: 60)
+                        } else if isRefreshing {
+                            // 로딩 중일 때 로딩 인디케이터 표시
+                            ProgressView("가장 가까운 버스 위치를 찾고 있습니다...")
+                        } else {
+                            Text("가장 가까운 버스 위치를 찾고 있습니다...")
                         }
-                    } else if isRefreshing {
-                        // 로딩 중일 때 로딩 인디케이터 표시
-                        ProgressView("가장 가까운 버스 위치를 찾고 있습니다...")
-                    } else {
-                        Text("가장 가까운 버스 위치를 찾고 있습니다...")
+                        Spacer()
                     }
-                    Spacer()
+                }
+            }
+            VStack {
+                Spacer() // 화면 상단과 하단에 공간을 줌
+                HStack {
+                    Spacer() // 왼쪽 공간 확보
+                    Button(action: refreshData) {
+                        Image(systemName: "arrow.clockwise")
+                            .font(.title3)
+                            .padding()
+                            .background(Color.blue.opacity(0.8))
+                            .clipShape(Circle())
+                            .foregroundColor(.white)
+                    }
+                    .disabled(isRefreshing)
+                    .padding() // 버튼과 화면 가장자리를 분리
                 }
             }
         }
         .navigationTitle("\(busAlert.alertLabel)")
         .navigationBarTitleDisplayMode(.inline)
- 
         .onAppear {
             refreshData() // 초기 로드
         }
-        
-        // 타이머를 활용한 자동 새로고침
         .onReceive(refreshTimer) { _ in
             refreshData()
         }
