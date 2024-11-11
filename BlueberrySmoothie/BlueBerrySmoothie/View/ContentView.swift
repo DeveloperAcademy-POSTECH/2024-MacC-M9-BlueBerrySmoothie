@@ -46,7 +46,7 @@ struct ContentView: View {
                                }
                            }
 
-                NavigationLink(destination: BusLocationListView()) { // StartAlarmView를 추가하세요
+                NavigationLink(destination: SelectCityView()) { // StartAlarmView를 추가하세요
                     HStack {
                         Image(systemName: "alarm.fill") // 알람 시작 심볼
                             .resizable()
