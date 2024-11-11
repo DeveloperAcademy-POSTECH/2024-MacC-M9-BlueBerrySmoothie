@@ -121,9 +121,9 @@ struct UsingAlertView: View {
                         Image(systemName: "arrow.clockwise")
                             .font(.title3)
                             .padding()
-                            .background(Color.blue.opacity(0.8))
+                            .background(Color.black) // 배경색을 검정색으로 설정
                             .clipShape(Circle())
-                            .foregroundColor(.white)
+                            .foregroundColor(.white) // 화살표 색상 유지 (하얀색)
                     }
                     .disabled(isRefreshing)
                     .padding() // 버튼과 화면 가장자리를 분리
