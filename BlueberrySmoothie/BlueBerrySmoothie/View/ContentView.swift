@@ -10,18 +10,18 @@ struct ContentView: View {
     var body: some View {
         NavigationStack {
             VStack(spacing: 20) {
-                NavigationLink(destination: AlertSettingMain()) {
-                    HStack {
-                        Image(systemName: "location.fill") // 도시 선택 심볼
-                            .resizable()
-                            .frame(width: 24, height: 24)
-                        Text("Select City")
-                            .font(.headline)
-                    }
-                    .padding()
-                    .background(Color.blue.opacity(0.2))
-                    .cornerRadius(10)
-                }
+//                NavigationLink(destination: AlertSettingMain()) {
+//                    HStack {
+//                        Image(systemName: "location.fill") // 도시 선택 심볼
+//                            .resizable()
+//                            .frame(width: 24, height: 24)
+//                        Text("Select City")
+//                            .font(.headline)
+//                    }
+//                    .padding()
+//                    .background(Color.blue.opacity(0.2))
+//                    .cornerRadius(10)
+//                }
                 List(busAlerts) { alert in
                     NavigationLink(destination: DetailView(alert: alert)) {
                         VStack(alignment: .leading) {

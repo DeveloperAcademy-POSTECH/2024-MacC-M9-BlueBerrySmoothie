@@ -18,9 +18,9 @@ struct SelectBusStopView: View {
     @EnvironmentObject var busStopViewModel: BusStopViewModel
     @State private var stop: String = ""
     @State private var updowncdselection: Int = 1
+    @Binding var showSelectBusSheet: Bool
 
     var body: some View {
-
         VStack{
             VStack {
                 
@@ -132,7 +132,7 @@ struct SelectBusStopView: View {
                      ForEach(busStopViewModel.busStopList, id: \.self) { busstop in
                          Button(action: {
                              storeBusStop(busStop: busstop)
-                             dismiss()
+                             showSelectBusSheet = false
                          }) {
                              VStack {
                                  Spacer()
@@ -165,6 +165,13 @@ struct SelectBusStopView: View {
          }
          .padding(.horizontal, 20)
          .navigationTitle("정류장 선택")
+         .toolbar { // ← 모달 닫기 버튼 추가
+                     ToolbarItem(placement: .navigationBarTrailing) {
+                         Button("닫기") {
+                             showSelectBusSheet = false
+                         }
+                     }
+                 }
          .task {
              await busStopViewModel.getBusStopData(cityCode: city.citycode, routeId: bus.routeid)
          }

@@ -4,11 +4,15 @@ import SwiftUI
 struct SelectBusView: View {
     @Binding var busStopAlert: BusStopAlert?
     
+    
     let city: City = City(citycode: 21, cityname: "부산")
     @State private var allBuses: [Bus] = []
     @State private var filteredBuses: [Bus] = []
     @State private var routeNo: String = ""
     @FocusState private var isTextFieldFocused: Bool
+    @Environment(\.dismiss) private var dismiss
+    @Binding var showSelectBusSheet: Bool
+
     
     var body: some View {
         NavigationStack {
@@ -42,7 +46,7 @@ struct SelectBusView: View {
                             
                         }) {
                             // 네비게이션 링크: 선택된 버스가 있을 때 SelectBusStopView로 이동
-                            NavigationLink(destination: SelectBusStopView(city: city, bus: bus, busStopAlert: $busStopAlert)){
+                            NavigationLink(destination: SelectBusStopView(city: city, bus: bus, busStopAlert: $busStopAlert, showSelectBusSheet: $showSelectBusSheet)){
                                 VStack(alignment: .leading) {
                                     Spacer()
                                     VStack(alignment: .leading) {
@@ -78,6 +82,7 @@ struct SelectBusView: View {
                     self.allBuses = fetchedBuses
                     self.filteredBuses = fetchedBuses
                 }
+                showSelectBusSheet = true
             }
         }
     }

@@ -1,28 +1,23 @@
-//
-//  alertSettingMain.swift
-//  BlueBerrySmoothie
-//
-//  Created by 문호 on 11/1/24.
-//
-
 import SwiftUI
 import SwiftData
 
 // AlertSettingMain 뷰
 struct AlertSettingMain: View {
     @Environment(\.modelContext) private var modelContext // ModelContext를 가져옴
-    
     @Environment(\.dismiss) private var dismiss
-    
     @Query var busStopLocal: [BusStopLocal]
+    
     @State private var label: String = ""
     @State private var showSheet: Bool = false
     @State private var selectedStation: String = "정류장 수"
-    
     @State private var busStopAlert: BusStopAlert?
+    @Binding var showSetting: Bool
     
+    // 추가된 상태 변수: SelectBusView를 sheet로 표시할지 여부
+    @State private var showSelectBusSheet: Bool = false // ← 추가된 부분
+    
+
     var body: some View {
-        NavigationStack {
             ZStack {
                 VStack {
                     HStack {
@@ -74,7 +69,10 @@ struct AlertSettingMain: View {
                             Spacer()
                             Spacer()
                             
-                            NavigationLink(destination: SelectBusView( busStopAlert: $busStopAlert)) {  // 선택된 버스를 전달받음
+                            // NavigationLink 대신 sheet를 사용하는 버튼
+                            Button(action: {
+                                showSelectBusSheet = true // sheet 표시 상태를 true로 설정
+                            }) {
                                 ZStack {
                                     Rectangle()
                                         .foregroundColor(Color.lightbrand)
@@ -90,24 +88,28 @@ struct AlertSettingMain: View {
                                 }
                             }
                             .fixedSize()
+                            .sheet(isPresented: $showSelectBusSheet) { // ← 수정된 부분
+                                SelectBusView(busStopAlert: $busStopAlert,showSelectBusSheet: $showSelectBusSheet)
+                            }
                         }
                     }
+                    
                     HStack {
+                        Spacer()
+                        Spacer()
+                        Spacer()
+                        Spacer()
+                        Spacer()
+                        Spacer()
+                        Spacer()
+                        Spacer()
+                        Spacer()
+                        Spacer()
+                        Spacer()
+                        Spacer()
+                        Spacer()
+                        Spacer()
                         
-                        Spacer()
-                        Spacer()
-                        Spacer()
-                        Spacer()
-                        Spacer()
-                        Spacer()
-                        Spacer()
-                        Spacer()
-                        Spacer()
-                        Spacer()
-                        Spacer()
-                        Spacer()
-                        Spacer()
-                        Spacer()
                         // 선택된 정류장 표시
                         ZStack {
                             Rectangle()
@@ -118,7 +120,7 @@ struct AlertSettingMain: View {
                                         .stroke(Color.gray4, lineWidth: 1)
                                 }
                             HStack {
-                                Text("\(busStopAlert?.arrivalBusStop.nodenm ?? "선택해주세요")") // 폰트 수정
+                                Text("\(busStopAlert?.arrivalBusStop.nodenm ?? "선택해주세요")")
                                     .foregroundColor(Color.black)
                                     .font(.regular16)
                                     .padding(.horizontal, 12)
@@ -129,6 +131,7 @@ struct AlertSettingMain: View {
                         .fixedSize(horizontal: false, vertical: true)
                         .padding(.bottom, 20)
                     }
+                    
                     HStack(spacing: 2) {
                         Text("일어날 정류장")
                             .font(.medium16)
@@ -174,6 +177,7 @@ struct AlertSettingMain: View {
                             .font(.regular16)
                     }
                     .padding(.bottom, 20)
+                    
                     // 알람 레이블 입력 필드
                     HStack {
                         Text("알람 레이블")
@@ -208,23 +212,24 @@ struct AlertSettingMain: View {
                 }
                 .padding(20)
                 Spacer()
-                .overlay {
-                    if showSheet {
-                        StationPickerModal(isPresented: $showSheet, selectedStation: $selectedStation, alert: $busStopAlert)
-                    } else {
-                        EmptyView()
+                    .overlay {
+                        if showSheet {
+                            StationPickerModal(isPresented: $showSheet, selectedStation: $selectedStation, alert: $busStopAlert)
+                        } else {
+                            EmptyView()
+                        }
                     }
-                }
-                .onAppear {
-                    if busStopAlert?.alertBusStop == 0 {
-                        selectedStation = "정류장 수"
+                    .onAppear {
+                        if busStopAlert?.alertBusStop == 0 {
+                            selectedStation = "정류장 수"
+                        }
+                        showSelectBusSheet = false
                     }
-                }
             }
             .background(Color.white)
-        }
+
         .toolbar {
-            ToolbarItem {
+            ToolbarItem(placement: .navigationBarTrailing) {
                 Button(action: {
                     if selectedStation != "정류장 수" && label != "" {
                         saveAlert()
@@ -238,6 +243,7 @@ struct AlertSettingMain: View {
                 }
             }
         }
+        
     }
     
     // 알람 저장 함수
@@ -250,27 +256,26 @@ struct AlertSettingMain: View {
         
         // 알람 객체 생성
         let newAlert = BusAlert(id: UUID().uuidString,
-                                cityCode: 21, // 예시로 cityCode 설정
-                                busNo: selectedBus.routeno, // 선택된 버스의 번호
-                                routeid: selectedBus.routeid, // 선택된 버스의 routeid
-                                arrivalBusStopID: selectedBusStop.nodeid, // 선택된 정류장의 ID
+                                cityCode: 21,
+                                busNo: selectedBus.routeno,
+                                routeid: selectedBus.routeid,
+                                arrivalBusStopID: selectedBusStop.nodeid,
                                 arrivalBusStopNm: selectedBusStop.nodenm,
-                                alertBusStop: busStopAlert!.alertBusStop, // 사용자가 설정한 알람 줄 정류장
-                                alertLabel: label, // 사용자가 입력한 알람 레이블
-                                alertSound: true, // 알람 사운드 활성화
-                                alertHaptic: true, // 해프틱 피드백 활성화
+                                alertBusStop: busStopAlert!.alertBusStop,
+                                alertLabel: label,
+                                alertSound: true,
+                                alertHaptic: true,
                                 alertCycle: nil,
                                 updowncd: selectedBusStop.updowncd)
         
         // 데이터베이스에 저장
         do {
-            try modelContext.insert(newAlert) // 모델 컨텍스트에 추가
+            try modelContext.insert(newAlert)
             print("알람이 저장되었습니다.")
         } catch {
             print("알람 저장 실패: \(error)")
         }
     }
-    
     
     private func saveBusstop() {
         guard !(busStopAlert?.allBusStop.isEmpty)! else {
@@ -278,18 +283,15 @@ struct AlertSettingMain: View {
             return
         }
         
-        // selectedBus.routeid가 이미 존재하는지 확인
         let routeExists = busStopLocal.contains { existingBusStop in
             existingBusStop.routeid == busStopAlert?.bus.routeid
         }
         
-        // 같은 routeid가 존재하면 저장하지 않음
         if routeExists {
             print("routeid \(busStopAlert?.bus.routeid ?? "알 수 없음")이 이미 존재합니다. 저장하지 않았습니다.")
-            return // 중복된 경우, 함수 종료
+            return
         }
         
-        // routeid가 존재하지 않으면 저장
         for busStop in busStopAlert!.allBusStop {
             let newBusStopLocal = BusStopLocal(
                 id: UUID().uuidString,
@@ -303,19 +305,12 @@ struct AlertSettingMain: View {
                 updowncd: busStop.updowncd
             )
             
-            // 데이터베이스에 저장
             do {
-                try modelContext.insert(newBusStopLocal) // 모델 컨텍스트에 추가
+                try modelContext.insert(newBusStopLocal)
                 print("버스 정류장이 저장되었습니다.")
-                
             } catch {
                 print("버스 정류장 저장 실패: \(error)")
             }
         }
     }
 }
-
-
-//#Preview {
-//    AlertSettingMain()
-//}
