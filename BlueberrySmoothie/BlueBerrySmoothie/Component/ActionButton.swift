@@ -8,11 +8,13 @@
 import SwiftUI
 
 struct ActionButton: View {
+    @Binding var isEmptyAlert: Bool
+
     var body: some View {
         ZStack {
             Rectangle()
                 .foregroundColor(.clear)
-                .background(Color.black)
+                .background(isEmptyAlert ? Color.gray4 : Color.black)
                 .cornerRadius(10.0)
             
             Text("시작하기")
@@ -23,6 +25,3 @@ struct ActionButton: View {
         .fixedSize(horizontal: false, vertical: true)
     }}
 
-#Preview {
-    ActionButton()
-}

@@ -57,7 +57,7 @@ struct UsingAlertView: View {
                                     .frame(width: 14, height: 14)
                                     .foregroundColor(Color.midbrand)
                             }
-                            Text("\(busAlert.arrivalBusStopNm)")
+                            Text("\(busAlert.alertBusStopNm)")
                                 .foregroundColor(Color.black)
                                 .font(.medium30)
                             Spacer()
@@ -140,7 +140,7 @@ struct UsingAlertView: View {
                 
             }
             .background(Color.gray7)
-            .navigationTitle(busAlert.alertLabel)
+            .navigationTitle(busAlert.alertLabel ?? "알람")
             .navigationBarTitleDisplayMode(.inline)
             .onAppear {
                 refreshData() // 초기 로드

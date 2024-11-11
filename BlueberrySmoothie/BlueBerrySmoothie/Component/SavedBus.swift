@@ -27,7 +27,7 @@ struct SavedBus: View {
                 }
             VStack {
                 HStack(alignment: .bottom) {
-                    Text(busAlert.alertLabel)
+                    Text(busAlert.alertLabel ?? "알림")
                             .font(.regular12)
                         .foregroundColor(Color.gray2)
                     Spacer()
