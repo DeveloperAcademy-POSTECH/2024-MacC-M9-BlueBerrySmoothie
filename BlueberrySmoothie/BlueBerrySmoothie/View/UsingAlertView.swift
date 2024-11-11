@@ -21,52 +21,65 @@ struct UsingAlertView: View {
     var body: some View {
         VStack {
             VStack {
-                VStack { }
                 VStack {
                     HStack {
                         Text("\(busAlert.busNo)")
+                            .foregroundColor(Color.gray3)
+                            .font(.regular20)
                         Image(systemName: "suit.diamond.fill")
-                            .font(.system(size: 10))
+                            .font(.regular10)
                             .foregroundStyle(.midbrand)
-                        Text("\(busAlert.alertLabel)")
+                        Text("\(busAlert.arrivalBusStopNm)")
+                            .foregroundColor(Color.gray2)
+                            .font(.regular20)
                         Spacer()
-                        VStack {
-                            if let refreshTime = lastRefreshTime {
-                                Text("마지막 새로고침: \(refreshTime, formatter: dateFormatter)")
-                                    .font(.caption)
-                                    .foregroundColor(.gray)
-                            }
-                            // 새로고침 버튼
-                            Button(action: refreshData) {
-                                Image(systemName: "arrow.clockwise")
-                                    .font(.title3)
-                            }
-                            .disabled(isRefreshing) // 로딩 중에는 비활성화
-                        }
+//                        VStack {
+//                            if let refreshTime = lastRefreshTime {
+//                                Text("마지막 새로고침: \(refreshTime, formatter: dateFormatter)")
+//                                    .font(.caption)
+//                                    .foregroundColor(.gray)
+//                            }
+//                            // 새로고침 버튼
+//                            Button(action: refreshData) {
+//                                Image(systemName: "arrow.clockwise")
+//                                    .font(.title3)
+//                            }
+//                            .disabled(isRefreshing) // 로딩 중에는 비활성화
+//                        }
                     }
-                    .font(.title3)
-                    .foregroundStyle(.gray2)
+                    .padding(.bottom, 26)
                     
                     HStack {
                         Text("\(busAlert.alertBusStop)정류장 전 알림")
-                            .foregroundStyle(.gray3)
+                            .foregroundStyle(.brand)
+                            .font(.regular16)
                         Spacer()
                     }
+                    .padding(.bottom, 8)
+                    
                     HStack {
-                        Image(systemName: "bell.circle")
-                            .font(.system(size: 20))
-                            .foregroundStyle(.midbrand)
+                        ZStack {
+                            Circle()
+                                .frame(width: 26, height: 26)
+                                .foregroundColor(Color.gray7)
+                            Image(systemName: "bell.fill")
+                                .frame(width: 14, height: 14)
+                                .foregroundColor(Color.midbrand)
+                        }
                         Text("\(busAlert.arrivalBusStopNm)")
-                        Toggle(isOn: $isAlertEnabled) { }
-                            .toggleStyle(SwitchToggleStyle(tint: .brand))
+//                        Text("\(busAlert.alertBusStopNm)") // n번째 전 정거장 값
+                            .foregroundColor(Color.black)
+                            .font(.medium30)
+                        Spacer()
+//                        Toggle(isOn: $isAlertEnabled) { }
+//                            .toggleStyle(SwitchToggleStyle(tint: .brand))
                     }
-                    .font(.title)
                 }
                 .padding(.horizontal, 20)
                 .padding(.top)
                 .padding(.bottom, 28)
             }
-            .background(Color.white)
+            .background(Color.lightbrand)
             
             ScrollView(showsIndicators: false) {
                 VStack(alignment: .leading, spacing: 0) {
@@ -89,10 +102,20 @@ struct UsingAlertView: View {
                                         Rectangle()
                                             .frame(width: 1)
                                             .foregroundStyle(.gray5)
-                                        Image(systemName: "circle.fill")
-                                            .foregroundStyle(busStop.nodeid == closestBus.nodeid ? .red : .brand)
-                                            .font(.system(size: 5))
-                                            .padding(.vertical, 2)
+                                        ZStack {
+                                            Circle()
+                                                .frame(width: 20, height: 20)
+                                                .foregroundColor(Color.gray6)
+                                            Circle()
+                                                .frame(width: 14, height: 14)
+                                                .foregroundColor(Color.lightbrand)
+                                            
+                                            Image(systemName: "chevron.down")
+                                                .foregroundStyle(busStop.nodeid == closestBus.nodeid ? .red : .gray4)
+                                                .font(.regular10)
+                                                .bold()
+                                                .padding(.vertical, 2)
+                                        }
                                         Rectangle()
                                             .frame(width: 1)
                                             .foregroundStyle(.gray5)
@@ -103,7 +126,8 @@ struct UsingAlertView: View {
                                 
                                 Text(busStop.nodenm) // 정류소 이름 표시
                                     .padding(.leading, 25)
-                                    .font(.system(size: 16))
+                                    .foregroundColor(Color.black)
+                                    .font(.regular16)
                                 Spacer()
                             }
                             .frame(height: 60)
@@ -111,13 +135,19 @@ struct UsingAlertView: View {
                     } else if isRefreshing {
                         // 로딩 중일 때 로딩 인디케이터 표시
                         ProgressView("가장 가까운 버스 위치를 찾고 있습니다...")
+                            .foregroundColor(Color.black)
+                            .font(.regular16)
                     } else {
                         Text("가장 가까운 버스 위치를 찾고 있습니다...")
+                            .foregroundColor(Color.black)
+                            .font(.regular16)
                     }
                     Spacer()
                 }
+                .background(.clear)
             }
         }
+        .background(Color.gray7)
         .navigationTitle("\(busAlert.alertLabel)")
         .navigationBarTitleDisplayMode(.inline)
  

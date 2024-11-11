@@ -18,7 +18,7 @@ struct SavedBus: View {
                 .cornerRadius(20)
                 .overlay {
                     RoundedRectangle(cornerRadius: 20)
-                        .stroke(Color.brand, lineWidth: 2)
+                        .stroke(isSelected ? Color.brand : Color.white, lineWidth: 2)
                 }
             VStack {
                 HStack(alignment: .bottom) {
