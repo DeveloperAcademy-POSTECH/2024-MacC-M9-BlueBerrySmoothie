@@ -35,7 +35,7 @@ struct UsingAlertView: View {
                     .alert(isPresented: $showExitConfirmation) {
                         SwiftUI.Alert(
                                         title: Text("알람 종료"),
-                                        message: Text("알람을 종료되고 메인화면으로 돌아가요"),
+                                        message: Text("알람을 종료하시겠습니까?"),
                                         primaryButton: .destructive(Text("종료")) {
                                             // 알림 취소 (alertBusStopLocal과 arrivalBusStopLocal 각각에 대해 호출)
                                             notificationManager.cancelLocationNotification(for: busAlert, for: alertBusStopLocal)
