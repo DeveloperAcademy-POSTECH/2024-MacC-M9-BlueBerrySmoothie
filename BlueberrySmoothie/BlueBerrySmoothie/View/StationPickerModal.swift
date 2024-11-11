@@ -14,6 +14,8 @@ struct StationPickerModal: View {
     @Binding var isPresented: Bool
     @Binding var selectedStation: String
     @Binding var alert: BusStopAlert? // BusStopAlert 값을 받아옴
+    @State var nodeord: Int
+    
     
     var body: some View {
         ZStack(alignment: .bottom) {
@@ -45,7 +47,7 @@ struct StationPickerModal: View {
                         .padding(.bottom, 20)
                     
                     // 각 정류장 선택지
-                    if let first = alert?.firstBeforeBusStop {
+                    if (alert?.firstBeforeBusStop) != nil || nodeord > 1 {
                         stationRow(stationText: "1 정거장 전", isEnabled: true) {
                             selectedStation = "1 정거장 전"
                             alert?.alertBusStop = 1
@@ -57,7 +59,7 @@ struct StationPickerModal: View {
                         stationRow(stationText: "1 정거장 전", isEnabled: false)
                     }
                     
-                    if let second = alert?.secondBeforeBusStop {
+                    if (alert?.secondBeforeBusStop) != nil || nodeord > 2 {
                         stationRow(stationText: "2 정거장 전", isEnabled: true) {
                             selectedStation = "2 정거장 전"
                             alert?.alertBusStop = 2
@@ -69,7 +71,7 @@ struct StationPickerModal: View {
                         stationRow(stationText: "2 정거장 전", isEnabled: false)
                     }
                     
-                    if let third = alert?.thirdBeforeBusStop {
+                    if (alert?.thirdBeforeBusStop) != nil || nodeord > 3 {
                         stationRow(stationText: "3 정거장 전", isEnabled: true) {
                             selectedStation = "3 정거장 전"
                             alert?.alertBusStop = 3

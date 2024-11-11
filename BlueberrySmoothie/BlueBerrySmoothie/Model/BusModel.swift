@@ -50,5 +50,23 @@ struct Bus: Codable, Identifiable {
         routetp = (try? container.decode(String.self, forKey: .routetp)) ?? "알 수 없음"
     }
     
+    // 사용자 정의 이니셜라이저
+        init(
+            routeno: String = "알 수 없음",
+            routeid: String = "알 수 없음",
+            startnodenm: String = "알 수 없음",
+            endnodenm: String = "알 수 없음",
+            startvehicletime: String = "알 수 없음",
+            endvehicletime: String = "알 수 없음",
+            routetp: String = "알 수 없음"
+        ) {
+            self.routeno = routeno
+            self.routeid = routeid
+            self.startnodenm = startnodenm
+            self.endnodenm = endnodenm
+            self.startvehicletime = startvehicletime
+            self.endvehicletime = endvehicletime
+            self.routetp = routetp
+        }
 
 }

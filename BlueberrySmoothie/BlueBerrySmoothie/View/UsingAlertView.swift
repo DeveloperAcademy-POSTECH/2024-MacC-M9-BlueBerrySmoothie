@@ -1,10 +1,19 @@
 import SwiftUI
+import SwiftData
 
 struct UsingAlertView: View {
+    //    let busStops: [BusStopLocal] // 정류소 정보 배열
+    @Query var busStops: [BusStopLocal]
     @StateObject private var viewModel = NowBusLocationViewModel() // ViewModel 연결
-    let busStops: [BusStopLocal] // 정류소 정보 배열
     let busAlert: BusAlert // 관련된 알림 정보
+    let alertBusStopLocal: BusStopLocal // 알림 기준 정류소
+    let arrivalBusStopLocal: BusStopLocal // 도착 정류소
+    
     @State private var isAlertEnabled: Bool = false // 스위치 상태 관리
+    // NotificationManager 인스턴스 감지
+    @ObservedObject var notificationManager = NotificationManager.instance
+    // EndView로의 이동 상태를 관리하는 변수
+    @State private var navigateToEndView = false
     @State private var isRefreshing: Bool = false // 새로고침 상태 관리
     @State private var lastRefreshTime: Date? = nil // 마지막 새로고침 시간
     
@@ -28,13 +37,6 @@ struct UsingAlertView: View {
                                 .foregroundColor(Color.gray2)
                                 .font(.regular20)
                             Spacer()
-//                            VStack {
-//                                if let refreshTime = lastRefreshTime {
-//                                    Text("마지막 새로고침: \(refreshTime, formatter: dateFormatter)")
-//                                        .font(.caption)
-//                                        .foregroundColor(.gray)
-//                                }
-//                            }
                         }
                         .padding(.bottom, 26)
                         
@@ -60,13 +62,15 @@ struct UsingAlertView: View {
                                 .font(.medium30)
                             Spacer()
                         }
+
                     }
                     .padding(.horizontal, 20)
                     .padding(.top)
                     .padding(.bottom, 28)
                 }
                 .background(Color.lightbrand)
-                
+                   
+                //버스 노선 스크롤뷰
                 ScrollView(showsIndicators: false) {
                     VStack(alignment: .leading, spacing: 0) {
                         if let closestBus = viewModel.closestBusLocation {
@@ -129,15 +133,25 @@ struct UsingAlertView: View {
                                 .font(.regular16)
                         }
                         Spacer()
+
                     }
                     .background(.clear)
                 }
+                
             }
             .background(Color.gray7)
-            .navigationTitle("\(busAlert.alertLabel)")
+            .navigationTitle(busAlert.alertLabel)
             .navigationBarTitleDisplayMode(.inline)
+            .onAppear {
+                refreshData() // 초기 로드
+            }
+            
+            // 타이머를 활용한 자동 새로고침
+            .onReceive(refreshTimer) { _ in
+                refreshData()
+            }
 
-            // 새로고침 버튼을 화면 오른쪽 아래에 배치
+// 새로고침 버튼을 화면 오른쪽 아래에 배치
             VStack {
                 Spacer() // 화면 상단에 공간을 줘서 버튼을 하단으로 밀어냄
                 HStack {
@@ -155,19 +169,21 @@ struct UsingAlertView: View {
                 }
             }
             .padding()
-        }
-        .onAppear {
-            refreshData() // 초기 로드
-        }
-        
-        // 타이머를 활용한 자동 새로고침
-        .onReceive(refreshTimer) { _ in
-            refreshData()
+            
+            // 알람종료 오버레이 뷰
+            if notificationManager.notificationReceived {
+                AfterAlertView()
+                    .edgesIgnoringSafeArea(.all) // 전체 화면에 적용
+            }
+            
+            // EndView로의 네비게이션
+            NavigationLink(destination: EndViewDaisy(busAlert: busAlert), isActive: $navigateToEndView) {
+                EmptyView()
+            }
         }
     }
-    
     // 새로고침 함수
-    private func refreshData() {
+    func refreshData() {
         guard !isRefreshing else { return } // 이미 새로고침 중일 경우 중복 요청 방지
         isRefreshing = true
         DispatchQueue.global(qos: .background).async {
@@ -178,11 +194,44 @@ struct UsingAlertView: View {
             }
         }
     }
-
-    private let dateFormatter: DateFormatter = {
+    
+    @ViewBuilder
+    func AfterAlertView() -> some View {
+        VStack {
+            Image("AfterAlertImg")
+                .padding()
+            
+            Button(action: {
+                notificationManager.notificationReceived = false // 오버레이 닫기
+                
+                // 알림 취소 (alertBusStopLocal과 arrivalBusStopLocal 각각에 대해 호출)
+                notificationManager.cancelLocationNotification(for: busAlert, for: alertBusStopLocal)
+                notificationManager.cancelLocationNotification(for: busAlert, for: arrivalBusStopLocal)
+                // EndView로 이동
+                navigateToEndView = true
+                //                notificationManager.locationManager.stopLocationUpdates()
+            }, label: {
+                Text("종료")
+                    .foregroundStyle(.white)
+                    .font(.largeTitle)
+                    .padding()
+                    .padding(.horizontal, 20)
+                    .background(Capsule())
+            })
+            
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(Color.gray.opacity(0.8))
+        .cornerRadius(10)
+        .shadow(radius: 10)
+        
+    }
+    
+    let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateStyle = .short
         formatter.timeStyle = .medium
         return formatter
     }()
+    
 }
