@@ -23,13 +23,13 @@ struct SavedBus: View {
                 .cornerRadius(20)
                 .overlay {
                     RoundedRectangle(cornerRadius: 20)
-                        .stroke(Color.brand, lineWidth: 2)
+                        .stroke(isSelected ? Color.brand : Color.white, lineWidth: 2)
                 }
             VStack {
                 HStack(alignment: .bottom) {
                     Text(busAlert.alertLabel)
-                        .font(.regular12)
-                        .foregroundColor(Color.brand)
+                            .font(.regular12)
+                        .foregroundColor(Color.gray2)
                     Spacer()
                     Menu {
                         Button(action: {

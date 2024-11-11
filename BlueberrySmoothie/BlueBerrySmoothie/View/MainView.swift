@@ -16,6 +16,10 @@ struct MainView: View {
     
     @Environment(\.modelContext) private var context // SwiftData의 ModelContext 가져오기
     let notificationManager = NotificationManager.instance
+  
+      init() {
+        UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.black]
+    }
     
     private func deleteBusAlert(_ busAlert: BusAlert) {
             // SwiftData의 ModelContext를 통해 객체 삭제
@@ -67,7 +71,6 @@ struct MainView: View {
                     notificationManager.scheduleTestNotification(for: selectedAlert)
                     notificationManager.requestLocationNotification(for: selectedAlert, for: alertBusStopLocal)
                     notificationManager.requestLocationNotification(for: selectedAlert, for: arrivalBusStopLocal)
-                    isUsingAlertActive = true
                 }, label: {
                     ActionButton()
                 })
@@ -80,11 +83,15 @@ struct MainView: View {
                     NavigationLink("추가") {
                         AlertSettingMain(isEditing: false)
                     }
-                    .font(.system(size: 16, weight: .regular))
-                    .foregroundColor(Color(red: 104 / 255, green: 144 / 255, blue: 255 / 255))
+                  .font(.medium16)
+                        .foregroundColor(Color.brand)
                 }
             }
-            
+            .background(Color.white)
+        }
+        .tint(Color.brand)
+        .onAppear(){
+            print(busAlerts)
         }
     }
     
@@ -98,6 +105,7 @@ struct MainView: View {
                     .onTapGesture {
                         selectedAlert = alert // Set the selected alert 
                         print(selectedAlert?.alertLabel)
+
                     }
                     .padding(.bottom, 8)
             }
