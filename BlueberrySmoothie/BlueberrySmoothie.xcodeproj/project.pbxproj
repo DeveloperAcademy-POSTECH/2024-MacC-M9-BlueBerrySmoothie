@@ -24,6 +24,7 @@
 		12D2B6D42CD3F5BE005CF771 /* getAPIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D2B6D32CD3F5BD005CF771 /* getAPIKey.swift */; };
 		12D2B6D82CD63D6A005CF771 /* AlertModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D2B6D72CD63D6A005CF771 /* AlertModel.swift */; };
 		8B0860F72CDDA237007C109A /* HapticManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0860F62CDDA237007C109A /* HapticManager.swift */; };
+		8B0860F92CE1A0A9007C109A /* silentSound.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8B0860F82CE1A0A8007C109A /* silentSound.wav */; };
 		8BF2EFA42CD3A78A008A6644 /* MainViewDaisy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF2EFA32CD3A78A008A6644 /* MainViewDaisy.swift */; };
 		8BF2EFA62CD3A7B0008A6644 /* InputViewDaisy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF2EFA52CD3A7B0008A6644 /* InputViewDaisy.swift */; };
 		8BF2EFA82CD3A7F2008A6644 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF2EFA72CD3A7F2008A6644 /* Alert.swift */; };
@@ -79,6 +80,7 @@
 		12D2B6D32CD3F5BD005CF771 /* getAPIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getAPIKey.swift; sourceTree = "<group>"; };
 		12D2B6D72CD63D6A005CF771 /* AlertModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertModel.swift; sourceTree = "<group>"; };
 		8B0860F62CDDA237007C109A /* HapticManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticManager.swift; sourceTree = "<group>"; };
+		8B0860F82CE1A0A8007C109A /* silentSound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = silentSound.wav; sourceTree = "<group>"; };
 		8BF2EFA32CD3A78A008A6644 /* MainViewDaisy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewDaisy.swift; sourceTree = "<group>"; };
 		8BF2EFA52CD3A7B0008A6644 /* InputViewDaisy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputViewDaisy.swift; sourceTree = "<group>"; };
 		8BF2EFA72CD3A7F2008A6644 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
@@ -262,6 +264,7 @@
 		D90E0C112CD89C620089883F /* Component */ = {
 			isa = PBXGroup;
 			children = (
+				8B0860F82CE1A0A8007C109A /* silentSound.wav */,
 				D968D5C72CD89EF4002DF70B /* SavedBus.swift */,
 				D968D5C52CD89EC4002DF70B /* ActionButton.swift */,
 			);
@@ -342,6 +345,7 @@
 				D968D6012CDB165B002DF70B /* SpoqaHanSansNeo-Bold.otf in Resources */,
 				D968D6022CDB165B002DF70B /* SpoqaHanSansNeo-Medium.otf in Resources */,
 				D968D6032CDB165B002DF70B /* SpoqaHanSansNeo-Light.otf in Resources */,
+				8B0860F92CE1A0A9007C109A /* silentSound.wav in Resources */,
 				D968D6042CDB165B002DF70B /* SpoqaHanSansNeo-Thin.otf in Resources */,
 				D968D6052CDB165B002DF70B /* SpoqaHanSansNeo-Regular.otf in Resources */,
 				1232B3B72CD1D3DF00C48414 /* Preview Assets.xcassets in Resources */,

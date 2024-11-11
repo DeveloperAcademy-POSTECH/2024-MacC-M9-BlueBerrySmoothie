@@ -63,7 +63,6 @@ class NotificationManager: NSObject, CLLocationManagerDelegate, ObservableObject
         content.title = "\(busAlert.arrivalBusStopNm) \(busAlert.alertBusStop) 정거장 전입니다."
         content.subtitle = "일어나서 내릴 준비를 해야해요!"
         content.interruptionLevel = .timeSensitive // 설정할 interruption level
-        //        content.sound = .defaultCritical
         
         // 이어폰이 연결되어 있는 경우에만 소리를 포함한 알림을 생성합니다.
         if isHeadphonesConnected() {
@@ -71,7 +70,6 @@ class NotificationManager: NSObject, CLLocationManagerDelegate, ObservableObject
         } else {
             content.sound = UNNotificationSound(named: UNNotificationSoundName("silentSound.wav"))
         }
-        
         
         // 10초 후 알림
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 10, repeats: false)
@@ -93,7 +91,12 @@ class NotificationManager: NSObject, CLLocationManagerDelegate, ObservableObject
         let content = UNMutableNotificationContent()
         content.title = "\(busAlert.arrivalBusStopNm) \(busAlert.alertBusStop) 정거장 전입니다."
         content.subtitle = "일어나서 내릴 준비를 해야해요!"
-        content.sound = .default
+        // 이어폰이 연결되어 있는 경우에만 소리를 포함한 알림을 생성합니다.
+        if isHeadphonesConnected() {
+            content.sound = UNNotificationSound.default
+        } else {
+            content.sound = UNNotificationSound(named: UNNotificationSoundName("silentSound.wav"))
+        }
         
         let center = CLLocationCoordinate2D(latitude: busStopLocal.gpslati, longitude: busStopLocal.gpslong)
         let region = CLCircularRegion(center: center, radius: 4.0, identifier: "POIRegion")
