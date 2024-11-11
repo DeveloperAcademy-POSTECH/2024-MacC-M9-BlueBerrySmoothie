@@ -69,7 +69,7 @@ class NotificationManager: NSObject, CLLocationManagerDelegate, ObservableObject
         if isHeadphonesConnected() {
             content.sound = UNNotificationSound.default
         } else {
-            content.sound = nil // 무음으로 설정
+            content.sound = UNNotificationSound(named: UNNotificationSoundName("silentSound.wav"))
         }
         
         
