@@ -114,6 +114,3 @@ struct InputViewDaisy: View {
     }
 }
 
-#Preview {
-    InputViewDaisy()
-}

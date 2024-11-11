@@ -1,4 +1,5 @@
 
+
 //
 //  NowBusLocationResponse.swift
 //  BlueBerrySmoothie
@@ -261,3 +262,90 @@ func fetchNowBusLocationData(cityCode: Int, routeId: String, completion: @escapi
         print("API serviceKey Error: \(error)")
     }
 }
+
+
+
+//struct BusLocationListView: View {
+//    @StateObject private var viewModel = BusLocationViewModel()
+//
+//    var body: some View {
+//        NavigationView {
+//            Button(action: { viewModel.fetchBusLocationData(cityCode: 21, routeId: "BSB5200043000")
+//                for i in viewModel.busLocations {print(i,"ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ")}}, label: {Text("zz")})
+//            List(viewModel.busLocations) { location in
+//                VStack(alignment: .leading) {
+//                    Text(location.nodenm)
+//                        .font(.headline)
+//                    Text("Vehicle No: \(location.vehicleno)")
+//                    Text("Latitude: \(location.gpslati), Longitude: \(location.gpslong)")
+//                    Text("Route: \(location.routenm), Order: \(location.nodeord)")
+//                }
+//                .padding(.vertical, 5)
+//            }
+//            .navigationTitle("Bus Locations")
+//            .onAppear {
+//                viewModel.fetchBusLocationData(cityCode: 21, routeId: "BSB5200043000")
+//            }
+//        }
+//    }
+//}
+//
+
+
+struct BusLocationListView: View {
+    @StateObject private var NowviewModel = NowBusLocationViewModel()
+
+    var body: some View {
+        NavigationView {
+            VStack {
+                
+                List(NowviewModel.NowbusLocations) { location in
+                    VStack(alignment: .leading) {
+                        Text(location.nodenm)
+                            .font(.headline)
+                        Text("차량번호: \(location.vehicleno)")
+                        Text("위도: \(location.gpslati), 경도: \(location.gpslong)")
+                        Text("노선: \(location.routenm), 순서: \(location.nodeord)")
+                    }
+                    .padding(.vertical, 5)
+                }
+                .navigationTitle("버스 위치")
+                .onAppear {
+                    // 처음 화면이 보일 때 데이터를 가져오기
+                    NowviewModel.fetchBusLocationData(cityCode: 21, routeId: "BSB5200043000")
+                }
+            }
+        }
+    }
+}
+
+struct NowBusLocationListView_Previews: PreviewProvider {
+    static var previews: some View {
+        BusLocationListView()
+    }
+}
+
+
+import Foundation
+import Combine
+
+class NowBusLocationViewModel: ObservableObject {
+    @Published var NowbusLocations: [NowBusLocation] = []
+    private var cancellables = Set<AnyCancellable>()
+    
+    init() {
+        BlueBerrySmoothie.fetchNowBusLocationData(cityCode: 21, routeId: "BSB5200043000") { [weak self] locations in
+            self?.NowbusLocations = locations
+        }
+    }
+    
+    func fetchBusLocationData(cityCode: Int, routeId: String) {
+        BlueBerrySmoothie.fetchNowBusLocationData(cityCode: cityCode, routeId: routeId) { [weak self] locations in
+            DispatchQueue.main.async {
+                self?.NowbusLocations = locations
+            }
+        }
+    }
+}
+
+
