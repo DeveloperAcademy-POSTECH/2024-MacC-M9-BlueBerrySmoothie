@@ -7,13 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		121D491B2CE1B46B00EF5269 /* NowBusLocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121D491A2CE1B46B00EF5269 /* NowBusLocationViewModel.swift */; };
+		121D491D2CE1B49000EF5269 /* BusLocationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121D491C2CE1B49000EF5269 /* BusLocationModel.swift */; };
+		121D491F2CE1B4A300EF5269 /* BusLocationDecoderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121D491E2CE1B4A300EF5269 /* BusLocationDecoderModel.swift */; };
+		121D49212CE1B4E000EF5269 /* FetchBusLocationAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121D49202CE1B4E000EF5269 /* FetchBusLocationAPI.swift */; };
 		1232B3B02CD1D3DE00C48414 /* BlueBerrySmoothieApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1232B3AF2CD1D3DE00C48414 /* BlueBerrySmoothieApp.swift */; };
-		1232B3B22CD1D3DE00C48414 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1232B3B12CD1D3DE00C48414 /* ContentView.swift */; };
 		1232B3B42CD1D3DF00C48414 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1232B3B32CD1D3DF00C48414 /* Assets.xcassets */; };
 		1232B3B72CD1D3DF00C48414 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1232B3B62CD1D3DF00C48414 /* Preview Assets.xcassets */; };
 		1232B3DB2CD1D40500C48414 /* BusDecoderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1232B3DA2CD1D40500C48414 /* BusDecoderModel.swift */; };
-		1232B3DE2CD1D41600C48414 /* SelectCityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1232B3DD2CD1D41600C48414 /* SelectCityView.swift */; };
-		1232B3E12CD1D46500C48414 /* DummyHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1232B3E02CD1D46500C48414 /* DummyHelper.swift */; };
 		1232B3E42CD1D48600C48414 /* FetchBusAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1232B3E32CD1D48600C48414 /* FetchBusAPI.swift */; };
 		12D2B6C62CD36E70005CF771 /* SelectBusStopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D2B6C52CD36E70005CF771 /* SelectBusStopView.swift */; };
 		12D2B6C82CD36E94005CF771 /* BusStopModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D2B6C72CD36E94005CF771 /* BusStopModel.swift */; };
@@ -25,19 +26,12 @@
 		12D2B6D82CD63D6A005CF771 /* AlertModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D2B6D72CD63D6A005CF771 /* AlertModel.swift */; };
 		8B0860F72CDDA237007C109A /* HapticManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0860F62CDDA237007C109A /* HapticManager.swift */; };
 		8B0860F92CE1A0A9007C109A /* silentSound.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8B0860F82CE1A0A8007C109A /* silentSound.wav */; };
-		8BF2EFA42CD3A78A008A6644 /* MainViewDaisy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF2EFA32CD3A78A008A6644 /* MainViewDaisy.swift */; };
-		8BF2EFA62CD3A7B0008A6644 /* InputViewDaisy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF2EFA52CD3A7B0008A6644 /* InputViewDaisy.swift */; };
 		8BF2EFA82CD3A7F2008A6644 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF2EFA72CD3A7F2008A6644 /* Alert.swift */; };
 		8BF2EFAA2CD3AA2B008A6644 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF2EFA92CD3AA2B008A6644 /* NotificationManager.swift */; };
 		8BF2EFAC2CD3AA44008A6644 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF2EFAB2CD3AA44008A6644 /* LocationManager.swift */; };
-		8BF2EFAE2CD3AA5F008A6644 /* LocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF2EFAD2CD3AA5F008A6644 /* LocationView.swift */; };
-		8BF2EFB12CD86C93008A6644 /* UsingAlertViewDaisy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF2EFB02CD86C93008A6644 /* UsingAlertViewDaisy.swift */; };
 		8BF2EFB52CD92BE0008A6644 /* HapticHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF2EFB42CD92BE0008A6644 /* HapticHelper.swift */; };
 		8BF2EFB72CD9B34A008A6644 /* EndViewDaisy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF2EFB62CD9B34A008A6644 /* EndViewDaisy.swift */; };
 		9D0C411B2CDA3D780005A6CC /* StationPickerModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D0C411A2CDA3D780005A6CC /* StationPickerModal.swift */; };
-		9D0C411D2CDA452E0005A6CC /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D0C411C2CDA452E0005A6CC /* DetailView.swift */; };
-		9D64A9E22CD7A85C00718CC8 /* AlarmStartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D64A9E12CD7A85C00718CC8 /* AlarmStartView.swift */; };
-		9DBC2A422CDC6F2600EB19A9 /* BusLocationListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DBC2A412CDC6F2600EB19A9 /* BusLocationListView.swift */; };
 		9DBC2A442CDC6F4D00EB19A9 /* UsingAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DBC2A432CDC6F4D00EB19A9 /* UsingAlertView.swift */; };
 		9DEA523F2CD362CA00A3AE68 /* SelectBusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEA523E2CD362C100A3AE68 /* SelectBusView.swift */; };
 		9DEA52412CD3630200A3AE68 /* CityDecoderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEA52402CD362FC00A3AE68 /* CityDecoderModel.swift */; };
@@ -62,14 +56,15 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		121D491A2CE1B46B00EF5269 /* NowBusLocationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NowBusLocationViewModel.swift; sourceTree = "<group>"; };
+		121D491C2CE1B49000EF5269 /* BusLocationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusLocationModel.swift; sourceTree = "<group>"; };
+		121D491E2CE1B4A300EF5269 /* BusLocationDecoderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusLocationDecoderModel.swift; sourceTree = "<group>"; };
+		121D49202CE1B4E000EF5269 /* FetchBusLocationAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchBusLocationAPI.swift; sourceTree = "<group>"; };
 		1232B3AC2CD1D3DE00C48414 /* BlueBerrySmoothie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BlueBerrySmoothie.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1232B3AF2CD1D3DE00C48414 /* BlueBerrySmoothieApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlueBerrySmoothieApp.swift; sourceTree = "<group>"; };
-		1232B3B12CD1D3DE00C48414 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		1232B3B32CD1D3DF00C48414 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1232B3B62CD1D3DF00C48414 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		1232B3DA2CD1D40500C48414 /* BusDecoderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusDecoderModel.swift; sourceTree = "<group>"; };
-		1232B3DD2CD1D41600C48414 /* SelectCityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCityView.swift; sourceTree = "<group>"; };
-		1232B3E02CD1D46500C48414 /* DummyHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyHelper.swift; sourceTree = "<group>"; };
 		1232B3E32CD1D48600C48414 /* FetchBusAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchBusAPI.swift; sourceTree = "<group>"; };
 		12D2B6C52CD36E70005CF771 /* SelectBusStopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectBusStopView.swift; sourceTree = "<group>"; };
 		12D2B6C72CD36E94005CF771 /* BusStopModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusStopModel.swift; sourceTree = "<group>"; };
@@ -82,20 +77,13 @@
 		12D2B6D72CD63D6A005CF771 /* AlertModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertModel.swift; sourceTree = "<group>"; };
 		8B0860F62CDDA237007C109A /* HapticManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticManager.swift; sourceTree = "<group>"; };
 		8B0860F82CE1A0A8007C109A /* silentSound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = silentSound.wav; sourceTree = "<group>"; };
-		8BF2EFA32CD3A78A008A6644 /* MainViewDaisy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewDaisy.swift; sourceTree = "<group>"; };
-		8BF2EFA52CD3A7B0008A6644 /* InputViewDaisy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputViewDaisy.swift; sourceTree = "<group>"; };
 		8BF2EFA72CD3A7F2008A6644 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		8BF2EFA92CD3AA2B008A6644 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		8BF2EFAB2CD3AA44008A6644 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
-		8BF2EFAD2CD3AA5F008A6644 /* LocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationView.swift; sourceTree = "<group>"; };
 		8BF2EFAF2CD3AABF008A6644 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		8BF2EFB02CD86C93008A6644 /* UsingAlertViewDaisy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsingAlertViewDaisy.swift; sourceTree = "<group>"; };
 		8BF2EFB42CD92BE0008A6644 /* HapticHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticHelper.swift; sourceTree = "<group>"; };
 		8BF2EFB62CD9B34A008A6644 /* EndViewDaisy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndViewDaisy.swift; sourceTree = "<group>"; };
 		9D0C411A2CDA3D780005A6CC /* StationPickerModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationPickerModal.swift; sourceTree = "<group>"; };
-		9D0C411C2CDA452E0005A6CC /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
-		9D64A9E12CD7A85C00718CC8 /* AlarmStartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmStartView.swift; sourceTree = "<group>"; };
-		9DBC2A412CDC6F2600EB19A9 /* BusLocationListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusLocationListView.swift; sourceTree = "<group>"; };
 		9DBC2A432CDC6F4D00EB19A9 /* UsingAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsingAlertView.swift; sourceTree = "<group>"; };
 		9DEA523E2CD362C100A3AE68 /* SelectBusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectBusView.swift; sourceTree = "<group>"; };
 		9DEA52402CD362FC00A3AE68 /* CityDecoderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityDecoderModel.swift; sourceTree = "<group>"; };
@@ -130,6 +118,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		121D49222CE1B5E600EF5269 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				D968D5F82CDB165B002DF70B /* UIfont.swift */,
+				8B0860F82CE1A0A8007C109A /* silentSound.wav */,
+				D968D5F92CDB165B002DF70B /* Fonts */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
 		1232B3A32CD1D3DE00C48414 = {
 			isa = PBXGroup;
 			children = (
@@ -149,8 +147,8 @@
 		1232B3AE2CD1D3DE00C48414 /* BlueBerrySmoothie */ = {
 			isa = PBXGroup;
 			children = (
-				D968D5F92CDB165B002DF70B /* Fonts */,
 				8BF2EFAF2CD3AABF008A6644 /* Info.plist */,
+				121D49222CE1B5E600EF5269 /* Resource */,
 				D90E0C112CD89C620089883F /* Component */,
 				12D2B6D22CD3F50F005CF771 /* Config.xcconfig */,
 				1232B3E92CD1D4E800C48414 /* App */,
@@ -185,6 +183,8 @@
 				12D2B6C72CD36E94005CF771 /* BusStopModel.swift */,
 				12D2B6C92CD36ED8005CF771 /* BusStopDecoderModel.swift */,
 				12D2B6D72CD63D6A005CF771 /* AlertModel.swift */,
+				121D491C2CE1B49000EF5269 /* BusLocationModel.swift */,
+				121D491E2CE1B4A300EF5269 /* BusLocationDecoderModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -193,21 +193,12 @@
 			isa = PBXGroup;
 			children = (
 				9DBC2A432CDC6F4D00EB19A9 /* UsingAlertView.swift */,
-				9DBC2A412CDC6F2600EB19A9 /* BusLocationListView.swift */,
-				9D0C411C2CDA452E0005A6CC /* DetailView.swift */,
 				9D0C411A2CDA3D780005A6CC /* StationPickerModal.swift */,
-				9D64A9E12CD7A85C00718CC8 /* AlarmStartView.swift */,
 				9DEA524D2CD46EF400A3AE68 /* BusDetailView.swift */,
 				9DEA524B2CD3B79B00A3AE68 /* ScrollingTextView.swift */,
-				1232B3DD2CD1D41600C48414 /* SelectCityView.swift */,
 				D90E0C192CD89CB20089883F /* AlertSettingMain.swift */,
 				9DEA523E2CD362C100A3AE68 /* SelectBusView.swift */,
 				12D2B6C52CD36E70005CF771 /* SelectBusStopView.swift */,
-				1232B3B12CD1D3DE00C48414 /* ContentView.swift */,
-				8BF2EFA32CD3A78A008A6644 /* MainViewDaisy.swift */,
-				8BF2EFA52CD3A7B0008A6644 /* InputViewDaisy.swift */,
-				8BF2EFAD2CD3AA5F008A6644 /* LocationView.swift */,
-				8BF2EFB02CD86C93008A6644 /* UsingAlertViewDaisy.swift */,
 				8BF2EFB62CD9B34A008A6644 /* EndViewDaisy.swift */,
 				D968D5C92CD912C5002DF70B /* MainView.swift */,
 			);
@@ -217,7 +208,6 @@
 		1232B3DF2CD1D45A00C48414 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
-				1232B3E02CD1D46500C48414 /* DummyHelper.swift */,
 				8BF2EFB42CD92BE0008A6644 /* HapticHelper.swift */,
 				12D2B6D02CD3B104005CF771 /* NetworkHelper.swift */,
 				12D2B6D32CD3F5BD005CF771 /* getAPIKey.swift */,
@@ -231,6 +221,7 @@
 				1232B3E32CD1D48600C48414 /* FetchBusAPI.swift */,
 				9DEA52462CD363A100A3AE68 /* FetchCityAPI.swift */,
 				12D2B6CB2CD3706F005CF771 /* fetchBusStopAPI.swift */,
+				121D49202CE1B4E000EF5269 /* FetchBusLocationAPI.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -260,6 +251,7 @@
 			isa = PBXGroup;
 			children = (
 				12D2B6CE2CD3ABAF005CF771 /* BusStopViewModel.swift */,
+				121D491A2CE1B46B00EF5269 /* NowBusLocationViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -267,7 +259,6 @@
 		D90E0C112CD89C620089883F /* Component */ = {
 			isa = PBXGroup;
 			children = (
-				8B0860F82CE1A0A8007C109A /* silentSound.wav */,
 				D968D5C72CD89EF4002DF70B /* SavedBus.swift */,
 				D968D5C52CD89EC4002DF70B /* ActionButton.swift */,
 			);
@@ -282,7 +273,6 @@
 				D968D5F52CDB165B002DF70B /* SpoqaHanSansNeo-Medium.otf */,
 				D968D5F62CDB165B002DF70B /* SpoqaHanSansNeo-Regular.otf */,
 				D968D5F72CDB165B002DF70B /* SpoqaHanSansNeo-Thin.otf */,
-				D968D5F82CDB165B002DF70B /* UIfont.swift */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -363,21 +353,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1232B3E12CD1D46500C48414 /* DummyHelper.swift in Sources */,
-				8BF2EFA42CD3A78A008A6644 /* MainViewDaisy.swift in Sources */,
 				8BF2EFB72CD9B34A008A6644 /* EndViewDaisy.swift in Sources */,
 				8B0860F72CDDA237007C109A /* HapticManager.swift in Sources */,
 				8BF2EFB52CD92BE0008A6644 /* HapticHelper.swift in Sources */,
 				8BF2EFAA2CD3AA2B008A6644 /* NotificationManager.swift in Sources */,
-				8BF2EFA62CD3A7B0008A6644 /* InputViewDaisy.swift in Sources */,
 				8BF2EFA82CD3A7F2008A6644 /* Alert.swift in Sources */,
-				8BF2EFAE2CD3AA5F008A6644 /* LocationView.swift in Sources */,
 				1232B3B02CD1D3DE00C48414 /* BlueBerrySmoothieApp.swift in Sources */,
 				8BF2EFAC2CD3AA44008A6644 /* LocationManager.swift in Sources */,
-				8BF2EFB12CD86C93008A6644 /* UsingAlertViewDaisy.swift in Sources */,
 				12D2B6D42CD3F5BE005CF771 /* getAPIKey.swift in Sources */,
 				1232B3DB2CD1D40500C48414 /* BusDecoderModel.swift in Sources */,
-				9D64A9E22CD7A85C00718CC8 /* AlarmStartView.swift in Sources */,
 				9DEA523F2CD362CA00A3AE68 /* SelectBusView.swift in Sources */,
 				D90E0C1A2CD89CB20089883F /* AlertSettingMain.swift in Sources */,
 				12D2B6D82CD63D6A005CF771 /* AlertModel.swift in Sources */,
@@ -385,28 +369,28 @@
 				9DEA52412CD3630200A3AE68 /* CityDecoderModel.swift in Sources */,
 				9DEA52502CD4D56400A3AE68 /* busColor.swift in Sources */,
 				9DEA524E2CD46EF400A3AE68 /* BusDetailView.swift in Sources */,
-				1232B3DE2CD1D41600C48414 /* SelectCityView.swift in Sources */,
 				9D0C411B2CDA3D780005A6CC /* StationPickerModal.swift in Sources */,
 				12D2B6CC2CD3706F005CF771 /* fetchBusStopAPI.swift in Sources */,
 				D968D5CA2CD912C5002DF70B /* MainView.swift in Sources */,
 				1232B3E42CD1D48600C48414 /* FetchBusAPI.swift in Sources */,
+				121D49212CE1B4E000EF5269 /* FetchBusLocationAPI.swift in Sources */,
 				9DEA52522CD4D57A00A3AE68 /* filterBuses.swift in Sources */,
-				9D0C411D2CDA452E0005A6CC /* DetailView.swift in Sources */,
-				1232B3B22CD1D3DE00C48414 /* ContentView.swift in Sources */,
 				D968D5C62CD89EC4002DF70B /* ActionButton.swift in Sources */,
+				121D491D2CE1B49000EF5269 /* BusLocationModel.swift in Sources */,
 				12D2B6D12CD3B104005CF771 /* NetworkHelper.swift in Sources */,
 				9DEA52472CD363AD00A3AE68 /* FetchCityAPI.swift in Sources */,
 				9DEA524C2CD3B79B00A3AE68 /* ScrollingTextView.swift in Sources */,
 				9DEA52452CD3639100A3AE68 /* CityModel.swift in Sources */,
 				D968D5C82CD89EF4002DF70B /* SavedBus.swift in Sources */,
 				9DEA52542CD4D5B500A3AE68 /* FetchAllBusData.swift in Sources */,
+				121D491B2CE1B46B00EF5269 /* NowBusLocationViewModel.swift in Sources */,
 				12D2B6CA2CD36ED8005CF771 /* BusStopDecoderModel.swift in Sources */,
 				D968D6002CDB165B002DF70B /* UIfont.swift in Sources */,
 				12D2B6C82CD36E94005CF771 /* BusStopModel.swift in Sources */,
 				9DBC2A442CDC6F4D00EB19A9 /* UsingAlertView.swift in Sources */,
 				12D2B6C62CD36E70005CF771 /* SelectBusStopView.swift in Sources */,
+				121D491F2CE1B4A300EF5269 /* BusLocationDecoderModel.swift in Sources */,
 				12D2B6CF2CD3ABAF005CF771 /* BusStopViewModel.swift in Sources */,
-				9DBC2A422CDC6F2600EB19A9 /* BusLocationListView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
