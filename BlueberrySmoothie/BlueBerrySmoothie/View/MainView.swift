@@ -31,7 +31,7 @@ struct MainView: View {
     }
     
     var body: some View {
-        NavigationStack {
+        NavigationView {
             VStack {
                 alertListView()
                 
@@ -112,7 +112,7 @@ struct MainView: View {
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .background(Color.clear)
             } else {
-                ScrollView {
+                ScrollView(showsIndicators: false)  {
                     ForEach (busAlerts, id: \.id) { alert in
                         SavedBus(busAlert: alert, isSelected: selectedAlert?.id == alert.id, onDelete: {
                             deleteBusAlert(alert) // 삭제 동작
