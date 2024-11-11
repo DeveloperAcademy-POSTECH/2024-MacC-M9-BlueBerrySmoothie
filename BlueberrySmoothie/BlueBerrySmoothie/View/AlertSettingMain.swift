@@ -14,6 +14,7 @@ struct AlertSettingMain: View {
     @Environment(\.dismiss) private var dismiss
     @Query var busStopLocal: [BusStopLocal]
     var busAlert: BusAlert? // 편집을 위한 `busAlert` 매개변수 추가
+    var isEditing: Bool = false // 편집을 위한 `busAlert` 매개변수 추가
     
     // 초기화 데이터들
     @State private var label: String = ""
@@ -23,8 +24,10 @@ struct AlertSettingMain: View {
     @State private var selectedBus: Bus? // 선택된 버스를 저장할 변수
     @State private var selectedArrivalBusStop: BusStop? // 선택된 도착 정류장
     
-    init(busAlert: BusAlert? = nil) {
+    init(busAlert: BusAlert? = nil, isEditing: Bool = false) {
         self.busAlert = busAlert
+        self.isEditing = isEditing
+        
     }
     
     var body: some View {
@@ -76,22 +79,25 @@ struct AlertSettingMain: View {
                         }
                         .fixedSize(horizontal: false, vertical: true)
                         
-                        NavigationLink(destination: SelectBusView( busStopAlert: $busStopAlert)) {  // 선택된 버스를 전달받음
-                            ZStack {
-                                Rectangle()
-                                    .foregroundColor(Color.lightbrand)
-                                    .cornerRadius(20)
-                                    .overlay {
-                                        RoundedRectangle(cornerRadius: 20)
-                                            .stroke(Color.brand, lineWidth: 1)
-                                    }
-                                Text("버스 찾기")
-                                    .font(.caption2)
-                                    .foregroundColor(Color.black)
-                                    .padding(12)
+                        // 수정이 아닐 경우
+                        if isEditing == false {
+                            NavigationLink(destination: SelectBusView( busStopAlert: $busStopAlert)) {  // 선택된 버스를 전달받음
+                                ZStack {
+                                    Rectangle()
+                                        .foregroundColor(Color.lightbrand)
+                                        .cornerRadius(20)
+                                        .overlay {
+                                            RoundedRectangle(cornerRadius: 20)
+                                                .stroke(Color.brand, lineWidth: 1)
+                                        }
+                                    Text("버스 찾기")
+                                        .font(.caption2)
+                                        .foregroundColor(Color.black)
+                                        .padding(12)
+                                }
                             }
+                            .fixedSize()
                         }
-                        .fixedSize()
                     }
                 }
                 HStack {
@@ -281,10 +287,10 @@ struct AlertSettingMain: View {
     //    }
     
     private func saveOrUpdateAlert() {
-        if let busAlert = busAlert {
+        if isEditing == true {
             // 기존 `busAlert` 업데이트
-            busAlert.alertLabel = label
-            busAlert.alertBusStop = Int(selectedStation) ?? busAlert.alertBusStop
+            busAlert?.alertLabel = label
+            busAlert?.alertBusStop = Int(selectedStation) ?? busAlert!.alertBusStop
             // 추가 필드 업데이트
             print("알람이 업데이트되었습니다.")
         } else {
