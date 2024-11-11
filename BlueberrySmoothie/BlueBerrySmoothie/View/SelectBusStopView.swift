@@ -43,14 +43,14 @@ struct SelectBusStopView: View {
 
                 .padding(.bottom, 12)
 
-                TextField("정류장 입력", text: $stop)
-                    .padding()
-                    .frame(height: 40)
-                    .frame(maxWidth: .infinity) // Ensures it spans full width
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 8)
-                            .stroke(Color.brand, lineWidth: 1) // Brand color border, thickness 1
-                    )
+//                TextField("정류장 입력", text: $stop)
+//                    .padding()
+//                    .frame(height: 40)
+//                    .frame(maxWidth: .infinity) // Ensures it spans full width
+//                    .overlay(
+//                        RoundedRectangle(cornerRadius: 8)
+//                            .stroke(Color.brand, lineWidth: 1) // Brand color border, thickness 1
+//                    )
 
             }
             .padding(.bottom, 10)

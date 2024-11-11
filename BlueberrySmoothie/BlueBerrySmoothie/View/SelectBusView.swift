@@ -27,14 +27,14 @@ struct SelectBusView: View {
                             filteredBuses = filterBuses(by: newRouteNo, from: allBuses)
                         }
                     Image(systemName: "magnifyingglass")
-                        .foregroundColor(isTextFieldFocused ? .blue : .gray)
+                        .foregroundColor(isTextFieldFocused ? .brand : .gray)
                 }
                 .padding(.horizontal, 36)
                 .padding(.bottom, -8)
                 .padding(.top, 30)
                 
                 Rectangle()
-                    .foregroundColor(isTextFieldFocused ? .blue : .gray)
+                    .foregroundColor(isTextFieldFocused ? .brand : .gray)
                     .frame(height: 2)
                     .padding(.horizontal, 20)
                 
@@ -77,6 +77,19 @@ struct SelectBusView: View {
             }
             .navigationTitle("버스 검색")
             .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                
+                // 닫기 버튼
+                   ToolbarItem(placement: .navigationBarLeading) {
+                       Button(action: {
+                           dismiss()  // 현재 화면을 닫는 동작
+                       }) {
+                           Text("닫기")
+                               .font(.regular16)
+                               .foregroundColor(Color.brand) // 원하는 색상으로 변경 가능
+                       }
+                   }
+            }
             .onAppear {
                 fetchAllBusData(citycode: city.citycode) { fetchedBuses in
                     self.allBuses = fetchedBuses

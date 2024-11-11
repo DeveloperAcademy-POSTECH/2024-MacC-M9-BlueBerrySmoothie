@@ -242,7 +242,18 @@ struct AlertSettingMain: View {
                         .foregroundColor(Color.brand)
                 }
             }
+            // 닫기 버튼
+               ToolbarItem(placement: .navigationBarLeading) {
+                   Button(action: {
+                       dismiss()  // 현재 화면을 닫는 동작
+                   }) {
+                       Text("닫기")
+                           .font(.regular16)
+                           .foregroundColor(Color.brand) // 원하는 색상으로 변경 가능
+                   }
+               }
         }
+        
         
     }
     
