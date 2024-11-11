@@ -67,7 +67,6 @@ struct MainView: View {
                     notificationManager.scheduleTestNotification(for: selectedAlert)
                     notificationManager.requestLocationNotification(for: selectedAlert, for: alertBusStopLocal)
                     notificationManager.requestLocationNotification(for: selectedAlert, for: arrivalBusStopLocal)
-                    isUsingAlertActive = true
                 }, label: {
                     ActionButton()
                 })

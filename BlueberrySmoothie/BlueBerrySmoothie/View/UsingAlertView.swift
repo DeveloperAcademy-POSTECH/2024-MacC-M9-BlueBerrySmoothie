@@ -2,11 +2,11 @@ import SwiftUI
 import SwiftData
 
 struct UsingAlertView: View {
-//    let busStops: [BusStopLocal] // 정류소 정보 배열
+    //    let busStops: [BusStopLocal] // 정류소 정보 배열
     @Query var busStops: [BusStopLocal]
     let busAlert: BusAlert // 관련된 알림 정보
     let alertBusStopLocal: BusStopLocal // 알림 기준 정류소
-        let arrivalBusStopLocal: BusStopLocal // 도착 정류소
+    let arrivalBusStopLocal: BusStopLocal // 도착 정류소
     
     @State private var isAlertEnabled: Bool = false // 스위치 상태 관리
     // NotificationManager 인스턴스 감지
@@ -56,12 +56,9 @@ struct UsingAlertView: View {
                 ScrollView(showsIndicators: false) {
                     VStack(alignment: .leading, spacing: 0) {
                         ForEach(busStops, id: \.id) { busStop in
-                            
-                            
                             HStack{
                                 //                            Image(systemName: "dot.circle")
                                 VStack {
-                                    
                                     Rectangle()
                                         .frame(width: 1) // 선의 너비
                                         .foregroundStyle(.gray5)
@@ -89,7 +86,7 @@ struct UsingAlertView: View {
                 }
             }
             .navigationTitle(busAlert.alertLabel)
-    //        .background(Color.black)
+            //        .background(Color.black)
             
             // 알람종료 오버레이 뷰
             if notificationManager.notificationReceived {
@@ -114,12 +111,11 @@ struct UsingAlertView: View {
                 notificationManager.notificationReceived = false // 오버레이 닫기
                 
                 // 알림 취소 (alertBusStopLocal과 arrivalBusStopLocal 각각에 대해 호출)
-                                notificationManager.cancelLocationNotification(for: busAlert, for: alertBusStopLocal)
-                                notificationManager.cancelLocationNotification(for: busAlert, for: arrivalBusStopLocal)
-
+                notificationManager.cancelLocationNotification(for: busAlert, for: alertBusStopLocal)
+                notificationManager.cancelLocationNotification(for: busAlert, for: arrivalBusStopLocal)                
                 // EndView로 이동
                 navigateToEndView = true
-//                notificationManager.locationManager.stopLocationUpdates()
+                //                notificationManager.locationManager.stopLocationUpdates()
             }, label: {
                 Text("종료")
                     .foregroundStyle(.white)
@@ -135,4 +131,5 @@ struct UsingAlertView: View {
         .cornerRadius(10)
         .shadow(radius: 10)
     }
+
 }

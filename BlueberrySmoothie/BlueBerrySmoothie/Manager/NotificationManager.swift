@@ -16,16 +16,16 @@ import AVFoundation
 class NotificationManager: NSObject, CLLocationManagerDelegate, ObservableObject, UNUserNotificationCenterDelegate {
     static let instance = NotificationManager() //Singleton
     @Published var notificationReceived = false // 알림 수신 상태
-//    var locationManager = LocationManager.instance
+    //    var locationManager = LocationManager.instance
     let hapticManager = HapticManager()
     
     
     // 새로운 초기화 메서드 추가
-//    init(locationManager: LocationManager) {
-//        super.init()
-//        self.locationManager = locationManager
-//        UNUserNotificationCenter.current().delegate = self
-//    }
+    //    init(locationManager: LocationManager) {
+    //        super.init()
+    //        self.locationManager = locationManager
+    //        UNUserNotificationCenter.current().delegate = self
+    //    }
     
     override init() {
         super.init()
@@ -130,7 +130,7 @@ class NotificationManager: NSObject, CLLocationManagerDelegate, ObservableObject
         print("Foreground 상태에서 알림 수신") // Foreground 상태에서 알림 수신 확인
         //        hapticManager.playPattern()
         notificationReceived = true // 알림 수신 상태 업데이트
-//        locationManager.stopLocationUpdates()
+        //        locationManager.stopLocationUpdates()
         completionHandler([.list, .sound, .banner])
     }
     
@@ -139,7 +139,7 @@ class NotificationManager: NSObject, CLLocationManagerDelegate, ObservableObject
         print("알림 수신")
         //        hapticManager.playPattern()
         notificationReceived = true // 알림 수신 상태 업데이트
-//        locationManager.stopLocationUpdates()
+        //        locationManager.stopLocationUpdates()
         completionHandler()
     }
     

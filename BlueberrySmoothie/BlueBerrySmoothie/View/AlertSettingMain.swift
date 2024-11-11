@@ -20,8 +20,6 @@ struct AlertSettingMain: View {
     @State private var selectedStation: String = "정류장 수"
     @State private var busStopAlert: BusStopAlert? // 사용자 선택 사항
     @State private var showSheet: Bool = false
-    @State private var selectedBus: Bus? // 선택된 버스를 저장할 변수
-    @State private var selectedArrivalBusStop: BusStop? // 선택된 도착 정류장
     
     init(busAlert: BusAlert? = nil) {
         self.busAlert = busAlert
@@ -245,7 +243,6 @@ struct AlertSettingMain: View {
                 ToolbarItem {
                     Button(action: {
                         if selectedStation != "정류장 수" && label != "" {
-                            //                            saveAlert()
                             saveOrUpdateAlert()
                             saveBusstop()
                             dismiss()
