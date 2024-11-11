@@ -1,10 +1,3 @@
-//
-//  UsingAlertView 2.swift
-//  BlueBerrySmoothie
-//
-//  Created by 문재윤 on 11/7/24.
-//
-
 import SwiftUI
 
 struct UsingAlertView: View {
@@ -19,138 +12,150 @@ struct UsingAlertView: View {
     private let refreshTimer = Timer.publish(every: 10, on: .main, in: .common).autoconnect()
     
     var body: some View {
-        VStack {
+        ZStack {
+            // 기존 콘텐츠 부분
             VStack {
                 VStack {
-                    HStack {
-                        Text("\(busAlert.busNo)")
-                            .foregroundColor(Color.gray3)
-                            .font(.regular20)
-                        Image(systemName: "suit.diamond.fill")
-                            .font(.regular10)
-                            .foregroundStyle(.midbrand)
-                        Text("\(busAlert.arrivalBusStopNm)")
-                            .foregroundColor(Color.gray2)
-                            .font(.regular20)
-                        Spacer()
-//                        VStack {
-//                            if let refreshTime = lastRefreshTime {
-//                                Text("마지막 새로고침: \(refreshTime, formatter: dateFormatter)")
-//                                    .font(.caption)
-//                                    .foregroundColor(.gray)
+                    VStack {
+                        HStack {
+                            Text("\(busAlert.busNo)")
+                                .foregroundColor(Color.gray3)
+                                .font(.regular20)
+                            Image(systemName: "suit.diamond.fill")
+                                .font(.regular10)
+                                .foregroundStyle(.midbrand)
+                            Text("\(busAlert.arrivalBusStopNm)")
+                                .foregroundColor(Color.gray2)
+                                .font(.regular20)
+                            Spacer()
+//                            VStack {
+//                                if let refreshTime = lastRefreshTime {
+//                                    Text("마지막 새로고침: \(refreshTime, formatter: dateFormatter)")
+//                                        .font(.caption)
+//                                        .foregroundColor(.gray)
+//                                }
 //                            }
-//                            // 새로고침 버튼
-//                            Button(action: refreshData) {
-//                                Image(systemName: "arrow.clockwise")
-//                                    .font(.title3)
-//                            }
-//                            .disabled(isRefreshing) // 로딩 중에는 비활성화
-//                        }
-                    }
-                    .padding(.bottom, 26)
-                    
-                    HStack {
-                        Text("\(busAlert.alertBusStop)정류장 전 알림")
-                            .foregroundStyle(.brand)
-                            .font(.regular16)
-                        Spacer()
-                    }
-                    .padding(.bottom, 8)
-                    
-                    HStack {
-                        ZStack {
-                            Circle()
-                                .frame(width: 26, height: 26)
-                                .foregroundColor(Color.gray7)
-                            Image(systemName: "bell.fill")
-                                .frame(width: 14, height: 14)
-                                .foregroundColor(Color.midbrand)
                         }
-                        Text("\(busAlert.arrivalBusStopNm)")
-//                        Text("\(busAlert.alertBusStopNm)") // n번째 전 정거장 값
-                            .foregroundColor(Color.black)
-                            .font(.medium30)
-                        Spacer()
-//                        Toggle(isOn: $isAlertEnabled) { }
-//                            .toggleStyle(SwitchToggleStyle(tint: .brand))
-                    }
-                }
-                .padding(.horizontal, 20)
-                .padding(.top)
-                .padding(.bottom, 28)
-            }
-            .background(Color.lightbrand)
-            
-            ScrollView(showsIndicators: false) {
-                VStack(alignment: .leading, spacing: 0) {
-                    if let closestBus = viewModel.closestBusLocation {
-                        ForEach(busStops.filter { $0.routeid == busAlert.routeid }.sorted(by: { $0.nodeord < $1.nodeord }), id: \.id) { busStop in
-                            HStack {
-                                if busStop.nodeid == closestBus.nodeid {
-                                    Image(systemName: "bus.fill")
-                                        .foregroundStyle(.brand)
-                                        .padding(.leading, 10)
-                                } else {
-                                    Image(systemName: "bus.fill")
-                                        .opacity(0)
-                                        .padding(.leading, 10)
-                                }
-                                VStack {
-                                    if busStop.nodeid == busAlert.arrivalBusStopID {
-                                        Image(systemName: "mappin.and.ellipse")
-                                    } else {
-                                        Rectangle()
-                                            .frame(width: 1)
-                                            .foregroundStyle(.gray5)
-                                        ZStack {
-                                            Circle()
-                                                .frame(width: 20, height: 20)
-                                                .foregroundColor(Color.gray6)
-                                            Circle()
-                                                .frame(width: 14, height: 14)
-                                                .foregroundColor(Color.lightbrand)
-                                            
-                                            Image(systemName: "chevron.down")
-                                                .foregroundStyle(busStop.nodeid == closestBus.nodeid ? .red : .gray4)
-                                                .font(.regular10)
-                                                .bold()
-                                                .padding(.vertical, 2)
-                                        }
-                                        Rectangle()
-                                            .frame(width: 1)
-                                            .foregroundStyle(.gray5)
-                                    }
-                                }
-                                .foregroundStyle(.gray)
-                                .padding(.leading, 10)
-                                
-                                Text(busStop.nodenm) // 정류소 이름 표시
-                                    .padding(.leading, 25)
-                                    .foregroundColor(Color.black)
-                                    .font(.regular16)
-                                Spacer()
+                        .padding(.bottom, 26)
+                        
+                        HStack {
+                            Text("\(busAlert.alertBusStop)정류장 전 알림")
+                                .foregroundStyle(.brand)
+                                .font(.regular16)
+                            Spacer()
+                        }
+                        .padding(.bottom, 8)
+                        
+                        HStack {
+                            ZStack {
+                                Circle()
+                                    .frame(width: 26, height: 26)
+                                    .foregroundColor(Color.gray7)
+                                Image(systemName: "bell.fill")
+                                    .frame(width: 14, height: 14)
+                                    .foregroundColor(Color.midbrand)
                             }
-                            .frame(height: 60)
+                            Text("\(busAlert.arrivalBusStopNm)")
+                                .foregroundColor(Color.black)
+                                .font(.medium30)
+                            Spacer()
                         }
-                    } else if isRefreshing {
-                        // 로딩 중일 때 로딩 인디케이터 표시
-                        ProgressView("가장 가까운 버스 위치를 찾고 있습니다...")
-                            .foregroundColor(Color.black)
-                            .font(.regular16)
-                    } else {
-                        Text("가장 가까운 버스 위치를 찾고 있습니다...")
-                            .foregroundColor(Color.black)
-                            .font(.regular16)
                     }
-                    Spacer()
+                    .padding(.horizontal, 20)
+                    .padding(.top)
+                    .padding(.bottom, 28)
                 }
-                .background(.clear)
+                .background(Color.lightbrand)
+                
+                ScrollView(showsIndicators: false) {
+                    VStack(alignment: .leading, spacing: 0) {
+                        if let closestBus = viewModel.closestBusLocation {
+                            ForEach(busStops.filter { $0.routeid == busAlert.routeid }.sorted(by: { $0.nodeord < $1.nodeord }), id: \.id) { busStop in
+                                HStack {
+                                    if busStop.nodeid == closestBus.nodeid {
+                                        Image(systemName: "bus.fill")
+                                            .foregroundStyle(.brand)
+                                            .padding(.leading, 10)
+                                    } else {
+                                        Image(systemName: "bus.fill")
+                                            .opacity(0)
+                                            .padding(.leading, 10)
+                                    }
+                                    VStack {
+                                        if busStop.nodeid == busAlert.arrivalBusStopID {
+                                            Image(systemName: "mappin.and.ellipse")
+                                        } else {
+                                            Rectangle()
+                                                .frame(width: 1)
+                                                .foregroundStyle(.gray5)
+                                            ZStack {
+                                                Circle()
+                                                    .frame(width: 20, height: 20)
+                                                    .foregroundColor(Color.gray6)
+                                                Circle()
+                                                    .frame(width: 14, height: 14)
+                                                    .foregroundColor(Color.lightbrand)
+                                                
+                                                Image(systemName: "chevron.down")
+                                                    .foregroundStyle(busStop.nodeid == closestBus.nodeid ? .red : .gray4)
+                                                    .font(.regular10)
+                                                    .bold()
+                                                    .padding(.vertical, 2)
+                                            }
+                                            Rectangle()
+                                                .frame(width: 1)
+                                                .foregroundStyle(.gray5)
+                                        }
+                                    }
+                                    .foregroundStyle(.gray)
+                                    .padding(.leading, 10)
+                                    
+                                    Text(busStop.nodenm) // 정류소 이름 표시
+                                        .padding(.leading, 25)
+                                        .foregroundColor(Color.black)
+                                        .font(.regular16)
+                                    Spacer()
+                                }
+                                .frame(height: 60)
+                            }
+                        } else if isRefreshing {
+                            // 로딩 중일 때 로딩 인디케이터 표시
+                            ProgressView("가장 가까운 버스 위치를 찾고 있습니다...")
+                                .foregroundColor(Color.black)
+                                .font(.regular16)
+                        } else {
+                            Text("가장 가까운 버스 위치를 찾고 있습니다...")
+                                .foregroundColor(Color.black)
+                                .font(.regular16)
+                        }
+                        Spacer()
+                    }
+                    .background(.clear)
+                }
             }
+            .background(Color.gray7)
+            .navigationTitle("\(busAlert.alertLabel)")
+            .navigationBarTitleDisplayMode(.inline)
+
+            // 새로고침 버튼을 화면 오른쪽 아래에 배치
+            VStack {
+                Spacer() // 화면 상단에 공간을 줘서 버튼을 하단으로 밀어냄
+                HStack {
+                    Spacer() // 오른쪽에 공간을 두어 버튼을 오른쪽 끝에 오도록 함
+                    Button(action: refreshData) {
+                        Image(systemName: "arrow.clockwise")
+                            .font(.title3)
+                            .padding()
+                            .background(Color.black) // 배경색을 검정색으로 설정
+                            .clipShape(Circle())
+                            .foregroundColor(.white) // 화살표 색상 유지 (하얀색)
+                    }
+                    .disabled(isRefreshing) // 로딩 중에는 비활성화
+                    .padding() // 버튼과 화면 가장자리를 분리
+                }
+            }
+            .padding()
         }
-        .background(Color.gray7)
-        .navigationTitle("\(busAlert.alertLabel)")
-        .navigationBarTitleDisplayMode(.inline)
- 
         .onAppear {
             refreshData() // 초기 로드
         }
