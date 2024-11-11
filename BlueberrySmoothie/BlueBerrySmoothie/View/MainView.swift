@@ -89,12 +89,12 @@ struct MainView: View {
                         }
                         .sheet(isPresented: $showSetting) {
                             NavigationView {
-                                AlertSettingMain(showSetting: $showSetting)
+                                AlertSettingMain()
                             }
                         }
                 }
             }
-            .background(Color.white)
+
         }
         .tint(Color.brand)
         .onAppear(){
