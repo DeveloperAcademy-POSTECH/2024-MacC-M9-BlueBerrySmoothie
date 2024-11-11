@@ -91,7 +91,8 @@ struct SavedBus: View {
                 Spacer()
             }
             .padding(.horizontal)
-            .padding(.bottom, 20)
+            .padding(.bottom, 10)
+            
         }
         .fixedSize(horizontal: false, vertical: true)
         // `NavigationLink`를 사용하여 화면 전환

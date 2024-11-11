@@ -113,7 +113,7 @@ struct MainView: View {
                 .background(Color.clear)
             } else {
                 ScrollView {
-                    ForEach(busAlerts, id: \.id) { alert in
+                    ForEach (busAlerts, id: \.id) { alert in
                         SavedBus(busAlert: alert, isSelected: selectedAlert?.id == alert.id, onDelete: {
                             deleteBusAlert(alert) // 삭제 동작
                         })
@@ -121,12 +121,12 @@ struct MainView: View {
                             selectedAlert = alert // 선택된 알람 설정
                             print(selectedAlert?.alertLabel)
                         }
-                        .padding(8) // padding을 조금 추가하여 스트로크가 잘리는 것을 방지
+                        .padding(2) // padding을 조금 추가하여 스트로크가 잘리는 것을 방지
 //                        .background(
 //                            RoundedRectangle(cornerRadius: 10)
 //                                .stroke(selectedAlert?.id == alert.id ? Color.blue : Color.clear, lineWidth: 2) // 선택된 항목에 스트로크 추가
 //                        )
-                        .padding(.bottom, 8) // 아이템 간 간격 유지
+                        .padding(.bottom, 1) // 아이템 간 간격 유지
 
                     }
                 }
