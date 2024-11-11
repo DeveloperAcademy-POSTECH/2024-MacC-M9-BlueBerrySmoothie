@@ -230,18 +230,18 @@ struct AlertSettingMain: View {
                     )
                 }
             }
+            .onAppear {
+                if busStopAlert?.alertBusStop == 0 {
+                    selectedStation = "정류장 수"
+                }
+            }
+//            .background(Color.white)
             .overlay {
                 if showSheet {
                     StationPickerModal(isPresented: $showSheet, selectedStation: $selectedStation, alert: $busStopAlert)
                 } else {
                     EmptyView()
                 }
-                .onAppear {
-                    if busStopAlert?.alertBusStop == 0 {
-                        selectedStation = "정류장 수"
-                    }
-                }
-                .background(Color.white)
             }
             .toolbar {
                 ToolbarItem {
