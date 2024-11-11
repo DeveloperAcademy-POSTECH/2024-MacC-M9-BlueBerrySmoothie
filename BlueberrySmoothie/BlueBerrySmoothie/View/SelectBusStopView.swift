@@ -125,8 +125,6 @@ struct SelectBusStopView: View {
 
             }
 
-
-
             ScrollViewReader { proxy in
                  ScrollView(showsIndicators: false) {
                      ForEach(busStopViewModel.busStopList, id: \.self) { busstop in

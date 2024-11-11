@@ -10,51 +10,76 @@ import SwiftData
 
 struct MainView: View {
     @State private var showSetting: Bool = false 
-    @Query var busAlerts: [BusAlert]
+    @Query var busAlerts: [BusAlert] // 알람 데이터를 바인딩
     @Query var busStopLocal: [BusStopLocal]
     @State private var selectedAlert: BusAlert? // State to store the selected BusAlert
     @State private var isUsingAlertActive: Bool = false // Controls navigation to UsingAlertView
     
-    init() {
+    @Environment(\.modelContext) private var context // SwiftData의 ModelContext 가져오기
+    let notificationManager = NotificationManager.instance
+  
+      init() {
         UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.black]
     }
     
+    private func deleteBusAlert(_ busAlert: BusAlert) {
+            // SwiftData의 ModelContext를 통해 객체 삭제
+            context.delete(busAlert)
+            
+            // SwiftData는 별도의 save() 없이 자동으로 변경 사항을 처리합니다.
+            print("Bus alert \(busAlert.alertLabel) deleted.")
+        }
+    
     var body: some View {
         NavigationView {
-            ZStack {
-                VStack {
-                    alertListView()
-                    
-                    Spacer()
-                    
-                    NavigationLink {
-                        //여기 수정하기... ㅠㅠ busAlert에 selectedAlert 넣는 방법!
-                        selectedAlert.map { UsingAlertView(busStops: busStopLocal, busAlert: $0)}
-                    } label: {
-                        ActionButton()
-                    }.onTapGesture {
-                        isUsingAlertActive = true // Activate navigation
-                        print(selectedAlert?.alertLabel)
-                    }
-                    
-                    //                Button(action: {
-                    //                    NavigationLink(ActionButton()){
-                    //                        UsingAlertView(busStops: busStopLocal, busAlert: <#T##BusAlert#>, isAlertEnabled: <#T##Bool#>)
-                    //                    }
-                    //                    guard selectedAlert != nil else {
-                    //                        print("No alert selected")
-                    //                        return
-                    //                    }
-                    
-                    //                }, label: {
-                    //                    ActionButton()
-                    //                })
-                    //                .disabled(selectedAlert == nil) // Disable button if no alert is selected
+            VStack{
+                alertListView()
+                
+                Spacer()
+                
+                //데이지데이지데이지데이지데이지데이지
+                let alertBusStopLocal = busStopLocal.filter{$0.nodeid == selectedAlert?.alertBusStopID}.first
+                let arrivalBusStopLocal = busStopLocal.filter{$0.nodeid == selectedAlert?.arrivalBusStopID}.first
+                
+                NavigationLink(
+                    destination: selectedAlert.flatMap { alert in
+                        if let alertBusStopLocal = alertBusStopLocal,
+                           let arrivalBusStopLocal = arrivalBusStopLocal {
+                            return UsingAlertView(busAlert: alert, alertBusStopLocal: alertBusStopLocal, arrivalBusStopLocal: arrivalBusStopLocal)
+                        } else {
+                            return nil
+                        }
+                    },
+                    isActive: $isUsingAlertActive
+                ) {
+                    EmptyView()
                 }
-                .padding(20)
-                .navigationTitle("버스 알람: 핫!챠")
-                .toolbar {
-                    ToolbarItem(placement: .navigationBarTrailing) { // 위치를 명확히 지정
+
+                
+                // 시작하기 버튼
+                Button(action: {
+                    // 선택된 alert와 해당 busStop들을 안전하게 언래핑합니다.
+                    guard let selectedAlert = selectedAlert,
+                          let alertBusStopLocal = alertBusStopLocal,
+                          let arrivalBusStopLocal = arrivalBusStopLocal else {
+                        print("선택된 알람 또는 버스 정류장이 설정되지 않았습니다.")
+                        return
+                    }
+                    isUsingAlertActive = true // Activate navigation
+                    print(selectedAlert.alertLabel)
+                    notificationManager.requestAuthorization()
+                    notificationManager.scheduleTestNotification(for: selectedAlert)
+                    notificationManager.requestLocationNotification(for: selectedAlert, for: alertBusStopLocal)
+                    notificationManager.requestLocationNotification(for: selectedAlert, for: arrivalBusStopLocal)
+                }, label: {
+                    ActionButton()
+                })
+                
+            }
+            .padding(20)
+            .navigationTitle("버스 알람: 핫!챠")
+            .toolbar {
+                 ToolbarItem(placement: .navigationBarTrailing) { // 위치를 명확히 지정
                         Button(action: {
                             showSetting = true // sheet 표시 상태를 true로 설정
                         }) {
@@ -67,7 +92,6 @@ struct MainView: View {
                                 AlertSettingMain(showSetting: $showSetting)
                             }
                         }
-                    }
                 }
             }
             .background(Color.white)
@@ -81,9 +105,14 @@ struct MainView: View {
     private func alertListView() -> some View {
         ScrollView {
             ForEach(busAlerts, id: \.id) { alert in
-                SavedBus(busAlert: alert, isSelected: selectedAlert?.id == alert.id)
+//                SavedBus(busAlert: alert, isSelected: selectedAlert?.id == alert.id)
+                SavedBus(busAlert: alert, isSelected: selectedAlert?.id == alert.id, onDelete: {
+                                    deleteBusAlert(alert) // 삭제 동작 전달
+                                })
                     .onTapGesture {
-                        selectedAlert = alert // Set the selected alert
+                        selectedAlert = alert // Set the selected alert 
+                        print(selectedAlert?.alertLabel)
+
                     }
                     .padding(.bottom, 8)
             }
