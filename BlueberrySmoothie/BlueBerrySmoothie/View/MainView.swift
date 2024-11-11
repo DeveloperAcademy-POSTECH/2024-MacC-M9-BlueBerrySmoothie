@@ -78,7 +78,7 @@ struct MainView: View {
             .toolbar {
                 ToolbarItem {
                     NavigationLink("추가") {
-                        AlertSettingMain(isEditing: true)
+                        AlertSettingMain(isEditing: false)
                     }
                     .font(.system(size: 16, weight: .regular))
                     .foregroundColor(Color(red: 104 / 255, green: 144 / 255, blue: 255 / 255))

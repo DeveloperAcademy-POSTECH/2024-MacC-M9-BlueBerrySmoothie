@@ -24,9 +24,9 @@ struct AlertSettingMain: View {
     @State private var selectedBus: Bus? // 선택된 버스를 저장할 변수
     @State private var selectedArrivalBusStop: BusStop? // 선택된 도착 정류장
     
-    init(busAlert: BusAlert? = nil, isEditing: Bool = false) {
+    init(busAlert: BusAlert? = nil, isEditing: Bool? = nil) {
         self.busAlert = busAlert
-        self.isEditing = isEditing
+        self.isEditing = isEditing ?? false
         
     }
     
@@ -224,7 +224,7 @@ struct AlertSettingMain: View {
                 if let busAlert = busAlert {
                     // `busAlert` 데이터로 초기 상태 설정
                     label = busAlert.alertLabel
-                    selectedStation = "\(busAlert.alertBusStop) 정류장 전 알람"
+                    selectedStation = "\(busAlert.alertBusStop) 정류장"
                     
                     busStopAlert = BusStopAlert(
                         cityCode: busAlert.cityCode,
@@ -237,7 +237,7 @@ struct AlertSettingMain: View {
             }
             .overlay {
                 if showSheet {
-                    StationPickerModal(isPresented: $showSheet, selectedStation: $selectedStation, alert: $busStopAlert)
+                    StationPickerModal(isPresented: $showSheet, selectedStation: $selectedStation, alert: $busStopAlert, nodeord: busAlert?.arrivalBusStopNord ?? 0)
                 } else {
                     EmptyView()
                 }
@@ -290,7 +290,7 @@ struct AlertSettingMain: View {
         if isEditing == true {
             // 기존 `busAlert` 업데이트
             busAlert?.alertLabel = label
-            busAlert?.alertBusStop = Int(selectedStation) ?? busAlert!.alertBusStop
+            busAlert?.alertBusStop = busStopAlert?.alertBusStop ?? 3
             // 추가 필드 업데이트
             print("알람이 업데이트되었습니다.")
         } else {
@@ -342,6 +342,7 @@ struct AlertSettingMain: View {
                                 routeid: selectedBus.routeid, // 선택된 버스의 routeid
                                 arrivalBusStopID: selectedBusStop.nodeid, // 선택된 정류장의 ID
                                 arrivalBusStopNm: selectedBusStop.nodenm,
+                                arrivalBusStopNord: selectedBusStop.nodeord,
                                 alertBusStop: busStopAlert!.alertBusStop, // 사용자가 설정한 알람 줄 정류장
                                 alertBusStopID: finalAlertBusStop.nodeid,
                                 alertBusStopNm: finalAlertBusStop.nodenm ,
