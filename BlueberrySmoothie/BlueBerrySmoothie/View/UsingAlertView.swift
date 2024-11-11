@@ -8,7 +8,7 @@ struct UsingAlertView: View {
     let busAlert: BusAlert // 관련된 알림 정보
     let alertBusStopLocal: BusStopLocal // 알림 기준 정류소
     let arrivalBusStopLocal: BusStopLocal // 도착 정류소
-    
+    @Environment(\.dismiss) private var dismiss
     @State private var isAlertEnabled: Bool = false // 스위치 상태 관리
     // NotificationManager 인스턴스 감지
     @ObservedObject var notificationManager = NotificationManager.instance
@@ -16,6 +16,7 @@ struct UsingAlertView: View {
     @State private var navigateToEndView = false
     @State private var isRefreshing: Bool = false // 새로고침 상태 관리
     @State private var lastRefreshTime: Date? = nil // 마지막 새로고침 시간
+    @State private var showExitConfirmation = false
     
     // 타이머 설정: 10초마다 자동으로 새로고침
     private let refreshTimer = Timer.publish(every: 10, on: .main, in: .common).autoconnect()
@@ -24,7 +25,24 @@ struct UsingAlertView: View {
         ZStack {
             // 기존 콘텐츠 부분
             VStack {
+                
                 VStack {
+                    HStack {
+                        Button(action: {self.showExitConfirmation.toggle(); print(showExitConfirmation)}, label: {Image(systemName: "xmark").foregroundStyle(.black)})
+                        
+                        Spacer()
+                    }
+                    .alert(isPresented: $showExitConfirmation) {
+                        SwiftUI.Alert(
+                                        title: Text("알람 종료"),
+                                        message: Text("알람을 종료되고 메인화면으로 돌아가요"),
+                                        primaryButton: .destructive(Text("종료")) {
+                                            dismiss() // Dismiss the view if confirmed
+                                        },
+                                        secondaryButton: .cancel(Text("취소")))
+                                    
+                                }
+                    .padding(.horizontal, 20)
                     VStack {
                         HStack {
                             Text("\(busAlert.busNo)")
@@ -68,6 +86,8 @@ struct UsingAlertView: View {
                     .padding(.top)
                     .padding(.bottom, 28)
                 }
+                
+
                 .background(Color.lightbrand)
                    
                 //버스 노선 스크롤뷰
@@ -87,7 +107,8 @@ struct UsingAlertView: View {
                                     }
                                     VStack {
                                         if busStop.nodeid == busAlert.arrivalBusStopID {
-                                            Image(systemName: "mappin.and.ellipse")
+                                            Image("endpoint")
+                                                .frame(width: 20, height: 20)
                                         } else {
                                             Rectangle()
                                                 .frame(width: 1)
@@ -150,6 +171,7 @@ struct UsingAlertView: View {
             .onReceive(refreshTimer) { _ in
                 refreshData()
             }
+            
 
 // 새로고침 버튼을 화면 오른쪽 아래에 배치
             VStack {
@@ -181,6 +203,8 @@ struct UsingAlertView: View {
                 EmptyView()
             }
         }
+        .toolbar(.hidden)
+       
     }
     // 새로고침 함수
     func refreshData() {
