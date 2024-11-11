@@ -95,17 +95,11 @@ struct SavedBus: View {
             
         }
         .fixedSize(horizontal: false, vertical: true)
-        // `NavigationLink`를 사용하여 화면 전환
-        NavigationLink(destination: AlertSettingMain(busAlert: busAlert, isEditing: isEditing), isActive: $isEditing) {
-            EmptyView() // 링크 표시하지 않음
+        .sheet(isPresented: $isEditing) {
+            NavigationView {
+                AlertSettingMain(busAlert: busAlert, isEditing: isEditing) // `busAlert`을 `AlertSettingMain`으로 전달
+            }
         }
-        //        .sheet(isPresented: $isEditing) {
-        //            AlertSettingMain(busAlert: busAlert) // `busAlert`을 `AlertSettingMain`으로 전달
-        //        }
-        //        .sheet(isPresented: $isEditing) {
-        ////            AlertSettingMain()
-        //            AlertSettingMain(/*busAlert: busAlert*/) // `busAlert` 데이터 전달
-        //        }
         .alert("알람 삭제", isPresented: $alertShowing) {
             Button("삭제", role: .destructive) {
                 onDelete()

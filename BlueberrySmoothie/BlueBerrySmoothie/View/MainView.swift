@@ -64,7 +64,7 @@ struct MainView: View {
                     isUsingAlertActive = true // Activate navigation
                     print(selectedAlert.alertLabel)
                     notificationManager.requestAuthorization()
-                    notificationManager.scheduleTestNotification(for: selectedAlert)
+//                    notificationManager.scheduleTestNotification(for: selectedAlert)
                     notificationManager.requestLocationNotification(for: selectedAlert, for: alertBusStopLocal)
                     notificationManager.requestLocationNotification(for: selectedAlert, for: arrivalBusStopLocal)
                 }, label: {

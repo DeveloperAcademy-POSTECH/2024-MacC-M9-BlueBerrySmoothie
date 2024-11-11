@@ -37,6 +37,9 @@ struct UsingAlertView: View {
                                         title: Text("알람 종료"),
                                         message: Text("알람을 종료되고 메인화면으로 돌아가요"),
                                         primaryButton: .destructive(Text("종료")) {
+                                            // 알림 취소 (alertBusStopLocal과 arrivalBusStopLocal 각각에 대해 호출)
+                                            notificationManager.cancelLocationNotification(for: busAlert, for: alertBusStopLocal)
+                                            notificationManager.cancelLocationNotification(for: busAlert, for: arrivalBusStopLocal)
                                             dismiss() // Dismiss the view if confirmed
                                         },
                                         secondaryButton: .cancel(Text("취소")))
@@ -231,9 +234,8 @@ struct UsingAlertView: View {
                 // 알림 취소 (alertBusStopLocal과 arrivalBusStopLocal 각각에 대해 호출)
                 notificationManager.cancelLocationNotification(for: busAlert, for: alertBusStopLocal)
                 notificationManager.cancelLocationNotification(for: busAlert, for: arrivalBusStopLocal)
-                // EndView로 이동
-                navigateToEndView = true
-                //                notificationManager.locationManager.stopLocationUpdates()
+                dismiss()
+            //                notificationManager.locationManager.stopLocationUpdates()
             }, label: {
                 Text("종료")
                     .foregroundStyle(.white)

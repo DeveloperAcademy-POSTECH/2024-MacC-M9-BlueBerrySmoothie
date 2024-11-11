@@ -185,12 +185,6 @@ struct AlertSettingMain: View {
                     .onTapGesture {
                         showSheet = true
                     }
-                    
-                    Spacer()
-                    Spacer()
-                    Text("전에 알람")
-                        .foregroundColor(Color.gray1)
-                        .font(.regular16)
                 }
                 .padding(.bottom, 20)
                 
@@ -229,7 +223,6 @@ struct AlertSettingMain: View {
             .padding(20)
             Spacer()
         }
-        .padding(20)
         .onAppear {
             //                loadData() // 저장된 데이터 로드
             if let busAlert = busAlert {
