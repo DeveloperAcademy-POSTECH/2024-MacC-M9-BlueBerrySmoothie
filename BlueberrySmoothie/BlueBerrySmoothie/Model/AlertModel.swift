@@ -22,7 +22,7 @@ class BusAlert {
     var alertBusStop: Int // 몇 번째 전에 알람
     var alertBusStopID: String // 알람 정류소 id
     var alertBusStopNm: String // 알람 정류소명
-    var alertLabel: String // 알람 이름
+    var alertLabel: String? // 알람 이름
     var alertSound: Bool? // 알람 사운드 (옵셔널)
     var alertHaptic: Bool? // 알람 진동 (옵셔널)
     var alertCycle: Double? // 알람 주기 (옵셔널)

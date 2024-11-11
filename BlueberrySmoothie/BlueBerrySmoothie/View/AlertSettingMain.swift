@@ -11,22 +11,25 @@ struct AlertSettingMain: View {
     var isEditing: Bool = false // 편집을 위한 `busAlert` 매개변수 추가
     
     // 초기화 데이터들
-    @State private var label: String = ""
+    @State private var label: String = "알람"
     @State private var selectedStation: String = "정류장 수"
     
-//    @Binding var showSetting: Bool
+    //    @Binding var showSetting: Bool
     
     // 추가된 상태 변수: SelectBusView를 sheet로 표시할지 여부
     @State private var showSelectBusSheet: Bool = false // ← 추가된 부분
-    
     @State private var busStopAlert: BusStopAlert? // 사용자 선택 사항
     @State private var showSheet: Bool = false
+    
+    // 토스트 메시지 상태 변수
+    @State private var showToast = false
+    @State private var toastMessage = ""
     
     init(busAlert: BusAlert? = nil, isEditing: Bool? = nil) {
         self.busAlert = busAlert
         self.isEditing = isEditing ?? false
     }
-
+    
     var body: some View {
         ZStack {
             VStack {
@@ -231,7 +234,7 @@ struct AlertSettingMain: View {
             //                loadData() // 저장된 데이터 로드
             if let busAlert = busAlert {
                 // `busAlert` 데이터로 초기 상태 설정
-                label = busAlert.alertLabel
+                label = busAlert.alertLabel ?? "알람"
                 selectedStation = "\(busAlert.alertBusStop) 정류장"
                 
                 busStopAlert = BusStopAlert(
@@ -259,10 +262,12 @@ struct AlertSettingMain: View {
         .toolbar {
             ToolbarItem {
                 Button(action: {
-                    if selectedStation != "정류장 수" && label != "" {
+                    if isInputValid() {
                         saveOrUpdateAlert()
                         saveBusstop()
                         dismiss()
+                    } else {
+                        showToastMessage("모든 정보를 입력해주세요.")
                     }
                 }) {
                     Text("저장")
@@ -282,29 +287,18 @@ struct AlertSettingMain: View {
                 }
             }
         }
-        
+        .toast(isShowing: $showToast, message: toastMessage)
         
     }
     
-    // 저장된 `BusAlert` 데이터를 불러와 UI에 반영하는 메서드
-    //    private func loadData() {
-    //        guard let busAlert = busAlert else { return }
-    //
-    //        // 기본적으로 `BusAlert` 데이터를 UI 상태에 반영
-    //        label = busAlert.alertLabel
-    //        selectedStation = "\(busAlert.alertBusStop) 정류장 전 알람"
-    //
-    //        // `BusStopAlert`로 변환하여 사용
-    //        busStopAlert = BusStopAlert(
-    //            cityCode: busAlert.cityCode, bus: Bus(routeid: busAlert.routeid, routeno: busAlert.busNo),
-    //            arrivalBusStop: BusStop(
-    //                nodeid: busAlert.arrivalBusStopID,
-    //                nodenm: busAlert.arrivalBusStopNm
-    //            ),
-    //            alertBusStop: busAlert.alertBusStop, // cityCode 추가
-    //                    allBusStop: [] // allBusStop은 빈 배열로 초기화하거나 필요한 값으로 설정
-    //        )
-    //    }
+    private func isInputValid() -> Bool {
+        return selectedStation != "정류장 수" && /*!label.isEmpty &&*/ busStopAlert?.bus != nil && busStopAlert?.arrivalBusStop != nil
+    }
+    
+    private func showToastMessage(_ message: String) {
+        toastMessage = message
+        showToast = true
+    }
     
     private func saveOrUpdateAlert() {
         if isEditing == true {

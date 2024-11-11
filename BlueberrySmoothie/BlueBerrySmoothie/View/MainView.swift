@@ -14,6 +14,7 @@ struct MainView: View {
     @Query var busStopLocal: [BusStopLocal]
     @State private var selectedAlert: BusAlert? // State to store the selected BusAlert
     @State private var isUsingAlertActive: Bool = false // Controls navigation to UsingAlertView
+    @State private var isEmptyAlert: Bool = true
     
     @Environment(\.modelContext) private var context // SwiftData의 ModelContext 가져오기
     let notificationManager = NotificationManager.instance
@@ -72,12 +73,13 @@ struct MainView: View {
                     notificationManager.requestLocationNotification(for: selectedAlert, for: alertBusStopLocal)
                     notificationManager.requestLocationNotification(for: selectedAlert, for: arrivalBusStopLocal)
                 }, label: {
-                    ActionButton()
+                    ActionButton(isEmptyAlert: $isEmptyAlert)
                 })
                 
             }
             .padding(20)
-            .navigationTitle("버스 알람: 핫!챠")
+            .background(Color.lightbrand)
+            .navigationTitle("버스 알람: 핫챠")
             .toolbar {
                  ToolbarItem(placement: .navigationBarTrailing) { // 위치를 명확히 지정
                         Button(action: {
@@ -94,11 +96,13 @@ struct MainView: View {
                         }
                 }
             }
+            .onAppear(){
+                print(busAlerts)
+                if busAlerts.count != 0 {
+                    isEmptyAlert = false
+                }
+            }
 
-        }
-        .tint(Color.brand)
-        .onAppear(){
-            print(busAlerts)
         }
     }
     
