@@ -18,6 +18,7 @@ class BusAlert {
     var routeid: String // 노선(버스번호) id
     var arrivalBusStopID: String // 도착 정류소 id
     var arrivalBusStopNm: String // 도착 정류소명
+    var arrivalBusStopNord: Int // 도착 정류소명
     var alertBusStop: Int // 몇 번째 전에 알람
     var alertBusStopID: String // 알람 정류소 id
     var alertBusStopNm: String // 알람 정류소명
@@ -27,13 +28,14 @@ class BusAlert {
     var alertCycle: Double? // 알람 주기 (옵셔널)
     var updowncd: Int
     
-    init(id: String, cityCode: Double, busNo: String, routeid: String, arrivalBusStopID: String, arrivalBusStopNm: String, alertBusStop: Int, alertBusStopID: String, alertBusStopNm: String, alertLabel: String, alertSound: Bool? = nil, alertHaptic: Bool? = nil, alertCycle: Double? = nil, updowncd: Int) {
+    init(id: String, cityCode: Double, busNo: String, routeid: String, arrivalBusStopID: String, arrivalBusStopNm: String, arrivalBusStopNord: Int ,alertBusStop: Int, alertBusStopID: String, alertBusStopNm: String, alertLabel: String, alertSound: Bool? = nil, alertHaptic: Bool? = nil, alertCycle: Double? = nil, updowncd: Int) {
         self.id = id
         self.cityCode = cityCode
         self.busNo = busNo
         self.routeid = routeid
         self.arrivalBusStopID = arrivalBusStopID
         self.arrivalBusStopNm = arrivalBusStopNm
+        self.arrivalBusStopNord = arrivalBusStopNord
         self.alertBusStop = alertBusStop
         self.alertBusStopID = alertBusStopID
         self.alertBusStopNm = alertBusStopNm

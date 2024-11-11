@@ -95,7 +95,7 @@ struct SavedBus: View {
         }
         .fixedSize(horizontal: false, vertical: true)
         // `NavigationLink`를 사용하여 화면 전환
-        NavigationLink(destination: AlertSettingMain(busAlert: busAlert), isActive: $isEditing) {
+        NavigationLink(destination: AlertSettingMain(busAlert: busAlert, isEditing: isEditing), isActive: $isEditing) {
             EmptyView() // 링크 표시하지 않음
         }
         //        .sheet(isPresented: $isEditing) {

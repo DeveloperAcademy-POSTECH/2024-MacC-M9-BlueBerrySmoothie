@@ -40,19 +40,19 @@ struct MainView: View {
                 let alertBusStopLocal = busStopLocal.filter{$0.nodeid == selectedAlert?.alertBusStopID}.first
                 let arrivalBusStopLocal = busStopLocal.filter{$0.nodeid == selectedAlert?.arrivalBusStopID}.first
                 
-                NavigationLink(
-                    destination: selectedAlert.flatMap { alert in
-                        if let alertBusStopLocal = alertBusStopLocal,
-                           let arrivalBusStopLocal = arrivalBusStopLocal {
-                            return UsingAlertView(busAlert: alert, alertBusStopLocal: alertBusStopLocal, arrivalBusStopLocal: arrivalBusStopLocal)
-                        } else {
-                            return nil
-                        }
-                    },
-                    isActive: $isUsingAlertActive
-                ) {
-                    EmptyView()
-                }
+//                NavigationLink(
+//                    destination: selectedAlert.flatMap { alert in
+//                        if let alertBusStopLocal = alertBusStopLocal,
+//                           let arrivalBusStopLocal = arrivalBusStopLocal {
+//                            return UsingAlertView(busAlert: alert, alertBusStopLocal: alertBusStopLocal, arrivalBusStopLocal: arrivalBusStopLocal)
+//                        } else {
+//                            return nil
+//                        }
+//                    },
+//                    isActive: $isUsingAlertActive
+//                ) {
+//                    EmptyView()
+//                }
 
                 
                 // 시작하기 버튼
@@ -81,7 +81,7 @@ struct MainView: View {
             .toolbar {
                 ToolbarItem {
                     NavigationLink("추가") {
-                        AlertSettingMain()    
+                        AlertSettingMain(isEditing: false)
                     }
                   .font(.medium16)
                         .foregroundColor(Color.brand)

@@ -14,6 +14,7 @@ struct AlertSettingMain: View {
     @Environment(\.dismiss) private var dismiss
     @Query var busStopLocal: [BusStopLocal]
     var busAlert: BusAlert? // 편집을 위한 `busAlert` 매개변수 추가
+    var isEditing: Bool = false // 편집을 위한 `busAlert` 매개변수 추가
     
     // 초기화 데이터들
     @State private var label: String = ""
@@ -21,8 +22,10 @@ struct AlertSettingMain: View {
     @State private var busStopAlert: BusStopAlert? // 사용자 선택 사항
     @State private var showSheet: Bool = false
     
-    init(busAlert: BusAlert? = nil) {
+    init(busAlert: BusAlert? = nil, isEditing: Bool? = nil) {
         self.busAlert = busAlert
+        self.isEditing = isEditing ?? false
+        
     }
     
     var body: some View {
@@ -77,7 +80,7 @@ struct AlertSettingMain: View {
                             
                             Spacer()
                             Spacer()
-                            
+                           if isEditing == false {
                             NavigationLink(destination: SelectBusView( busStopAlert: $busStopAlert)) {  // 선택된 버스를 전달받음
                                 ZStack {
                                     Rectangle()
@@ -94,6 +97,7 @@ struct AlertSettingMain: View {
                                 }
                             }
                             .fixedSize()
+                           }
                         }
                     }
                     HStack {
@@ -219,7 +223,7 @@ struct AlertSettingMain: View {
                 if let busAlert = busAlert {
                     // `busAlert` 데이터로 초기 상태 설정
                     label = busAlert.alertLabel
-                    selectedStation = "\(busAlert.alertBusStop) 정류장 전 알람"
+                    selectedStation = "\(busAlert.alertBusStop) 정류장"
                     
                     busStopAlert = BusStopAlert(
                         cityCode: busAlert.cityCode,
@@ -238,7 +242,7 @@ struct AlertSettingMain: View {
 //            .background(Color.white)
             .overlay {
                 if showSheet {
-                    StationPickerModal(isPresented: $showSheet, selectedStation: $selectedStation, alert: $busStopAlert)
+                    StationPickerModal(isPresented: $showSheet, selectedStation: $selectedStation, alert: $busStopAlert, nodeord: busAlert?.arrivalBusStopNord ?? 0)
                 } else {
                     EmptyView()
                 }
@@ -282,10 +286,10 @@ struct AlertSettingMain: View {
     //    }
     
     private func saveOrUpdateAlert() {
-        if let busAlert = busAlert {
+        if isEditing == true {
             // 기존 `busAlert` 업데이트
-            busAlert.alertLabel = label
-            busAlert.alertBusStop = Int(selectedStation) ?? busAlert.alertBusStop
+            busAlert?.alertLabel = label
+            busAlert?.alertBusStop = busStopAlert?.alertBusStop ?? 3
             // 추가 필드 업데이트
             print("알람이 업데이트되었습니다.")
         } else {
@@ -337,6 +341,7 @@ struct AlertSettingMain: View {
                                 routeid: selectedBus.routeid, // 선택된 버스의 routeid
                                 arrivalBusStopID: selectedBusStop.nodeid, // 선택된 정류장의 ID
                                 arrivalBusStopNm: selectedBusStop.nodenm,
+                                arrivalBusStopNord: selectedBusStop.nodeord,
                                 alertBusStop: busStopAlert!.alertBusStop, // 사용자가 설정한 알람 줄 정류장
                                 alertBusStopID: finalAlertBusStop.nodeid,
                                 alertBusStopNm: finalAlertBusStop.nodenm ,
