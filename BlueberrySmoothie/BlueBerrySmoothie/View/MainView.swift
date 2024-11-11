@@ -31,7 +31,7 @@ struct MainView: View {
     }
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             VStack {
                 alertListView()
                 
@@ -72,7 +72,7 @@ struct MainView: View {
                 })
             }
             .padding(20)
-            .background(Color.lightbrand)
+//            .background(Color.lightbrand)
             .navigationTitle("버스 알람: 핫챠")
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) { // 위치를 명확히 지정
