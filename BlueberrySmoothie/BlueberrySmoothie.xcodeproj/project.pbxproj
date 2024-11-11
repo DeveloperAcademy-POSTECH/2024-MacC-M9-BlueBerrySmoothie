@@ -27,6 +27,7 @@
 		632D06862CDB63DC00A7685C /* BusLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632D06852CDB63DC00A7685C /* BusLocationManager.swift */; };
 		632D06882CDB65AD00A7685C /* BusTrackingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632D06872CDB65AD00A7685C /* BusTrackingView.swift */; };
 		632D068A2CDB6BCA00A7685C /* BusLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632D06892CDB6BCA00A7685C /* BusLocation.swift */; };
+
 		8BF2EFA42CD3A78A008A6644 /* MainViewDaisy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF2EFA32CD3A78A008A6644 /* MainViewDaisy.swift */; };
 		8BF2EFA62CD3A7B0008A6644 /* InputViewDaisy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF2EFA52CD3A7B0008A6644 /* InputViewDaisy.swift */; };
 		8BF2EFA82CD3A7F2008A6644 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF2EFA72CD3A7F2008A6644 /* Alert.swift */; };
@@ -39,7 +40,7 @@
 		9D0C411B2CDA3D780005A6CC /* StationPickerModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D0C411A2CDA3D780005A6CC /* StationPickerModal.swift */; };
 		9D0C411D2CDA452E0005A6CC /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D0C411C2CDA452E0005A6CC /* DetailView.swift */; };
 		9D64A9E22CD7A85C00718CC8 /* AlarmStartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D64A9E12CD7A85C00718CC8 /* AlarmStartView.swift */; };
-		9D64A9E42CD7AB3400718CC8 /* UsingAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D64A9E32CD7AB3400718CC8 /* UsingAlertView.swift */; };
+		9DBC2A442CDC6F4D00EB19A9 /* UsingAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DBC2A432CDC6F4D00EB19A9 /* UsingAlertView.swift */; };
 		9DEA523F2CD362CA00A3AE68 /* SelectBusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEA523E2CD362C100A3AE68 /* SelectBusView.swift */; };
 		9DEA52412CD3630200A3AE68 /* CityDecoderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEA52402CD362FC00A3AE68 /* CityDecoderModel.swift */; };
 		9DEA52432CD3637C00A3AE68 /* BusModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEA52422CD3637900A3AE68 /* BusModel.swift */; };
@@ -55,6 +56,12 @@
 		D968D5C62CD89EC4002DF70B /* ActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D968D5C52CD89EC4002DF70B /* ActionButton.swift */; };
 		D968D5C82CD89EF4002DF70B /* SavedBus.swift in Sources */ = {isa = PBXBuildFile; fileRef = D968D5C72CD89EF4002DF70B /* SavedBus.swift */; };
 		D968D5CA2CD912C5002DF70B /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D968D5C92CD912C5002DF70B /* MainView.swift */; };
+		D968D6002CDB165B002DF70B /* UIfont.swift in Sources */ = {isa = PBXBuildFile; fileRef = D968D5F82CDB165B002DF70B /* UIfont.swift */; };
+		D968D6012CDB165B002DF70B /* SpoqaHanSansNeo-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = D968D5F32CDB165B002DF70B /* SpoqaHanSansNeo-Bold.otf */; };
+		D968D6022CDB165B002DF70B /* SpoqaHanSansNeo-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = D968D5F52CDB165B002DF70B /* SpoqaHanSansNeo-Medium.otf */; };
+		D968D6032CDB165B002DF70B /* SpoqaHanSansNeo-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = D968D5F42CDB165B002DF70B /* SpoqaHanSansNeo-Light.otf */; };
+		D968D6042CDB165B002DF70B /* SpoqaHanSansNeo-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = D968D5F72CDB165B002DF70B /* SpoqaHanSansNeo-Thin.otf */; };
+		D968D6052CDB165B002DF70B /* SpoqaHanSansNeo-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = D968D5F62CDB165B002DF70B /* SpoqaHanSansNeo-Regular.otf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -76,10 +83,12 @@
 		12D2B6D22CD3F50F005CF771 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		12D2B6D32CD3F5BD005CF771 /* getAPIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getAPIKey.swift; sourceTree = "<group>"; };
 		12D2B6D72CD63D6A005CF771 /* AlertModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertModel.swift; sourceTree = "<group>"; };
+
 		632D06832CDB19D000A7685C /* BellaBellaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BellaBellaView.swift; sourceTree = "<group>"; };
 		632D06852CDB63DC00A7685C /* BusLocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusLocationManager.swift; sourceTree = "<group>"; };
 		632D06872CDB65AD00A7685C /* BusTrackingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusTrackingView.swift; sourceTree = "<group>"; };
 		632D06892CDB6BCA00A7685C /* BusLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusLocation.swift; sourceTree = "<group>"; };
+
 		8BF2EFA32CD3A78A008A6644 /* MainViewDaisy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewDaisy.swift; sourceTree = "<group>"; };
 		8BF2EFA52CD3A7B0008A6644 /* InputViewDaisy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputViewDaisy.swift; sourceTree = "<group>"; };
 		8BF2EFA72CD3A7F2008A6644 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
@@ -93,7 +102,7 @@
 		9D0C411A2CDA3D780005A6CC /* StationPickerModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationPickerModal.swift; sourceTree = "<group>"; };
 		9D0C411C2CDA452E0005A6CC /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		9D64A9E12CD7A85C00718CC8 /* AlarmStartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmStartView.swift; sourceTree = "<group>"; };
-		9D64A9E32CD7AB3400718CC8 /* UsingAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsingAlertView.swift; sourceTree = "<group>"; };
+		9DBC2A432CDC6F4D00EB19A9 /* UsingAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsingAlertView.swift; sourceTree = "<group>"; };
 		9DEA523E2CD362C100A3AE68 /* SelectBusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectBusView.swift; sourceTree = "<group>"; };
 		9DEA52402CD362FC00A3AE68 /* CityDecoderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityDecoderModel.swift; sourceTree = "<group>"; };
 		9DEA52422CD3637900A3AE68 /* BusModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusModel.swift; sourceTree = "<group>"; };
@@ -105,16 +114,16 @@
 		9DEA52512CD4D57A00A3AE68 /* filterBuses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = filterBuses.swift; sourceTree = "<group>"; };
 		9DEA52532CD4D5B500A3AE68 /* FetchAllBusData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchAllBusData.swift; sourceTree = "<group>"; };
 		9DEDA8062CDB986100D9D51D /* BusLocationListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusLocationListView.swift; sourceTree = "<group>"; };
-		D90E0C122CD89C950089883F /* SpoqaHanSansNeo-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Bold.otf"; sourceTree = "<group>"; };
-		D90E0C132CD89C950089883F /* SpoqaHanSansNeo-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Light.otf"; sourceTree = "<group>"; };
-		D90E0C142CD89C950089883F /* SpoqaHanSansNeo-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Medium.otf"; sourceTree = "<group>"; };
-		D90E0C152CD89C950089883F /* SpoqaHanSansNeo-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Regular.otf"; sourceTree = "<group>"; };
-		D90E0C162CD89C950089883F /* SpoqaHanSansNeo-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Thin.otf"; sourceTree = "<group>"; };
-		D90E0C172CD89C950089883F /* UIfont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIfont.swift; sourceTree = "<group>"; };
 		D90E0C192CD89CB20089883F /* AlertSettingMain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertSettingMain.swift; sourceTree = "<group>"; };
 		D968D5C52CD89EC4002DF70B /* ActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionButton.swift; sourceTree = "<group>"; };
 		D968D5C72CD89EF4002DF70B /* SavedBus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedBus.swift; sourceTree = "<group>"; };
 		D968D5C92CD912C5002DF70B /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		D968D5F32CDB165B002DF70B /* SpoqaHanSansNeo-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Bold.otf"; sourceTree = "<group>"; };
+		D968D5F42CDB165B002DF70B /* SpoqaHanSansNeo-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Light.otf"; sourceTree = "<group>"; };
+		D968D5F52CDB165B002DF70B /* SpoqaHanSansNeo-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Medium.otf"; sourceTree = "<group>"; };
+		D968D5F62CDB165B002DF70B /* SpoqaHanSansNeo-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Regular.otf"; sourceTree = "<group>"; };
+		D968D5F72CDB165B002DF70B /* SpoqaHanSansNeo-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Thin.otf"; sourceTree = "<group>"; };
+		D968D5F82CDB165B002DF70B /* UIfont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIfont.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,8 +156,8 @@
 		1232B3AE2CD1D3DE00C48414 /* BlueBerrySmoothie */ = {
 			isa = PBXGroup;
 			children = (
+				D968D5F92CDB165B002DF70B /* Fonts */,
 				8BF2EFAF2CD3AABF008A6644 /* Info.plist */,
-				D90E0C182CD89C950089883F /* Fonts */,
 				D90E0C112CD89C620089883F /* Component */,
 				12D2B6D22CD3F50F005CF771 /* Config.xcconfig */,
 				1232B3E92CD1D4E800C48414 /* App */,
@@ -195,6 +204,7 @@
 				9D0C411C2CDA452E0005A6CC /* DetailView.swift */,
 				9D0C411A2CDA3D780005A6CC /* StationPickerModal.swift */,
 				9D64A9E32CD7AB3400718CC8 /* UsingAlertView.swift */,
+
 				9D64A9E12CD7A85C00718CC8 /* AlarmStartView.swift */,
 				632D06872CDB65AD00A7685C /* BusTrackingView.swift */,
 				9DEA524D2CD46EF400A3AE68 /* BusDetailView.swift */,
@@ -274,15 +284,15 @@
 			path = Component;
 			sourceTree = "<group>";
 		};
-		D90E0C182CD89C950089883F /* Fonts */ = {
+		D968D5F92CDB165B002DF70B /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
-				D90E0C122CD89C950089883F /* SpoqaHanSansNeo-Bold.otf */,
-				D90E0C132CD89C950089883F /* SpoqaHanSansNeo-Light.otf */,
-				D90E0C142CD89C950089883F /* SpoqaHanSansNeo-Medium.otf */,
-				D90E0C152CD89C950089883F /* SpoqaHanSansNeo-Regular.otf */,
-				D90E0C162CD89C950089883F /* SpoqaHanSansNeo-Thin.otf */,
-				D90E0C172CD89C950089883F /* UIfont.swift */,
+				D968D5F32CDB165B002DF70B /* SpoqaHanSansNeo-Bold.otf */,
+				D968D5F42CDB165B002DF70B /* SpoqaHanSansNeo-Light.otf */,
+				D968D5F52CDB165B002DF70B /* SpoqaHanSansNeo-Medium.otf */,
+				D968D5F62CDB165B002DF70B /* SpoqaHanSansNeo-Regular.otf */,
+				D968D5F72CDB165B002DF70B /* SpoqaHanSansNeo-Thin.otf */,
+				D968D5F82CDB165B002DF70B /* UIfont.swift */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -345,6 +355,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D968D6012CDB165B002DF70B /* SpoqaHanSansNeo-Bold.otf in Resources */,
+				D968D6022CDB165B002DF70B /* SpoqaHanSansNeo-Medium.otf in Resources */,
+				D968D6032CDB165B002DF70B /* SpoqaHanSansNeo-Light.otf in Resources */,
+				D968D6042CDB165B002DF70B /* SpoqaHanSansNeo-Thin.otf in Resources */,
+				D968D6052CDB165B002DF70B /* SpoqaHanSansNeo-Regular.otf in Resources */,
 				1232B3B72CD1D3DF00C48414 /* Preview Assets.xcassets in Resources */,
 				1232B3B42CD1D3DF00C48414 /* Assets.xcassets in Resources */,
 			);
@@ -398,9 +413,10 @@
 				9DEA52452CD3639100A3AE68 /* CityModel.swift in Sources */,
 				D968D5C82CD89EF4002DF70B /* SavedBus.swift in Sources */,
 				9DEA52542CD4D5B500A3AE68 /* FetchAllBusData.swift in Sources */,
-				9D64A9E42CD7AB3400718CC8 /* UsingAlertView.swift in Sources */,
 				12D2B6CA2CD36ED8005CF771 /* BusStopDecoderModel.swift in Sources */,
+				D968D6002CDB165B002DF70B /* UIfont.swift in Sources */,
 				12D2B6C82CD36E94005CF771 /* BusStopModel.swift in Sources */,
+				9DBC2A442CDC6F4D00EB19A9 /* UsingAlertView.swift in Sources */,
 				12D2B6C62CD36E70005CF771 /* SelectBusStopView.swift in Sources */,
 				12D2B6CF2CD3ABAF005CF771 /* BusStopViewModel.swift in Sources */,
 			);
@@ -537,7 +553,9 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"BlueBerrySmoothie/Preview Content\"";
-				DEVELOPMENT_TEAM = 6Q3GG57US3;
+
+				DEVELOPMENT_TEAM = V9J26YADA8;
+
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BlueBerrySmoothie/Info.plist;
@@ -554,7 +572,9 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.Bella.Blueberry;
+
+				PRODUCT_BUNDLE_IDENTIFIER = com.Ssan.Blueberry;
+
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -571,7 +591,9 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"BlueBerrySmoothie/Preview Content\"";
-				DEVELOPMENT_TEAM = 6Q3GG57US3;
+
+				DEVELOPMENT_TEAM = V9J26YADA8;
+
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BlueBerrySmoothie/Info.plist;
@@ -588,7 +610,9 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.Bella.Blueberry;
+
+				PRODUCT_BUNDLE_IDENTIFIER = com.Ssan.Blueberry;
+
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
