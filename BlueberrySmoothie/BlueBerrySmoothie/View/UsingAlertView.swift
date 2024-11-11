@@ -6,12 +6,21 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct UsingAlertView: View {
+    //    let busStops: [BusStopLocal] // 정류소 정보 배열
+    @Query var busStops: [BusStopLocal]
     @StateObject private var viewModel = NowBusLocationViewModel() // ViewModel 연결
-    let busStops: [BusStopLocal] // 정류소 정보 배열
     let busAlert: BusAlert // 관련된 알림 정보
+    let alertBusStopLocal: BusStopLocal // 알림 기준 정류소
+    let arrivalBusStopLocal: BusStopLocal // 도착 정류소
+    
     @State private var isAlertEnabled: Bool = false // 스위치 상태 관리
+    // NotificationManager 인스턴스 감지
+    @ObservedObject var notificationManager = NotificationManager.instance
+    // EndView로의 이동 상태를 관리하는 변수
+    @State private var navigateToEndView = false
     @State private var isRefreshing: Bool = false // 새로고침 상태 관리
     @State private var lastRefreshTime: Date? = nil // 마지막 새로고침 시간
     
@@ -19,20 +28,21 @@ struct UsingAlertView: View {
     private let refreshTimer = Timer.publish(every: 10, on: .main, in: .common).autoconnect()
     
     var body: some View {
-        VStack {
+        ZStack{
             VStack {
                 VStack {
-                    HStack {
-                        Text("\(busAlert.busNo)")
-                            .foregroundColor(Color.gray3)
-                            .font(.regular20)
-                        Image(systemName: "suit.diamond.fill")
-                            .font(.regular10)
-                            .foregroundStyle(.midbrand)
-                        Text("\(busAlert.arrivalBusStopNm)")
-                            .foregroundColor(Color.gray2)
-                            .font(.regular20)
-                        Spacer()
+                    VStack{
+                        HStack {
+                            Text("\(busAlert.busNo)")
+                                .foregroundColor(Color.gray3)
+                                .font(.regular20)
+                            Image(systemName: "suit.diamond.fill")
+                                .font(.regular10)
+                                .foregroundStyle(.midbrand)
+                            Text("\(busAlert.arrivalBusStopNm)")
+                                .foregroundColor(Color.gray2)
+                                .font(.regular20)
+                            Spacer()
 //                        VStack {
 //                            if let refreshTime = lastRefreshTime {
 //                                Text("마지막 새로고침: \(refreshTime, formatter: dateFormatter)")
@@ -46,40 +56,43 @@ struct UsingAlertView: View {
 //                            }
 //                            .disabled(isRefreshing) // 로딩 중에는 비활성화
 //                        }
-                    }
-                    .padding(.bottom, 26)
-                    
-                    HStack {
-                        Text("\(busAlert.alertBusStop)정류장 전 알림")
-                            .foregroundStyle(.brand)
-                            .font(.regular16)
-                        Spacer()
-                    }
-                    .padding(.bottom, 8)
-                    
-                    HStack {
-                        ZStack {
-                            Circle()
-                                .frame(width: 26, height: 26)
-                                .foregroundColor(Color.gray7)
-                            Image(systemName: "bell.fill")
-                                .frame(width: 14, height: 14)
-                                .foregroundColor(Color.midbrand)
                         }
-                        Text("\(busAlert.arrivalBusStopNm)")
+                        .padding(.bottom, 26)
+                      
+                        HStack {
+                            Text("\(busAlert.alertBusStop)정류장 전 알림")
+                                .foregroundStyle(.brand)
+                                .font(.regular16)
+                            Spacer()
+                        }
+                        .padding(.bottom, 8)
+                      
+                        HStack {
+                            ZStack {
+                                Circle()
+                                    .frame(width: 26, height: 26)
+                                    .foregroundColor(Color.gray7)
+                                Image(systemName: "bell.fill")
+                                    .frame(width: 14, height: 14)
+                                    .foregroundColor(Color.midbrand)
+                            }
+                            Text("\(busAlert.arrivalBusStopNm)")
 //                        Text("\(busAlert.alertBusStopNm)") // n번째 전 정거장 값
-                            .foregroundColor(Color.black)
-                            .font(.medium30)
-                        Spacer()
+                                .foregroundColor(Color.black)
+                                .font(.medium30)
+                            Spacer()
 //                        Toggle(isOn: $isAlertEnabled) { }
 //                            .toggleStyle(SwitchToggleStyle(tint: .brand))
+                        }
+                        
                     }
+                    .padding(.horizontal, 20)
+                    .padding(.top)
+                    .padding(.bottom, 28)
                 }
-                .padding(.horizontal, 20)
-                .padding(.top)
-                .padding(.bottom, 28)
-            }
-            .background(Color.lightbrand)
+                .background(.white)
+                
+                //버스 노선 스크롤뷰
             
             ScrollView(showsIndicators: false) {
                 VStack(alignment: .leading, spacing: 0) {
@@ -142,7 +155,6 @@ struct UsingAlertView: View {
                             .foregroundColor(Color.black)
                             .font(.regular16)
                     }
-                    Spacer()
                 }
                 .background(.clear)
             }
@@ -171,7 +183,52 @@ struct UsingAlertView: View {
                 lastRefreshTime = Date() // 새로고침 시간 업데이트
                 isRefreshing = false
             }
+            .navigationTitle(busAlert.alertLabel)
+            //        .background(Color.black)
+            
+            // 알람종료 오버레이 뷰
+            if notificationManager.notificationReceived {
+                AfterAlertView()
+                    .edgesIgnoringSafeArea(.all) // 전체 화면에 적용
+            }
+            
+            // EndView로의 네비게이션
+            NavigationLink(destination: EndViewDaisy(busAlert: busAlert), isActive: $navigateToEndView) {
+                EmptyView()
+            }
         }
+    }
+    
+    @ViewBuilder
+    func AfterAlertView() -> some View {
+        VStack {
+            Image("AfterAlertImg")
+                .padding()
+            
+            Button(action: {
+                notificationManager.notificationReceived = false // 오버레이 닫기
+                
+                // 알림 취소 (alertBusStopLocal과 arrivalBusStopLocal 각각에 대해 호출)
+                notificationManager.cancelLocationNotification(for: busAlert, for: alertBusStopLocal)
+                notificationManager.cancelLocationNotification(for: busAlert, for: arrivalBusStopLocal)                
+                // EndView로 이동
+                navigateToEndView = true
+                //                notificationManager.locationManager.stopLocationUpdates()
+            }, label: {
+                Text("종료")
+                    .foregroundStyle(.white)
+                    .font(.largeTitle)
+                    .padding()
+                    .padding(.horizontal, 20)
+                    .background(Capsule())
+            })
+            
+        }
+//         .frame(maxWidth: .infinity, maxHeight: .infinity)
+//         .background(Color.gray.opacity(0.8))
+//         .cornerRadius(10)
+//         .shadow(radius: 10)
+
     }
 
     private let dateFormatter: DateFormatter = {

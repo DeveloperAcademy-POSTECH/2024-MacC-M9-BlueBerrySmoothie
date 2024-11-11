@@ -59,4 +59,16 @@ struct BusStop: Codable, Identifiable, Hashable {
            self.gpslong = gpslong
            self.updowncd = updowncd
        }
+    
+    // nodeid와 nodenm만으로 초기화하는 이니셜라이저
+        init(nodeid: String, nodenm: String) {
+            self.routeid = "알 수 없음"
+            self.nodeid = nodeid
+            self.nodenm = nodenm
+            self.nodeno = nil
+            self.nodeord = 0
+            self.gpslati = 0.0
+            self.gpslong = 0.0
+            self.updowncd = 0
+        }
 }

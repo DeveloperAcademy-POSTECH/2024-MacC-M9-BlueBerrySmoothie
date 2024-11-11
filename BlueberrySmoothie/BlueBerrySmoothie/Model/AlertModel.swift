@@ -14,18 +14,20 @@ import SwiftData
 class BusAlert {
     var id: String
     var cityCode: Double // 도시코드
-    var busNo: String
-    var routeid: String
-    var arrivalBusStopID: String
-    var arrivalBusStopNm: String
-    var alertBusStop: Int // 알람 줄 정류장
+    var busNo: String // 노선(버스번호)
+    var routeid: String // 노선(버스번호) id
+    var arrivalBusStopID: String // 도착 정류소 id
+    var arrivalBusStopNm: String // 도착 정류소명
+    var alertBusStop: Int // 몇 번째 전에 알람
+    var alertBusStopID: String // 알람 정류소 id
+    var alertBusStopNm: String // 알람 정류소명
     var alertLabel: String // 알람 이름
     var alertSound: Bool? // 알람 사운드 (옵셔널)
     var alertHaptic: Bool? // 알람 진동 (옵셔널)
     var alertCycle: Double? // 알람 주기 (옵셔널)
     var updowncd: Int
     
-    init(id: String, cityCode: Double, busNo: String, routeid: String, arrivalBusStopID: String, arrivalBusStopNm: String, alertBusStop: Int, alertLabel: String, alertSound: Bool? = nil, alertHaptic: Bool? = nil, alertCycle: Double? = nil, updowncd: Int) {
+    init(id: String, cityCode: Double, busNo: String, routeid: String, arrivalBusStopID: String, arrivalBusStopNm: String, alertBusStop: Int, alertBusStopID: String, alertBusStopNm: String, alertLabel: String, alertSound: Bool? = nil, alertHaptic: Bool? = nil, alertCycle: Double? = nil, updowncd: Int) {
         self.id = id
         self.cityCode = cityCode
         self.busNo = busNo
@@ -33,6 +35,8 @@ class BusAlert {
         self.arrivalBusStopID = arrivalBusStopID
         self.arrivalBusStopNm = arrivalBusStopNm
         self.alertBusStop = alertBusStop
+        self.alertBusStopID = alertBusStopID
+        self.alertBusStopNm = alertBusStopNm
         self.alertLabel = alertLabel
         self.alertSound = alertSound
         self.alertHaptic = alertHaptic
@@ -44,13 +48,13 @@ class BusAlert {
 @Model
 class BusStopLocal {
     var id: String
-    var routeid: String
-    var nodeid: String
-    var nodenm: String
-    var nodeno: Int?
-    var nodeord: Int
-    var gpslati: Double
-    var gpslong: Double
+    var routeid: String // 노선(버스번호) id
+    var nodeid: String // 정류소 id
+    var nodenm: String // 정류소명
+    var nodeno: Int? // 정류소 번호
+    var nodeord: Int // 정류소 순번
+    var gpslati: Double // 정류소 latitude 좌표 (위도)
+    var gpslong: Double // 정류소 longtitude 좌표 (경도)
     var updowncd: Int
     
     init(id: String, routeid: String, nodeid: String, nodenm: String, nodeno: Int? = nil, nodeord: Int, gpslati: Double, gpslong: Double, updowncd: Int) {
