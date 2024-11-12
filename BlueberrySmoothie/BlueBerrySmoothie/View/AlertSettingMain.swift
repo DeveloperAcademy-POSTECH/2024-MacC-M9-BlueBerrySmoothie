@@ -13,9 +13,7 @@ struct AlertSettingMain: View {
     // 초기화 데이터들
     @State private var label: String = "알람"
     @State private var selectedStation: String = "정류장 수"
-    
-    //    @Binding var showSetting: Bool
-    
+        
     // 추가된 상태 변수: SelectBusView를 sheet로 표시할지 여부
     @State private var showSelectBusSheet: Bool = false // ← 추가된 부분
     @State private var busStopAlert: BusStopAlert? // 사용자 선택 사항
@@ -168,7 +166,7 @@ struct AlertSettingMain: View {
                             }
                         
                         HStack {
-                            Text(selectedStation)
+                            Text("\(selectedStation)")
                                 .foregroundColor(Color.black)
                                 .font(.regular16)
                             
@@ -228,7 +226,7 @@ struct AlertSettingMain: View {
             if let busAlert = busAlert {
                 // `busAlert` 데이터로 초기 상태 설정
                 label = busAlert.alertLabel ?? "알람"
-                selectedStation = "\(busAlert.alertBusStop) 정류장"
+                selectedStation = "\(busAlert.alertBusStop) 정류장 전에 알람"
                 
                 busStopAlert = BusStopAlert(
                     cityCode: busAlert.cityCode,

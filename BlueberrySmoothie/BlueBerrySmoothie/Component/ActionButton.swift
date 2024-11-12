@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ActionButton: View {
-    @Binding var isEmptyAlert: Bool
+    var isEmptyAlert: Bool
 
     var body: some View {
         ZStack {

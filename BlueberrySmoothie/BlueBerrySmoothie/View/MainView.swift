@@ -15,6 +15,7 @@ struct MainView: View {
     @State private var selectedAlert: BusAlert? // State to store the selected BusAlert
     @State private var isUsingAlertActive: Bool = false // Controls navigation to UsingAlertView
     @State private var isEmptyAlert: Bool = true
+    @State private var isSelected: Bool = false
     
     @Environment(\.modelContext) private var context // SwiftData의 ModelContext 가져오기
     let notificationManager = NotificationManager.instance
@@ -32,74 +33,73 @@ struct MainView: View {
     
     var body: some View {
         NavigationView {
-            VStack {
-                alertListView()
-                
-                Spacer()
-                
-                let alertBusStopLocal = busStopLocal.filter { $0.nodeid == selectedAlert?.alertBusStopID }.first
-                let arrivalBusStopLocal = busStopLocal.filter { $0.nodeid == selectedAlert?.arrivalBusStopID }.first
-                
-                NavigationLink(
-                    destination: Group {
-                        if let selectedAlert = selectedAlert,
-                           let alertBusStopLocal = alertBusStopLocal,
-                           let arrivalBusStopLocal = arrivalBusStopLocal {
-                            UsingAlertView(
-                                busAlert: selectedAlert,
-                                alertBusStopLocal: alertBusStopLocal,
-                                arrivalBusStopLocal: arrivalBusStopLocal
-                            )
-                        }
-                    },
-                    isActive: $isUsingAlertActive
-                ) {
-                    EmptyView()
-                }
-                
-                Button(action: {
-                    guard let selectedAlert = selectedAlert,
-                          let alertBusStopLocal = alertBusStopLocal,
-                          let arrivalBusStopLocal = arrivalBusStopLocal else {
-                        print("선택된 알람 또는 버스 정류장이 설정되지 않았습니다.")
-                        return
+            ZStack{
+                Color.lightbrand
+                    .ignoresSafeArea()
+                VStack {
+                    alertListView()
+                    
+                    Spacer()
+                    
+                    let alertBusStopLocal = busStopLocal.filter { $0.nodeid == selectedAlert?.alertBusStopID }.first
+                    let arrivalBusStopLocal = busStopLocal.filter { $0.nodeid == selectedAlert?.arrivalBusStopID }.first
+                    
+                    NavigationLink(
+                        destination: Group {
+                            if let selectedAlert = selectedAlert,
+                               let alertBusStopLocal = alertBusStopLocal,
+                               let arrivalBusStopLocal = arrivalBusStopLocal {
+                                UsingAlertView(
+                                    busAlert: selectedAlert,
+                                    alertBusStopLocal: alertBusStopLocal,
+                                    arrivalBusStopLocal: arrivalBusStopLocal
+                                )
+                            }
+                        },
+                        isActive: $isUsingAlertActive
+                    ) {
+                        EmptyView()
                     }
-                    isUsingAlertActive = true // Activate navigation
-                    print(selectedAlert.alertLabel)
-                    notificationManager.requestAuthorization()
-//                    notificationManager.scheduleTestNotification(for: selectedAlert)
-                    notificationManager.requestLocationNotification(for: selectedAlert, for: alertBusStopLocal)
-                    notificationManager.requestLocationNotification(for: selectedAlert, for: arrivalBusStopLocal)
-                }, label: {
-                    ActionButton(isEmptyAlert: $isEmptyAlert)
-                })
-            }
-            .padding(20)
-//            .background(Color.lightbrand)
-            .navigationTitle("버스 알람: 핫챠")
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) { // 위치를 명확히 지정
+                    
                     Button(action: {
-                        showSetting = true // sheet 표시 상태를 true로 설정
-                    }) {
-                        Text("추가")
-                            .font(.system(size: 16, weight: .medium))
-                            .foregroundColor(Color.brand)
-                    }
-                    .sheet(isPresented: $showSetting) {
-                        NavigationView {
-                            AlertSettingMain()
+                        guard let selectedAlert = selectedAlert,
+                              let alertBusStopLocal = alertBusStopLocal,
+                              let arrivalBusStopLocal = arrivalBusStopLocal else {
+                            print("선택된 알람 또는 버스 정류장이 설정되지 않았습니다.")
+                            return
+                        }
+                        isUsingAlertActive = true // Activate navigation
+                        print(selectedAlert.alertLabel)
+                        notificationManager.requestAuthorization()
+                        //                    notificationManager.scheduleTestNotification(for: selectedAlert)
+                        notificationManager.requestLocationNotification(for: selectedAlert, for: alertBusStopLocal)
+                        notificationManager.requestLocationNotification(for: selectedAlert, for: arrivalBusStopLocal)
+                    }, label: {
+                        ActionButton(isEmptyAlert: isEmptyAlert)
+                    })
+                    .disabled(isEmptyAlert)
+                }
+                .padding(20)
+                //            .background(Color.lightbrand)
+                .navigationTitle("버스 알람: 핫챠")
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarTrailing) { // 위치를 명확히 지정
+                        Button(action: {
+                            showSetting = true // sheet 표시 상태를 true로 설정
+                        }) {
+                            Text("추가")
+                                .font(.system(size: 16, weight: .medium))
+                                .foregroundColor(Color.brand)
+                        }
+                        .sheet(isPresented: $showSetting) {
+                            NavigationView {
+                                AlertSettingMain()
+                            }
                         }
                     }
                 }
             }
-            .onAppear(){
-                print(busAlerts)
-                if busAlerts.count != 0 {
-                    isEmptyAlert = false
-                }
-            }
-
         }
     }
     
@@ -119,16 +119,23 @@ struct MainView: View {
                     ForEach (busAlerts, id: \.id) { alert in
                         SavedBus(busAlert: alert, isSelected: selectedAlert?.id == alert.id, onDelete: {
                             deleteBusAlert(alert) // 삭제 동작
+                            if busAlerts.isEmpty {
+                                isEmptyAlert = true
+                            }
                         })
                         .onTapGesture {
                             selectedAlert = alert // 선택된 알람 설정
+//                            if selectedAlert?.id == alert.id {
+//                                isSelected = true
+//                            } else {
+//                                isSelected = false
+//                            }
+                            if busAlerts.count != 0 {
+                                isEmptyAlert = false
+                            }
                             print(selectedAlert?.alertLabel)
                         }
                         .padding(2) // padding을 조금 추가하여 스트로크가 잘리는 것을 방지
-//                        .background(
-//                            RoundedRectangle(cornerRadius: 10)
-//                                .stroke(selectedAlert?.id == alert.id ? Color.blue : Color.clear, lineWidth: 2) // 선택된 항목에 스트로크 추가
-//                        )
                         .padding(.bottom, 1) // 아이템 간 간격 유지
 
                     }

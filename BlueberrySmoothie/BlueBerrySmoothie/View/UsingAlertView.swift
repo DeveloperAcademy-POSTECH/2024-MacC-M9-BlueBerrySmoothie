@@ -13,7 +13,6 @@ struct UsingAlertView: View {
     // NotificationManager 인스턴스 감지
     @ObservedObject var notificationManager = NotificationManager.instance
     // EndView로의 이동 상태를 관리하는 변수
-    @State private var navigateToEndView = false
     @State private var isRefreshing: Bool = false // 새로고침 상태 관리
     @State private var lastRefreshTime: Date? = nil // 마지막 새로고침 시간
     @State private var showExitConfirmation = false
@@ -152,11 +151,6 @@ struct UsingAlertView: View {
             if notificationManager.notificationReceived {
                 AfterAlertView()
                     .edgesIgnoringSafeArea(.all) // 전체 화면에 적용
-            }
-            
-            // EndView로의 네비게이션
-            NavigationLink(destination: EndViewDaisy(busAlert: busAlert), isActive: $navigateToEndView) {
-                EmptyView()
             }
         }
         .toolbar(.hidden)
