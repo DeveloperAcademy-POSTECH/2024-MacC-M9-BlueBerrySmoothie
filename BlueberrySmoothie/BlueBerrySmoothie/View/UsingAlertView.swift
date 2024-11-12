@@ -8,7 +8,7 @@ struct UsingAlertView: View {
     let busAlert: BusAlert // 관련된 알림 정보
     let alertBusStopLocal: BusStopLocal // 알림 기준 정류소
     let arrivalBusStopLocal: BusStopLocal // 도착 정류소
-    
+    @Environment(\.dismiss) private var dismiss
     @State private var isAlertEnabled: Bool = false // 스위치 상태 관리
     // NotificationManager 인스턴스 감지
     @ObservedObject var notificationManager = NotificationManager.instance
@@ -16,6 +16,7 @@ struct UsingAlertView: View {
     @State private var navigateToEndView = false
     @State private var isRefreshing: Bool = false // 새로고침 상태 관리
     @State private var lastRefreshTime: Date? = nil // 마지막 새로고침 시간
+    @State private var showExitConfirmation = false
     
     // ScrollTo 변수
     @State private var positionIndex: Int = 1
@@ -29,6 +30,23 @@ struct UsingAlertView: View {
             // 기존 콘텐츠 부분
             VStack {
                 VStack {
+                    HStack {
+                        Button(action: {self.showExitConfirmation.toggle(); print(showExitConfirmation)}, label: {Image(systemName: "xmark").foregroundStyle(.black)})
+                        Spacer()
+                    }
+                    .alert(isPresented: $showExitConfirmation) {
+                        SwiftUI.Alert(
+                                        title: Text("알람 종료"),
+                                        message: Text("알람을 종료하시겠습니까?"),
+                                        primaryButton: .destructive(Text("종료")) {
+                                            // 알림 취소 (alertBusStopLocal과 arrivalBusStopLocal 각각에 대해 호출)
+                                            notificationManager.cancelLocationNotification(for: busAlert, for: alertBusStopLocal)
+                                            notificationManager.cancelLocationNotification(for: busAlert, for: arrivalBusStopLocal)
+                                            dismiss() // Dismiss the view if confirmed
+                                        },
+                                        secondaryButton: .cancel(Text("취소")))
+                                }
+                    .padding(.horizontal, 20)
                     VStack {
                         HStack {
                             Text("\(busAlert.busNo)")
@@ -61,7 +79,7 @@ struct UsingAlertView: View {
                                     .frame(width: 14, height: 14)
                                     .foregroundColor(Color.midbrand)
                             }
-                            Text("\(busAlert.arrivalBusStopNm)")
+                            Text("\(busAlert.alertBusStopNm)")
                                 .foregroundColor(Color.black)
                                 .font(.medium30)
                             Spacer()
@@ -86,7 +104,6 @@ struct UsingAlertView: View {
                                         isCurrentLocation: busStop.nodeid == closestBus.nodeid,
                                         arrivalBusStopID: busAlert.arrivalBusStopID
                                     )
-                                    
                                 }
                             } else if isRefreshing {
                                 // 로딩 중일 때 로딩 인디케이터 표시
@@ -116,13 +133,11 @@ struct UsingAlertView: View {
                 
             }
             .background(Color.gray7)
-            .navigationTitle(busAlert.alertLabel)
+            .navigationTitle(busAlert.alertLabel ?? "알람")
             .navigationBarTitleDisplayMode(.inline)
             .onAppear {
                 refreshData() // 초기 로드
             }
-            
-            
             // 타이머를 활용한 자동 새로고침
             .onReceive(refreshTimer) { _ in
                 refreshData()
@@ -143,6 +158,8 @@ struct UsingAlertView: View {
                 EmptyView()
             }
         }
+        .toolbar(.hidden)
+       
     }
     
     // BusStop 리스트
@@ -165,7 +182,8 @@ struct UsingAlertView: View {
                 }
                 VStack {
                     if busStop.nodeid == arrivalBusStopID {
-                        Image(systemName: "mappin.and.ellipse")
+                        Image("endpoint")
+                            .frame(width: 20, height: 20)
                     } else {
                         Rectangle()
                             .frame(width: 1)
@@ -252,8 +270,8 @@ struct UsingAlertView: View {
                 // 알림 취소 (alertBusStopLocal과 arrivalBusStopLocal 각각에 대해 호출)
                 notificationManager.cancelLocationNotification(for: busAlert, for: alertBusStopLocal)
                 notificationManager.cancelLocationNotification(for: busAlert, for: arrivalBusStopLocal)
-                // EndView로 이동
-                navigateToEndView = true
+                dismiss()
+            //                notificationManager.locationManager.stopLocationUpdates()
             }, label: {
                 Text("종료")
                     .foregroundStyle(.white)

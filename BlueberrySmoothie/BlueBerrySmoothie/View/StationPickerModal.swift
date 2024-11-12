@@ -48,39 +48,39 @@ struct StationPickerModal: View {
                     
                     // 각 정류장 선택지
                     if (alert?.firstBeforeBusStop) != nil || nodeord > 1 {
-                        stationRow(stationText: "1 정거장 전", isEnabled: true) {
-                            selectedStation = "1 정거장 전"
+                        stationRow(stationText: "1 정류장 전에 알람", isEnabled: true) {
+                            selectedStation = "1 정류장 전에 알람"
                             alert?.alertBusStop = 1
                             withAnimation {
                                 isPresented = false
                             }
                         }
                     } else {
-                        stationRow(stationText: "1 정거장 전", isEnabled: false)
+                        stationRow(stationText: "1 정류장 전에 알람", isEnabled: false)
                     }
                     
                     if (alert?.secondBeforeBusStop) != nil || nodeord > 2 {
-                        stationRow(stationText: "2 정거장 전", isEnabled: true) {
-                            selectedStation = "2 정거장 전"
+                        stationRow(stationText: "2 정류장 전에 알람", isEnabled: true) {
+                            selectedStation = "2 정류장 전에 알람"
                             alert?.alertBusStop = 2
                             withAnimation {
                                 isPresented = false
                             }
                         }
                     } else {
-                        stationRow(stationText: "2 정거장 전", isEnabled: false)
+                        stationRow(stationText: "2 정류장 전에 알람", isEnabled: false)
                     }
                     
                     if (alert?.thirdBeforeBusStop) != nil || nodeord > 3 {
-                        stationRow(stationText: "3 정거장 전", isEnabled: true) {
-                            selectedStation = "3 정거장 전"
+                        stationRow(stationText: "3 정류장 전에 알람", isEnabled: true) {
+                            selectedStation = "3 정류장 전에 알람"
                             alert?.alertBusStop = 3
                             withAnimation {
                                 isPresented = false
                             }
                         }
                     } else {
-                        stationRow(stationText: "3 정거장 전", isEnabled: false)
+                        stationRow(stationText: "3 정류장 전에 알람", isEnabled: false)
                     }
                     
                     Spacer()
