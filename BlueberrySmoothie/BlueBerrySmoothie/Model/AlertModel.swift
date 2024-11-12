@@ -86,3 +86,20 @@ struct BusStopAlert: Identifiable {
     var secondBeforeBusStop: BusStop? // 2번째 전 정류장
     var thirdBeforeBusStop: BusStop? // 3번째 전 정류장
 }
+
+
+func findAlertBusStop(busAlert: BusAlert, busStops: [BusStopLocal]) -> BusStopLocal? {
+    // 1. BusStopLocal에서 routeid가 동일한 노선 찾기
+    let filteredStops = busStops.filter { $0.routeid == busAlert.routeid }
+    
+    // 2. 도착 정류소 ID에 해당하는 정류소 찾기
+    guard let arrivalStop = filteredStops.first(where: { $0.nodeid == busAlert.arrivalBusStopID }) else {
+        return nil // 도착 정류소가 없으면 nil 반환
+    }
+    
+    // 3. 도착 정류소의 nodeord에서 alertBusStop을 뺀 정류소 찾기
+    let targetNodeOrd = arrivalStop.nodeord - busAlert.alertBusStop
+    
+    // 4. 해당 nodeord에 해당하는 정류소 반환
+    return filteredStops.first(where: { $0.nodeord == targetNodeOrd })
+}
