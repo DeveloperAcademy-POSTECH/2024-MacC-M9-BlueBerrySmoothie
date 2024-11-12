@@ -134,7 +134,9 @@ struct UsingAlertView: View {
                                         busStop: busStop,
                                         isCurrentLocation: busStop.nodeid == closestBus.nodeid,
                                         arrivalBusStopID: busAlert.arrivalBusStopID,
-                                        alertBusStopID: busAlert.alertBusStopID
+                                        alertBusStopID: busAlert.alertBusStopID,
+                                        alertStop: alertStop
+                                        // 여기도 수정함 이거ㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓ
                                     )
                                 }
                             } else if isRefreshing {
@@ -195,12 +197,14 @@ struct UsingAlertView: View {
     }
     
     // BusStop 리스트
+    // 여기도 수정함 이거ㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓ
     struct BusStopRow: View {
         let busStop: BusStopLocal  // BusStop을 BusStopLocal로 변경
         let isCurrentLocation: Bool
         let arrivalBusStopID: String
         let alertBusStopID: String
-        
+        let alertStop: BusStopLocal?
+        // 여기도 수정함 이거ㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓ
         var body: some View {
             HStack {
                 if isCurrentLocation {
@@ -217,7 +221,8 @@ struct UsingAlertView: View {
                     if busStop.nodeid == arrivalBusStopID {
                         Image("endpoint")
                             .frame(width: 20, height: 20)
-                    } else if busStop.nodeid == alertBusStopID {
+                        // 여기도 수정함 이거ㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓ
+                    } else if busStop.nodeid == alertStop?.nodeid {
                         Image("AlertBusStop")
                             .frame(width: 20, height: 20)
                     }
