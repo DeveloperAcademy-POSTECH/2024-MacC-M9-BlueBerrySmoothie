@@ -44,16 +44,30 @@ struct MainView: View {
                     let alertBusStopLocal = busStopLocal.filter { $0.nodeid == selectedAlert?.alertBusStopID }.first
                     let arrivalBusStopLocal = busStopLocal.filter { $0.nodeid == selectedAlert?.arrivalBusStopID }.first
                     
+                    
+                    //                    NavigationLink(
+                    //                        destination: Group {
+                    //                            if let selectedAlert = selectedAlert,
+                    //                               let alertBusStopLocal = alertBusStopLocal,
+                    //                               let arrivalBusStopLocal = arrivalBusStopLocal {
+                    //                                UsingAlertView(
+                    //                                    busAlert: selectedAlert,
+                    //                                    alertBusStopLocal: alertBusStopLocal,
+                    //                                    arrivalBusStopLocal: arrivalBusStopLocal
+                    //                                )
+                    //                            }
+                    //                        },
+                    //                        isActive: $isUsingAlertActive
+                    //                    ) {
+                    //                        EmptyView()
+                    //                    }
                     NavigationLink(
-                        destination: Group {
-                            if let selectedAlert = selectedAlert,
-                               let alertBusStopLocal = alertBusStopLocal,
+                        destination: selectedAlert.flatMap { alert in
+                            if let alertBusStopLocal = alertBusStopLocal,
                                let arrivalBusStopLocal = arrivalBusStopLocal {
-                                UsingAlertView(
-                                    busAlert: selectedAlert,
-                                    alertBusStopLocal: alertBusStopLocal,
-                                    arrivalBusStopLocal: arrivalBusStopLocal
-                                )
+                                return UsingAlertView(busAlert: alert, alertBusStopLocal: alertBusStopLocal, arrivalBusStopLocal: arrivalBusStopLocal)
+                            } else {
+                                return nil
                             }
                         },
                         isActive: $isUsingAlertActive
@@ -81,8 +95,8 @@ struct MainView: View {
                 }
                 .padding(20)
                 //            .background(Color.lightbrand)
-                .navigationTitle("버스 알람: 핫챠")
-                .navigationBarTitleDisplayMode(.inline)
+                //                .navigationTitle("버스 알람: 핫챠")
+                //                .navigationBarTitleDi splayMode(.inline)
                 .toolbar {
                     ToolbarItem(placement: .navigationBarTrailing) { // 위치를 명확히 지정
                         Button(action: {
@@ -97,6 +111,11 @@ struct MainView: View {
                                 AlertSettingMain()
                             }
                         }
+                    }
+                    ToolbarItem(placement: .navigationBarLeading) { // 위치를 명확히 지정
+                        Text("버스 알람: 햣챠")
+                            .font(.mediumbold24)
+                            .foregroundStyle(.black)
                     }
                 }
             }
@@ -125,11 +144,6 @@ struct MainView: View {
                         })
                         .onTapGesture {
                             selectedAlert = alert // 선택된 알람 설정
-//                            if selectedAlert?.id == alert.id {
-//                                isSelected = true
-//                            } else {
-//                                isSelected = false
-//                            }
                             if busAlerts.count != 0 {
                                 isEmptyAlert = false
                             }
@@ -137,7 +151,7 @@ struct MainView: View {
                         }
                         .padding(2) // padding을 조금 추가하여 스트로크가 잘리는 것을 방지
                         .padding(.bottom, 1) // 아이템 간 간격 유지
-
+                        
                     }
                 }
             }
