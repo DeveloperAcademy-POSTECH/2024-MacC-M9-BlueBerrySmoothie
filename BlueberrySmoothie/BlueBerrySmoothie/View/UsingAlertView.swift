@@ -16,7 +16,10 @@ struct UsingAlertView: View {
     @State private var isRefreshing: Bool = false // 새로고침 상태 관리
     @State private var lastRefreshTime: Date? = nil // 마지막 새로고침 시간
     @State private var showExitConfirmation = false
+    
+    //이거ㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓ
     @State private var alertStop: BusStopLocal? // alertStop을 상태로 관리
+    //이거ㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓ
     
     // ScrollTo 변수
     @State private var positionIndex: Int = 1
@@ -25,7 +28,7 @@ struct UsingAlertView: View {
     // 타이머 설정: 10초마다 자동으로 새로고침
     private let refreshTimer = Timer.publish(every: 10, on: .main, in: .common).autoconnect()
     
-    
+    //이거ㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓ
     func findAlertBusStop(busAlert: BusAlert, busStops: [BusStopLocal]) -> BusStopLocal? {
             // 1. BusStopLocal에서 routeid가 동일한 노선 찾기
             let filteredStops = busStops.filter { $0.routeid == busAlert.routeid }
@@ -42,6 +45,7 @@ struct UsingAlertView: View {
             return filteredStops.first(where: { $0.nodeord == targetNodeOrd })
         
         }
+    //이거ㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓ
     
     
     
@@ -58,7 +62,9 @@ struct UsingAlertView: View {
                         
                         SwiftUI.Alert(
                                         title: Text("알람 종료"),
-                                        message: Text("\(alertStop?.nodenm)에서 알람을 종료하시겠습니까?"),
+                                        //이거ㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓ
+                                        message: Text("\(alertStop?.nodenm) 알람을 종료하시겠습니까?"),
+                                        //이거ㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓ
                                         primaryButton: .destructive(Text("종료")) {
                                             // 알림 취소 (alertBusStopLocal과 arrivalBusStopLocal 각각에 대해 호출)
                                             notificationManager.cancelLocationNotification(for: busAlert, for: alertBusStopLocal)
@@ -76,7 +82,9 @@ struct UsingAlertView: View {
                             Image(systemName: "suit.diamond.fill")
                                 .font(.regular10)
                                 .foregroundStyle(.midbrand)
+                            //이거ㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓ
                             Text("\(alertStop?.nodenm)")
+                            //이거ㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓ
                                 .foregroundColor(Color.gray2)
                                 .font(.regular20)
                             Spacer()
@@ -100,7 +108,9 @@ struct UsingAlertView: View {
                                     .frame(width: 14, height: 14)
                                     .foregroundColor(Color.midbrand)
                             }
+                            //이거ㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓ
                             Text("\(alertStop?.nodenm)")
+                            //이거ㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓ
                                 .foregroundColor(Color.black)
                                 .font(.medium30)
                             Spacer()
@@ -157,9 +167,11 @@ struct UsingAlertView: View {
             .background(Color.gray7)
             .navigationTitle(busAlert.alertLabel ?? "알람")
             .navigationBarTitleDisplayMode(.inline)
-            .onAppear {// 화면이 나타날 때 findAlertBusStop 함수 실행
+            .onAppear {
+                //이거ㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓ
                 if let foundStop = findAlertBusStop(busAlert: busAlert, busStops: busStops) {
                     alertStop = foundStop
+                    //이거ㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓ
                 }
                 refreshData() // 초기 로드
             }
