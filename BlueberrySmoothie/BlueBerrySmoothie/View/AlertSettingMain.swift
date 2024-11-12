@@ -8,7 +8,7 @@ struct AlertSettingMain: View {
     @Query var busStopLocal: [BusStopLocal]
     
     var busAlert: BusAlert? // 편집을 위한 `busAlert` 매개변수 추가
-    var isEditing: Bool = false // 편집을 위한 `busAlert` 매개변수 추가
+    @Binding var isEditing: Bool
     
     // 초기화 데이터들
     @State private var label: String = "알람"
@@ -23,10 +23,10 @@ struct AlertSettingMain: View {
     @State private var showToast = false
     @State private var toastMessage = ""
     
-    init(busAlert: BusAlert? = nil, isEditing: Bool? = nil) {
-        self.busAlert = busAlert
-        self.isEditing = isEditing ?? false
-    }
+//    init(busAlert: BusAlert? = nil, isEditing: Bool? = nil) {
+//        self.busAlert = busAlert
+//        self.isEditing = isEditing ?? false
+//    }
     
     var body: some View {
         ZStack {
@@ -349,8 +349,8 @@ struct AlertSettingMain: View {
                                 arrivalBusStopNm: selectedBusStop.nodenm,
                                 arrivalBusStopNord: selectedBusStop.nodeord,
                                 alertBusStop: busStopAlert!.alertBusStop, // 사용자가 설정한 알람 줄 정류장
-                                alertBusStopID: finalAlertBusStop.nodeid,
-                                alertBusStopNm: finalAlertBusStop.nodenm ,
+//                                alertBusStopID: finalAlertBusStop.nodeid,
+//                                alertBusStopNm: finalAlertBusStop.nodenm ,
                                 alertLabel: label, // 사용자가 입력한 알람 레이블
                                 alertSound: true, // 알람 사운드 활성화
                                 alertHaptic: true, // 해프틱 피드백 활성화

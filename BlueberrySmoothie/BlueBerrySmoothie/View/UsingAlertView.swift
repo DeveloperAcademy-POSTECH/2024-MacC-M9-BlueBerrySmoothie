@@ -6,7 +6,7 @@ struct UsingAlertView: View {
     @Query var busStops: [BusStopLocal]
     @StateObject private var viewModel = NowBusLocationViewModel() // ViewModel 연결
     let busAlert: BusAlert // 관련된 알림 정보
-    let alertBusStopLocal: BusStopLocal // 알림 기준 정류소
+//    let alertBusStopLocal: BusStopLocal // 알림 기준 정류소
     let arrivalBusStopLocal: BusStopLocal // 도착 정류소
     @Environment(\.dismiss) private var dismiss
     @State private var isAlertEnabled: Bool = false // 스위치 상태 관리
@@ -18,7 +18,7 @@ struct UsingAlertView: View {
     @State private var showExitConfirmation = false
     
     //이거ㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓ
-    @State private var alertStop: BusStopLocal? // alertStop을 상태로 관리
+    @Binding var alertStop: BusStopLocal? // alertStop을 상태로 관리
     //이거ㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓ
     
     // ScrollTo 변수
@@ -67,7 +67,7 @@ struct UsingAlertView: View {
                                         //이거ㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓ
                                         primaryButton: .destructive(Text("종료")) {
                                             // 알림 취소 (alertBusStopLocal과 arrivalBusStopLocal 각각에 대해 호출)
-                                            notificationManager.cancelLocationNotification(for: busAlert, for: alertBusStopLocal)
+                                            notificationManager.cancelLocationNotification(for: busAlert, for: alertStop!)
                                             notificationManager.cancelLocationNotification(for: busAlert, for: arrivalBusStopLocal)
                                             dismiss() // Dismiss the view if confirmed
                                         },
@@ -83,7 +83,7 @@ struct UsingAlertView: View {
                                 .font(.regular10)
                                 .foregroundStyle(.midbrand)
                             //이거ㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓ
-                            Text("\(alertStop?.nodenm)")
+                            Text("\(busAlert.arrivalBusStopNm)")
                             //이거ㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓ
                                 .foregroundColor(Color.gray2)
                                 .font(.regular20)
@@ -134,7 +134,7 @@ struct UsingAlertView: View {
                                         busStop: busStop,
                                         isCurrentLocation: busStop.nodeid == closestBus.nodeid,
                                         arrivalBusStopID: busAlert.arrivalBusStopID,
-                                        alertBusStopID: busAlert.alertBusStopID,
+//                                        alertBusStopID: alertStop?.nodeid,
                                         alertStop: alertStop
                                         // 여기도 수정함 이거ㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓ
                                     )
@@ -171,10 +171,10 @@ struct UsingAlertView: View {
             .navigationBarTitleDisplayMode(.inline)
             .onAppear {
                 //이거ㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓ
-                if let foundStop = findAlertBusStop(busAlert: busAlert, busStops: busStops) {
-                    alertStop = foundStop
-                    //이거ㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓ
-                }
+//                if let foundStop = findAlertBusStop(busAlert: busAlert, busStops: busStops) {
+//                    alertStop = foundStop
+//                    //이거ㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓ
+//                }
                 refreshData() // 초기 로드
             }
             // 타이머를 활용한 자동 새로고침
@@ -202,7 +202,7 @@ struct UsingAlertView: View {
         let busStop: BusStopLocal  // BusStop을 BusStopLocal로 변경
         let isCurrentLocation: Bool
         let arrivalBusStopID: String
-        let alertBusStopID: String
+//        let alertBusStopID: String
         let alertStop: BusStopLocal?
         // 여기도 수정함 이거ㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓ
         var body: some View {
@@ -310,7 +310,7 @@ struct UsingAlertView: View {
                 notificationManager.notificationReceived = false // 오버레이 닫기
                 
                 // 알림 취소 (alertBusStopLocal과 arrivalBusStopLocal 각각에 대해 호출)
-                notificationManager.cancelLocationNotification(for: busAlert, for: alertBusStopLocal)
+                notificationManager.cancelLocationNotification(for: busAlert, for: alertStop!)
                 notificationManager.cancelLocationNotification(for: busAlert, for: arrivalBusStopLocal)
                 dismiss()
             //                notificationManager.locationManager.stopLocationUpdates()

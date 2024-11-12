@@ -9,12 +9,13 @@ import SwiftUI
 
 struct SavedBus: View {
 //    @State private var busAlert: BusAlert // 수정 가능하게 변경
+    let busStopLocals: [BusStopLocal]
     let busAlert: BusAlert
     var isSelected: Bool = false
     var onDelete: () -> Void // 삭제 핸들러
     @State private var alertShowing = false
-    @State private var isEditing = false
-    
+    @Binding var isEditing: Bool
+
     
     var body: some View {
         ZStack {
@@ -81,7 +82,7 @@ struct SavedBus: View {
                         .frame(width: 2, height: 12)
                         .background(Color.gray5)
                     
-                    Text(busAlert.alertBusStopNm)
+                    Text(findAlertBusStop(busAlert: busAlert, busStops: busStopLocals)?.nodenm ?? "정류장명없음")
                         .font(.regular14)
                         .foregroundColor(Color.gray3)
                     
@@ -97,7 +98,7 @@ struct SavedBus: View {
         .fixedSize(horizontal: false, vertical: true)
         .sheet(isPresented: $isEditing) {
             NavigationView {
-                AlertSettingMain(busAlert: busAlert, isEditing: isEditing) // `busAlert`을 `AlertSettingMain`으로 전달
+                AlertSettingMain(busAlert: busAlert, isEditing: $isEditing) // `busAlert`을 `AlertSettingMain`으로 전달
             }
         }
         .alert("알람 삭제", isPresented: $alertShowing) {
