@@ -41,12 +41,15 @@ struct MainView: View {
                 let arrivalBusStopLocal = busStopLocal.filter { $0.nodeid == selectedAlert?.arrivalBusStopID }.first
                 
                 NavigationLink(
-                    destination: selectedAlert.flatMap { alert in
-                        if let alertBusStopLocal = alertBusStopLocal,
+                    destination: Group {
+                        if let selectedAlert = selectedAlert,
+                           let alertBusStopLocal = alertBusStopLocal,
                            let arrivalBusStopLocal = arrivalBusStopLocal {
-                            return UsingAlertView(busAlert: alert, alertBusStopLocal: alertBusStopLocal, arrivalBusStopLocal: arrivalBusStopLocal)
-                        } else {
-                            return nil
+                            UsingAlertView(
+                                busAlert: selectedAlert,
+                                alertBusStopLocal: alertBusStopLocal,
+                                arrivalBusStopLocal: arrivalBusStopLocal
+                            )
                         }
                     },
                     isActive: $isUsingAlertActive
