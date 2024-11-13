@@ -37,7 +37,6 @@ class LocationManager: NSObject, ObservableObject {
         manager.desiredAccuracy = kCLLocationAccuracyBest // locationManager의 정확도를 최고로 설정
         manager.allowsBackgroundLocationUpdates = true // 백그라운드에서도 위치를 업데이트하도록 설정
         checkIfLocationServicesIsEnabled()
-        //        startAutoRefresh() // 10초마다 자동으로 위치를 갱신하도록 타이머 설정
     }
     
     // 위치 업데이트 시작 함수
@@ -53,10 +52,6 @@ class LocationManager: NSObject, ObservableObject {
         manager.stopUpdatingLocation()
         stopAutoRefresh() // 위치 자동 갱신 타이머 중지
     }
-    
-//    deinit {
-//        stopAutoRefresh()
-//    }
     
     /// 10초마다 refreshLocation()을 호출하는 타이머를 설정
     func startAutoRefresh() {

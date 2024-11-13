@@ -10,12 +10,11 @@ import SwiftUI
 struct SavedBus: View {
 //    @State private var busAlert: BusAlert // 수정 가능하게 변경
     let busStopLocals: [BusStopLocal]
-    let busAlert: BusAlert
+    let busAlert: BusAlert?
     var isSelected: Bool = false
     var onDelete: () -> Void // 삭제 핸들러
     @State private var alertShowing = false
-    @Binding var isEditing: Bool
-
+    @State private var isEditing: Bool = false
     
     var body: some View {
         ZStack {
@@ -28,7 +27,7 @@ struct SavedBus: View {
                 }
             VStack {
                 HStack(alignment: .bottom) {
-                    Text(busAlert.alertLabel ?? "알림")
+                    Text(busAlert?.alertLabel ?? "알림")
                             .font(.regular12)
                         .foregroundColor(Color.gray2)
                     Spacer()
@@ -57,9 +56,9 @@ struct SavedBus: View {
                     
                 }
                 HStack {
-                    Text(busAlert.busNo)
+                    Text(busAlert?.busNo ?? "버스번호없음")
                         .font(.regular20)
-                    Text(busAlert.arrivalBusStopNm)
+                    Text(busAlert?.arrivalBusStopNm ?? "도착정류장")
                         .font(.regular20)
                     
                     Spacer()
@@ -73,7 +72,7 @@ struct SavedBus: View {
                     Image(systemName: "bell.fill")
                         .font(.regular12)
                         .foregroundColor(Color.brand)
-                    Text("\(busAlert.alertBusStop) 정류장 전 알람")
+                    Text("\(busAlert!.alertBusStop) 정류장 전 알람")
                         .font(.regular14)
                         .foregroundColor(Color.brand)
                     
@@ -82,7 +81,7 @@ struct SavedBus: View {
                         .frame(width: 2, height: 12)
                         .background(Color.gray5)
                     
-                    Text(findAlertBusStop(busAlert: busAlert, busStops: busStopLocals)?.nodenm ?? "정류장명없음")
+                    Text(findAlertBusStop(busAlert: busAlert!, busStops: busStopLocals)?.nodenm ?? "정류장명없음")
                         .font(.regular14)
                         .foregroundColor(Color.gray3)
                     
@@ -97,8 +96,8 @@ struct SavedBus: View {
         }
         .fixedSize(horizontal: false, vertical: true)
         .sheet(isPresented: $isEditing) {
-            NavigationView {
-                AlertSettingMain(busAlert: busAlert, isEditing: $isEditing) // `busAlert`을 `AlertSettingMain`으로 전달
+            NavigationView{
+                AlertSettingMain(busAlert: busAlert, isEditing: true) // `busAlert`을 `AlertSettingMain`으로 전달
             }
         }
         .alert("알람 삭제", isPresented: $alertShowing) {
@@ -108,6 +107,9 @@ struct SavedBus: View {
             Button("취소", role: .cancel){}
         } message: {
             Text("알람을 삭제하시겠습니까?")
+        }
+        .onAppear(){
+            print(busAlert?.alertLabel)
         }
     }
 }

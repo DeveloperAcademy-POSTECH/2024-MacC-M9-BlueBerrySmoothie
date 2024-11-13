@@ -2,56 +2,44 @@ import SwiftUI
 import SwiftData
 
 struct UsingAlertView: View {
-    //    let busStops: [BusStopLocal] // 정류소 정보 배열
     @Query var busStops: [BusStopLocal]
     @StateObject private var viewModel = NowBusLocationViewModel() // ViewModel 연결
-    let busAlert: BusAlert // 관련된 알림 정보
-//    let alertBusStopLocal: BusStopLocal // 알림 기준 정류소
-    let arrivalBusStopLocal: BusStopLocal // 도착 정류소
+    @ObservedObject var notificationManager = NotificationManager.instance // NotificationManager 인스턴스 감지
     @Environment(\.dismiss) private var dismiss
+    
+    let busAlert: BusAlert // 관련된 알림 정보
+    let arrivalBusStopLocal: BusStopLocal // 도착 정류소
+    private let refreshTimer = Timer.publish(every: 10, on: .main, in: .common).autoconnect() // 타이머 설정: 10초마다 자동으로 새로고침
+    
     @State private var isAlertEnabled: Bool = false // 스위치 상태 관리
-    // NotificationManager 인스턴스 감지
-    @ObservedObject var notificationManager = NotificationManager.instance
-    // EndView로의 이동 상태를 관리하는 변수
     @State private var isRefreshing: Bool = false // 새로고침 상태 관리
     @State private var lastRefreshTime: Date? = nil // 마지막 새로고침 시간
     @State private var showExitConfirmation = false
-    
-    //이거ㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓ
+    @State private var positionIndex: Int = 1 // ScrollTo 변수
     @Binding var alertStop: BusStopLocal? // alertStop을 상태로 관리
-    //이거ㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓ
-    
-    // ScrollTo 변수
-    @State private var positionIndex: Int = 1
     
     
-    // 타이머 설정: 10초마다 자동으로 새로고침
-    private let refreshTimer = Timer.publish(every: 10, on: .main, in: .common).autoconnect()
-    
-    //이거ㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓ
     func findAlertBusStop(busAlert: BusAlert, busStops: [BusStopLocal]) -> BusStopLocal? {
-            // 1. BusStopLocal에서 routeid가 동일한 노선 찾기
-            let filteredStops = busStops.filter { $0.routeid == busAlert.routeid }
-            
-            // 2. 도착 정류소 ID에 해당하는 정류소 찾기
-            guard let arrivalStop = filteredStops.first(where: { $0.nodeid == busAlert.arrivalBusStopID }) else {
-                return nil // 도착 정류소가 없으면 nil 반환
-            }
-            
-            // 3. 도착 정류소의 nodeord에서 alertBusStop을 뺀 정류소 찾기
-            let targetNodeOrd = arrivalStop.nodeord - busAlert.alertBusStop
-            
-            // 4. 해당 nodeord에 해당하는 정류소 반환
-            return filteredStops.first(where: { $0.nodeord == targetNodeOrd })
+        // 1. BusStopLocal에서 routeid가 동일한 노선 찾기
+        let filteredStops = busStops.filter { $0.routeid == busAlert.routeid }
         
+        // 2. 도착 정류소 ID에 해당하는 정류소 찾기
+        guard let arrivalStop = filteredStops.first(where: { $0.nodeid == busAlert.arrivalBusStopID }) else {
+            return nil // 도착 정류소가 없으면 nil 반환
         }
-    //이거ㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓ
+        
+        // 3. 도착 정류소의 nodeord에서 alertBusStop을 뺀 정류소 찾기
+        let targetNodeOrd = arrivalStop.nodeord - busAlert.alertBusStop
+        
+        // 4. 해당 nodeord에 해당하는 정류소 반환
+        return filteredStops.first(where: { $0.nodeord == targetNodeOrd })
+        
+    }
     
     
     
     var body: some View {
         ZStack {
-            // 기존 콘텐츠 부분
             VStack {
                 VStack {
                     HStack {
@@ -61,18 +49,16 @@ struct UsingAlertView: View {
                     .alert(isPresented: $showExitConfirmation) {
                         
                         SwiftUI.Alert(
-                                        title: Text("알람 종료"),
-                                        //이거ㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓ
-                                        message: Text("\(alertStop?.nodenm) 알람을 종료하시겠습니까?"),
-                                        //이거ㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓ
-                                        primaryButton: .destructive(Text("종료")) {
-                                            // 알림 취소 (alertBusStopLocal과 arrivalBusStopLocal 각각에 대해 호출)
-                                            notificationManager.cancelLocationNotification(for: busAlert, for: alertStop!)
-                                            notificationManager.cancelLocationNotification(for: busAlert, for: arrivalBusStopLocal)
-                                            dismiss() // Dismiss the view if confirmed
-                                        },
-                                        secondaryButton: .cancel(Text("취소")))
-                                }
+                            title: Text("알람 종료"),
+                            message: Text("알람을 종료하시겠습니까?"),
+                            primaryButton: .destructive(Text("종료")) {
+                                // 알림 취소 (alertBusStopLocal과 arrivalBusStopLocal 각각에 대해 호출)
+                                notificationManager.cancelLocationNotification(for: busAlert, for: alertStop!)
+                                notificationManager.cancelLocationNotification(for: busAlert, for: arrivalBusStopLocal)
+                                dismiss() // Dismiss the view if confirmed
+                            },
+                            secondaryButton: .cancel(Text("취소")))
+                    }
                     .padding(.horizontal, 20)
                     VStack {
                         HStack {
@@ -82,9 +68,7 @@ struct UsingAlertView: View {
                             Image(systemName: "suit.diamond.fill")
                                 .font(.regular10)
                                 .foregroundStyle(.midbrand)
-                            //이거ㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓ
                             Text("\(busAlert.arrivalBusStopNm)")
-                            //이거ㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓ
                                 .foregroundColor(Color.gray2)
                                 .font(.regular20)
                             Spacer()
@@ -108,9 +92,7 @@ struct UsingAlertView: View {
                                     .frame(width: 14, height: 14)
                                     .foregroundColor(Color.midbrand)
                             }
-                            //이거ㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓ
-                            Text("\(alertStop?.nodenm)")
-                            //이거ㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓ
+                            Text("\(alertStop!.nodenm)")
                                 .foregroundColor(Color.black)
                                 .font(.medium30)
                             Spacer()
@@ -134,9 +116,7 @@ struct UsingAlertView: View {
                                         busStop: busStop,
                                         isCurrentLocation: busStop.nodeid == closestBus.nodeid,
                                         arrivalBusStopID: busAlert.arrivalBusStopID,
-//                                        alertBusStopID: alertStop?.nodeid,
                                         alertStop: alertStop
-                                        // 여기도 수정함 이거ㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓ
                                     )
                                 }
                             } else if isRefreshing {
@@ -170,11 +150,6 @@ struct UsingAlertView: View {
             .navigationTitle(busAlert.alertLabel ?? "알람")
             .navigationBarTitleDisplayMode(.inline)
             .onAppear {
-                //이거ㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓ
-//                if let foundStop = findAlertBusStop(busAlert: busAlert, busStops: busStops) {
-//                    alertStop = foundStop
-//                    //이거ㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓ
-//                }
                 refreshData() // 초기 로드
             }
             // 타이머를 활용한 자동 새로고침
@@ -193,18 +168,15 @@ struct UsingAlertView: View {
             }
         }
         .toolbar(.hidden)
-       
+        
     }
     
     // BusStop 리스트
-    // 여기도 수정함 이거ㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓ
     struct BusStopRow: View {
         let busStop: BusStopLocal  // BusStop을 BusStopLocal로 변경
         let isCurrentLocation: Bool
         let arrivalBusStopID: String
-//        let alertBusStopID: String
         let alertStop: BusStopLocal?
-        // 여기도 수정함 이거ㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓ
         var body: some View {
             HStack {
                 if isCurrentLocation {
@@ -221,7 +193,6 @@ struct UsingAlertView: View {
                     if busStop.nodeid == arrivalBusStopID {
                         Image("endpoint")
                             .frame(width: 20, height: 20)
-                        // 여기도 수정함 이거ㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓ
                     } else if busStop.nodeid == alertStop?.nodeid {
                         Image("AlertBusStop")
                             .frame(width: 20, height: 20)
@@ -313,7 +284,6 @@ struct UsingAlertView: View {
                 notificationManager.cancelLocationNotification(for: busAlert, for: alertStop!)
                 notificationManager.cancelLocationNotification(for: busAlert, for: arrivalBusStopLocal)
                 dismiss()
-            //                notificationManager.locationManager.stopLocationUpdates()
             }, label: {
                 Text("종료")
                     .foregroundStyle(.white)

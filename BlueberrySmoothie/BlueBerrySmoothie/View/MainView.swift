@@ -13,6 +13,7 @@ struct MainView: View {
     @Query var busAlerts: [BusAlert] // 알람 데이터를 바인딩
     @Query var busStopLocal: [BusStopLocal]
     @State private var selectedAlert: BusAlert? // State to store the selected BusAlert
+    @State private var mainToSetting: BusAlert? = nil
     @State private var isUsingAlertActive: Bool = false // Controls navigation to UsingAlertView
     @State private var isEmptyAlert: Bool = true
     @State private var isSelected: Bool = false
@@ -44,40 +45,37 @@ struct MainView: View {
                     
                     Spacer()
                     
-//                    let alertBusStopLocal = busStopLocal.filter { $0.nodeid == selectedAlert?.alertBusStopID }.first
-//                    let alertBusStopLocal = findAlertBusStop(busAlert: selectedAlert!, busStops: busStopLocal)
                     let arrivalBusStopLocal = busStopLocal.filter { $0.nodeid == selectedAlert?.arrivalBusStopID }.first
                     
                     
-                    //                    NavigationLink(
-                    //                        destination: Group {
-                    //                            if let selectedAlert = selectedAlert,
-                    //                               let alertBusStopLocal = alertBusStopLocal,
-                    //                               let arrivalBusStopLocal = arrivalBusStopLocal {
-                    //                                UsingAlertView(
-                    //                                    busAlert: selectedAlert,
-                    //                                    alertBusStopLocal: alertBusStopLocal,
-                    //                                    arrivalBusStopLocal: arrivalBusStopLocal
-                    //                                )
-                    //                            }
-                    //                        },
-                    //                        isActive: $isUsingAlertActive
-                    //                    ) {
-                    //                        EmptyView()
-                    //                    }
                     NavigationLink(
-                        destination: selectedAlert.flatMap { alert in
-                            if /*let alertBusStopLocal = alertBusStopLocal,*/
+                        destination: Group {
+                            if let selectedAlert = selectedAlert,
                                let arrivalBusStopLocal = arrivalBusStopLocal {
-                                return UsingAlertView(busAlert: alert, /*alertBusStopLocal: alertBusStopLocal,*/ arrivalBusStopLocal: arrivalBusStopLocal, alertStop: $alertStop)
-                            } else {
-                                return nil
+                                UsingAlertView(
+                                    busAlert: selectedAlert,
+                                    arrivalBusStopLocal: arrivalBusStopLocal,
+                                    alertStop: $alertStop
+                                )
                             }
                         },
                         isActive: $isUsingAlertActive
                     ) {
                         EmptyView()
                     }
+                    //                    NavigationLink(
+                    //                        destination: selectedAlert.flatMap { alert in
+                    //                            if /*let alertBusStopLocal = alertBusStopLocal,*/
+                    //                               let arrivalBusStopLocal = arrivalBusStopLocal {
+                    //                                return UsingAlertView(busAlert: alert, /*alertBusStopLocal: alertBusStopLocal,*/ arrivalBusStopLocal: arrivalBusStopLocal, alertStop: $alertStop)
+                    //                            } else {
+                    //                                return nil
+                    //                            }
+                    //                        },
+                    //                        isActive: $isUsingAlertActive
+                    //                    ) {
+                    //                        EmptyView()
+                    //                    }
                     
                     Button(action: {
                         guard let selectedAlert = selectedAlert,
@@ -89,7 +87,7 @@ struct MainView: View {
                         isUsingAlertActive = true // Activate navigation
                         print(selectedAlert.alertLabel)
                         notificationManager.requestAuthorization()
-                                            notificationManager.scheduleTestNotification(for: selectedAlert)
+                        //                        notificationManager.scheduleTestNotification(for: selectedAlert)
                         notificationManager.requestLocationNotification(for: selectedAlert, for: alertBusStopLocal)
                         notificationManager.requestLocationNotification(for: selectedAlert, for: arrivalBusStopLocal)
                     }, label: {
@@ -98,9 +96,6 @@ struct MainView: View {
                     .disabled(isEmptyAlert)
                 }
                 .padding(20)
-                //            .background(Color.lightbrand)
-                //                .navigationTitle("버스 알람: 핫챠")
-                //                .navigationBarTitleDi splayMode(.inline)
                 .toolbar {
                     ToolbarItem(placement: .navigationBarTrailing) { // 위치를 명확히 지정
                         Button(action: {
@@ -112,7 +107,7 @@ struct MainView: View {
                         }
                         .sheet(isPresented: $showSetting) {
                             NavigationView {
-                                AlertSettingMain(isEditing: $isEditing)
+                                AlertSettingMain(/*isEditing: $isEditing*/)
                             }
                         }
                     }
@@ -139,13 +134,13 @@ struct MainView: View {
                 .background(Color.clear)
             } else {
                 ScrollView(showsIndicators: false)  {
-                    ForEach (busAlerts, id: \.id) { alert in
+                    ForEach (busAlerts, id: \.self) { alert in
                         SavedBus(busStopLocals: busStopLocal, busAlert: alert, isSelected: selectedAlert?.id == alert.id, onDelete: {
                             deleteBusAlert(alert) // 삭제 동작
                             if busAlerts.isEmpty {
                                 isEmptyAlert = true
                             }
-                        }, isEditing: $isEditing)
+                        })
                         .onTapGesture {
                             selectedAlert = alert // 선택된 알람 설정
                             if let foundStop = findAlertBusStop(busAlert: alert, busStops: busStopLocal) {
@@ -155,6 +150,9 @@ struct MainView: View {
                                 isEmptyAlert = false
                             }
                             print(selectedAlert?.alertLabel)
+                            print("foundStop: \(alertStop?.nodenm)")
+                            print(alert.alertLabel)
+                            
                         }
                         .padding(2) // padding을 조금 추가하여 스트로크가 잘리는 것을 방지
                         .padding(.bottom, 1) // 아이템 간 간격 유지

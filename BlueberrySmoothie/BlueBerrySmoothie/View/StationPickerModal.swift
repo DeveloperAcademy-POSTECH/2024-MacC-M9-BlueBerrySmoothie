@@ -16,7 +16,6 @@ struct StationPickerModal: View {
     @Binding var alert: BusStopAlert? // BusStopAlert 값을 받아옴
     @State var nodeord: Int
     
-    
     var body: some View {
         ZStack(alignment: .bottom) {
             Color.black.opacity(0.3)
