@@ -72,7 +72,8 @@ class LocationManager: NSObject, ObservableObject {
         print(manager.location ?? "실시간 location")
         
         let targetRegion = CLCircularRegion(
-            center: CLLocationCoordinate2D(latitude: busStopLocal.gpslati, longitude: busStopLocal.gpslong),
+//            center: CLLocationCoordinate2D(latitude: busStopLocal.gpslati, longitude: busStopLocal.gpslong),
+            center: CLLocationCoordinate2D(latitude: 36.014141, longitude: 129.325686), // 테스트 좌표(c5 입구)
             radius: 4.0,
             identifier: "POIRegion")
         print("targetRegion: \(busStopLocal.gpslati), \(busStopLocal.gpslong)")
