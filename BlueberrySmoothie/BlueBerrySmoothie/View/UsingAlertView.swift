@@ -5,10 +5,10 @@ struct UsingAlertView: View {
     @Query var busStops: [BusStopLocal]
     @StateObject private var viewModel = NowBusLocationViewModel() // ViewModel 연결
     @ObservedObject var notificationManager = NotificationManager.instance // NotificationManager 인스턴스 감지
+    private let locationManager = LocationManager.shared // LocationManager 싱글톤 참조로 변경
     @Environment(\.dismiss) private var dismiss
     
     let busAlert: BusAlert // 관련된 알림 정보
-    let arrivalBusStopLocal: BusStopLocal // 도착 정류소
     private let refreshTimer = Timer.publish(every: 10, on: .main, in: .common).autoconnect() // 타이머 설정: 10초마다 자동으로 새로고침
     
     @State private var isAlertEnabled: Bool = false // 스위치 상태 관리
@@ -37,7 +37,6 @@ struct UsingAlertView: View {
     }
     
     
-    
     var body: some View {
         ZStack {
             VStack {
@@ -52,9 +51,8 @@ struct UsingAlertView: View {
                             title: Text("알람 종료"),
                             message: Text("알람을 종료하시겠습니까?"),
                             primaryButton: .destructive(Text("종료")) {
-                                // 알림 취소 (alertBusStopLocal과 arrivalBusStopLocal 각각에 대해 호출)
-                                notificationManager.cancelLocationNotification(for: busAlert, for: alertStop!)
-                                notificationManager.cancelLocationNotification(for: busAlert, for: arrivalBusStopLocal)
+                                notificationManager.notificationReceived = false // 오버레이 닫기
+                                locationManager.stopLocationUpdates(for: busAlert)
                                 dismiss() // Dismiss the view if confirmed
                             },
                             secondaryButton: .cancel(Text("취소")))
@@ -277,12 +275,10 @@ struct UsingAlertView: View {
             Image("AfterAlertImg")
                 .padding()
             
+            // 알람 종료 버튼
             Button(action: {
                 notificationManager.notificationReceived = false // 오버레이 닫기
-                
-                // 알림 취소 (alertBusStopLocal과 arrivalBusStopLocal 각각에 대해 호출)
-                notificationManager.cancelLocationNotification(for: busAlert, for: alertStop!)
-                notificationManager.cancelLocationNotification(for: busAlert, for: arrivalBusStopLocal)
+                locationManager.stopLocationUpdates(for: busAlert)
                 dismiss()
             }, label: {
                 Text("종료")
@@ -298,7 +294,9 @@ struct UsingAlertView: View {
         .background(Color.gray.opacity(0.8))
         .cornerRadius(10)
         .shadow(radius: 10)
-        
+        .onDisappear{
+            locationManager.stopNotificationAlarm(for: busAlert)
+        }
     }
     
     let dateFormatter: DateFormatter = {

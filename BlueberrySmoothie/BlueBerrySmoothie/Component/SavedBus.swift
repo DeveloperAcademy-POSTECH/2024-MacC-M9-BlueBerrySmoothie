@@ -108,9 +108,6 @@ struct SavedBus: View {
         } message: {
             Text("알람을 삭제하시겠습니까?")
         }
-        .onAppear(){
-            print(busAlert?.alertLabel)
-        }
     }
 }
 
