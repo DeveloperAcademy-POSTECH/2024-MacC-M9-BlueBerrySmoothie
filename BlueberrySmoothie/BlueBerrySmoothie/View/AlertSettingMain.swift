@@ -146,6 +146,7 @@ struct AlertSettingMain: View {
                     .padding(.bottom, 20)
                 }
                 
+                // 일어날 정류장 선택
                 HStack(spacing: 2) {
                     Text("일어날 정류장")
                         .font(.medium16)
@@ -223,6 +224,7 @@ struct AlertSettingMain: View {
         }
         .onAppear {
             print("AlertSettingMain onAppear: \(busAlert?.alertLabel)")
+            // 수정인 경우
             if let busAlert = busAlert {
                 // `busAlert` 데이터로 초기 상태 설정
                 label = busAlert.alertLabel ?? "알람"
@@ -249,6 +251,7 @@ struct AlertSettingMain: View {
                 EmptyView()
             }
         }
+        // TODO: Toolbar Item도 반복해서 쓰이는거니까 이 안에 들어가는 버튼을 간소화할 수 없나?
         .toolbar {
             ToolbarItem {
                 Button(action: {
@@ -290,7 +293,9 @@ struct AlertSettingMain: View {
         showToast = true
     }
     
+    // 알람 저장 함수
     private func saveOrUpdateAlert() {
+        // 기존 알람 수정
         if isEditing == true {
             // 기존 `busAlert` 업데이트
             busAlert?.alertLabel = label
@@ -303,7 +308,7 @@ struct AlertSettingMain: View {
         }
     }
     
-    // 알람 저장 함수
+    // 새 알림 저장 함수
     private func saveAlert() {
         guard let selectedBus = busStopAlert?.bus,
               let selectedBusStop = busStopAlert?.arrivalBusStop else {
@@ -363,6 +368,7 @@ struct AlertSettingMain: View {
         }
     }
     
+    // 선택한 버스의 정류장 List 저장 함수 - UsingAlertView에서 정류장 노선을 띄우는데 사용됨
     private func saveBusstop() {
         guard !(busStopAlert?.allBusStop.isEmpty)! else {
             print("버스를 선택하세요.")

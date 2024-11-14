@@ -38,6 +38,7 @@ struct SelectBusView: View {
                     .frame(height: 2)
                     .padding(.horizontal, 20)
                 
+                // TODO: BusList로 분리
                 ScrollView(showsIndicators: false) {
                     ForEach(filteredBuses) { bus in
                         Button(action: {

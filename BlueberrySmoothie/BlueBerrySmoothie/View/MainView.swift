@@ -77,6 +77,8 @@ struct MainView: View {
                     //                        EmptyView()
                     //                    }
                     
+                    
+                    //TODO: 이 버튼도 StartButton으로 분리
                     Button(action: {
                         guard let selectedAlert = selectedAlert,
                               let alertBusStopLocal = alertStop,
@@ -91,6 +93,8 @@ struct MainView: View {
                         notificationManager.requestLocationNotification(for: selectedAlert, for: alertBusStopLocal)
                         notificationManager.requestLocationNotification(for: selectedAlert, for: arrivalBusStopLocal)
                     }, label: {
+                        // 시작하기 버튼
+                        // TODO: StartButtonUI로 이름 수정
                         ActionButton(isEmptyAlert: isEmptyAlert)
                     })
                     .disabled(isEmptyAlert)
@@ -135,6 +139,7 @@ struct MainView: View {
             } else {
                 ScrollView(showsIndicators: false)  {
                     ForEach (busAlerts, id: \.self) { alert in
+                        // 저장된 알람에 대한 각각의 노드
                         SavedBus(busStopLocals: busStopLocal, busAlert: alert, isSelected: selectedAlert?.id == alert.id, onDelete: {
                             deleteBusAlert(alert) // 삭제 동작
                             if busAlerts.isEmpty {
@@ -149,9 +154,9 @@ struct MainView: View {
                             if busAlerts.count != 0 {
                                 isEmptyAlert = false
                             }
-                            print(selectedAlert?.alertLabel)
-                            print("foundStop: \(alertStop?.nodenm)")
-                            print(alert.alertLabel)
+//                            print(selectedAlert?.alertLabel)
+//                            print("foundStop: \(alertStop?.nodenm)")
+//                            print(alert.alertLabel)
                             
                         }
                         .padding(2) // padding을 조금 추가하여 스트로크가 잘리는 것을 방지

@@ -19,6 +19,7 @@ struct UsingAlertView: View {
     @Binding var alertStop: BusStopLocal? // alertStop을 상태로 관리
     
     
+    // TODO: 아래로 내리기
     func findAlertBusStop(busAlert: BusAlert, busStops: [BusStopLocal]) -> BusStopLocal? {
         // 1. BusStopLocal에서 routeid가 동일한 노선 찾기
         let filteredStops = busStops.filter { $0.routeid == busAlert.routeid }
@@ -36,18 +37,17 @@ struct UsingAlertView: View {
         
     }
     
-    
-    
     var body: some View {
         ZStack {
             VStack {
                 VStack {
                     HStack {
+                        // TODO: Button 줄바꿈하기
                         Button(action: {self.showExitConfirmation.toggle(); print(showExitConfirmation)}, label: {Image(systemName: "xmark").foregroundStyle(.black)})
                         Spacer()
                     }
                     .alert(isPresented: $showExitConfirmation) {
-                        
+                        // TODO: Alert 종료 분리하기
                         SwiftUI.Alert(
                             title: Text("알람 종료"),
                             message: Text("알람을 종료하시겠습니까?"),
@@ -105,10 +105,11 @@ struct UsingAlertView: View {
                 }
                 .background(Color.lightbrand)
                 
-                //버스 노선 스크롤뷰
+                //TODO: 버스 노선 스크롤뷰 분리
                 ScrollViewReader { proxy in
                     ScrollView(showsIndicators: false) {
                         VStack(alignment: .leading, spacing: 0) {
+                            // 가장 가까운 버스가 감지 되었을 경우
                             if let closestBus = viewModel.closestBusLocation {
                                 ForEach(busStops.filter { $0.routeid == busAlert.routeid }.sorted(by: { $0.nodeord < $1.nodeord }), id: \.id) { busStop in
                                     
@@ -133,6 +134,7 @@ struct UsingAlertView: View {
                         }
                         .background(.clear)
                     }
+                    // 해당 버스 노드 위치로 스크롤하는 에니메이션
                     .onReceive(viewModel.$closestBusLocation) { location in
                         if let location = location {
                             DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
@@ -142,7 +144,6 @@ struct UsingAlertView: View {
                             }
                         }
                     }
-                    
                 }
                 
             }
@@ -156,7 +157,6 @@ struct UsingAlertView: View {
             .onReceive(refreshTimer) { _ in
                 refreshData()
             }
-            
             RefreshButton(isRefreshing: isRefreshing) {
                 refreshData()
             }
@@ -271,6 +271,7 @@ struct UsingAlertView: View {
         }
     }
     
+    // 알람 비활성화 뷰
     @ViewBuilder
     func AfterAlertView() -> some View {
         VStack {
@@ -301,6 +302,7 @@ struct UsingAlertView: View {
         
     }
     
+    // TODO: Extension으로 분리하기 - 사용되는 곳이 없어보이는데 없다면 삭제
     let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateStyle = .short

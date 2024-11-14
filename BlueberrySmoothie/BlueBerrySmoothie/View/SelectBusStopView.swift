@@ -40,7 +40,7 @@ struct SelectBusStopView: View {
             }
             .padding(.bottom, 10)
             
-            // 방면
+            // TODO: 방면 2와 1이 같은 코드를 사용하고 있기 때문에 따로 분리하기
             HStack {
                 VStack{
                     if updowncdselection == 2 {
@@ -109,6 +109,7 @@ struct SelectBusStopView: View {
                 
             }
             
+            // TODO: BusStopList로 분리
             ScrollViewReader { proxy in
                 ScrollView(showsIndicators: false) {
                     ForEach(busStopViewModel.busStopList, id: \.nodeord) { busstop in
