@@ -290,7 +290,7 @@ struct UsingAlertView: View {
                     .font(.largeTitle)
                     .padding()
                     .padding(.horizontal, 20)
-                    .background(Capsule())
+                    .background(Capsule().foregroundStyle(Color.black))
             })
             
         }
