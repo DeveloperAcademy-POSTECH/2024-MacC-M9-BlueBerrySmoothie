@@ -127,7 +127,10 @@ struct UsingAlertView: View {
                                     .foregroundColor(Color.black)
                                     .font(.regular16)
                             }
-                            Spacer()
+                            if let alertStop = alertStop {
+                                                AlertStopMapView(busStop: alertStop)
+                                            }
+//                            Spacer()
                         }
                         .background(.clear)
                     }
@@ -153,10 +156,12 @@ struct UsingAlertView: View {
             // 타이머를 활용한 자동 새로고침
             .onReceive(refreshTimer) { _ in
                 refreshData()
+                print("화면 새로고침")
             }
             
             RefreshButton(isRefreshing: isRefreshing) {
                 refreshData()
+                print("refresh 버튼")
             }
             
             // 알람종료 오버레이 뷰

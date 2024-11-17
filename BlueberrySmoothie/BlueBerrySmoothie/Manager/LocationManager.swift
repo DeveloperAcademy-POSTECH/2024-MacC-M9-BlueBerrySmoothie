@@ -30,6 +30,7 @@ class LocationManager: NSObject, ObservableObject {
         manager.desiredAccuracy = kCLLocationAccuracyBest // locationManager의 정확도를 최고로 설정
         manager.allowsBackgroundLocationUpdates = true // 백그라운드에서도 위치를 업데이트하도록 설정
         checkIfLocationServicesIsEnabled()
+        print("init은 언제호출")
     }
     
     // 위치 업데이트 시작 함수
@@ -68,22 +69,23 @@ class LocationManager: NSObject, ObservableObject {
     /// 위치 업데이트를 시작하고, 현재 위치가 targetRegion 안에 있는지 확인해 결과를 콘솔에 출력합니다.
     func refreshLocation(for busAlert: BusAlert, for busStopLocal: BusStopLocal) {
         lastRefreshTime = Date()
-        //        manager.startUpdatingLocation()
-        print(manager.location ?? "실시간 location")
+//                manager.startUpdatingLocation()
+        print("현재 내 위치: \(manager.location)" ?? "실시간 location")
         
         let targetRegion = CLCircularRegion(
-//            center: CLLocationCoordinate2D(latitude: busStopLocal.gpslati, longitude: busStopLocal.gpslong),
-            center: CLLocationCoordinate2D(latitude: 36.014141, longitude: 129.325686), // 테스트 좌표(c5 입구)
-            radius: 4.0,
+            center: CLLocationCoordinate2D(latitude: busStopLocal.gpslati, longitude: busStopLocal.gpslong),
+//            center: CLLocationCoordinate2D(latitude: 36.014141, longitude: 129.325686), // 테스트 좌표(c5 입구)
+            radius: 15.0,
             identifier: "POIRegion")
-        print("targetRegion: \(busStopLocal.gpslati), \(busStopLocal.gpslong)")
         
         // 위치가 region 안에 있는지 확인
         if let currentLocation = manager.location {
             if targetRegion.contains(currentLocation.coordinate) {
+                print("targetRegion = \(targetRegion)")
                 print("현재 위치가 지정된 지역 안에 있습니다.")
                 startNotificationAlarm(for: busAlert) //1.5초마다 알림을 생성합니다.
             } else {
+                print("targetRegion = \(targetRegion)")
                 print("현재 위치가 지정된 지역 밖에 있습니다.")
             }
         }

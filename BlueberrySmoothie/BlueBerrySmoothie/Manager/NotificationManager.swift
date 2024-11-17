@@ -63,7 +63,7 @@ class NotificationManager: NSObject, CLLocationManagerDelegate, ObservableObject
             content.sound = UNNotificationSound(named: UNNotificationSoundName("silentSound.wav"))
         }
         
-        // 10초 후 알림
+        // 1초 후 알림
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
         
         let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
