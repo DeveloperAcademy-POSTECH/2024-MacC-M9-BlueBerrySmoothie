@@ -13,7 +13,7 @@ struct AlertSettingMain: View {
     // 초기화 데이터들
     @State private var label: String = "알람"
     @State private var selectedStation: String = "정류장 수"
-        
+    
     // 추가된 상태 변수: SelectBusView를 sheet로 표시할지 여부
     @State private var showSelectBusSheet: Bool = false // ← 추가된 부분
     @State private var busStopAlert: BusStopAlert? // 사용자 선택 사항
@@ -223,7 +223,12 @@ struct AlertSettingMain: View {
             Spacer()
         }
         .onAppear {
-            print("AlertSettingMain onAppear: \(busAlert?.alertLabel)")
+//            print("AlertSettingMain onAppear: \(busAlert?.alertLabel)")
+            // 이전 정류장 수 선택이 안되어있는 경우
+            if busStopAlert?.alertBusStop == 0 {
+                selectedStation = "정류장 수"
+            }
+            
             // 수정인 경우
             if let busAlert = busAlert {
                 // `busAlert` 데이터로 초기 상태 설정
@@ -239,11 +244,6 @@ struct AlertSettingMain: View {
                 )
             }
         }
-        .onAppear {
-            if busStopAlert?.alertBusStop == 0 {
-                selectedStation = "정류장 수"
-            }
-        }
         .overlay {
             if showSheet {
                 StationPickerModal(isPresented: $showSheet, selectedStation: $selectedStation, alert: $busStopAlert, nodeord: busAlert?.arrivalBusStopNord ?? 0)
@@ -251,8 +251,8 @@ struct AlertSettingMain: View {
                 EmptyView()
             }
         }
-        // TODO: Toolbar Item도 반복해서 쓰이는거니까 이 안에 들어가는 버튼을 간소화할 수 없나?
         .toolbar {
+            // 저장 버튼
             ToolbarItem {
                 Button(action: {
                     if isInputValid() {
@@ -281,7 +281,6 @@ struct AlertSettingMain: View {
             }
         }
         .toast(isShowing: $showToast, message: toastMessage)
-        
     }
     
     private func isInputValid() -> Bool {
@@ -399,7 +398,7 @@ struct AlertSettingMain: View {
             
             do {
                 try modelContext.insert(newBusStopLocal)
-                print("버스 정류장이 저장되었습니다.")
+                //                print("버스 정류장이 저장되었습니다.")
             } catch {
                 print("버스 정류장 저장 실패: \(error)")
             }

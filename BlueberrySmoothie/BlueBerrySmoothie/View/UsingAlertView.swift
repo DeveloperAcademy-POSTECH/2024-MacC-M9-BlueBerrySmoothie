@@ -18,46 +18,22 @@ struct UsingAlertView: View {
     @State private var positionIndex: Int = 1 // ScrollTo 변수
     @Binding var alertStop: BusStopLocal? // alertStop을 상태로 관리
     
-    
-    // TODO: 아래로 내리기
-    func findAlertBusStop(busAlert: BusAlert, busStops: [BusStopLocal]) -> BusStopLocal? {
-        // 1. BusStopLocal에서 routeid가 동일한 노선 찾기
-        let filteredStops = busStops.filter { $0.routeid == busAlert.routeid }
-        
-        // 2. 도착 정류소 ID에 해당하는 정류소 찾기
-        guard let arrivalStop = filteredStops.first(where: { $0.nodeid == busAlert.arrivalBusStopID }) else {
-            return nil // 도착 정류소가 없으면 nil 반환
-        }
-        
-        // 3. 도착 정류소의 nodeord에서 alertBusStop을 뺀 정류소 찾기
-        let targetNodeOrd = arrivalStop.nodeord - busAlert.alertBusStop
-        
-        // 4. 해당 nodeord에 해당하는 정류소 반환
-        return filteredStops.first(where: { $0.nodeord == targetNodeOrd })
-        
-    }
-    
     var body: some View {
         ZStack {
             VStack {
                 VStack {
                     HStack {
-                        // TODO: Button 줄바꿈하기
-                        Button(action: {self.showExitConfirmation.toggle(); print(showExitConfirmation)}, label: {Image(systemName: "xmark").foregroundStyle(.black)})
+                        // x 종료 버튼
+                        Button(action: {
+                            self.showExitConfirmation.toggle();
+                        }, label: {
+                            Image(systemName: "xmark")
+                                .foregroundStyle(.black)
+                        })
                         Spacer()
                     }
                     .alert(isPresented: $showExitConfirmation) {
-                        // TODO: Alert 종료 분리하기
-                        SwiftUI.Alert(
-                            title: Text("알람 종료"),
-                            message: Text("알람을 종료하시겠습니까?"),
-                            primaryButton: .destructive(Text("종료")) {
-                                // 알림 취소 (alertBusStopLocal과 arrivalBusStopLocal 각각에 대해 호출)
-                                notificationManager.cancelLocationNotification(for: busAlert, for: alertStop!)
-                                notificationManager.cancelLocationNotification(for: busAlert, for: arrivalBusStopLocal)
-                                dismiss() // Dismiss the view if confirmed
-                            },
-                            secondaryButton: .cancel(Text("취소")))
+                        exitConfirmAlert()
                     }
                     .padding(.horizontal, 20)
                     VStack {
@@ -105,47 +81,14 @@ struct UsingAlertView: View {
                 }
                 .background(Color.lightbrand)
                 
-                //TODO: 버스 노선 스크롤뷰 분리
-                ScrollViewReader { proxy in
-                    ScrollView(showsIndicators: false) {
-                        VStack(alignment: .leading, spacing: 0) {
-                            // 가장 가까운 버스가 감지 되었을 경우
-                            if let closestBus = viewModel.closestBusLocation {
-                                ForEach(busStops.filter { $0.routeid == busAlert.routeid }.sorted(by: { $0.nodeord < $1.nodeord }), id: \.id) { busStop in
-                                    
-                                    BusStopRow(
-                                        busStop: busStop,
-                                        isCurrentLocation: busStop.nodeid == closestBus.nodeid,
-                                        arrivalBusStopID: busAlert.arrivalBusStopID,
-                                        alertStop: alertStop
-                                    )
-                                }
-                            } else if isRefreshing {
-                                // 로딩 중일 때 로딩 인디케이터 표시
-                                ProgressView("가장 가까운 버스 위치를 찾고 있습니다...")
-                                    .foregroundColor(Color.black)
-                                    .font(.regular16)
-                            } else {
-                                Text("가장 가까운 버스 위치를 찾고 있습니다...")
-                                    .foregroundColor(Color.black)
-                                    .font(.regular16)
-                            }
-                            Spacer()
-                        }
-                        .background(.clear)
-                    }
-                    // 해당 버스 노드 위치로 스크롤하는 에니메이션
-                    .onReceive(viewModel.$closestBusLocation) { location in
-                        if let location = location {
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
-                                withAnimation(.smooth) {
-                                    proxy.scrollTo(location.nodeid, anchor: .center)
-                                }
-                            }
-                        }
-                    }
-                }
-                
+                BusStopScrollView(
+                    closestBus: $viewModel.closestBusLocation,
+                    isRefreshing: $isRefreshing,
+                    busStops: busStops,
+                    busAlert: busAlert,
+                    alertStop: alertStop,
+                    viewModel: viewModel
+                )
             }
             .background(Color.gray7)
             .navigationTitle(busAlert.alertLabel ?? "알람")
@@ -169,6 +112,58 @@ struct UsingAlertView: View {
         }
         .toolbar(.hidden)
         
+    }
+    
+    // BusStopList가 포함된 ScrollView
+    struct BusStopScrollView: View {
+        @Binding var closestBus: NowBusLocation? // 가장 가까운 버스
+        @Binding var isRefreshing: Bool // 로딩 상태
+        let busStops: [BusStopLocal] // 버스 정류장 목록
+        let busAlert: BusAlert // 버스 알림 정보
+        let alertStop: BusStopLocal? // 알림 정류장
+        @ObservedObject var viewModel: NowBusLocationViewModel // ViewModel
+        
+        var body: some View {
+            ScrollViewReader { proxy in
+                ScrollView(showsIndicators: false) {
+                    VStack(alignment: .leading, spacing: 0) {
+                        // 가장 가까운 버스가 감지 되었을 경우
+                        if let closestBus = viewModel.closestBusLocation {
+                            ForEach(busStops.filter { $0.routeid == busAlert.routeid }.sorted(by: { $0.nodeord < $1.nodeord }), id: \.id) { busStop in
+                                
+                                BusStopRow(
+                                    busStop: busStop,
+                                    isCurrentLocation: busStop.nodeid == closestBus.nodeid,
+                                    arrivalBusStopID: busAlert.arrivalBusStopID,
+                                    alertStop: alertStop
+                                )
+                            }
+                        } else if isRefreshing {
+                            // 로딩 중일 때 로딩 인디케이터 표시
+                            ProgressView("가장 가까운 버스 위치를 찾고 있습니다...")
+                                .foregroundColor(Color.black)
+                                .font(.regular16)
+                        } else {
+                            Text("가장 가까운 버스 위치를 찾고 있습니다...")
+                                .foregroundColor(Color.black)
+                                .font(.regular16)
+                        }
+                        Spacer()
+                    }
+                    .background(.clear)
+                }
+                // 해당 버스 노드 위치로 스크롤하는 에니메이션
+                .onReceive(viewModel.$closestBusLocation) { location in
+                    if let location = location {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+                            withAnimation(.smooth) {
+                                proxy.scrollTo(location.nodeid, anchor: .center)
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
     
     // BusStop 리스트
@@ -231,6 +226,21 @@ struct UsingAlertView: View {
             }
             .frame(height: 60)
         }
+    }
+    
+    /// 알람 종료를 위한 Alert 표시
+    private func exitConfirmAlert() -> SwiftUI.Alert {
+        return SwiftUI.Alert(
+            title: Text("알람 종료"),
+            message: Text("알람을 종료하시겠습니까?"),
+            primaryButton: .destructive(Text("종료")) {
+                // 알림 취소 (alertBusStopLocal과 arrivalBusStopLocal 각각에 대해 호출)
+                notificationManager.cancelLocationNotification(for: busAlert, for: alertStop!)
+                notificationManager.cancelLocationNotification(for: busAlert, for: arrivalBusStopLocal)
+                dismiss() // Dismiss the view if confirmed
+            },
+            secondaryButton: .cancel(Text("취소"))
+        )
     }
     
     // 새로고침 함수
@@ -302,12 +312,20 @@ struct UsingAlertView: View {
         
     }
     
-    // TODO: Extension으로 분리하기 - 사용되는 곳이 없어보이는데 없다면 삭제
-    let dateFormatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateStyle = .short
-        formatter.timeStyle = .medium
-        return formatter
-    }()
-    
+    /// 알람 울릴 버스 정류소 계산
+    func findAlertBusStop(busAlert: BusAlert, busStops: [BusStopLocal]) -> BusStopLocal? {
+        // 1. BusStopLocal에서 routeid가 동일한 노선 찾기
+        let filteredStops = busStops.filter { $0.routeid == busAlert.routeid }
+        
+        // 2. 도착 정류소 ID에 해당하는 정류소 찾기
+        guard let arrivalStop = filteredStops.first(where: { $0.nodeid == busAlert.arrivalBusStopID }) else {
+            return nil // 도착 정류소가 없으면 nil 반환
+        }
+        
+        // 3. 도착 정류소의 nodeord에서 alertBusStop을 뺀 정류소 찾기
+        let targetNodeOrd = arrivalStop.nodeord - busAlert.alertBusStop
+        
+        // 4. 해당 nodeord에 해당하는 정류소 반환
+        return filteredStops.first(where: { $0.nodeord == targetNodeOrd })
+    }
 }

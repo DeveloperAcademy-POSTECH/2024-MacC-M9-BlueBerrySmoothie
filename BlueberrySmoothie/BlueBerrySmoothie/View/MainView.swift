@@ -28,13 +28,6 @@ struct MainView: View {
         UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.black]
     }
     
-    private func deleteBusAlert(_ busAlert: BusAlert) {
-        // SwiftData의 ModelContext를 통해 객체 삭제
-        context.delete(busAlert)
-        // SwiftData는 별도의 save() 없이 자동으로 변경 사항을 처리합니다.
-        print("Bus alert \(busAlert.alertLabel) deleted.")
-    }
-    
     var body: some View {
         NavigationView {
             ZStack{
@@ -42,11 +35,9 @@ struct MainView: View {
                     .ignoresSafeArea()
                 VStack {
                     alertListView()
-                    
                     Spacer()
                     
                     let arrivalBusStopLocal = busStopLocal.filter { $0.nodeid == selectedAlert?.arrivalBusStopID }.first
-                    
                     
                     NavigationLink(
                         destination: Group {
@@ -63,41 +54,9 @@ struct MainView: View {
                     ) {
                         EmptyView()
                     }
-                    //                    NavigationLink(
-                    //                        destination: selectedAlert.flatMap { alert in
-                    //                            if /*let alertBusStopLocal = alertBusStopLocal,*/
-                    //                               let arrivalBusStopLocal = arrivalBusStopLocal {
-                    //                                return UsingAlertView(busAlert: alert, /*alertBusStopLocal: alertBusStopLocal,*/ arrivalBusStopLocal: arrivalBusStopLocal, alertStop: $alertStop)
-                    //                            } else {
-                    //                                return nil
-                    //                            }
-                    //                        },
-                    //                        isActive: $isUsingAlertActive
-                    //                    ) {
-                    //                        EmptyView()
-                    //                    }
                     
-                    
-                    //TODO: 이 버튼도 StartButton으로 분리
-                    Button(action: {
-                        guard let selectedAlert = selectedAlert,
-                              let alertBusStopLocal = alertStop,
-                              let arrivalBusStopLocal = arrivalBusStopLocal else {
-                            print("선택된 알람 또는 버스 정류장이 설정되지 않았습니다.")
-                            return
-                        }
-                        isUsingAlertActive = true // Activate navigation
-                        print(selectedAlert.alertLabel)
-                        notificationManager.requestAuthorization()
-                        //                        notificationManager.scheduleTestNotification(for: selectedAlert)
-                        notificationManager.requestLocationNotification(for: selectedAlert, for: alertBusStopLocal)
-                        notificationManager.requestLocationNotification(for: selectedAlert, for: arrivalBusStopLocal)
-                    }, label: {
-                        // 시작하기 버튼
-                        // TODO: StartButtonUI로 이름 수정
-                        ActionButton(isEmptyAlert: isEmptyAlert)
-                    })
-                    .disabled(isEmptyAlert)
+                    // 시작 버튼
+                    startButton(arrivalBusStopLocal: arrivalBusStopLocal)
                 }
                 .padding(20)
                 .toolbar {
@@ -154,10 +113,6 @@ struct MainView: View {
                             if busAlerts.count != 0 {
                                 isEmptyAlert = false
                             }
-//                            print(selectedAlert?.alertLabel)
-//                            print("foundStop: \(alertStop?.nodenm)")
-//                            print(alert.alertLabel)
-                            
                         }
                         .padding(2) // padding을 조금 추가하여 스트로크가 잘리는 것을 방지
                         .padding(.bottom, 1) // 아이템 간 간격 유지
@@ -165,5 +120,35 @@ struct MainView: View {
                 }
             }
         }
+    }
+    
+    // 시작하기 버튼
+    private func startButton(arrivalBusStopLocal: BusStopLocal?) -> some View {
+        Button(action: {
+            guard let selectedAlert = selectedAlert,
+                  let alertBusStopLocal = alertStop,
+                  let arrivalBusStopLocal = arrivalBusStopLocal else {
+                print("선택된 알람 또는 버스 정류장이 설정되지 않았습니다.")
+                return
+            }
+            // 알림 설정
+            isUsingAlertActive = true // Activate navigation
+            //            print(selectedAlert.alertLabel)
+            notificationManager.requestAuthorization()
+            //                        notificationManager.scheduleTestNotification(for: selectedAlert)
+            notificationManager.requestLocationNotification(for: selectedAlert, for: alertBusStopLocal)
+            notificationManager.requestLocationNotification(for: selectedAlert, for: arrivalBusStopLocal)
+        }, label: {
+            // 시작하기 버튼 UI
+            startButtonUI(isEmptyAlert: isEmptyAlert)
+        })
+        .disabled(isEmptyAlert)
+    }
+    
+    private func deleteBusAlert(_ busAlert: BusAlert) {
+        // SwiftData의 ModelContext를 통해 객체 삭제
+        context.delete(busAlert)
+        // SwiftData는 별도의 save() 없이 자동으로 변경 사항을 처리합니다.
+        print("Bus alert \(busAlert.alertLabel) deleted.")
     }
 }
