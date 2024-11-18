@@ -9,8 +9,8 @@ import Foundation
 
 struct NowBusLocation: Codable, Identifiable {
     let id = UUID()
-    let gpslati: String
-    let gpslong: String
+    var gpslati: String
+    var gpslong: String
     let nodeid: String
     let nodenm: String
     let nodeord: String
