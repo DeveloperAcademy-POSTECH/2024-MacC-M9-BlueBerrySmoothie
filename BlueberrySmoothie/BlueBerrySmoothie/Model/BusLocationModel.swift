@@ -13,8 +13,8 @@ struct NowBusLocation: Codable, Identifiable {
     let gpslong: String
     let nodeid: String
     let nodenm: String
-    let nodeord: Int
-    let routenm: Int
+    let nodeord: String
+    let routenm: String
     let routetp: String
     let vehicleno: String
 
@@ -22,25 +22,32 @@ struct NowBusLocation: Codable, Identifiable {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
 
-        // gpslati를 Double 또는 String으로 디코딩
-        if let gpslatiValue = try? container.decode(Double.self, forKey: .gpslati) {
-            gpslati = String(gpslatiValue)
-        } else {
-            gpslati = try container.decode(String.self, forKey: .gpslati)
-        }
+        // 값을 디코딩하고 String으로 변환
+        gpslati = try Self.decodeAsString(container: container, forKey: .gpslati)
+        gpslong = try Self.decodeAsString(container: container, forKey: .gpslong)
+        nodeid = try Self.decodeAsString(container: container, forKey: .nodeid)
+        nodenm = try Self.decodeAsString(container: container, forKey: .nodenm)
+        nodeord = try Self.decodeAsString(container: container, forKey: .nodeord)
+        routenm = try Self.decodeAsString(container: container, forKey: .routenm)
+        routetp = try Self.decodeAsString(container: container, forKey: .routetp)
+        vehicleno = try Self.decodeAsString(container: container, forKey: .vehicleno)
+    }
 
-        // gpslong를 Double 또는 String으로 디코딩
-        if let gpslongValue = try? container.decode(Double.self, forKey: .gpslong) {
-            gpslong = String(gpslongValue)
+    // 유틸리티 메서드: 다양한 타입(String, Int, Double)을 String으로 디코딩
+    private static func decodeAsString(container: KeyedDecodingContainer<CodingKeys>, forKey key: CodingKeys) throws -> String {
+        if let stringValue = try? container.decode(String.self, forKey: key) {
+            return stringValue
+        } else if let intValue = try? container.decode(Int.self, forKey: key) {
+            return String(intValue)
+        } else if let doubleValue = try? container.decode(Double.self, forKey: key) {
+            return String(doubleValue)
         } else {
-            gpslong = try container.decode(String.self, forKey: .gpslong)
+            throw DecodingError.dataCorruptedError(forKey: key, in: container, debugDescription: "Value cannot be decoded as String, Int, or Double")
         }
+    }
 
-        nodeid = try container.decode(String.self, forKey: .nodeid)
-        nodenm = try container.decode(String.self, forKey: .nodenm)
-        nodeord = try container.decode(Int.self, forKey: .nodeord)
-        routenm = try container.decode(Int.self, forKey: .routenm)
-        routetp = try container.decode(String.self, forKey: .routetp)
-        vehicleno = try container.decode(String.self, forKey: .vehicleno)
+    // 키 열거형
+    private enum CodingKeys: String, CodingKey {
+        case gpslati, gpslong, nodeid, nodenm, nodeord, routenm, routetp, vehicleno
     }
 }
