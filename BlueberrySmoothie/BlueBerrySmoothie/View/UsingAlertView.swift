@@ -128,9 +128,9 @@ struct UsingAlertView: View {
                                     .font(.regular16)
                             }
                             if let alertStop = alertStop {
-                                                AlertStopMapView(busStop: alertStop)
-                                            }
-//                            Spacer()
+                                AlertStopMapView(busStop: alertStop)
+                            }
+                            //                            Spacer()
                         }
                         .background(.clear)
                     }
@@ -241,7 +241,7 @@ struct UsingAlertView: View {
         guard !isRefreshing else { return } // 이미 새로고침 중일 경우 중복 요청 방지
         isRefreshing = true
         DispatchQueue.global(qos: .background).async {
-            viewModel.fetchBusLocationData(cityCode: 21, routeId: busAlert.routeid)
+            viewModel.fetchBusLocationData(cityCode: 37010, routeId: busAlert.routeid)
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 lastRefreshTime = Date() // 새로고침 시간 업데이트
                 isRefreshing = false
@@ -284,6 +284,7 @@ struct UsingAlertView: View {
             Button(action: {
                 notificationManager.notificationReceived = false // 오버레이 닫기
                 locationManager.stopLocationUpdates(for: busAlert)
+                locationManager.unregisterBusAlert(busAlert)
                 dismiss()
             }, label: {
                 Text("종료")
@@ -301,6 +302,7 @@ struct UsingAlertView: View {
         .shadow(radius: 10)
         .onDisappear{
             locationManager.stopNotificationAlarm(for: busAlert)
+            locationManager.stopAllMonitoring()
         }
     }
     

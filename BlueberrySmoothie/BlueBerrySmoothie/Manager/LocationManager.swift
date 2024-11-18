@@ -12,10 +12,10 @@ class LocationManager: NSObject, ObservableObject {
     private let notificationManager = NotificationManager.instance
     static let shared = LocationManager() // 싱글톤 인스턴스
     let manager = CLLocationManager()
-    private var timer: Timer?
+    
     private var notificationTimer: Timer?
-    private var activeAlarms: Set<String> = []// 활성화된 알람을 추적하기 위한 Set
-
+    private var activeAlarms: Set<String> = [] // 활성화된 알람을 추적하기 위한 Set
+    private var activeBusAlerts: [String: BusAlert] = [:] // 현재 모니터링 중인 BusAlert를 저장하는 Dictionary
     
     @Published var location: CLLocation?
     @Published var region: CLLocation?
@@ -29,120 +29,92 @@ class LocationManager: NSObject, ObservableObject {
         manager.delegate = self
         manager.desiredAccuracy = kCLLocationAccuracyBest // locationManager의 정확도를 최고로 설정
         manager.allowsBackgroundLocationUpdates = true // 백그라운드에서도 위치를 업데이트하도록 설정
+        manager.pausesLocationUpdatesAutomatically = false // 백그라운드에서 업데이트가 중지되지 않도록 설정
         checkIfLocationServicesIsEnabled()
-        print("init은 언제호출")
     }
     
-    // 위치 업데이트 시작 함수
     func startLocationUpdates(for busAlert: BusAlert, for busStopLocal: BusStopLocal) {
-        print("Starting location updates: \(busAlert.alertLabel)")
+        // Region Monitoring 설정
+        let region = CLCircularRegion(
+            center: CLLocationCoordinate2D(latitude: busStopLocal.gpslati, longitude: busStopLocal.gpslong),
+            radius: 20.0,
+            identifier: busAlert.id)
+        
+        region.notifyOnEntry = true
+        region.notifyOnExit = false
+        
+        // 현재 모니터링 중인 모든 region 제거
+        manager.monitoredRegions.forEach { manager.stopMonitoring(for: $0) }
+        
+        // 새로운 region 모니터링 시작
+        manager.startMonitoring(for: region)
         manager.startUpdatingLocation()
-        startAutoRefresh(for: busAlert, for: busStopLocal) // 위치 자동 갱신 타이머 시작
+        
+        print("Started monitoring region for \(busAlert.alertLabel ?? "")")
     }
     
-    // 위치 업데이트 중지 함수
     func stopLocationUpdates(for busAlert: BusAlert) {
-        print("Stopping location updates: \(busAlert.alertLabel)")
-        manager.stopUpdatingLocation()
-        stopAutoRefresh() // 위치 자동 갱신 타이머 중지
+        manager.monitoredRegions.forEach { region in
+            if region.identifier == busAlert.id {
+                manager.stopMonitoring(for: region)
+            }
+        }
         stopNotificationAlarm(for: busAlert)
     }
     
-    /// 6초마다 refreshLocation()을 호출하는 타이머를 설정
-    func startAutoRefresh(for busAlert: BusAlert, for busStopLocal: BusStopLocal) {
-        timer = Timer.scheduledTimer(withTimeInterval: 6.0, repeats: true) { [weak self] _ in
-            self?.refreshLocation(for: busAlert, for: busStopLocal)
+    // Region 진입 시 호출되는 delegate 메서드
+    func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
+        print("Entered region: \(region.identifier)")
+        if let busAlert = getBusAlert(for: region.identifier) {
+            startNotificationAlarm(for: busAlert)
         }
     }
     
-    /// 타이머를 중지하고 해제
-    func stopAutoRefresh() {
-        //        timer?.invalidate()
-        //        timer = nil
-        if timer != nil {
-            print("Auto refresh timer invalidated")
-            timer?.invalidate()
-            timer = nil
-        }
-    }
-    
-    /// 위치 업데이트를 시작하고, 현재 위치가 targetRegion 안에 있는지 확인해 결과를 콘솔에 출력합니다.
-    func refreshLocation(for busAlert: BusAlert, for busStopLocal: BusStopLocal) {
-        lastRefreshTime = Date()
-//                manager.startUpdatingLocation()
-        print("현재 내 위치: \(manager.location)" ?? "실시간 location")
-        
-        let targetRegion = CLCircularRegion(
-            center: CLLocationCoordinate2D(latitude: busStopLocal.gpslati, longitude: busStopLocal.gpslong),
-//            center: CLLocationCoordinate2D(latitude: 36.014141, longitude: 129.325686), // 테스트 좌표(c5 입구)
-            radius: 15.0,
-            identifier: "POIRegion")
-        
-        // 위치가 region 안에 있는지 확인
-        if let currentLocation = manager.location {
-            if targetRegion.contains(currentLocation.coordinate) {
-                print("targetRegion = \(targetRegion)")
-                print("현재 위치가 지정된 지역 안에 있습니다.")
-                startNotificationAlarm(for: busAlert) //1.5초마다 알림을 생성합니다.
-            } else {
-                print("targetRegion = \(targetRegion)")
-                print("현재 위치가 지정된 지역 밖에 있습니다.")
-            }
-        }
-    }
-
     func startNotificationAlarm(for busAlert: BusAlert) {
-            guard !activeAlarms.contains(busAlert.id) else { return }
-            
-            activeAlarms.insert(busAlert.id)
-            
-            notificationTimer = Timer.scheduledTimer(withTimeInterval: 1.5, repeats: true) { [weak self] _ in
-                guard let self = self,
-                      self.activeAlarms.contains(busAlert.id) else {
-                    self?.stopNotificationAlarm(for: busAlert)
-                    return
-                }
-                self.notificationManager.scheduleTestNotification(for: busAlert)
-            }
-            
-            // RunLoop에 타이머 추가
-            if let timer = notificationTimer {
-                RunLoop.current.add(timer, forMode: .common)
-            }
-            
-            print("Notification alarm started for \(busAlert.alertLabel ?? "Unknown")")
-        }
-
-    // 알림 중지
-        func stopNotificationAlarm(for busAlert: BusAlert) {
-            activeAlarms.remove(busAlert.id)
-            notificationTimer?.invalidate()
-            notificationTimer = nil
-            cancelAllNotifications(for: busAlert)
-            print("Notification alarm stopped for \(busAlert.alertLabel ?? "Unknown")")
-        }
+        guard !activeAlarms.contains(busAlert.id) else { return }
+        activeAlarms.insert(busAlert.id)
+        
+        // 백그라운드에서도 동작하는 로컬 알림 예약
+        let content = UNMutableNotificationContent()
+        content.title = busAlert.alertLabel ?? "알림"
+        content.body = "목적지에 도착했습니다."
+        content.sound = .default
+        
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1.5, repeats: true)
+        let request = UNNotificationRequest(identifier: busAlert.id,
+                                            content: content,
+                                            trigger: trigger)
+        
+        UNUserNotificationCenter.current().add(request)
+    }
+    
+    func stopNotificationAlarm(for busAlert: BusAlert) {
+        activeAlarms.remove(busAlert.id)
+        UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [busAlert.id])
+        UNUserNotificationCenter.current().removeDeliveredNotifications(withIdentifiers: [busAlert.id])
+    }
     
     // 모든 알림 취소
-        private func cancelAllNotifications(for busAlert: BusAlert) {
-            UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
-            UNUserNotificationCenter.current().removeAllDeliveredNotifications()
-            print("All notifications canceled for \(busAlert.alertLabel ?? "Unknown")")
-        }
+    private func cancelAllNotifications(for busAlert: BusAlert) {
+        UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+        UNUserNotificationCenter.current().removeAllDeliveredNotifications()
+        print("All notifications canceled for \(busAlert.alertLabel ?? "Unknown")")
+    }
     
     // 현재 알람이 활성화되어 있는지 확인
-        func isAlarmActive(for busAlert: BusAlert) -> Bool {
-            return activeAlarms.contains(busAlert.id)
-        }
+    func isAlarmActive(for busAlert: BusAlert) -> Bool {
+        return activeAlarms.contains(busAlert.id)
+    }
     
     // 모든 알람 중지
-        func stopAllAlarms() {
-            activeAlarms.removeAll()
-            notificationTimer?.invalidate()
-            notificationTimer = nil
-            UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
-            UNUserNotificationCenter.current().removeAllDeliveredNotifications()
-            print("All alarms stopped")
-        }
+    func stopAllAlarms() {
+        activeAlarms.removeAll()
+        notificationTimer?.invalidate()
+        notificationTimer = nil
+        UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+        UNUserNotificationCenter.current().removeAllDeliveredNotifications()
+        print("All alarms stopped")
+    }
     
     
     /// 위치 서비스가 활성화되었는지 확인하고, 활성화되지 않았을 경우 오류 메시지를 설정
@@ -170,6 +142,31 @@ class LocationManager: NSObject, ObservableObject {
         @unknown default:
             break
         }
+    }
+    
+    // BusAlert 등록 메서드
+    func registerBusAlert(_ busAlert: BusAlert, busStopLocal: BusStopLocal) {
+        activeBusAlerts[busAlert.id] = busAlert
+        startLocationUpdates(for: busAlert, for: busStopLocal)
+    }
+    
+    // BusAlert 등록 해제 메서드
+    func unregisterBusAlert(_ busAlert: BusAlert) {
+        activeBusAlerts.removeValue(forKey: busAlert.id)
+        stopLocationUpdates(for: busAlert)
+    }
+    
+    // BusAlert 조회 메서드
+    private func getBusAlert(for identifier: String) -> BusAlert? {
+        return activeBusAlerts[identifier]
+    }
+    
+    // 모든 모니터링 중지
+    func stopAllMonitoring() {
+        activeBusAlerts.forEach { (_, busAlert) in
+            stopLocationUpdates(for: busAlert)
+        }
+        activeBusAlerts.removeAll()
     }
 }
 

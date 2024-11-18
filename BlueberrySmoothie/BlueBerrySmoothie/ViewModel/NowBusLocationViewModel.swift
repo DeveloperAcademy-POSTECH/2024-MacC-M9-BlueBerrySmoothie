@@ -26,7 +26,7 @@ class NowBusLocationViewModel: NSObject, ObservableObject, CLLocationManagerDele
         locationManager.startUpdatingLocation()
         print("유저로케이션업데이트")
 
-        fetchBusLocationData(cityCode: 21, routeId: "BSB5200043000")
+        fetchBusLocationData(cityCode: 37010, routeId: "BSB5200043000")
     }
 
     // CLLocationManagerDelegate 메서드 - 사용자 위치 업데이트 시 호출

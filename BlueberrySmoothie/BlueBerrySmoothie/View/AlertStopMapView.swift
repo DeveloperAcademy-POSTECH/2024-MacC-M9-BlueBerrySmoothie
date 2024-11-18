@@ -21,7 +21,7 @@ struct AlertStopMapView: View {
     
     // 지도의 초기 영역 설정
     @State private var region: MKCoordinateRegion
-    private let radius: CLLocationDistance = 15 // 20미터 반경
+    private let radius: CLLocationDistance = 20 // 20미터 반경
     
     // 버스정류장 위치 객체
     private var stopLocation: BusStopLocation

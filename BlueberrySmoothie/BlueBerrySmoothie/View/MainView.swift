@@ -72,6 +72,7 @@ struct MainView: View {
                         // 데이지 수정ㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏ
                         notificationManager.requestAuthorization()
                         locationManager.startLocationUpdates(for: selectedAlert, for: alertBusStopLocal)
+                        locationManager.registerBusAlert(selectedAlert, busStopLocal: alertBusStopLocal)
                     }, label: {
                         ActionButton(isEmptyAlert: isEmptyAlert)
                     })
