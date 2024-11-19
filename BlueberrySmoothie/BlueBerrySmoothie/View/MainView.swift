@@ -68,7 +68,7 @@ struct MainView: View {
                             return
                         }
                         isUsingAlertActive = true // Activate navigation
-                        notificationManager.notificationReceived = true
+                        notificationManager.notificationReceived = false
                         print(selectedAlert.alertLabel)
                         // 데이지 수정ㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏ
                         notificationManager.requestAuthorization()
