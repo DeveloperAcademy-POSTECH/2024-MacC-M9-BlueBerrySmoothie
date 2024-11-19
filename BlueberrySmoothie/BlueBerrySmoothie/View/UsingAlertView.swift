@@ -241,7 +241,7 @@ struct UsingAlertView: View {
         guard !isRefreshing else { return } // 이미 새로고침 중일 경우 중복 요청 방지
         isRefreshing = true
         DispatchQueue.global(qos: .background).async {
-            viewModel.fetchBusLocationData(cityCode: 37010, routeId: busAlert.routeid)
+            viewModel.fetchBusLocationData(cityCode: 21, routeId: busAlert.routeid)
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 lastRefreshTime = Date() // 새로고침 시간 업데이트
                 isRefreshing = false

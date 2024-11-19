@@ -41,6 +41,7 @@ class LocationManager: NSObject, ObservableObject {
         }
     }
     
+    /// 정류장 근처에 왔을 때 실행되는 함수
     private func startNotifications(for busAlert: BusAlert) {
         guard !activeNotifications.contains(busAlert.id) else { return }
         

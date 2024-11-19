@@ -5,7 +5,7 @@ struct SelectBusView: View {
     @Binding var busStopAlert: BusStopAlert?
     
     
-    let city: City = City(citycode: 37010, cityname: "부산")
+    let city: City = City(citycode: 21, cityname: "부산")
     @State private var allBuses: [Bus] = []
     @State private var filteredBuses: [Bus] = []
     @State private var routeNo: String = ""

@@ -341,7 +341,7 @@ struct AlertSettingMain: View {
         
         // 알람 객체 생성
         let newAlert = BusAlert(id: UUID().uuidString,
-                                cityCode: 37010,
+                                cityCode: 21,
                                 busNo: selectedBus.routeno,
                                 routeid: selectedBus.routeid,
                                 arrivalBusStopID: selectedBusStop.nodeid,
