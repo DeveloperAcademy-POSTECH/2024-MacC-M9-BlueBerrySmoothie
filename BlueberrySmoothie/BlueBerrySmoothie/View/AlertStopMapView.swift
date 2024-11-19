@@ -31,8 +31,8 @@ struct AlertStopMapView: View {
         self.busStop = busStop
         // 정류장 위치로 지도 중심 설정
         let coordinate = CLLocationCoordinate2D(
-            latitude: Double(busStop.gpslati) ?? 0,
-            longitude: Double(busStop.gpslong) ?? 0
+            latitude: Double(busStop.gpslati),
+            longitude: Double(busStop.gpslong)
         )
         _region = State(initialValue: MKCoordinateRegion(
             center: coordinate,

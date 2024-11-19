@@ -52,7 +52,7 @@ struct UsingAlertView: View {
                             message: Text("알람을 종료하시겠습니까?"),
                             primaryButton: .destructive(Text("종료")) {
                                 notificationManager.notificationReceived = false // 오버레이 닫기
-                                locationManager.stopLocationUpdates(for: busAlert)
+                                locationManager.unregisterBusAlert(busAlert)
                                 dismiss() // Dismiss the view if confirmed
                             },
                             secondaryButton: .cancel(Text("취소")))
@@ -283,7 +283,6 @@ struct UsingAlertView: View {
             // 알람 종료 버튼
             Button(action: {
                 notificationManager.notificationReceived = false // 오버레이 닫기
-                locationManager.stopLocationUpdates(for: busAlert)
                 locationManager.unregisterBusAlert(busAlert)
                 dismiss()
             }, label: {
@@ -301,7 +300,7 @@ struct UsingAlertView: View {
         .cornerRadius(10)
         .shadow(radius: 10)
         .onDisappear{
-            locationManager.stopNotificationAlarm(for: busAlert)
+            locationManager.unregisterBusAlert(busAlert)
             locationManager.stopAllMonitoring()
         }
     }
