@@ -11,7 +11,7 @@ import SwiftUI
 // 가정: BusDetailView는 Bus 객체를 받아서 상세 정보를 표시하는 View입니다.
 struct BusDetailView: View {
     let bus: Bus
-
+    
     var body: some View {
         VStack(alignment: .leading) {
             Text("노선 번호: \(bus.routeno)")

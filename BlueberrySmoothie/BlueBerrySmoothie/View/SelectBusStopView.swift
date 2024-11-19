@@ -9,8 +9,9 @@ import SwiftUI
 import SwiftData
 
 struct SelectBusStopView: View {
-    let city: City // 도시 정보
+//    let city: City // 도시 정보
     let bus: Bus // 선택된 버스 정보
+    let cityCode: Int // ← 추가된 부분
     @Binding var busStopAlert: BusStopAlert?
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var busStopViewModel: BusStopViewModel
@@ -40,111 +41,29 @@ struct SelectBusStopView: View {
             }
             .padding(.bottom, 10)
             
-            // 방면
             HStack {
-                VStack{
-                    if updowncdselection == 2 {
-                        VStack {
-                            HStack{
-                                Spacer()
-                                Text("\(bus.endnodenm)방면")
-                                    .foregroundStyle(.gray)
-                                Spacer()
-                            }
-                            Spacer()
-                            Rectangle()
-                                .foregroundStyle(.gray2)
-                                .frame(height: 1)
-                        }.frame(height: 25)
-                    } else {
-                        VStack {
-                            HStack{
-                                Spacer()
-                                Text("\(bus.endnodenm)방면")
-                                
-                                Spacer()
-                            }
-                            Spacer()
-                            Rectangle()
-                                .foregroundStyle(.midbrand)
-                                .frame(height: 2)
-                        }.frame(height: 25)
-                    }
-                }
+                directionView(
+                    directionName: "\(bus.endnodenm)방면",
+                    isSelected: updowncdselection == 1,
+                    selectedColor: .midbrand,
+                    unselectedColor: .gray2
+                )
                 .onTapGesture {
                     updowncdselection = 1
                 }
                 
-                VStack() {
-                    if updowncdselection == 1 {
-                        VStack {
-                            HStack(alignment: .bottom) {
-                                Spacer()
-                                Text("\(bus.startnodenm)방면")
-                                    .foregroundStyle(.gray)
-                                Spacer()
-                            }
-                            Spacer()
-                            Rectangle()
-                                .foregroundStyle(.gray2)
-                                .frame(height: 1)
-                        }.frame(height: 25)
-                    } else {
-                        VStack {
-                            HStack{
-                                Spacer()
-                                Text("\(bus.startnodenm)방면")
-                                Spacer()
-                            }
-                            Spacer()
-                            Rectangle()
-                                .foregroundStyle(.midbrand)
-                                .frame(height: 2)
-                        }.frame(height: 25)
-                    }
-                }
+                directionView(
+                    directionName: "\(bus.startnodenm)방면",
+                    isSelected: updowncdselection == 2,
+                    selectedColor: .midbrand,
+                    unselectedColor: .gray2
+                )
                 .onTapGesture {
                     updowncdselection = 2
                 }
-                
             }
-            
-            ScrollViewReader { proxy in
-                ScrollView(showsIndicators: false) {
-                    ForEach(busStopViewModel.busStopList, id: \.nodeord) { busstop in
-                        Button(action: {
-                            storeBusStop(busStop: busstop)
-                            showSelectBusSheet = false
-                            
-                        }) {
-                            VStack {
-                                Spacer()
-                                HStack {
-                                    Text("\(busstop.nodenm)")
-                                        .padding(.leading, 24)
-                                        .foregroundStyle(.black)
-                                    Text("\(busstop.nodeid)")
-                                        .font(.system(size: 10))
-                                        .foregroundStyle(.gray)
-                                    
-                                    Spacer()
-                                }
-                                Spacer()
-                                Divider()
-                            }
-                            .frame(height: 60)
-                        }
-                        .id(busstop.nodeid) // 각 정류장에 고유 ID를 설정
-                    }
-                }
-                .onChange(of: updowncdselection) { _ in
-                    if updowncdselection == 1 {
-                        scrollToTop(proxy: proxy)
-                    } else {
-                        scrollToMiddle(proxy: proxy)
-                    }
-                }
-            }
+            //BusStop 리스트 View
+            BusStopScrollView()
         }
         .padding(.horizontal, 20)
         .navigationTitle("정류장 선택")
@@ -156,7 +75,46 @@ struct SelectBusStopView: View {
             }
         }
         .task {
-            await busStopViewModel.getBusStopData(cityCode: city.citycode, routeId: bus.routeid)
+            await busStopViewModel.getBusStopData(cityCode: cityCode, routeId: bus.routeid)
+        }
+    }
+    
+    /// Bus List 뷰
+    private func BusStopScrollView() -> some View {
+        ScrollViewReader { proxy in
+            ScrollView(showsIndicators: false) {
+                ForEach(busStopViewModel.busStopList, id: \.nodeord) { busstop in
+                    Button(action: {
+                        storeBusStop(busStop: busstop)
+                        showSelectBusSheet = false
+                    }) {
+                        VStack {
+                            Spacer()
+                            HStack {
+                                Text("\(busstop.nodenm)")
+                                    .padding(.leading, 24)
+                                    .foregroundStyle(.black)
+                                Text("\(busstop.nodeid)")
+                                    .font(.system(size: 10))
+                                    .foregroundStyle(.gray)
+                                
+                                Spacer()
+                            }
+                            Spacer()
+                            Divider()
+                        }
+                        .frame(height: 60)
+                    }
+                    .id(busstop.nodeid) // 각 정류장에 고유 ID를 설정
+                }
+            }
+            .onChange(of: updowncdselection) { _ in
+                if updowncdselection == 1 {
+                    scrollToTop(proxy: proxy)
+                } else {
+                    scrollToMiddle(proxy: proxy)
+                }
+            }
         }
     }
     
@@ -175,6 +133,7 @@ struct SelectBusStopView: View {
             proxy.scrollTo(40, anchor: .center)
         }
     }
+    
     // 최하단으로 스크롤하는 함수
     private func scrollToBottom(proxy: ScrollViewProxy) {
         if let firstStop = busStopViewModel.busStopList.last {
@@ -185,13 +144,29 @@ struct SelectBusStopView: View {
     // 버스 정류장 데이터 저장
     func storeBusStop(busStop: BusStop){
         // 기본 busStopAlert 데이터 저장
-        busStopAlert = BusStopAlert(cityCode: Double(city.citycode), bus: bus, allBusStop: busStopViewModel.busStopList, arrivalBusStop: busStop, alertBusStop: 0)
+        busStopAlert = BusStopAlert(cityCode: Double(cityCode), bus: bus, allBusStop: busStopViewModel.busStopList, arrivalBusStop: busStop, alertBusStop: 0)
         
         // 이전 정류장 (1~3번째) 저장
         if var unwrappedBusStopAlert = busStopAlert {
             storeBeforeBusStops(for: busStop, alert: &unwrappedBusStopAlert, busStops: busStopViewModel.busStopList)
             busStopAlert = unwrappedBusStopAlert
         }
+    }
+    
+    private func directionView(directionName: String, isSelected: Bool, selectedColor: Color, unselectedColor: Color) -> some View {
+        VStack {
+            HStack {
+                Spacer()
+                Text(directionName)
+                    .foregroundColor(isSelected ? .primary : .gray)
+                Spacer()
+            }
+            Spacer()
+            Rectangle()
+                .foregroundStyle(isSelected ? selectedColor : unselectedColor)
+                .frame(height: isSelected ? 2 : 1)
+        }
+        .frame(height: 25)
     }
     
     // 차고지 - 회차지가 있는 일반적인 경우를 예외 처리하여 이전 3 정류장을 저장한다

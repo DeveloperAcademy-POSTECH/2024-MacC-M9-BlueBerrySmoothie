@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ActionButton: View {
+struct startButtonUI: View {
     var isEmptyAlert: Bool
 
     var body: some View {

@@ -100,8 +100,8 @@ struct StationPickerModal: View {
     private func stationRow(stationText: String, isEnabled: Bool, action: (() -> Void)? = nil) -> some View {
         HStack {
             Text(stationText)
-              .foregroundColor(isEnabled ? Color.gray2 : Color.gray6)
-               .font(.regular16)
+                .foregroundColor(isEnabled ? Color.gray2 : Color.gray6)
+                .font(.regular16)
                 .onTapGesture {
                     if isEnabled, let action = action {
                         action()

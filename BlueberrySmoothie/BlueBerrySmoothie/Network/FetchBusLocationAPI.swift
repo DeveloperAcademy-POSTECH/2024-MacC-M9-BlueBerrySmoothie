@@ -19,7 +19,8 @@ func fetchNowBusLocationData(cityCode: Int, routeId: String, completion: @escapi
         }
 
         let urlString = "http://apis.data.go.kr/1613000/BusLcInfoInqireService/getRouteAcctoBusLcList?serviceKey=\(serviceKey)&_type=json&cityCode=\(cityCode)&routeId=\(routeId)&numOfRows=9999&pageNo=1"
-        print("Request URL: \(urlString)")
+//        print("Request URL: \(urlString)")
+        
 
         guard let url = URL(string: urlString) else {
             print("Invalid URL")
@@ -58,7 +59,7 @@ func fetchNowBusLocationData(cityCode: Int, routeId: String, completion: @escapi
             do {
                 let singleObjectResponse = try JSONDecoder().decode(NowBusLocationResponseNotArray.self, from: data)
                 if let singleBusLocation = singleObjectResponse.response.body.items?.item {
-//                    print("Decoded single BusLocation item: \(singleBusLocation)")
+                    print("Decoded single BusLocation item: \(singleBusLocation)")
                     DispatchQueue.main.async {
                         completion([singleBusLocation]) // 단일 BusLocation 객체 배열로 반환
                     }
