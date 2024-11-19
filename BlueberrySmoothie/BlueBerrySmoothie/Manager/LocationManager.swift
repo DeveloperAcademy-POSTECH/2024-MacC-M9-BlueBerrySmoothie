@@ -7,83 +7,150 @@
 
 import SwiftUI
 import CoreLocation
-import MapKit
 
 class LocationManager: NSObject, ObservableObject {
-    static let instance = LocationManager() //Singleton 인스턴스 생성
+    private let notificationManager = NotificationManager.instance
+    static let shared = LocationManager() // 싱글톤 인스턴스
     let manager = CLLocationManager()
-    private var timer: Timer?
+    private var activeBusAlerts: [String: BusAlert] = [:]
+    private var backgroundTasks: [String: UIBackgroundTaskIdentifier] = [:]
+    private var notificationTimers: [String: Timer] = [:]
+    private var activeAlarms: Set<String> = [] // 활성화된 알람을 추적하기 위한 Set
     
     @Published var location: CLLocation?
-    @Published var region = MKCoordinateRegion(
-        center: CLLocationCoordinate2D(latitude: 37.5665, longitude: 126.9780), //초기화 값.업데이트 시, 실제 사용자 위치로 업데이트 됨
-        span: MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005)  // 배율 확대
-    )
+    @Published var region: CLLocation?
     @Published var locationStatus: CLAuthorizationStatus?
-    @Published var address: String = "위치 찾는 중..."
-    @Published var detailedAddress: AddressDetail = AddressDetail()
     @Published var errorMessage: String?
     @Published var lastRefreshTime: Date = Date()
-    
-    private let targetRegion = CLCircularRegion(
-        center: CLLocationCoordinate2D(latitude: 36.017449, longitude: 129.322232), //기숙사
-        //        center: CLLocationCoordinate2D(latitude: 36.015175, longitude: 129.325121), //포스텍 버스정류장(기숙사 맞은편)
-        radius: 4.0,
-        identifier: "POIRegion")
+    @Published var activeNotifications: Set<String> = [] // 현재 활성화된 알림 추적
     
     override init() {
         super.init()
         manager.delegate = self
         manager.desiredAccuracy = kCLLocationAccuracyBest // locationManager의 정확도를 최고로 설정
         manager.allowsBackgroundLocationUpdates = true // 백그라운드에서도 위치를 업데이트하도록 설정
+        manager.pausesLocationUpdatesAutomatically = false // 백그라운드에서 업데이트가 중지되지 않도록 설정
         checkIfLocationServicesIsEnabled()
     }
     
-    // 위치 업데이트 시작 함수
-    func startLocationUpdates() {
-        print("Starting location updates")
-        manager.startUpdatingLocation()
-        startAutoRefresh() // 위치 자동 갱신 타이머 시작
-    }
-    
-    // 위치 업데이트 중지 함수
-    func stopLocationUpdates() {
-        print("Stopping location updates")
-        manager.stopUpdatingLocation()
-        stopAutoRefresh() // 위치 자동 갱신 타이머 중지
-    }
-    
-    /// 10초마다 refreshLocation()을 호출하는 타이머를 설정
-    func startAutoRefresh() {
-        timer = Timer.scheduledTimer(withTimeInterval: 6.0, repeats: true) { [weak self] _ in
-            self?.refreshLocation()
+    // Region 진입 시 호출되는 delegate 메서드
+    func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
+        print("Entered region: \(region.identifier) emfdjdhdkdjdkjdkjdjdkdjdkf")
+        if let busAlert = getBusAlert(for: region.identifier) {
+            startNotifications(for: busAlert)
         }
     }
     
-    /// 타이머를 중지하고 해제
-    func stopAutoRefresh() {
-        //        timer?.invalidate()
-        //        timer = nil
-        if timer != nil {
-            print("Auto refresh timer invalidated")
-            timer?.invalidate()
-            timer = nil
-        }
-    }
-    
-    /// 위치 업데이트를 시작하고, 현재 위치가 targetRegion 안에 있는지 확인해 결과를 콘솔에 출력합니다.
-    func refreshLocation() {
-        address = "위치 찾는 중…"
-        lastRefreshTime = Date()
-        //        manager.startUpdatingLocation()
-        print(manager.location ?? "실시간 location")
+    /// 정류장 근처에 왔을 때 실행되는 함수
+    private func startNotifications(for busAlert: BusAlert) {
+        guard !activeNotifications.contains(busAlert.id) else { return }
         
-        // 위치가 region 안에 있는지 확인
-        if let currentLocation = manager.location {
-            if targetRegion.contains(currentLocation.coordinate) {
-                print("현재 위치가 지정된 지역 안에 있습니다.")
-            } else {
-                print("현재 위치가 지정된 지역 밖에 있습니다.")
+        // 이전 타이머가 있다면 중지
+        stopNotifications(for: busAlert)
+        
+        // 활성 알림 목록에 추가
+        activeNotifications.insert(busAlert.id)
+        
+        // 백그라운드 작업 시작
+        let backgroundTask = UIApplication.shared.beginBackgroundTask { [weak self] in
+            self?.stopNotifications(for: busAlert)
+        }
+        backgroundTasks[busAlert.id] = backgroundTask
+        
+        // 1초마다 반복되는 타이머 생성
+        let timer = Timer(timeInterval: 1.0, repeats: true) { [weak self] _ in
+            self?.scheduleNotification(for: busAlert)
+        }
+        RunLoop.main.add(timer, forMode: .common)
+        notificationTimers[busAlert.id] = timer
+        
+        print("Started notifications for \(busAlert.alertLabel ?? "")")
+    }
+    
+    func stopNotifications(for busAlert: BusAlert) {
+        // 타이머 중지
+        notificationTimers[busAlert.id]?.invalidate()
+        notificationTimers.removeValue(forKey: busAlert.id)
+        
+        // 활성 알림 목록에서 제거
+        activeNotifications.remove(busAlert.id)
+        
+        // 백그라운드 작업 종료
+        if let backgroundTask = backgroundTasks[busAlert.id] {
+            UIApplication.shared.endBackgroundTask(backgroundTask)
+            backgroundTasks.removeValue(forKey: busAlert.id)
+        }
+        
+        // 대기 중인 알림 제거
+        UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [busAlert.id])
+        UNUserNotificationCenter.current().removeDeliveredNotifications(withIdentifiers: [busAlert.id])
+        
+        print("Stopped notifications for \(busAlert.alertLabel ?? "")")
+    }
+    
+    private func scheduleNotification(for busAlert: BusAlert) {
+        let content = UNMutableNotificationContent()
+        content.title = busAlert.alertLabel ?? "목적지 도착"
+        content.body = "지정된 버스정류장 근처에 도착했습니다."
+        content.sound = .default
+        
+        // 앱이 포그라운드 상태일 때
+        if UIApplication.shared.applicationState == .active {
+            content.subtitle = "포그라운드 알림"
+        } else {
+            content.subtitle = "백그라운드 알림"
+        }
+        
+        // 고유한 식별자 생성 (시간값 포함)
+        let identifier = "\(busAlert.id)_\(Date().timeIntervalSince1970)"
+        
+        // 즉시 실행되는 트리거
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
+        
+        let request = UNNotificationRequest(identifier: identifier,
+                                            content: content,
+                                            trigger: trigger)
+        
+        UNUserNotificationCenter.current().add(request) { error in
+            if let error = error {
+                print("Error scheduling notification: \(error)")
+            }
+        }
+    }
+
+    func registerBusAlert(_ busAlert: BusAlert, busStopLocal: BusStopLocal) {
+        activeBusAlerts[busAlert.id] = busAlert
+        
+        // Region Monitoring 설정
+        let region = CLCircularRegion(
+            center: CLLocationCoordinate2D(latitude: busStopLocal.gpslati, longitude: busStopLocal.gpslong),
+            radius: 15.0,
+            identifier: busAlert.id)
+        
+        region.notifyOnEntry = true
+        region.notifyOnExit = true
+        
+        // 현재 위치가 이미 region 안에 있는지 확인
+        if let currentLocation = location?.coordinate {
+            let locationIsInRegion = region.contains(currentLocation)
+            if locationIsInRegion {
+                startNotifications(for: busAlert)
+            }
+        }
+        
+        // 새로운 region 모니터링 시작
+        manager.startMonitoring(for: region)
+        print("Started monitoring region for \(busAlert.alertLabel ?? "")")
+    }
+    
+    func unregisterBusAlert(_ busAlert: BusAlert) {
+        stopNotifications(for: busAlert)
+        activeBusAlerts.removeValue(forKey: busAlert.id)
+        
+        // Region 모니터링 중지
+        manager.monitoredRegions.forEach { region in
+            if region.identifier == busAlert.id {
+                manager.stopMonitoring(for: region)
             }
         }
     }
@@ -114,27 +181,24 @@ class LocationManager: NSObject, ObservableObject {
             break
         }
     }
-}
-
-// 주소 세부 정보를 저장하는 구조체
-struct AddressDetail {
-    var country: String = ""
-    var administrativeArea: String = ""  // 시/도
-    var locality: String = ""            // 시/군/구
-    var subLocality: String = ""         // 동/읍/면
-    var thoroughfare: String = ""        // 도로명
-    var subThoroughfare: String = ""     // 건물번호
     
-    var fullAddress: String {
-        [country, administrativeArea, locality, subLocality, thoroughfare, subThoroughfare]
-            .filter { !$0.isEmpty }
-            .joined(separator: " ")
+    // BusAlert 조회 메서드
+    private func getBusAlert(for identifier: String) -> BusAlert? {
+        return activeBusAlerts[identifier]
     }
     
-    var shortAddress: String {
-        [locality, subLocality, thoroughfare, subThoroughfare]
-            .filter { !$0.isEmpty }
-            .joined(separator: " ")
+    // 모든 모니터링 중지
+    func stopAllMonitoring() {
+        activeBusAlerts.forEach { (_, busAlert) in
+            unregisterBusAlert(busAlert)
+        }
+        activeBusAlerts.removeAll()
+        activeNotifications.removeAll()
+    }
+    
+//     알림이 현재 활성화되어 있는지 확인하는 메서드
+    func isNotificationActive(for busAlert: BusAlert) -> Bool {
+        return activeNotifications.contains(busAlert.id)
     }
 }
 
@@ -147,35 +211,8 @@ extension LocationManager: CLLocationManagerDelegate {
         
         if location.horizontalAccuracy > 0 {
             self.location = location
-            self.region = MKCoordinateRegion(
-                center: location.coordinate,
-                span: MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005)  // 배율 확대
-            )
+            self.region = CLLocation(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
             self.manager.stopUpdatingLocation()
-            
-            let geocoder = CLGeocoder()
-            geocoder.reverseGeocodeLocation(location) { [weak self] (placemarks, error) in
-                if let error = error {
-                    print("Geocoding error: \(error.localizedDescription)")
-                    self?.address = "주소를 찾을 수 없습니다."
-                    return
-                }
-                
-                if let placemark = placemarks?.first {
-                    DispatchQueue.main.async {
-                        var newAddress = AddressDetail()
-                        newAddress.country = placemark.country ?? ""
-                        newAddress.administrativeArea = placemark.administrativeArea ?? ""
-                        newAddress.locality = placemark.locality ?? ""
-                        newAddress.subLocality = placemark.subLocality ?? ""
-                        newAddress.thoroughfare = placemark.thoroughfare ?? ""
-                        newAddress.subThoroughfare = placemark.subThoroughfare ?? ""
-                        
-                        self?.detailedAddress = newAddress
-                        self?.address = newAddress.fullAddress
-                    }
-                }
-            }
         }
     }
     

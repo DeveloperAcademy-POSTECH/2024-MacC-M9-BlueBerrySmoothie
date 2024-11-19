@@ -16,6 +16,7 @@ class NowBusLocationViewModel: NSObject, ObservableObject, CLLocationManagerDele
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
+        print("유저로케이션업데이트")
 
         fetchBusLocationData(cityCode: 21, routeId: "BSB5200043000")
     }
@@ -24,6 +25,7 @@ class NowBusLocationViewModel: NSObject, ObservableObject, CLLocationManagerDele
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.last else { return }
         userLocation = location
+        print("locationManager(didUpdateLocations")
         findClosestBusLocation()
         printUserLocationAndClosestBus() // 사용자 위치 및 가장 가까운 버스 정보 출력
     }
@@ -45,6 +47,7 @@ class NowBusLocationViewModel: NSObject, ObservableObject, CLLocationManagerDele
     // 사용자 위치와 가장 가까운 버스 위치를 찾음
     private func findClosestBusLocation() {
         guard let userLocation = userLocation else { return }
+        print("userLocation: \(userLocation)")
 
         closestBusLocation = NowbusLocations.min(by: { bus1, bus2 in
             let busLocation1 = CLLocation(latitude: Double(bus1.gpslati) ?? 0, longitude: Double(bus1.gpslong) ?? 0)
@@ -52,6 +55,7 @@ class NowBusLocationViewModel: NSObject, ObservableObject, CLLocationManagerDele
 
             return userLocation.distance(from: busLocation1) < userLocation.distance(from: busLocation2)
         })
+        print("가장 가까운 정류장: \(closestBusLocation?.nodenm)")
     }
 
     // 사용자 위치와 가장 가까운 버스 정보를 출력

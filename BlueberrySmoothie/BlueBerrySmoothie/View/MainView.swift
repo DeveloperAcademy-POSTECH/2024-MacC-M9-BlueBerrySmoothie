@@ -21,6 +21,7 @@ struct MainView: View {
     
     @Environment(\.modelContext) private var context // SwiftData의 ModelContext 가져오기
     let notificationManager = NotificationManager.instance
+    @StateObject private var locationManager = LocationManager.shared
     
     @State private var alertStop: BusStopLocal? // alertStop을 상태로 관리
     
@@ -36,16 +37,12 @@ struct MainView: View {
                 VStack {
                     alertListView()
                     Spacer()
-                    
-                    let arrivalBusStopLocal = busStopLocal.filter { $0.nodeid == selectedAlert?.arrivalBusStopID }.first
-                    
+                  
                     NavigationLink(
                         destination: Group {
-                            if let selectedAlert = selectedAlert,
-                               let arrivalBusStopLocal = arrivalBusStopLocal {
+                            if let selectedAlert = selectedAlert {
                                 UsingAlertView(
                                     busAlert: selectedAlert,
-                                    arrivalBusStopLocal: arrivalBusStopLocal,
                                     alertStop: $alertStop
                                 )
                             }
@@ -54,7 +51,7 @@ struct MainView: View {
                     ) {
                         EmptyView()
                     }
-                    
+                   
                     // 시작 버튼
                     startButton(arrivalBusStopLocal: arrivalBusStopLocal)
                 }
@@ -126,18 +123,15 @@ struct MainView: View {
     private func startButton(arrivalBusStopLocal: BusStopLocal?) -> some View {
         Button(action: {
             guard let selectedAlert = selectedAlert,
-                  let alertBusStopLocal = alertStop,
-                  let arrivalBusStopLocal = arrivalBusStopLocal else {
+                  let alertBusStopLocal = alertStop else {
                 print("선택된 알람 또는 버스 정류장이 설정되지 않았습니다.")
                 return
             }
             // 알림 설정
             isUsingAlertActive = true // Activate navigation
-            //            print(selectedAlert.alertLabel)
+            notificationManager.notificationReceived = false
             notificationManager.requestAuthorization()
-            //                        notificationManager.scheduleTestNotification(for: selectedAlert)
-            notificationManager.requestLocationNotification(for: selectedAlert, for: alertBusStopLocal)
-            notificationManager.requestLocationNotification(for: selectedAlert, for: arrivalBusStopLocal)
+            locationManager.registerBusAlert(selectedAlert, busStopLocal: alertBusStopLocal)
         }, label: {
             // 시작하기 버튼 UI
             startButtonUI(isEmptyAlert: isEmptyAlert)
