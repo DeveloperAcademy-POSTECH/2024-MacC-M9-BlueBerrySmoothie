@@ -83,7 +83,7 @@ class NowBusLocationViewModel: NSObject, ObservableObject, CLLocationManagerDele
         }
 
         // 위도와 경도가 올바른지 확인 (대한민국 기준 위도는 약 33~38, 경도는 약 124~132)
-        if latitude < 33 || latitude > 38 || longitude < 124 || longitude > 132 {
+        if latitude < 20 || latitude > 40 || longitude < 110 || longitude > 140 {
             // 위도와 경도가 뒤바뀐 경우 수정
             correctedBusLocation.gpslati = String(longitude)
             correctedBusLocation.gpslong = String(latitude)
