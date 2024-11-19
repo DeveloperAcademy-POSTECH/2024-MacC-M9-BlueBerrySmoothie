@@ -15,7 +15,7 @@ struct AlertSettingMain: View {
     @State private var selectedStation: String = "정류장 수"
     
     // 사용자 입력을 받을 cityCode
-       @State private var cityCodeInput: String = "" // ← 추가된 상태 변수
+    @State private var cityCodeInput: String = "" // ← 추가된 상태 변수
     
     // 추가된 상태 변수: SelectBusView를 sheet로 표시할지 여부
     @State private var showSelectBusSheet: Bool = false // ← 추가된 부분

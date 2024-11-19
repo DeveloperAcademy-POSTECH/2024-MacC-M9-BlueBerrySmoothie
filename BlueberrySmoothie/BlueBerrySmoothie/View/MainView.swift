@@ -53,7 +53,7 @@ struct MainView: View {
                     }
                    
                     // 시작 버튼
-                    startButton(arrivalBusStopLocal: arrivalBusStopLocal)
+                    startButton(arrivalBusStopLocal: alertStop)
                 }
                 .padding(20)
                 .toolbar {

@@ -17,6 +17,7 @@ struct UsingAlertView: View {
     @State private var showExitConfirmation = false
     @State private var positionIndex: Int = 1 // ScrollTo 변수
     @Binding var alertStop: BusStopLocal? // alertStop을 상태로 관리
+    @State private var isScrollTriggered: Bool = false
     
     var body: some View {
         ZStack {
@@ -80,14 +81,15 @@ struct UsingAlertView: View {
                     .padding(.bottom, 28)
                 }
                 .background(Color.lightbrand)
-
+                
                 BusStopScrollView(
                     closestBus: $viewModel.closestBusLocation,
                     isRefreshing: $isRefreshing,
                     busStops: busStops,
                     busAlert: busAlert,
                     alertStop: alertStop,
-                    viewModel: viewModel
+                    viewModel: viewModel,
+                    isScrollTriggered: $isScrollTriggered
                 )
             }
             .background(Color.gray7)
@@ -101,8 +103,9 @@ struct UsingAlertView: View {
                 refreshData()
                 print("화면 새로고침")
             }
-            RefreshButton(isRefreshing: isRefreshing) {
+            RefreshButton(isRefreshing: isRefreshing, isScrollTriggered: $isScrollTriggered) {
                 refreshData()
+                isScrollTriggered = true
                 print("refresh 버튼")
             }
             
@@ -124,6 +127,7 @@ struct UsingAlertView: View {
         let busAlert: BusAlert // 버스 알림 정보
         let alertStop: BusStopLocal? // 알림 정류장
         @ObservedObject var viewModel: NowBusLocationViewModel // ViewModel
+        @Binding var isScrollTriggered: Bool // 스크롤하게 하는 트리거
         
         var body: some View {
             ScrollViewReader { proxy in
@@ -155,13 +159,16 @@ struct UsingAlertView: View {
                     .background(.clear)
                 }
                 // 해당 버스 노드 위치로 스크롤하는 에니메이션
-                .onReceive(viewModel.$closestBusLocation) { location in
-                    if let location = location {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
-                            withAnimation(.smooth) {
-                                proxy.scrollTo(location.nodeid, anchor: .center)
+                .onChange(of: isScrollTriggered) { value in
+                    if value {
+                        if let location = viewModel.closestBusLocation {
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                                withAnimation(.smooth) {
+                                    proxy.scrollTo(location.nodeid, anchor: .center)
+                                }
                             }
                         }
+                        isScrollTriggered = false
                     }
                 }
             }
@@ -249,7 +256,7 @@ struct UsingAlertView: View {
     func refreshData() {
         guard !isRefreshing else { return } // 이미 새로고침 중일 경우 중복 요청 방지
         isRefreshing = true
-        DispatchQueue.global(qos: .background).async {
+        DispatchQueue.global(qos: .background).async { // TODO: 이게 원인일거같음
             viewModel.fetchBusLocationData(cityCode: Int(busAlert.cityCode), routeId: busAlert.routeid)
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 lastRefreshTime = Date() // 새로고침 시간 업데이트
@@ -261,7 +268,8 @@ struct UsingAlertView: View {
     // 새로고침 버튼 뷰
     struct RefreshButton: View {
         let isRefreshing: Bool
-        let action: () -> Void
+        @Binding var isScrollTriggered: Bool
+        var action: () -> Void
         
         var body: some View {
             VStack {
