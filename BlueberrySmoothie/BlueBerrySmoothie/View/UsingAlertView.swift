@@ -236,7 +236,7 @@ struct UsingAlertView: View {
             title: Text("알람 종료"),
             message: Text("알람을 종료하시겠습니까?"),
             primaryButton: .destructive(Text("종료")) {
-                // 알림 취소 (alertBusStopLocal과 arrivalBusStopLocal 각각에 대해 호출)
+                // 알림 취소
                 notificationManager.notificationReceived = false // 오버레이 닫기
                 locationManager.unregisterBusAlert(busAlert)
                 dismiss() // Dismiss the view if confirmed
