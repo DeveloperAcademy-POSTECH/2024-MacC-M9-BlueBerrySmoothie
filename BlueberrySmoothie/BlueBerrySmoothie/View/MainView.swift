@@ -15,7 +15,6 @@ struct MainView: View {
     @State private var selectedAlert: BusAlert? // State to store the selected BusAlert
     @State private var mainToSetting: BusAlert? = nil
     @State private var isUsingAlertActive: Bool = false // Controls navigation to UsingAlertView
-    @State private var isEmptyAlert: Bool = true
     @State private var isSelected: Bool = false
     @State private var isEditing: Bool = false
     
@@ -98,17 +97,11 @@ struct MainView: View {
                         // 저장된 알람에 대한 각각의 노드
                         SavedBus(busStopLocals: busStopLocal, busAlert: alert, isSelected: selectedAlert?.id == alert.id, onDelete: {
                             deleteBusAlert(alert) // 삭제 동작
-                            if busAlerts.isEmpty {
-                                isEmptyAlert = true
-                            }
                         })
                         .onTapGesture {
                             selectedAlert = alert // 선택된 알람 설정
                             if let foundStop = findAlertBusStop(busAlert: alert, busStops: busStopLocal) {
                                 alertStop = foundStop
-                            }
-                            if busAlerts.count != 0 {
-                                isEmptyAlert = false
                             }
                         }
                         .padding(2) // padding을 조금 추가하여 스트로크가 잘리는 것을 방지
@@ -134,14 +127,18 @@ struct MainView: View {
             locationManager.registerBusAlert(selectedAlert, busStopLocal: alertBusStopLocal)
         }, label: {
             // 시작하기 버튼 UI
-            startButtonUI(isEmptyAlert: isEmptyAlert)
+            startButtonUI(isEmptyAlert: selectedAlert == nil)
         })
-        .disabled(isEmptyAlert)
+        .disabled(selectedAlert == nil)
     }
     
     private func deleteBusAlert(_ busAlert: BusAlert) {
         // SwiftData의 ModelContext를 통해 객체 삭제
         context.delete(busAlert)
+        // 선택된 알람이 삭제된 경우 nil로 설정
+        if selectedAlert?.id == busAlert.id {
+            selectedAlert = nil
+        }
         // SwiftData는 별도의 save() 없이 자동으로 변경 사항을 처리합니다.
         print("Bus alert \(busAlert.alertLabel) deleted.")
     }
