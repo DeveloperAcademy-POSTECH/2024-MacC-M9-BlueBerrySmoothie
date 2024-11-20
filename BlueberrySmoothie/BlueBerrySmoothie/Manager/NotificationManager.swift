@@ -16,7 +16,6 @@ import AVFoundation
 class NotificationManager: NSObject, CLLocationManagerDelegate, ObservableObject, UNUserNotificationCenterDelegate {
     static let instance = NotificationManager() //Singleton
     @Published var notificationReceived = false // 알림 수신 상태
-    //    var locationManager = LocationManager.instance
     let hapticManager = HapticManager()
     
     override init() {
@@ -49,6 +48,9 @@ class NotificationManager: NSObject, CLLocationManagerDelegate, ObservableObject
     
     // 타이머 기반 notification
     func scheduleTestNotification(for busAlert: BusAlert) {
+        // 고유한 identifier 생성 (예: 알림의 ID)
+        let identifier = busAlert.id
+        
         let content = UNMutableNotificationContent()
         content.title = "\(busAlert.arrivalBusStopNm) \(busAlert.alertBusStop) 정거장 전입니다."
         content.subtitle = "일어나서 내릴 준비를 해야해요!"
@@ -61,10 +63,10 @@ class NotificationManager: NSObject, CLLocationManagerDelegate, ObservableObject
             content.sound = UNNotificationSound(named: UNNotificationSoundName("silentSound.wav"))
         }
         
-        // 10초 후 알림
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 10, repeats: false)
+        // 1초 후 알림
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
         
-        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+        let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
         UNUserNotificationCenter.current().add(request) { error in
             if let error = error {
                 print("Error scheduling notification: \(error.localizedDescription)")
@@ -74,47 +76,10 @@ class NotificationManager: NSObject, CLLocationManagerDelegate, ObservableObject
         }
     }
     
-    func requestLocationNotification(for busAlert: BusAlert, for busStopLocal: BusStopLocal) {
-        // 고유한 identifier 생성 (예: 알림의 ID)
-        let identifier = "\(busAlert.id)-\(busStopLocal.id)"
-        
-        let content = UNMutableNotificationContent()
-        content.title = "\(busAlert.arrivalBusStopNm) \(busAlert.alertBusStop) 정거장 전입니다."
-        content.subtitle = "일어나서 내릴 준비를 해야해요!"
-        // 이어폰이 연결되어 있는 경우에만 소리를 포함한 알림을 생성합니다.
-        if isHeadphonesConnected() {
-            content.sound = UNNotificationSound.default
-        } else {
-            content.sound = UNNotificationSound(named: UNNotificationSoundName("silentSound.wav"))
-        }
-        
-        let center = CLLocationCoordinate2D(latitude: busStopLocal.gpslati, longitude: busStopLocal.gpslong)
-        let region = CLCircularRegion(center: center, radius: 4.0, identifier: "POIRegion")
-        region.notifyOnEntry = true // 설정한 지역 구간에 들어왔을 때
-        region.notifyOnExit = false // 설정한 지역 구간을 나갈 때
-        
-        let trigger = UNLocationNotificationTrigger(region: region, repeats: true)
-        
-        let request = UNNotificationRequest(
-            identifier: identifier,
-            content: content,
-            trigger: trigger)
-        
-        UNUserNotificationCenter.current().add(request) { error in
-            if let error = error {
-                print("Error location notification: \(error.localizedDescription)")
-            } else {
-                print("Location notification scheduled successfully")
-            }
-        }
-        
-    }
-    
-    /// 특정 알림을 비활성화하는 메서드
-    func cancelLocationNotification(for busAlert: BusAlert, for busStopLocal: BusStopLocal) {
-        let identifier = "\(busAlert.id)-\(busStopLocal.id)"
-        UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [identifier])
-        print("Location notification canceled for \(identifier)")
+    func cancelAllNotifications(for busAlert: BusAlert) {
+        UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+        UNUserNotificationCenter.current().removeAllDeliveredNotifications()
+        print("All notifications for \(busAlert.alertLabel) have been canceled")
     }
     
     

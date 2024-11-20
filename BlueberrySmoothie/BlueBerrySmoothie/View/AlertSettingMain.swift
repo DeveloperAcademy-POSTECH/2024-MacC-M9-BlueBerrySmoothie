@@ -14,6 +14,9 @@ struct AlertSettingMain: View {
     @State private var label: String = "알람"
     @State private var selectedStation: String = "정류장 수"
     
+    // 사용자 입력을 받을 cityCode
+    @State private var cityCodeInput: String = "" // ← 추가된 상태 변수
+    
     // 추가된 상태 변수: SelectBusView를 sheet로 표시할지 여부
     @State private var showSelectBusSheet: Bool = false // ← 추가된 부분
     @State private var busStopAlert: BusStopAlert? // 사용자 선택 사항
@@ -46,6 +49,35 @@ struct AlertSettingMain: View {
                     Spacer()
                 }
                 .padding(.bottom, 36)
+                
+                // City Code 입력 필드
+                HStack {
+                    Text("도시 코드")
+                        .foregroundColor(Color.black)
+                        .font(.regular16)
+                    Spacer()
+                    ZStack {
+                        Rectangle()
+                            .foregroundColor(.white)
+                            .cornerRadius(8)
+                            .overlay {
+                                RoundedRectangle(cornerRadius: 8)
+                                    .stroke(Color.gray4, lineWidth: 1)
+                            }
+                        HStack {
+                            TextField("예: 21", text: $cityCodeInput, prompt: Text("도시 코드 입력").foregroundColor(Color.gray4))
+                                .keyboardType(.numberPad)
+                                .foregroundColor(Color.black)
+                                .font(.regular16)
+                                .padding(.vertical, 10)
+                                .padding(.horizontal, 12)
+                            Spacer()
+                        }
+                    }
+                    .fixedSize(horizontal: false, vertical: true)
+                    .padding(.leading, 10)
+                }
+                .padding(.bottom, 20)
                 
                 VStack {
                     HStack(spacing: 2) {
@@ -100,7 +132,7 @@ struct AlertSettingMain: View {
                             }
                             .fixedSize()
                             .sheet(isPresented: $showSelectBusSheet) { // ← 수정된 부분
-                                SelectBusView(busStopAlert: $busStopAlert,showSelectBusSheet: $showSelectBusSheet)
+                                SelectBusView(cityCode: Int(cityCodeInput) ?? 21, busStopAlert: $busStopAlert,showSelectBusSheet: $showSelectBusSheet)
                             }
                             
                         }
@@ -343,20 +375,30 @@ struct AlertSettingMain: View {
             return
         }
         
+        
+        let cityCode = Int(cityCodeInput) ?? -1 // 도시 코드 유효성 확인
+        guard cityCode > 0 else {
+            print("유효한 도시 코드를 입력하세요.")
+            showToastMessage("유효한 도시 코드를 입력하세요.")
+            return
+        }
+
         // 알람 객체 생성
-        let newAlert = BusAlert(id: UUID().uuidString,
-                                cityCode: 21,
-                                busNo: selectedBus.routeno,
-                                routeid: selectedBus.routeid,
-                                arrivalBusStopID: selectedBusStop.nodeid,
-                                arrivalBusStopNm: selectedBusStop.nodenm,
-                                arrivalBusStopNord: selectedBusStop.nodeord,
-                                alertBusStop: busStopAlert!.alertBusStop, // 사용자가 설정한 알람 줄 정류장
-                                alertLabel: label, // 사용자가 입력한 알람 레이블
-                                alertSound: true, // 알람 사운드 활성화
-                                alertHaptic: true, // 해프틱 피드백 활성화
-                                alertCycle: nil,
-                                updowncd: selectedBusStop.updowncd)
+        let newAlert = BusAlert(
+            id: UUID().uuidString,
+            cityCode: Double(cityCode), // 사용자가 입력한 도시 코드
+            busNo: selectedBus.routeno,
+            routeid: selectedBus.routeid,
+            arrivalBusStopID: selectedBusStop.nodeid,
+            arrivalBusStopNm: selectedBusStop.nodenm,
+            arrivalBusStopNord: selectedBusStop.nodeord,
+            alertBusStop: busStopAlert!.alertBusStop,
+            alertLabel: label,
+            alertSound: true,
+            alertHaptic: true,
+            alertCycle: nil,
+            updowncd: selectedBusStop.updowncd ?? 1
+        )
         
         // 데이터베이스에 저장
         do {
@@ -393,7 +435,7 @@ struct AlertSettingMain: View {
                 nodeord: busStop.nodeord,
                 gpslati: busStop.gpslati,
                 gpslong: busStop.gpslong,
-                updowncd: busStop.updowncd
+                updowncd: busStop.updowncd ?? 1
             )
             
             do {

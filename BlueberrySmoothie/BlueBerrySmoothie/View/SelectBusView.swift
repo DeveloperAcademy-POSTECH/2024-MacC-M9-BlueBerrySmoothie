@@ -2,7 +2,8 @@
 import SwiftUI
 
 struct SelectBusView: View {
-    let city: City = City(citycode: 21, cityname: "부산")
+//    let city: City = City(citycode: 21, cityname: "부산")
+    let cityCode: Int // ← 추가된 부분
     @Binding var busStopAlert: BusStopAlert?
     @State private var allBuses: [Bus] = []
     @State private var filteredBuses: [Bus] = []
@@ -56,7 +57,7 @@ struct SelectBusView: View {
                 }
             }
             .onAppear {
-                fetchAllBusData(citycode: city.citycode) { fetchedBuses in
+                fetchAllBusData(citycode: cityCode) { fetchedBuses in
                     self.allBuses = fetchedBuses
                     self.filteredBuses = fetchedBuses
                 }
@@ -77,7 +78,7 @@ struct SelectBusView: View {
                     busStopAlert?.bus = bus
                 }) {
                     // 네비게이션 링크: 선택된 버스가 있을 때 SelectBusStopView로 이동
-                    NavigationLink(destination: SelectBusStopView(city: city, bus: bus, busStopAlert: $busStopAlert, showSelectBusSheet: $showSelectBusSheet)){
+                    NavigationLink(destination: SelectBusStopView(bus: bus, cityCode: cityCode, busStopAlert: $busStopAlert, showSelectBusSheet: $showSelectBusSheet)){
                         VStack(alignment: .leading) {
                             Spacer()
                             VStack(alignment: .leading) {

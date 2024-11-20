@@ -9,8 +9,9 @@ import SwiftUI
 import SwiftData
 
 struct SelectBusStopView: View {
-    let city: City // 도시 정보
+//    let city: City // 도시 정보
     let bus: Bus // 선택된 버스 정보
+    let cityCode: Int // ← 추가된 부분
     @Binding var busStopAlert: BusStopAlert?
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var busStopViewModel: BusStopViewModel
@@ -74,7 +75,7 @@ struct SelectBusStopView: View {
             }
         }
         .task {
-            await busStopViewModel.getBusStopData(cityCode: city.citycode, routeId: bus.routeid)
+            await busStopViewModel.getBusStopData(cityCode: cityCode, routeId: bus.routeid)
         }
     }
     
@@ -143,7 +144,7 @@ struct SelectBusStopView: View {
     // 버스 정류장 데이터 저장
     func storeBusStop(busStop: BusStop){
         // 기본 busStopAlert 데이터 저장
-        busStopAlert = BusStopAlert(cityCode: Double(city.citycode), bus: bus, allBusStop: busStopViewModel.busStopList, arrivalBusStop: busStop, alertBusStop: 0)
+        busStopAlert = BusStopAlert(cityCode: Double(cityCode), bus: bus, allBusStop: busStopViewModel.busStopList, arrivalBusStop: busStop, alertBusStop: 0)
         
         // 이전 정류장 (1~3번째) 저장
         if var unwrappedBusStopAlert = busStopAlert {

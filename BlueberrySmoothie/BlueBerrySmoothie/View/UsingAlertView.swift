@@ -1,15 +1,17 @@
 import SwiftUI
 import SwiftData
+import Combine // Cancellable을 사용하기 위해 필요
 
 struct UsingAlertView: View {
     @Query var busStops: [BusStopLocal]
     @StateObject private var viewModel = NowBusLocationViewModel() // ViewModel 연결
     @ObservedObject var notificationManager = NotificationManager.instance // NotificationManager 인스턴스 감지
+    private let locationManager = LocationManager.shared // LocationManager 싱글톤 참조로 변경
     @Environment(\.dismiss) private var dismiss
     
     let busAlert: BusAlert // 관련된 알림 정보
-    let arrivalBusStopLocal: BusStopLocal // 도착 정류소
-    private let refreshTimer = Timer.publish(every: 10, on: .main, in: .common).autoconnect() // 타이머 설정: 10초마다 자동으로 새로고침
+    @State private var refreshTimerCancellable: Cancellable? // 타이머를 관리하기 위한 상태
+    private let refreshInterval: TimeInterval = 10.0 // 새로고침 간격
     
     @State private var isAlertEnabled: Bool = false // 스위치 상태 관리
     @State private var isRefreshing: Bool = false // 새로고침 상태 관리
@@ -80,7 +82,7 @@ struct UsingAlertView: View {
                     .padding(.bottom, 28)
                 }
                 .background(Color.lightbrand)
-                
+
                 BusStopScrollView(
                     closestBus: $viewModel.closestBusLocation,
                     isRefreshing: $isRefreshing,
@@ -94,14 +96,23 @@ struct UsingAlertView: View {
             .navigationTitle(busAlert.alertLabel ?? "알람")
             .navigationBarTitleDisplayMode(.inline)
             .onAppear {
+                viewModel.startUpdating() // 뷰가 보일 때 뷰모델에서 위치 업데이트 시작
+                startRefreshTimer() // 타이머 시작
                 refreshData() // 초기 로드
             }
-            // 타이머를 활용한 자동 새로고침
-            .onReceive(refreshTimer) { _ in
-                refreshData()
+            .onDisappear {
+                viewModel.stopUpdating() // 뷰가 사라질 때 뷰모델에서 위치 업데이트 중단
+                stopRefreshTimer() // 뷰 사라질 때 타이머 중단
             }
+//            // 타이머를 활용한 자동 새로고침
+//            .onReceive(refreshTimer) { _ in
+//                refreshData()
+//                print("화면 새로고침")
+//            }
+            
             RefreshButton(isRefreshing: isRefreshing) {
                 refreshData()
+                print("refresh 버튼")
             }
             
             // 알람종료 오버레이 뷰
@@ -228,15 +239,32 @@ struct UsingAlertView: View {
         }
     }
     
+    /// 타이머 시작
+    private func startRefreshTimer() {
+        refreshTimerCancellable = Timer.publish(every: refreshInterval, on: .main, in: .common)
+            .autoconnect()
+            .sink { _ in
+                refreshData()
+                print("화면 새로고침")
+            }
+    }
+    
+    /// 타이머 중단
+    private func stopRefreshTimer() {
+        refreshTimerCancellable?.cancel()
+        refreshTimerCancellable = nil
+    }
+    
     /// 알람 종료를 위한 Alert 표시
     private func exitConfirmAlert() -> SwiftUI.Alert {
         return SwiftUI.Alert(
             title: Text("알람 종료"),
             message: Text("알람을 종료하시겠습니까?"),
             primaryButton: .destructive(Text("종료")) {
-                // 알림 취소 (alertBusStopLocal과 arrivalBusStopLocal 각각에 대해 호출)
-                notificationManager.cancelLocationNotification(for: busAlert, for: alertStop!)
-                notificationManager.cancelLocationNotification(for: busAlert, for: arrivalBusStopLocal)
+                // 알림 취소
+                stopRefreshTimer() // 알람 종료 시 타이머도 중단
+                notificationManager.notificationReceived = false // 오버레이 닫기
+                locationManager.unregisterBusAlert(busAlert)
                 dismiss() // Dismiss the view if confirmed
             },
             secondaryButton: .cancel(Text("취소"))
@@ -248,7 +276,7 @@ struct UsingAlertView: View {
         guard !isRefreshing else { return } // 이미 새로고침 중일 경우 중복 요청 방지
         isRefreshing = true
         DispatchQueue.global(qos: .background).async {
-            viewModel.fetchBusLocationData(cityCode: 21, routeId: busAlert.routeid)
+            viewModel.fetchBusLocationData(cityCode: Int(busAlert.cityCode), routeId: busAlert.routeid)
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 lastRefreshTime = Date() // 새로고침 시간 업데이트
                 isRefreshing = false
@@ -288,12 +316,11 @@ struct UsingAlertView: View {
             Image("AfterAlertImg")
                 .padding()
             
+            // 알람 종료 버튼
             Button(action: {
+                stopRefreshTimer() // 알람 종료 시 타이머도 중단
                 notificationManager.notificationReceived = false // 오버레이 닫기
-                
-                // 알림 취소 (alertBusStopLocal과 arrivalBusStopLocal 각각에 대해 호출)
-                notificationManager.cancelLocationNotification(for: busAlert, for: alertStop!)
-                notificationManager.cancelLocationNotification(for: busAlert, for: arrivalBusStopLocal)
+                locationManager.unregisterBusAlert(busAlert)
                 dismiss()
             }, label: {
                 Text("종료")
@@ -309,7 +336,10 @@ struct UsingAlertView: View {
         .background(Color.gray.opacity(0.8))
         .cornerRadius(10)
         .shadow(radius: 10)
-        
+        .onDisappear{
+            locationManager.unregisterBusAlert(busAlert)
+            locationManager.stopAllMonitoring()
+        }
     }
     
     /// 알람 울릴 버스 정류소 계산
