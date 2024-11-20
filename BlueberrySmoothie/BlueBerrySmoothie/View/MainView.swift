@@ -1,9 +1,4 @@
-//
-//  MainView.swift
-//  BlueBerrySmoothie
-//
-//  Created by 문호 on 11/4/24.
-//
+
 
 import SwiftUI
 import SwiftData
@@ -30,7 +25,7 @@ struct MainView: View {
     
     var body: some View {
         NavigationView {
-            ZStack{
+            ZStack {
                 Color.lightbrand
                     .ignoresSafeArea()
                 VStack {
@@ -60,9 +55,9 @@ struct MainView: View {
                 }
                 .padding(20)
                 .toolbar {
-                    ToolbarItem(placement: .navigationBarTrailing) { // 위치를 명확히 지정
+                    ToolbarItem(placement: .navigationBarTrailing) {
                         Button(action: {
-                            showSetting = true // sheet 표시 상태를 true로 설정
+                            showSetting = true
                         }) {
                             Text("추가")
                                 .font(.system(size: 16, weight: .medium))
@@ -70,11 +65,11 @@ struct MainView: View {
                         }
                         .sheet(isPresented: $showSetting) {
                             NavigationView {
-                                AlertSettingMain(/*isEditing: $isEditing*/)
+                                AlertSettingMain()
                             }
                         }
                     }
-                    ToolbarItem(placement: .navigationBarLeading) { // 위치를 명확히 지정
+                    ToolbarItem(placement: .navigationBarLeading) {
                         Text("버스 알람: 햣챠")
                             .font(.mediumbold24)
                             .foregroundStyle(.black)
@@ -96,17 +91,16 @@ struct MainView: View {
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .background(Color.clear)
             } else {
-                ScrollView(showsIndicators: false)  {
-                    ForEach (busAlerts, id: \.self) { alert in
-                        // 저장된 알람에 대한 각각의 노드
+                ScrollView(showsIndicators: false) {
+                    ForEach(busAlerts, id: \.self) { alert in
                         SavedBus(busStopLocals: busStopLocal, busAlert: alert, isSelected: selectedAlert?.id == alert.id, onDelete: {
-                            deleteBusAlert(alert) // 삭제 동작
+                            deleteBusAlert(alert)
                             if busAlerts.isEmpty {
                                 isEmptyAlert = true
                             }
                         })
                         .onTapGesture {
-                            selectedAlert = alert // 선택된 알람 설정
+                            selectedAlert = alert
                             if let foundStop = findAlertBusStop(busAlert: alert, busStops: busStopLocal) {
                                 alertStop = foundStop
                             }
@@ -114,15 +108,15 @@ struct MainView: View {
                                 isEmptyAlert = false
                             }
                         }
-                        .padding(2) // padding을 조금 추가하여 스트로크가 잘리는 것을 방지
-                        .padding(.bottom, 1) // 아이템 간 간격 유지
+                        .padding(2)
+                        .padding(.bottom, 1)
                     }
                 }
             }
         }
     }
     
-    // 시작하기 버튼
+    /// 시작하기 버튼
     private func startButton(arrivalBusStopLocal: BusStopLocal?) -> some View {
         Button(action: {
             guard let selectedAlert = selectedAlert,
@@ -131,11 +125,13 @@ struct MainView: View {
                 print("선택된 알람 또는 버스 정류장이 설정되지 않았습니다.")
                 return
             }
+            
+            // 라이브 액티비티 시작
+            LiveActivityManager.shared.startLiveActivity()
+            
             // 알림 설정
-            isUsingAlertActive = true // Activate navigation
-            //            print(selectedAlert.alertLabel)
+            isUsingAlertActive = true
             notificationManager.requestAuthorization()
-            //                        notificationManager.scheduleTestNotification(for: selectedAlert)
             notificationManager.requestLocationNotification(for: selectedAlert, for: alertBusStopLocal)
             notificationManager.requestLocationNotification(for: selectedAlert, for: arrivalBusStopLocal)
         }, label: {
@@ -146,9 +142,7 @@ struct MainView: View {
     }
     
     private func deleteBusAlert(_ busAlert: BusAlert) {
-        // SwiftData의 ModelContext를 통해 객체 삭제
         context.delete(busAlert)
-        // SwiftData는 별도의 save() 없이 자동으로 변경 사항을 처리합니다.
         print("Bus alert \(busAlert.alertLabel) deleted.")
     }
 }
