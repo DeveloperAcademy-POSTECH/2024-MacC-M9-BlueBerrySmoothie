@@ -3,7 +3,7 @@ import SwiftData
 
 struct UsingAlertView: View {
     @Query var busStops: [BusStopLocal]
-    @StateObject private var viewModel = NowBusLocationViewModel() // ViewModel 연결
+    @StateObject private var currentBusViewModel = NowBusLocationViewModel() // ViewModel 연결
     @ObservedObject var notificationManager = NotificationManager.instance // NotificationManager 인스턴스 감지
     private let locationManager = LocationManager.shared // LocationManager 싱글톤 참조로 변경
     @Environment(\.dismiss) private var dismiss
@@ -83,12 +83,12 @@ struct UsingAlertView: View {
                 .background(Color.lightbrand)
                 
                 BusStopScrollView(
-                    closestBus: $viewModel.closestBusLocation,
+                    closestBus: $currentBusViewModel.closestBusLocation,
                     isRefreshing: $isRefreshing,
                     busStops: busStops,
                     busAlert: busAlert,
                     alertStop: alertStop,
-                    viewModel: viewModel,
+                    viewModel: currentBusViewModel,
                     isScrollTriggered: $isScrollTriggered
                 )
             }
@@ -257,7 +257,7 @@ struct UsingAlertView: View {
         guard !isRefreshing else { return } // 이미 새로고침 중일 경우 중복 요청 방지
         isRefreshing = true
         DispatchQueue.global(qos: .background).async { // TODO: 이게 원인일거같음
-            viewModel.fetchBusLocationData(cityCode: Int(busAlert.cityCode), routeId: busAlert.routeid)
+            currentBusViewModel.fetchBusLocationData(cityCode: Int(busAlert.cityCode), routeId: busAlert.routeid)
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 lastRefreshTime = Date() // 새로고침 시간 업데이트
                 isRefreshing = false
