@@ -10,24 +10,43 @@ class NowBusLocationViewModel: NSObject, ObservableObject, CLLocationManagerDele
     private var cancellables = Set<AnyCancellable>()
     private var locationManager = CLLocationManager()
     private var userLocation: CLLocation?
+    private var isUpdatingLocation = false // 위치 업데이트 상태 추적
 
     override init() {
         super.init()
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
-        locationManager.startUpdatingLocation()
-        print("유저로케이션업데이트")
+        print("NowBusLocationViewModel initialized.")
 
         fetchBusLocationData(cityCode: 21, routeId: "BSB5200043000")
+    }
+    
+    func startUpdating() {
+        guard !isUpdatingLocation else { return } // 이미 활성 상태라면 무시
+        locationManager.startUpdatingLocation()
+        isUpdatingLocation = true
+        print("Location updates started.")
+    }
+
+    func stopUpdating() {
+        guard isUpdatingLocation else { return } // 이미 중지 상태라면 무시
+        locationManager.stopUpdatingLocation()
+        isUpdatingLocation = false
+        print("Location updates stopped.")
+    }
+
+    deinit {
+        stopUpdating()
+        print("NowBusLocationViewModel deinitialized.")
     }
 
     // CLLocationManagerDelegate 메서드 - 사용자 위치 업데이트 시 호출
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.last else { return }
         userLocation = location
-        print("locationManager(didUpdateLocations")
+        print("locationManager(didUpdateLocations)")
         findClosestBusLocation()
-        printUserLocationAndClosestBus() // 사용자 위치 및 가장 가까운 버스 정보 출력
+//        printUserLocationAndClosestBus() // 사용자 위치 및 가장 가까운 버스 정보 출력
     }
 
     // API를 호출하여 버스 위치 데이터를 가져옴
@@ -39,7 +58,7 @@ class NowBusLocationViewModel: NSObject, ObservableObject, CLLocationManagerDele
                 // 좌표 검증 후 업데이트
                 self?.NowbusLocations = locations.map { self?.validateAndFixCoordinates(for: $0) ?? $0 }
                 self?.findClosestBusLocation() // 데이터 가져온 후 가장 가까운 버스 위치 계산
-                self?.printUserLocationAndClosestBus() // 사용자 위치 및 가장 가까운 버스 정보 출력
+//                self?.printUserLocationAndClosestBus() // 사용자 위치 및 가장 가까운 버스 정보 출력
             }
         }
     }
