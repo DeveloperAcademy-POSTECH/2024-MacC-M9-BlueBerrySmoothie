@@ -37,3 +37,6 @@
 
 <key>NSWidgetWantsToUpdateOnLockScreen</key>
 <true/>
+
+<key>UIBackgroundModes</key>
+<array>

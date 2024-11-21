@@ -9,6 +9,7 @@ struct MyLiveActivityAttributes: ActivityAttributes {
     var title: String  // 타이틀 (예: "Tracking Progress")
     var description: String  // 설명 (예: "Your journey is in progress")
 }
+
 //
 //class LiveActivityManager {
 //    static let shared = LiveActivityManager()

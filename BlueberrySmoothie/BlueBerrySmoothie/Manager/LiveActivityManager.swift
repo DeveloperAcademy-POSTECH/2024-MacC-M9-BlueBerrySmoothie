@@ -8,7 +8,8 @@ struct MyLiveActivityAttributes: ActivityAttributes {
     }
     
     var title: String
-    var description: String 
+    var description: String
+    var stationName: String
 }
 
 class LiveActivityManager {
@@ -22,7 +23,7 @@ class LiveActivityManager {
     // 라이브 액티비티 시작
     func startLiveActivity() {
         if ActivityAuthorizationInfo().areActivitiesEnabled {
-            let activityAttributes = MyLiveActivityAttributes(title: "Tracking Progress", description: "Your journey is in progress")
+            let activityAttributes = MyLiveActivityAttributes(title: "Tracking Progress", description: "Your journey is in progress", stationName:"목적지")
             let initialState = ActivityContent(state: MyLiveActivityAttributes.ContentState(progress: 0.0), staleDate: nil)
             
             
