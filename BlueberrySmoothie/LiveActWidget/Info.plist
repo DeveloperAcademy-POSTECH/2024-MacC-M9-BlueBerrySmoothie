@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>NSLiveActivityDuration</key>
+    <string>60</string>
+    <key>NSSupportsLiveActivities</key>
+    <true/>
+    
+    <key>NSExtension</key>
+    <dict>
+        <key>NSExtensionPointIdentifier</key>
+        <string>com.apple.widgetkit-extension</string>
+        <!-- 추가 구성 필요 시 여기에서 설정 가능 -->
+    </dict>
+</dict>
+</plist>
+
+<key>UIBackgroundModes</key>
+<array>
+    <string>fetch</string>
+    <string>processing</string>
+</array>
+
+<key>UIBackgroundModes</key>
+<array>
+    <string>fetch</string>
+    <string>processing</string>
+</array>
+<key>NSLocationAlwaysUsageDescription</key>
+<string>위치 서비스를 사용하여 알림을 제공합니다.</string>
+<key>NSLocationWhenInUseUsageDescription</key>
+<string>위치 서비스를 사용하여 알림을 제공합니다.</string>
+
+<key>NSLiveActivityUsageDescription</key>
+<string>사용자가 실시간 활동을 확인할 수 있도록 Live Activity를 제공합니다.</string>
+
+<key>NSWidgetWantsToUpdateOnLockScreen</key>
+<true/>

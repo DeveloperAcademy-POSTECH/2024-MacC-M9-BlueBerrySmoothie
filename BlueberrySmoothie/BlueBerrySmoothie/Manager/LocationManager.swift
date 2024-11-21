@@ -57,8 +57,8 @@ class LocationManager: NSObject, ObservableObject {
         }
         backgroundTasks[busAlert.id] = backgroundTask
         
-        // 1초마다 반복되는 타이머 생성
-        let timer = Timer(timeInterval: 1.0, repeats: true) { [weak self] _ in
+        // 0.6초마다 반복되는 타이머 생성
+        let timer = Timer(timeInterval: 0.6, repeats: true) { [weak self] _ in
             self?.scheduleNotification(for: busAlert)
         }
         RunLoop.main.add(timer, forMode: .common)
@@ -90,8 +90,8 @@ class LocationManager: NSObject, ObservableObject {
     
     private func scheduleNotification(for busAlert: BusAlert) {
         let content = UNMutableNotificationContent()
-        content.title = busAlert.alertLabel ?? "목적지 도착"
-        content.body = "지정된 버스정류장 근처에 도착했습니다."
+        content.title = "\(busAlert.arrivalBusStopNm) \(busAlert.alertBusStop)정거장 전입니다."
+        content.body = "일어나서 내릴 준비를 해야해요!"
         content.sound = .default
         
         // 앱이 포그라운드 상태일 때
@@ -105,7 +105,7 @@ class LocationManager: NSObject, ObservableObject {
         let identifier = "\(busAlert.id)_\(Date().timeIntervalSince1970)"
         
         // 즉시 실행되는 트리거
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 0.4, repeats: false)
         
         let request = UNNotificationRequest(identifier: identifier,
                                             content: content,
@@ -118,6 +118,7 @@ class LocationManager: NSObject, ObservableObject {
         }
     }
 
+    // 버스 알람 등록 (모니터링 지역 설정, 시작)
     func registerBusAlert(_ busAlert: BusAlert, busStopLocal: BusStopLocal) {
         activeBusAlerts[busAlert.id] = busAlert
         
@@ -143,6 +144,7 @@ class LocationManager: NSObject, ObservableObject {
         print("Started monitoring region for \(busAlert.alertLabel ?? "")")
     }
     
+    // 버스 알람 해제
     func unregisterBusAlert(_ busAlert: BusAlert) {
         stopNotifications(for: busAlert)
         activeBusAlerts.removeValue(forKey: busAlert.id)
@@ -196,10 +198,10 @@ class LocationManager: NSObject, ObservableObject {
         activeNotifications.removeAll()
     }
     
-//     알림이 현재 활성화되어 있는지 확인하는 메서드
-    func isNotificationActive(for busAlert: BusAlert) -> Bool {
-        return activeNotifications.contains(busAlert.id)
-    }
+////     알림이 현재 활성화되어 있는지 확인하는 메서드
+//    func isNotificationActive(for busAlert: BusAlert) -> Bool {
+//        return activeNotifications.contains(busAlert.id)
+//    }
 }
 
 extension LocationManager: CLLocationManagerDelegate {

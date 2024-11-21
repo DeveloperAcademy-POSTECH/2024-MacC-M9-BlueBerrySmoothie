@@ -1,5 +1,6 @@
 import SwiftUI
 import SwiftData
+import Combine // Cancellable을 사용하기 위해 필요
 
 struct UsingAlertView: View {
     @Query var busStops: [BusStopLocal]
@@ -9,7 +10,8 @@ struct UsingAlertView: View {
     @Environment(\.dismiss) private var dismiss
     
     let busAlert: BusAlert // 관련된 알림 정보
-    private let refreshTimer = Timer.publish(every: 10, on: .main, in: .common).autoconnect() // 타이머 설정: 10초마다 자동으로 새로고침
+    @State private var refreshTimerCancellable: Cancellable? // 타이머를 관리하기 위한 상태
+    private let refreshInterval: TimeInterval = 10.0 // 새로고침 간격
     
     @State private var isAlertEnabled: Bool = false // 스위치 상태 관리
     @State private var isRefreshing: Bool = false // 새로고침 상태 관리
@@ -96,12 +98,13 @@ struct UsingAlertView: View {
             .navigationTitle(busAlert.alertLabel ?? "알람")
             .navigationBarTitleDisplayMode(.inline)
             .onAppear {
+                viewModel.startUpdating() // 뷰가 보일 때 뷰모델에서 위치 업데이트 시작
+                startRefreshTimer() // 타이머 시작
                 refreshData() // 초기 로드
             }
-            // 타이머를 활용한 자동 새로고침
-            .onReceive(refreshTimer) { _ in
-                refreshData()
-                print("화면 새로고침")
+            .onDisappear {
+                viewModel.stopUpdating() // 뷰가 사라질 때 뷰모델에서 위치 업데이트 중단
+                stopRefreshTimer() // 뷰 사라질 때 타이머 중단
             }
             RefreshButton(isRefreshing: isRefreshing, isScrollTriggered: $isScrollTriggered) {
                 refreshData()
@@ -237,13 +240,30 @@ struct UsingAlertView: View {
         }
     }
     
+    /// 타이머 시작
+    private func startRefreshTimer() {
+        refreshTimerCancellable = Timer.publish(every: refreshInterval, on: .main, in: .common)
+            .autoconnect()
+            .sink { _ in
+                refreshData()
+                print("화면 새로고침")
+            }
+    }
+    
+    /// 타이머 중단
+    private func stopRefreshTimer() {
+        refreshTimerCancellable?.cancel()
+        refreshTimerCancellable = nil
+    }
+    
     /// 알람 종료를 위한 Alert 표시
     private func exitConfirmAlert() -> SwiftUI.Alert {
         return SwiftUI.Alert(
             title: Text("알람 종료"),
             message: Text("알람을 종료하시겠습니까?"),
             primaryButton: .destructive(Text("종료")) {
-                // 알림 취소 (alertBusStopLocal과 arrivalBusStopLocal 각각에 대해 호출)
+                // 알림 취소
+                stopRefreshTimer() // 알람 종료 시 타이머도 중단
                 notificationManager.notificationReceived = false // 오버레이 닫기
                 locationManager.unregisterBusAlert(busAlert)
                 dismiss() // Dismiss the view if confirmed
@@ -300,6 +320,7 @@ struct UsingAlertView: View {
             
             // 알람 종료 버튼
             Button(action: {
+                stopRefreshTimer() // 알람 종료 시 타이머도 중단
                 notificationManager.notificationReceived = false // 오버레이 닫기
                 locationManager.unregisterBusAlert(busAlert)
                 dismiss()
