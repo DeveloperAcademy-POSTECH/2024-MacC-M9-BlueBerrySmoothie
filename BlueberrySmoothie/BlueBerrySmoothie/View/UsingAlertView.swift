@@ -4,7 +4,7 @@ import Combine // Cancellable을 사용하기 위해 필요
 
 struct UsingAlertView: View {
     @Query var busStops: [BusStopLocal]
-    @StateObject private var viewModel = NowBusLocationViewModel() // ViewModel 연결
+    @StateObject private var currentBusViewModel = NowBusLocationViewModel() // ViewModel 연결
     @ObservedObject var notificationManager = NotificationManager.instance // NotificationManager 인스턴스 감지
     private let locationManager = LocationManager.shared // LocationManager 싱글톤 참조로 변경
     @Environment(\.dismiss) private var dismiss
@@ -19,6 +19,7 @@ struct UsingAlertView: View {
     @State private var showExitConfirmation = false
     @State private var positionIndex: Int = 1 // ScrollTo 변수
     @Binding var alertStop: BusStopLocal? // alertStop을 상태로 관리
+    @State private var isScrollTriggered: Bool = false
     
     var body: some View {
         ZStack {
@@ -82,14 +83,15 @@ struct UsingAlertView: View {
                     .padding(.bottom, 28)
                 }
                 .background(Color.lightbrand)
-
+                
                 BusStopScrollView(
-                    closestBus: $viewModel.closestBusLocation,
+                    closestBus: $currentBusViewModel.closestBusLocation,
                     isRefreshing: $isRefreshing,
                     busStops: busStops,
                     busAlert: busAlert,
                     alertStop: alertStop,
-                    viewModel: viewModel
+                    viewModel: currentBusViewModel,
+                    isScrollTriggered: $isScrollTriggered
                 )
             }
             .background(Color.gray7)
@@ -104,14 +106,9 @@ struct UsingAlertView: View {
                 viewModel.stopUpdating() // 뷰가 사라질 때 뷰모델에서 위치 업데이트 중단
                 stopRefreshTimer() // 뷰 사라질 때 타이머 중단
             }
-//            // 타이머를 활용한 자동 새로고침
-//            .onReceive(refreshTimer) { _ in
-//                refreshData()
-//                print("화면 새로고침")
-//            }
-            
-            RefreshButton(isRefreshing: isRefreshing) {
+            RefreshButton(isRefreshing: isRefreshing, isScrollTriggered: $isScrollTriggered) {
                 refreshData()
+                isScrollTriggered = true
                 print("refresh 버튼")
             }
             
@@ -133,6 +130,7 @@ struct UsingAlertView: View {
         let busAlert: BusAlert // 버스 알림 정보
         let alertStop: BusStopLocal? // 알림 정류장
         @ObservedObject var viewModel: NowBusLocationViewModel // ViewModel
+        @Binding var isScrollTriggered: Bool // 스크롤하게 하는 트리거
         
         var body: some View {
             ScrollViewReader { proxy in
@@ -164,13 +162,16 @@ struct UsingAlertView: View {
                     .background(.clear)
                 }
                 // 해당 버스 노드 위치로 스크롤하는 에니메이션
-                .onReceive(viewModel.$closestBusLocation) { location in
-                    if let location = location {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
-                            withAnimation(.smooth) {
-                                proxy.scrollTo(location.nodeid, anchor: .center)
+                .onChange(of: isScrollTriggered) { value in
+                    if value {
+                        if let location = viewModel.closestBusLocation {
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                                withAnimation(.smooth) {
+                                    proxy.scrollTo(location.nodeid, anchor: .center)
+                                }
                             }
                         }
+                        isScrollTriggered = false
                     }
                 }
             }
@@ -276,7 +277,7 @@ struct UsingAlertView: View {
         guard !isRefreshing else { return } // 이미 새로고침 중일 경우 중복 요청 방지
         isRefreshing = true
         DispatchQueue.global(qos: .background).async {
-            viewModel.fetchBusLocationData(cityCode: Int(busAlert.cityCode), routeId: busAlert.routeid)
+            currentBusViewModel.fetchBusLocationData(cityCode: Int(busAlert.cityCode), routeId: busAlert.routeid)
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 lastRefreshTime = Date() // 새로고침 시간 업데이트
                 isRefreshing = false
@@ -287,7 +288,8 @@ struct UsingAlertView: View {
     // 새로고침 버튼 뷰
     struct RefreshButton: View {
         let isRefreshing: Bool
-        let action: () -> Void
+        @Binding var isScrollTriggered: Bool
+        var action: () -> Void
         
         var body: some View {
             VStack {
