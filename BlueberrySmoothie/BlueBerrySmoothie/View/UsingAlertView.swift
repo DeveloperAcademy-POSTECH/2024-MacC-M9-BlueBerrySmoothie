@@ -256,7 +256,7 @@ struct UsingAlertView: View {
     func refreshData() {
         guard !isRefreshing else { return } // 이미 새로고침 중일 경우 중복 요청 방지
         isRefreshing = true
-        DispatchQueue.global(qos: .background).async { // TODO: 이게 원인일거같음
+        DispatchQueue.global(qos: .background).async {
             currentBusViewModel.fetchBusLocationData(cityCode: Int(busAlert.cityCode), routeId: busAlert.routeid)
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 lastRefreshTime = Date() // 새로고침 시간 업데이트
