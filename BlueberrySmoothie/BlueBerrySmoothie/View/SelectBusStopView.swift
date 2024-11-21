@@ -130,16 +130,16 @@ struct SelectBusStopView: View {
         // 하행의 가장 작은 order 구함
         if let maxUpwardNodeord = busStopViewModel.busStopList.filter({ $0.updowncd == 1 }).map({ $0.nodeord }).min() {
             //해당 order로 스크롤을 이동함
-            proxy.scrollTo(40, anchor: .center)
+            proxy.scrollTo(maxUpwardNodeord, anchor: .center)
         }
     }
     
     // 최하단으로 스크롤하는 함수
-    private func scrollToBottom(proxy: ScrollViewProxy) {
-        if let firstStop = busStopViewModel.busStopList.last {
-            proxy.scrollTo(firstStop.nodeid, anchor: .bottom)
-        }
-    }
+//    private func scrollToBottom(proxy: ScrollViewProxy) {
+//        if let firstStop = busStopViewModel.busStopList.last {
+//            proxy.scrollTo(firstStop.nodeid, anchor: .bottom)
+//        }
+//    }
     
     // 버스 정류장 데이터 저장
     func storeBusStop(busStop: BusStop){
