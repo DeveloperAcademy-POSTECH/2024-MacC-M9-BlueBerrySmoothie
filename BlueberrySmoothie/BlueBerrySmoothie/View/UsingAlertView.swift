@@ -4,7 +4,7 @@ import Combine // Cancellable을 사용하기 위해 필요
 
 struct UsingAlertView: View {
     @Query var busStops: [BusStopLocal]
-    @StateObject private var viewModel = NowBusLocationViewModel() // ViewModel 연결
+    @StateObject private var currentBusViewModel = NowBusLocationViewModel() // ViewModel 연결
     @ObservedObject var notificationManager = NotificationManager.instance // NotificationManager 인스턴스 감지
     private let locationManager = LocationManager.shared // LocationManager 싱글톤 참조로 변경
     @Environment(\.dismiss) private var dismiss
@@ -84,24 +84,24 @@ struct UsingAlertView: View {
                 .background(Color.lightbrand)
 
                 BusStopScrollView(
-                    closestBus: $viewModel.closestBusLocation,
+                    closestBus: $currentBusViewModel.closestBusLocation,
                     isRefreshing: $isRefreshing,
                     busStops: busStops,
                     busAlert: busAlert,
                     alertStop: alertStop,
-                    viewModel: viewModel
+                    viewModel: currentBusViewModel
                 )
             }
             .background(Color.gray7)
             .navigationTitle(busAlert.alertLabel ?? "알람")
             .navigationBarTitleDisplayMode(.inline)
             .onAppear {
-                viewModel.startUpdating() // 뷰가 보일 때 뷰모델에서 위치 업데이트 시작
+                currentBusViewModel.startUpdating() // 뷰가 보일 때 뷰모델에서 위치 업데이트 시작
                 startRefreshTimer() // 타이머 시작
                 refreshData() // 초기 로드
             }
             .onDisappear {
-                viewModel.stopUpdating() // 뷰가 사라질 때 뷰모델에서 위치 업데이트 중단
+                currentBusViewModel.stopUpdating() // 뷰가 사라질 때 뷰모델에서 위치 업데이트 중단
                 stopRefreshTimer() // 뷰 사라질 때 타이머 중단
             }
 //            // 타이머를 활용한 자동 새로고침
@@ -276,7 +276,7 @@ struct UsingAlertView: View {
         guard !isRefreshing else { return } // 이미 새로고침 중일 경우 중복 요청 방지
         isRefreshing = true
         DispatchQueue.global(qos: .background).async {
-            viewModel.fetchBusLocationData(cityCode: Int(busAlert.cityCode), routeId: busAlert.routeid)
+            currentBusViewModel.fetchBusLocationData(cityCode: Int(busAlert.cityCode), routeId: busAlert.routeid)
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 lastRefreshTime = Date() // 새로고침 시간 업데이트
                 isRefreshing = false
