@@ -33,39 +33,28 @@ struct AlertSettingMain: View {
     
     var body: some View {
         ZStack {
-            // 배경 (Tap Gesture 추가)
+            // 배경 (Tap Gesture 추가, 화면을 눌렀을 때 키보드 숨김을 위함)
             Color(.white)
                 .ignoresSafeArea()
                 .onTapGesture {
                     hideKeyboard() // 키보드 숨김
                 }
-            VStack {
-                HStack {
-                    Text("알람 설정")
-                        .font(.medium24)
-                        .foregroundColor(.black)
-                    Spacer()
-                }
-                .padding(.bottom, 8)
-                
-                HStack {
-                    Text("종착지에 도착하기 전에 깨워드려요")
-                        .font(.regular16)
-                        .foregroundColor(Color.gray3)
-                    Spacer()
-                }
-                .padding(.bottom, 36)
+            VStack(alignment: .leading) {
+                Text("알람 설정")
+                    .font(.regular16)
+                    .foregroundColor(.black)
+                    .padding(.bottom, 8)
+                Text("종착지에 도착하기 전에 깨워드려요")
+                    .font(.regular14)
+                    .foregroundColor(.gray3)
+                    .padding(.bottom, 32)
                 
                 VStack {
                     HStack(spacing: 2) {
-                        Text("버스 및 종착지")
-                            .foregroundColor(.black)
-                            .font(.regular16)
-                        Image(systemName: "asterisk")
-                            .foregroundColor(Color.brand)
-                            .font(.regular10)
-                            .bold()
-                            .padding(.trailing)
+                        // 입력할 내용 라벨
+                        settingLabel(text: "버스 및 종착지")
+                        // * 아이콘
+                        astrickImage()
                         
                         ZStack {
                             Rectangle()
@@ -118,21 +107,6 @@ struct AlertSettingMain: View {
                 }
                 
                 HStack {
-                    Spacer()
-                    Spacer()
-                    Spacer()
-                    Spacer()
-                    Spacer()
-                    Spacer()
-                    Spacer()
-                    Spacer()
-                    Spacer()
-                    Spacer()
-                    Spacer()
-                    Spacer()
-                    Spacer()
-                    Spacer()
-                    
                     // 선택된 정류장 표시
                     ZStack {
                         Rectangle()
@@ -157,14 +131,10 @@ struct AlertSettingMain: View {
                 
                 // 일어날 정류장 선택
                 HStack(spacing: 2) {
-                    Text("일어날 정류장")
-                        .font(.medium16)
-                        .foregroundColor(Color.black)
-                    Image(systemName: "asterisk")
-                        .foregroundColor(Color.brand)
-                        .font(.regular10)
-                        .bold()
-                        .padding(.trailing)
+                    // 입력할 내용 라벨
+                    settingLabel(text: "일어날 정류장")
+                    // * 아이콘
+                    astrickImage()
                     
                     ZStack {
                         Rectangle()
@@ -198,9 +168,8 @@ struct AlertSettingMain: View {
                 
                 // 알람 레이블 입력 필드
                 HStack {
-                    Text("알람 레이블")
-                        .foregroundColor(Color.black)
-                        .font(.regular16)
+                    // 입력할 내용 라벨
+                    settingLabel(text: "알람 이름")
                     Spacer()
                     Spacer()
                     Spacer()
@@ -283,9 +252,9 @@ struct AlertSettingMain: View {
                 Button(action: {
                     dismiss()  // 현재 화면을 닫는 동작
                 }) {
-                    Text("닫기")
-                        .font(.regular16)
-                        .foregroundColor(Color.brand) // 원하는 색상으로 변경 가능
+                    Image(systemName: "xmark")
+                        .frame(width: 19.2, height: 19.2)
+                        .foregroundColor(Color.gray1) // 원하는 색상으로 변경 가능
                 }
             }
         }
@@ -390,6 +359,20 @@ struct AlertSettingMain: View {
         } catch {
             print("알람 저장 실패: \(error)")
         }
+    }
+    
+    func astrickImage() -> some View {
+        Image(systemName: "asterisk")
+            .foregroundColor(Color.brand)
+            .font(.regular10)
+            .bold()
+            .padding(.trailing)
+    }
+    
+    func settingLabel(text: String) -> some View {
+        Text("\(text)")
+            .font(.regular16)
+            .foregroundColor(.gray1)
     }
     
     // 선택한 버스의 정류장 List 저장 함수 - UsingAlertView에서 정류장 노선을 띄우는데 사용됨
