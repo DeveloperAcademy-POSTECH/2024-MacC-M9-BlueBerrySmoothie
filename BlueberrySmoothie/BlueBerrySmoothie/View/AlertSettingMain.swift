@@ -289,6 +289,7 @@ struct AlertSettingMain: View {
                 }
             }
         }
+        .navigationBarBackButtonHidden(true)
         .toast(isShowing: $showToast, message: toastMessage)
     }
     
