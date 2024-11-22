@@ -98,12 +98,12 @@ struct UsingAlertView: View {
             .navigationTitle(busAlert.alertLabel ?? "알람")
             .navigationBarTitleDisplayMode(.inline)
             .onAppear {
-                viewModel.startUpdating() // 뷰가 보일 때 뷰모델에서 위치 업데이트 시작
+                currentBusViewModel.startUpdating() // 뷰가 보일 때 뷰모델에서 위치 업데이트 시작
                 startRefreshTimer() // 타이머 시작
                 refreshData() // 초기 로드
             }
             .onDisappear {
-                viewModel.stopUpdating() // 뷰가 사라질 때 뷰모델에서 위치 업데이트 중단
+                currentBusViewModel.stopUpdating() // 뷰가 사라질 때 뷰모델에서 위치 업데이트 중단
                 stopRefreshTimer() // 뷰 사라질 때 타이머 중단
             }
             RefreshButton(isRefreshing: isRefreshing, isScrollTriggered: $isScrollTriggered) {
@@ -323,6 +323,7 @@ struct UsingAlertView: View {
                 stopRefreshTimer() // 알람 종료 시 타이머도 중단
                 notificationManager.notificationReceived = false // 오버레이 닫기
                 locationManager.unregisterBusAlert(busAlert)
+                locationManager.stopAudio()
                 dismiss()
             }, label: {
                 Text("종료")
