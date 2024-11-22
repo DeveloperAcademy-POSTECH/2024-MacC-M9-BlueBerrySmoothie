@@ -15,7 +15,7 @@ struct AlertSettingMain: View {
     @State private var selectedStation: String = "정류장 수"
     
     // 사용자 입력을 받을 cityCode
-    @State private var cityCodeInput: String = "" // ← 추가된 상태 변수
+    @State private var cityCodeInput: String = "21" // ← 추가된 상태 변수
     
     // 추가된 상태 변수: SelectBusView를 sheet로 표시할지 여부
     @State private var showSelectBusSheet: Bool = false // ← 추가된 부분
@@ -55,35 +55,6 @@ struct AlertSettingMain: View {
                     Spacer()
                 }
                 .padding(.bottom, 36)
-                
-                // City Code 입력 필드
-                HStack {
-                    Text("도시 코드")
-                        .foregroundColor(Color.black)
-                        .font(.regular16)
-                    Spacer()
-                    ZStack {
-                        Rectangle()
-                            .foregroundColor(.white)
-                            .cornerRadius(8)
-                            .overlay {
-                                RoundedRectangle(cornerRadius: 8)
-                                    .stroke(Color.gray4, lineWidth: 1)
-                            }
-                        HStack {
-                            TextField("예: 21", text: $cityCodeInput, prompt: Text("도시 코드 입력").foregroundColor(Color.gray4))
-                                .keyboardType(.numberPad)
-                                .foregroundColor(Color.black)
-                                .font(.regular16)
-                                .padding(.vertical, 10)
-                                .padding(.horizontal, 12)
-                            Spacer()
-                        }
-                    }
-                    .fixedSize(horizontal: false, vertical: true)
-                    .padding(.leading, 10)
-                }
-                .padding(.bottom, 20)
                 
                 VStack {
                     HStack(spacing: 2) {
