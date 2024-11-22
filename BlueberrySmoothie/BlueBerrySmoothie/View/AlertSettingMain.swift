@@ -33,6 +33,12 @@ struct AlertSettingMain: View {
     
     var body: some View {
         ZStack {
+            // 배경 (Tap Gesture 추가)
+            Color(.white)
+                .ignoresSafeArea()
+                .onTapGesture {
+                    hideKeyboard() // 키보드 숨김
+                }
             VStack {
                 HStack {
                     Text("알람 설정")
@@ -255,7 +261,7 @@ struct AlertSettingMain: View {
             Spacer()
         }
         .onAppear {
-//            print("AlertSettingMain onAppear: \(busAlert?.alertLabel)")
+            //            print("AlertSettingMain onAppear: \(busAlert?.alertLabel)")
             // 이전 정류장 수 선택이 안되어있는 경우
             if busStopAlert?.alertBusStop == 0 {
                 selectedStation = "정류장 수"
@@ -339,6 +345,11 @@ struct AlertSettingMain: View {
         }
     }
     
+    // 키보드 숨김 메서드
+    func hideKeyboard() {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
+    
     // 새 알림 저장 함수
     private func saveAlert() {
         guard let selectedBus = busStopAlert?.bus,
@@ -382,7 +393,7 @@ struct AlertSettingMain: View {
             showToastMessage("유효한 도시 코드를 입력하세요.")
             return
         }
-
+        
         // 알람 객체 생성
         let newAlert = BusAlert(
             id: UUID().uuidString,
