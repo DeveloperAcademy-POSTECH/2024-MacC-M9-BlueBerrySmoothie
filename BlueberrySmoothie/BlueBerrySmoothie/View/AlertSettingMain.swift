@@ -40,6 +40,7 @@ struct AlertSettingMain: View {
                     hideKeyboard() // 키보드 숨김
                 }
             VStack(alignment: .leading) {
+                // 상단 타이틀, 페이지 설명
                 Text("알람 설정")
                     .font(.regular16)
                     .foregroundColor(.black)
@@ -49,152 +50,83 @@ struct AlertSettingMain: View {
                     .foregroundColor(.gray3)
                     .padding(.bottom, 32)
                 
-                VStack {
-                    HStack(spacing: 2) {
+                VStack(alignment:.trailing, spacing: 12) {
+                    HStack() {
                         // 입력할 내용 라벨
                         settingLabel(text: "버스 및 종착지")
                         // * 아이콘
                         astrickImage()
                         
-                        ZStack {
-                            Rectangle()
-                                .foregroundColor(Color.gray6)
-                                .cornerRadius(8)
-                                .overlay {
-                                    RoundedRectangle(cornerRadius: 8)
-                                        .stroke(Color.gray4, lineWidth: 1)
-                                }
-                            HStack {
-                                Text(busStopAlert?.bus.routeno ?? "선택 안됨")  // 선택된 버스 표시
-                                    .font(.regular16)
-                                    .foregroundColor(Color.black)
-                                    .padding(.horizontal, 12)
-                                    .padding(.vertical, 10)
-                                Spacer()
-                            }
-                        }
-                        .fixedSize(horizontal: false, vertical: true)
-                        
-                        Spacer()
                         Spacer()
                         
-                        if isEditing == false {
-                            Button(action: {
-                                showSelectBusSheet = true // sheet 표시 상태를 true로 설정
-                            }) {  // 선택된 버스를 전달받음
-                                ZStack {
-                                    Rectangle()
-                                        .foregroundColor(Color.lightbrand)
-                                        .cornerRadius(20)
-                                        .overlay {
-                                            RoundedRectangle(cornerRadius: 20)
-                                                .stroke(Color.brand, lineWidth: 1)
-                                        }
-                                    Text("버스 찾기")
-                                        .font(.caption2)
-                                        .foregroundColor(Color.black)
-                                        .padding(12)
-                                }
-                            }
-                            .fixedSize()
-                            .sheet(isPresented: $showSelectBusSheet) { // ← 수정된 부분
-                                SelectBusView(cityCode: Int(cityCodeInput) ?? 21, busStopAlert: $busStopAlert,showSelectBusSheet: $showSelectBusSheet)
-                            }
-                            
-                        }
-                        
+                        // 선택된 버스 번호 표시
+                        Text(busStopAlert?.bus.routeno ?? "버스 번호")
+                            .font(.regular16)
+                            .foregroundColor(.gray3)
+                            .padding(EdgeInsets(top: 10, leading: 0, bottom: 0,trailing: 20))
                     }
+                        Divider()
+                            .padding(.horizontal, 12)
+                            .padding(.top, -10)
+
+                    // 버스 정류장 이름 표시
+                    Text("\(busStopAlert?.arrivalBusStop.nodenm ?? "하차 정류장")")
+                        .foregroundColor(.gray3)
+                        .font(.regular16)
+                        .padding(EdgeInsets(top: 2, leading: 0, bottom: 22, trailing: 20))
                 }
-                
-                HStack {
-                    // 선택된 정류장 표시
-                    ZStack {
-                        Rectangle()
-                            .foregroundColor(Color.gray6)
-                            .cornerRadius(8)
-                            .overlay {
-                                RoundedRectangle(cornerRadius: 8)
-                                    .stroke(Color.gray4, lineWidth: 1)
-                            }
-                        HStack {
-                            Text("\(busStopAlert?.arrivalBusStop.nodenm ?? "선택해주세요")")
-                                .foregroundColor(Color.black)
-                                .font(.regular16)
-                                .padding(.horizontal, 12)
-                                .padding(.vertical, 10)
-                            Spacer()
-                        }
-                    }
-                    .fixedSize(horizontal: false, vertical: true)
-                    .padding(.bottom, 20)
+                .fixedSize(horizontal: false, vertical: true)
+                .background(.gray7)
+                .cornerRadius(20)
+                .overlay {
+                    RoundedRectangle(cornerRadius: 20)
+                        .stroke(Color.gray5, lineWidth: 1)
                 }
-                
+
                 // 일어날 정류장 선택
-                HStack(spacing: 2) {
+                HStack() {
                     // 입력할 내용 라벨
                     settingLabel(text: "일어날 정류장")
                     // * 아이콘
                     astrickImage()
                     
-                    ZStack {
-                        Rectangle()
-                            .foregroundColor(.white)
-                            .cornerRadius(8)
-                            .overlay {
-                                RoundedRectangle(cornerRadius: 8)
-                                    .stroke(Color.gray4, lineWidth: 1)
-                            }
-                        
-                        HStack {
-                            Text("\(selectedStation)")
-                                .foregroundColor(Color.black)
-                                .font(.regular16)
-                            
-                            Spacer()
-                            
-                            Image(systemName: "chevron.down")
-                                .foregroundColor(Color.gray3)
-                                .font(.regular10)
+                    Spacer()
+                    
+                    Text("\(selectedStation)")
+                        .foregroundColor(.gray3)
+                        .font(.regular16)
+                        .padding(EdgeInsets(top: 22, leading: 20, bottom: 22, trailing: 20))
+                        .onTapGesture {
+                            showSheet = true
                         }
-                        .padding(.horizontal, 12)
-                        .padding(.vertical, 10)
-                    }
-                    .fixedSize(horizontal: false, vertical: true)
-                    .onTapGesture {
-                        showSheet = true
-                    }
                 }
-                .padding(.bottom, 20)
+                .background(.gray7)
+                .cornerRadius(20)
+                .overlay {
+                    RoundedRectangle(cornerRadius: 20)
+                        .stroke(Color.gray5, lineWidth: 1)
+                }
+                .padding(.vertical, 10)
                 
                 // 알람 레이블 입력 필드
-                HStack {
+                HStack(alignment: .center) {
                     // 입력할 내용 라벨
                     settingLabel(text: "알람 이름")
+                    
                     Spacer()
-                    Spacer()
-                    Spacer()
-                    Spacer()
-                    ZStack {
-                        Rectangle()
-                            .foregroundColor(.white)
-                            .cornerRadius(8)
-                            .overlay {
-                                RoundedRectangle(cornerRadius: 8)
-                                    .stroke(Color.gray4, lineWidth: 1)
-                            }
-                        HStack {
-                            TextField("통학", text: $label, prompt: Text("통학").foregroundColor(Color.gray4))
-                                .foregroundColor(Color.black)
-                                .font(.regular16)
-                                .padding(.vertical, 10)
-                                .padding(.horizontal, 12)
-                            Spacer()
-                        }
-                    }
-                    .fixedSize(horizontal: false, vertical: true)
-                    .padding(.leading, 10)
+                    
+                    TextField("통학", text: $label, prompt: Text("통학").foregroundColor(.gray3))
+                        .multilineTextAlignment(.trailing)
+                        .foregroundColor(.gray3)
+                        .font(.regular16)
+                        .padding(EdgeInsets(top: 22, leading: 20, bottom: 22, trailing: 20))
                 }
-                
+                .background(.gray7)
+                .cornerRadius(20)
+                .overlay {
+                    RoundedRectangle(cornerRadius: 20)
+                        .stroke(.gray5, lineWidth: 1)
+                }
                 Spacer()
             }
             .padding(20)
@@ -206,7 +138,6 @@ struct AlertSettingMain: View {
             if busStopAlert?.alertBusStop == 0 {
                 selectedStation = "정류장 수"
             }
-            
             // 수정인 경우
             if let busAlert = busAlert {
                 // `busAlert` 데이터로 초기 상태 설정
@@ -242,8 +173,8 @@ struct AlertSettingMain: View {
                     }
                 }) {
                     Text("저장")
-                        .font(.regular16)
-                        .foregroundColor(Color.brand)
+                        .font(.body)
+                        .foregroundColor(.gray3)
                 }
             }
             
@@ -260,6 +191,21 @@ struct AlertSettingMain: View {
         }
         .navigationBarBackButtonHidden(true)
         .toast(isShowing: $showToast, message: toastMessage)
+    }
+    
+    func settingLabel(text: String) -> some View {
+        Text("\(text)")
+            .font(.regular16)
+            .foregroundColor(.gray1)
+            .padding(EdgeInsets(top: 22, leading: 20, bottom: 22, trailing: 0))
+    }
+    
+    func astrickImage() -> some View {
+        Image(systemName: "asterisk")
+            .foregroundColor(Color.brand)
+            .font(.regular10)
+            .bold()
+            .padding(.trailing)
     }
     
     private func isInputValid() -> Bool {
@@ -359,20 +305,6 @@ struct AlertSettingMain: View {
         } catch {
             print("알람 저장 실패: \(error)")
         }
-    }
-    
-    func astrickImage() -> some View {
-        Image(systemName: "asterisk")
-            .foregroundColor(Color.brand)
-            .font(.regular10)
-            .bold()
-            .padding(.trailing)
-    }
-    
-    func settingLabel(text: String) -> some View {
-        Text("\(text)")
-            .font(.regular16)
-            .foregroundColor(.gray1)
     }
     
     // 선택한 버스의 정류장 List 저장 함수 - UsingAlertView에서 정류장 노선을 띄우는데 사용됨
