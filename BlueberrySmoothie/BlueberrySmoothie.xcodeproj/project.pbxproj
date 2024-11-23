@@ -50,6 +50,8 @@
 		9DEA52542CD4D5B500A3AE68 /* FetchAllBusData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEA52532CD4D5B500A3AE68 /* FetchAllBusData.swift */; };
 		D90E0C1A2CD89CB20089883F /* AlertSettingMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = D90E0C192CD89CB20089883F /* AlertSettingMain.swift */; };
 		D94BF93C2CEB7F7700973D08 /* AlarmTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94BF93B2CEB7F7700973D08 /* AlarmTestView.swift */; };
+		D94BF98E2CF1CC2000973D08 /* AlarmSound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D94BF98D2CF1CC2000973D08 /* AlarmSound.mp3 */; };
+		D94BF98F2CF1CC2000973D08 /* AlarmSound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D94BF98D2CF1CC2000973D08 /* AlarmSound.mp3 */; };
 		D968D5C62CD89EC4002DF70B /* ActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D968D5C52CD89EC4002DF70B /* ActionButton.swift */; };
 		D968D5C82CD89EF4002DF70B /* SavedBus.swift in Sources */ = {isa = PBXBuildFile; fileRef = D968D5C72CD89EF4002DF70B /* SavedBus.swift */; };
 		D968D5CA2CD912C5002DF70B /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D968D5C92CD912C5002DF70B /* MainView.swift */; };
@@ -132,6 +134,7 @@
 		9DEA52532CD4D5B500A3AE68 /* FetchAllBusData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchAllBusData.swift; sourceTree = "<group>"; };
 		D90E0C192CD89CB20089883F /* AlertSettingMain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertSettingMain.swift; sourceTree = "<group>"; };
 		D94BF93B2CEB7F7700973D08 /* AlarmTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmTestView.swift; sourceTree = "<group>"; };
+		D94BF98D2CF1CC2000973D08 /* AlarmSound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = AlarmSound.mp3; sourceTree = "<group>"; };
 		D968D5C52CD89EC4002DF70B /* ActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionButton.swift; sourceTree = "<group>"; };
 		D968D5C72CD89EF4002DF70B /* SavedBus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedBus.swift; sourceTree = "<group>"; };
 		D968D5C92CD912C5002DF70B /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -188,6 +191,7 @@
 			isa = PBXGroup;
 			children = (
 				D968D5F82CDB165B002DF70B /* UIfont.swift */,
+				D94BF98D2CF1CC2000973D08 /* AlarmSound.mp3 */,
 				8B0860F82CE1A0A8007C109A /* silentSound.wav */,
 				D968D5F92CDB165B002DF70B /* Fonts */,
 			);
@@ -451,6 +455,7 @@
 				D968D6042CDB165B002DF70B /* SpoqaHanSansNeo-Thin.otf in Resources */,
 				D968D6052CDB165B002DF70B /* SpoqaHanSansNeo-Regular.otf in Resources */,
 				1232B3B72CD1D3DF00C48414 /* Preview Assets.xcassets in Resources */,
+				D94BF98F2CF1CC2000973D08 /* AlarmSound.mp3 in Resources */,
 				1232B3B42CD1D3DF00C48414 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -459,6 +464,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D94BF98E2CF1CC2000973D08 /* AlarmSound.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -659,11 +665,13 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"BlueBerrySmoothie/Preview Content\"";
-				DEVELOPMENT_TEAM = GF3B5LP7RQ;
+				DEVELOPMENT_TEAM = V9J26YADA8;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BlueBerrySmoothie/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "핫챠";
+				INFOPLIST_KEY_NSAppleMusicUsageDescription = "비디오를 선택하여 앱에서 사용하기 위해 미디어 라이브러리 접근 권한이 필요합니다.";
+				INFOPLIST_KEY_NSFileProviderDomainUsageDescription = "";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "현재 위치를 기반으로 서비스 제공을 위해 위치 정보가 필요합니다.";
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "앱이 백그라운드에서도 주변 장소를 보여주기 위해 위치 정보가 필요합니다.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "현재 위치를 기반으로 서비스 제공을 위해 위치 정보가 필요합니다.";
@@ -701,11 +709,13 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"BlueBerrySmoothie/Preview Content\"";
-				DEVELOPMENT_TEAM = UW9295Z57Q;
+				DEVELOPMENT_TEAM = V9J26YADA8;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BlueBerrySmoothie/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "핫챠";
+				INFOPLIST_KEY_NSAppleMusicUsageDescription = "비디오를 선택하여 앱에서 사용하기 위해 미디어 라이브러리 접근 권한이 필요합니다.";
+				INFOPLIST_KEY_NSFileProviderDomainUsageDescription = "";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "현재 위치를 기반으로 서비스 제공을 위해 위치 정보가 필요합니다.";
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "앱이 백그라운드에서도 주변 장소를 보여주기 위해 위치 정보가 필요합니다.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "현재 위치를 기반으로 서비스 제공을 위해 위치 정보가 필요합니다.";
@@ -769,7 +779,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 6Q3GG57US3;
+				DEVELOPMENT_TEAM = V9J26YADA8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = LiveActWidget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = LiveActWidget;
