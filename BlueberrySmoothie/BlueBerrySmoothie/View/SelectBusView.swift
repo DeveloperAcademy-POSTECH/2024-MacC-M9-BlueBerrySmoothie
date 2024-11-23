@@ -22,7 +22,7 @@ struct SelectBusView: View {
                     HStack(alignment: .center) {
                         TextField("버스 번호", text: $routeNo)
                             .font(.body) // TODO: body1로 수정
-                            .foregroundStyle(routeNo != "" ? .black : .gray3)
+                            .foregroundStyle(.black)
                             .textFieldStyle(.plain)
                             .focused($isTextFieldFocused)
                             .padding(EdgeInsets(top: 16, leading: 20, bottom: 16, trailing: 0))
