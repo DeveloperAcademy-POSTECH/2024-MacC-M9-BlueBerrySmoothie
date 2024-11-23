@@ -75,6 +75,8 @@ struct AlertSettingMain: View {
                                 if isEditing != true {
                                     selectedField = 1
                                     showSelectBusSheet = true
+                                } else {
+                                    showToastMessage("버스 및 종착지는 수정할 수 없어요")
                                 }
                             }
                     }
@@ -92,6 +94,8 @@ struct AlertSettingMain: View {
                                 selectedField = 1 // stroke 활성화/비활성화 색
                                 showSelectBusSheet = true
                                 hideKeyboard() // 키보드 숨김
+                            } else {
+                                showToastMessage("버스 및 종착지는 수정할 수 없어요")
                             }
                         }
                 }
