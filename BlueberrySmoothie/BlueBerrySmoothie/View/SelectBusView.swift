@@ -31,7 +31,7 @@ struct SelectBusView: View {
                                 filteredBuses = filterBuses(by: newRouteNo, from: allBuses)
                             }
                         Spacer()
-                        Image(systemName: "magnifyingglass")
+                        Image("magnifyingglass")
                             .frame(width: 24, height: 24)
                             .foregroundStyle(.gray3)
                             .padding(.trailing, 20.67)
@@ -96,19 +96,20 @@ struct SelectBusView: View {
                             Spacer()
                             VStack(alignment: .leading) {
                                 Text("\(bus.routeno)")
-                                    .font(.system(size: 20))
-                                    .foregroundColor(busColor(for: bus.routetp))
+                                    .font(.body) //TODO: body2로 수정
+                                    .foregroundStyle(.brand)
+                                    .padding(.bottom, 4)
                                 HStack {
                                     Text("\(bus.startnodenm) - \(bus.endnodenm)")
-                                        .foregroundStyle(.gray)
+                                        .font(.caption2)
+                                        .foregroundStyle(.gray3)
                                 }
                             }
                             .padding(.horizontal, 16)
-                            Spacer()
                             
                             Divider()
-                                .padding(.top, 16)
-                                .padding(.bottom, 20)
+                                .padding(.top, 20)
+                                .padding(.bottom, 16)
                         }
                     }
                 }
