@@ -69,11 +69,13 @@ struct AlertSettingMain: View {
                         // 선택된 버스 번호 표시
                         Text(busStopAlert?.bus.routeno ?? "버스 번호")
                             .font(.regular16)
-                            .foregroundColor(busStopAlert?.bus.routeno != nil ? .black : .gray3)
+                            .foregroundColor(busStopAlert?.bus.routeno != nil && isEditing == false ? .black : .gray3)
                             .padding(EdgeInsets(top: 10, leading: 0, bottom: 0,trailing: 20))
                             .onTapGesture {
-                                selectedField = 1
-                                showSelectBusSheet = true
+                                if isEditing != true {
+                                    selectedField = 1
+                                    showSelectBusSheet = true
+                                }
                             }
                     }
                         Divider()
@@ -82,13 +84,15 @@ struct AlertSettingMain: View {
                     
                     // 버스 정류장 이름 표시
                     Text("\(busStopAlert?.arrivalBusStop.nodenm ?? "하차 정류장")")
-                        .foregroundColor(busStopAlert?.arrivalBusStop.nodenm != nil ? .black : .gray3)
+                        .foregroundColor(busStopAlert?.arrivalBusStop.nodenm != nil && isEditing == false ? .black : .gray3)
                         .font(.regular16)
                         .padding(EdgeInsets(top: 2, leading: 0, bottom: 22, trailing: 20))
                         .onTapGesture {
-                            selectedField = 1 // stroke 활성화/비활성화 색
-                            showSelectBusSheet = true
-                            hideKeyboard() // 키보드 숨김
+                            if isEditing != true {
+                                selectedField = 1 // stroke 활성화/비활성화 색
+                                showSelectBusSheet = true
+                                hideKeyboard() // 키보드 숨김
+                            }
                         }
                 }
                 .fixedSize(horizontal: false, vertical: true)
