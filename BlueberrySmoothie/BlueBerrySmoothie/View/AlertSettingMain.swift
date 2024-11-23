@@ -69,7 +69,7 @@ struct AlertSettingMain: View {
                         // 선택된 버스 번호 표시
                         Text(busStopAlert?.bus.routeno ?? "버스 번호")
                             .font(.regular16)
-                            .foregroundColor(.gray3)
+                            .foregroundColor(busStopAlert?.bus.routeno != nil ? .black : .gray3)
                             .padding(EdgeInsets(top: 10, leading: 0, bottom: 0,trailing: 20))
                             .onTapGesture {
                                 selectedField = 1
@@ -82,7 +82,7 @@ struct AlertSettingMain: View {
                     
                     // 버스 정류장 이름 표시
                     Text("\(busStopAlert?.arrivalBusStop.nodenm ?? "하차 정류장")")
-                        .foregroundColor(.gray3)
+                        .foregroundColor(busStopAlert?.arrivalBusStop.nodenm != nil ? .black : .gray3)
                         .font(.regular16)
                         .padding(EdgeInsets(top: 2, leading: 0, bottom: 22, trailing: 20))
                         .onTapGesture {
@@ -112,7 +112,7 @@ struct AlertSettingMain: View {
                     Spacer()
                     
                     Text("\(selectedStation)")
-                        .foregroundColor(.gray3)
+                        .foregroundColor(selectedStation != "정류장 수" ? .black : .gray3)
                         .font(.regular16)
                         .padding(EdgeInsets(top: 22, leading: 20, bottom: 22, trailing: 20))
                         .onTapGesture {
@@ -136,9 +136,9 @@ struct AlertSettingMain: View {
                     
                     Spacer()
                     
-                    TextField("통학", text: $label, prompt: Text("통학").foregroundColor(.gray3))
+                    TextField("통학", text: $label, prompt: Text("알람").foregroundColor(.gray3))
                         .multilineTextAlignment(.trailing)
-                        .foregroundColor(.gray3)
+                        .foregroundStyle(label == "알람" ? .gray3 : .black)
                         .font(.regular16)
                         .focused($isFieldFocused) // stroke 색 변경을 위한 활성 비활성 구분
                         .padding(EdgeInsets(top: 22, leading: 20, bottom: 22, trailing: 20))
@@ -188,6 +188,8 @@ struct AlertSettingMain: View {
         .overlay {
             if showSheet {
                 StationPickerModal(isPresented: $showSheet, selectedStation: $selectedStation, alert: $busStopAlert, nodeord: busAlert?.arrivalBusStopNord ?? 0)
+                    .zIndex(1)
+//                    .presentationDetents([.medium]) // toast 보다 dimension이 위로 오도록 조정
             } else {
                 EmptyView()
             }
@@ -201,7 +203,7 @@ struct AlertSettingMain: View {
                         saveBusstop()
                         dismiss()
                     } else {
-                        showToastMessage("모든 정보를 입력해주세요.")
+                        showToastMessage("몇 정거장 전에 알람이 울릴지 선택해주세요")
                     }
                 }) {
                     Text("저장")
