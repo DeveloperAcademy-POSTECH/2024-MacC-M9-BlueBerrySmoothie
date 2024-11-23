@@ -17,14 +17,20 @@ struct AlertSettingMain: View {
     // 사용자 입력을 받을 cityCode
     @State private var cityCodeInput: String = "21" // ← 추가된 상태 변수
     
-    // 추가된 상태 변수: SelectBusView를 sheet로 표시할지 여부
+    // SelectBusView를 sheet로 표시할지 여부
     @State private var showSelectBusSheet: Bool = false // ← 추가된 부분
     @State private var busStopAlert: BusStopAlert? // 사용자 선택 사항
-    @State private var showSheet: Bool = false
+    @State private var showSheet: Bool = false // 몇 번째 전 정거장 선택 sheet 관리
     
     // 토스트 메시지 상태 변수
     @State private var showToast = false
     @State private var toastMessage = ""
+    
+    // 활성 비활성 색 변경을 위해 선택된 필드를 추적 / 버스 및 종착지:1, 일어날 정류장:2, 알람 이름:3, 해당안될 시 nil
+    @State private var selectedField: Int? = nil
+    // TextField는 selectedField로 활성 비활성 구분이 안돼서선택되었는지 상태 확인
+    @FocusState private var isFieldFocused: Bool
+
     
     init(busAlert: BusAlert? = nil, isEditing: Bool? = nil) {
         self.busAlert = busAlert
@@ -38,6 +44,8 @@ struct AlertSettingMain: View {
                 .ignoresSafeArea()
                 .onTapGesture {
                     hideKeyboard() // 키보드 숨김
+                    selectedField = nil // 선택된 영역 초기화
+                    isFieldFocused = false // textField 선택된 영역 초기화
                 }
             VStack(alignment: .leading) {
                 // 상단 타이틀, 페이지 설명
@@ -64,6 +72,10 @@ struct AlertSettingMain: View {
                             .font(.regular16)
                             .foregroundColor(.gray3)
                             .padding(EdgeInsets(top: 10, leading: 0, bottom: 0,trailing: 20))
+                            .onTapGesture {
+                                selectedField = 1
+                                showSelectBusSheet = true
+                            }
                     }
                         Divider()
                             .padding(.horizontal, 12)
@@ -74,14 +86,22 @@ struct AlertSettingMain: View {
                         .foregroundColor(.gray3)
                         .font(.regular16)
                         .padding(EdgeInsets(top: 2, leading: 0, bottom: 22, trailing: 20))
+                        .onTapGesture {
+                            selectedField = 1 // stroke 활성화/비활성화 색
+                            showSelectBusSheet = true
+                            hideKeyboard() // 키보드 숨김
+                        }
                 }
                 .fixedSize(horizontal: false, vertical: true)
                 .background(.gray7)
                 .cornerRadius(20)
                 .overlay {
                     RoundedRectangle(cornerRadius: 20)
-                        .stroke(Color.gray5, lineWidth: 1)
+                        .stroke(selectedField == 1 && isFieldFocused != true ? .brand : .gray5, lineWidth: 1)
                 }
+                .sheet(isPresented: $showSelectBusSheet) { // ← 수정된 부분
+                        SelectBusView(cityCode: Int(cityCodeInput) ?? 21, busStopAlert: $busStopAlert,showSelectBusSheet: $showSelectBusSheet)
+                    }
 
                 // 일어날 정류장 선택
                 HStack() {
@@ -97,18 +117,20 @@ struct AlertSettingMain: View {
                         .font(.regular16)
                         .padding(EdgeInsets(top: 22, leading: 20, bottom: 22, trailing: 20))
                         .onTapGesture {
+                            selectedField = 2 // stroke 활성화/비활성화 색
                             showSheet = true
+                            hideKeyboard() // 키보드 숨김
                         }
                 }
                 .background(.gray7)
                 .cornerRadius(20)
                 .overlay {
                     RoundedRectangle(cornerRadius: 20)
-                        .stroke(Color.gray5, lineWidth: 1)
+                        .stroke(selectedField == 2 && isFieldFocused != true ? .brand : .gray5, lineWidth: 1)
                 }
                 .padding(.vertical, 10)
                 
-                // 알람 레이블 입력 필드
+                // 알람 이름 입력 필드
                 HStack(alignment: .center) {
                     // 입력할 내용 라벨
                     settingLabel(text: "알람 이름")
@@ -119,13 +141,14 @@ struct AlertSettingMain: View {
                         .multilineTextAlignment(.trailing)
                         .foregroundColor(.gray3)
                         .font(.regular16)
+                        .focused($isFieldFocused) // stroke 색 변경을 위한 활성 비활성 구분
                         .padding(EdgeInsets(top: 22, leading: 20, bottom: 22, trailing: 20))
                 }
                 .background(.gray7)
                 .cornerRadius(20)
                 .overlay {
                     RoundedRectangle(cornerRadius: 20)
-                        .stroke(.gray5, lineWidth: 1)
+                        .stroke(selectedField == 3 || isFieldFocused ? .brand : .gray5, lineWidth: 1)
                 }
                 Spacer()
             }
