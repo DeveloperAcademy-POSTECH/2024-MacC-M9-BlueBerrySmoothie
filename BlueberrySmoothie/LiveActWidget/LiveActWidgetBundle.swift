@@ -9,7 +9,7 @@ import WidgetKit
 import SwiftUI
 
 @main
-struct LiveBundle: WidgetBundle {
+struct LiveActivityWidgetBundle: WidgetBundle {
     var body: some Widget {
         LiveActivityUI()
     }

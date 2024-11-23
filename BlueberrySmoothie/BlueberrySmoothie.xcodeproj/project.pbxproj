@@ -144,24 +144,24 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		6300BF022CEAE36F0004E1A4 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Info.plist,
-			);
-			target = 6300BEEA2CEAE36D0004E1A4 /* LiveActWidgetExtension */;
-		};
-		63B439F92CED6D8E00B77F4D /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+		6309E0FC2CF1B5AE00350CC3 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				LiveActivityUI.swift,
 			);
 			target = 1232B3AB2CD1D3DE00C48414 /* BlueBerrySmoothie */;
 		};
+		6309E0FD2CF1B5B300350CC3 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 6300BEEA2CEAE36D0004E1A4 /* LiveActWidgetExtension */;
+		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		6300BEF12CEAE36D0004E1A4 /* LiveActWidget */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (63B439F92CED6D8E00B77F4D /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 6300BF022CEAE36F0004E1A4 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = LiveActWidget; sourceTree = "<group>"; };
+		6300BEF12CEAE36D0004E1A4 /* LiveActWidget */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (6309E0FC2CF1B5AE00350CC3 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 6309E0FD2CF1B5B300350CC3 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = LiveActWidget; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
