@@ -18,6 +18,7 @@ struct SelectBusStopView: View {
     @State private var stop: String = ""
     @State private var updowncdselection: Int = 1
     @Binding var showSelectBusSheet: Bool
+    @State private var isAnimating = false // 버스 리스트가 아래에서 위로 올라오는 애니메이션 실행 여부
     
     var body: some View {
         VStack{
@@ -38,29 +39,38 @@ struct SelectBusStopView: View {
             }
             .padding(EdgeInsets(top: 44, leading: 0, bottom: 24, trailing: 0))
             
-            HStack {
-                directionView(
-                    directionName: "\(bus.endnodenm)방면",
-                    isSelected: updowncdselection == 1,
-                    selectedColor: .midbrand,
-                    unselectedColor: .gray2
-                )
-                .onTapGesture {
-                    updowncdselection = 1
+            VStack {
+                HStack {
+                    directionView(
+                        directionName: "\(bus.endnodenm)방면",
+                        isSelected: updowncdselection == 1,
+                        selectedColor: .midbrand,
+                        unselectedColor: .gray2
+                    )
+                    .onTapGesture {
+                        updowncdselection = 1
+                    }
+                    
+                    directionView(
+                        directionName: "\(bus.startnodenm)방면",
+                        isSelected: updowncdselection == 2,
+                        selectedColor: .midbrand,
+                        unselectedColor: .gray2
+                    )
+                    .onTapGesture {
+                        updowncdselection = 2
+                    }
                 }
-                
-                directionView(
-                    directionName: "\(bus.startnodenm)방면",
-                    isSelected: updowncdselection == 2,
-                    selectedColor: .midbrand,
-                    unselectedColor: .gray2
-                )
-                .onTapGesture {
-                    updowncdselection = 2
-                }
+                //BusStop 리스트 View
+                BusStopScrollView()
             }
-            //BusStop 리스트 View
-            BusStopScrollView()
+            // 버스 리스트가 아래에서 위로 올라오는 애니메이션 위치
+            .offset(y: isAnimating ? 0 : UIScreen.main.bounds.height)
+        }
+        // 버스 리스트가 아래에서 위로 올라오는 애니메이션
+        .animation(.spring(duration: 1.0, bounce: 0.1), value: isAnimating)
+        .onAppear {
+            isAnimating = true
         }
         .padding(.horizontal, 20)
         .navigationTitle("버스 검색")
