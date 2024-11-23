@@ -9,7 +9,7 @@ import SwiftUI
 import SwiftData
 
 struct SelectBusStopView: View {
-//    let city: City // 도시 정보
+    //    let city: City // 도시 정보
     let bus: Bus // 선택된 버스 정보
     let cityCode: Int // ← 추가된 부분
     @Binding var busStopAlert: BusStopAlert?
@@ -21,25 +21,22 @@ struct SelectBusStopView: View {
     
     var body: some View {
         VStack{
-            VStack {
-                HStack {
-                    Text("\(bus.routeno)")
-                        .padding(.leading, 15)
-                    Spacer()
-                }
-                .frame(height: 40)
-                .background(
-                    RoundedRectangle(cornerRadius: 8)
-                        .fill(Color.gray6) // RoundedRectangle에만 배경 색을 적용
-                )
-                .overlay(
-                    RoundedRectangle(cornerRadius: 8)
-                        .stroke(Color.gray6, lineWidth: 1)
-                )
-                .frame(maxWidth: .infinity) // Match width to TextField's width
-                .padding(.bottom, 12)
+            HStack {
+                Text("\(bus.routeno)")
+                    .padding(EdgeInsets(top: 16, leading: 20, bottom: 16, trailing: 0))
+                Spacer()
+                Image("magnifyingglass")
+                    .frame(width: 24, height: 24)
+                    .foregroundStyle(.gray3)
+                    .padding(.trailing, 20.67)
             }
-            .padding(.bottom, 10)
+            .background(.gray6)
+            .cornerRadius(20)
+            .overlay {
+                RoundedRectangle(cornerRadius: 20)
+                    .stroke(.gray5, lineWidth: 1)
+            }
+            .padding(EdgeInsets(top: 44, leading: 0, bottom: 24, trailing: 0))
             
             HStack {
                 directionView(
@@ -66,14 +63,26 @@ struct SelectBusStopView: View {
             BusStopScrollView()
         }
         .padding(.horizontal, 20)
-        .navigationTitle("정류장 선택")
-        .toolbar { // ← 모달 닫기 버튼 추가
-            ToolbarItem(placement: .navigationBarTrailing) {
-                Button("닫기") {
-                    showSelectBusSheet = false
+        .navigationTitle("버스 검색")
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            // 닫기 버튼
+            ToolbarItem(placement: .navigationBarLeading) {
+                Button(action: {
+                    dismiss()
+                }) {
+                    HStack {
+                        Image(systemName: "chevron.left")
+                            .font(.body) // TODO: body1로 수정
+                        Text("뒤로")
+                            .font(.body) //TODO: body2로 수정
+                            .padding(.leading, -7)
+                    }
+                    .foregroundStyle(.gray1)
                 }
             }
         }
+        .navigationBarBackButtonHidden(true)
         .task {
             await busStopViewModel.getBusStopData(cityCode: cityCode, routeId: bus.routeid)
         }
@@ -135,11 +144,11 @@ struct SelectBusStopView: View {
     }
     
     // 최하단으로 스크롤하는 함수
-//    private func scrollToBottom(proxy: ScrollViewProxy) {
-//        if let firstStop = busStopViewModel.busStopList.last {
-//            proxy.scrollTo(firstStop.nodeid, anchor: .bottom)
-//        }
-//    }
+    //    private func scrollToBottom(proxy: ScrollViewProxy) {
+    //        if let firstStop = busStopViewModel.busStopList.last {
+    //            proxy.scrollTo(firstStop.nodeid, anchor: .bottom)
+    //        }
+    //    }
     
     // 버스 정류장 데이터 저장
     func storeBusStop(busStop: BusStop){
