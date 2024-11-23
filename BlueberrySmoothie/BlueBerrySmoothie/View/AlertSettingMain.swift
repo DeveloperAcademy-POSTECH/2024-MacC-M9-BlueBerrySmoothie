@@ -8,7 +8,7 @@ struct AlertSettingMain: View {
     @Query var busStopLocal: [BusStopLocal]
     
     var busAlert: BusAlert? // 편집을 위한 `busAlert` 매개변수 추가
-    var isEditing: Bool = false
+    var isEditing: Bool = false // Edit 모드인지 구분
     
     // 초기화 데이터들
     @State private var label: String = "알람"
@@ -17,8 +17,7 @@ struct AlertSettingMain: View {
     // 사용자 입력을 받을 cityCode
     @State private var cityCodeInput: String = "21" // ← 추가된 상태 변수
     
-    // SelectBusView를 sheet로 표시할지 여부
-    @State private var showSelectBusSheet: Bool = false // ← 추가된 부분
+    @State private var showSelectBusSheet: Bool = false // SelectBusView를 sheet로 표시할지 여부
     @State private var busStopAlert: BusStopAlert? // 사용자 선택 사항
     @State private var showSheet: Bool = false // 몇 번째 전 정거장 선택 sheet 관리
     
@@ -30,7 +29,7 @@ struct AlertSettingMain: View {
     @State private var selectedField: Int? = nil
     // TextField는 selectedField로 활성 비활성 구분이 안돼서선택되었는지 상태 확인
     @FocusState private var isFieldFocused: Bool
-
+    @State private var confirmSaveButton: Bool = false
     
     init(busAlert: BusAlert? = nil, isEditing: Bool? = nil) {
         self.busAlert = busAlert
@@ -80,7 +79,7 @@ struct AlertSettingMain: View {
                         Divider()
                             .padding(.horizontal, 12)
                             .padding(.top, -10)
-
+                    
                     // 버스 정류장 이름 표시
                     Text("\(busStopAlert?.arrivalBusStop.nodenm ?? "하차 정류장")")
                         .foregroundColor(.gray3)
@@ -100,7 +99,7 @@ struct AlertSettingMain: View {
                         .stroke(selectedField == 1 && isFieldFocused != true ? .brand : .gray5, lineWidth: 1)
                 }
                 .sheet(isPresented: $showSelectBusSheet) { // ← 수정된 부분
-                        SelectBusView(cityCode: Int(cityCodeInput) ?? 21, busStopAlert: $busStopAlert,showSelectBusSheet: $showSelectBusSheet)
+                        SelectBusView(cityCode: Int(cityCodeInput) ?? 21, busStopAlert: $busStopAlert, showSelectBusSheet: $showSelectBusSheet)
                     }
 
                 // 일어날 정류장 선택
@@ -176,6 +175,16 @@ struct AlertSettingMain: View {
                 )
             }
         }
+        .onChange(of: selectedStation){
+            if selectedStation != "정류장 수" {
+                confirmSaveButton = true
+            } else {
+                confirmSaveButton = false
+            }
+        }
+        .onChange(of: busStopAlert?.arrivalBusStop) {
+            selectedStation = "정류장 수"
+        }
         .overlay {
             if showSheet {
                 StationPickerModal(isPresented: $showSheet, selectedStation: $selectedStation, alert: $busStopAlert, nodeord: busAlert?.arrivalBusStopNord ?? 0)
@@ -197,7 +206,7 @@ struct AlertSettingMain: View {
                 }) {
                     Text("저장")
                         .font(.body)
-                        .foregroundColor(.gray3)
+                        .foregroundColor(confirmSaveButton ? .brand : .gray3)
                 }
             }
             
