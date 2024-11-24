@@ -172,19 +172,16 @@ struct SelectBusStopView: View {
         let screenHeight = UIScreen.main.bounds.height
         let centerY = screenHeight / 3 * 2
         
-        if midY > centerY {
+        if midY > centerY && updowncdselection != 1 {
             updowncdselection = 1 // 중앙 아래
+            HapticManager.shared.triggerImpactFeedback(style: .light) // TODO: 머지 후 HapticManager 이름 변경
         } else {
-            updowncdselection = 2 // 중앙 위
+            if updowncdselection != 2 { // updowncdselection의 상태가 변경될 때만 실행,
+                updowncdselection = 2 // 중앙 위
+                HapticManager.shared.triggerImpactFeedback(style: .light) // TODO: 머지 후 HapticManager 이름 변경
+            }
         }
     }
-    
-    // 최하단으로 스크롤하는 함수
-    //    private func scrollToBottom(proxy: ScrollViewProxy) {
-    //        if let firstStop = busStopViewModel.busStopList.last {
-    //            proxy.scrollTo(firstStop.nodeid, anchor: .bottom)
-    //        }
-    //    }
     
     // 버스 정류장 데이터 저장
     func storeBusStop(busStop: BusStop){

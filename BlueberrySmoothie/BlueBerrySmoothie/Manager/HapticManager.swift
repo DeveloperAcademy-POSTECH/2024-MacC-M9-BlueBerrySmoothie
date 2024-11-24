@@ -8,15 +8,32 @@
 import SwiftUI
 import UserNotifications
 import CoreHaptics
+import UIKit
 
 // HapticManager를 설정합니다.
 class HapticManager {
     private var engine: CHHapticEngine?
+    static let shared = HapticManager()
 
     init() {
-        prepareHaptics()
+//        prepareHaptics()
     }
 
+    func triggerImpactFeedback(style: UIImpactFeedbackGenerator.FeedbackStyle) {
+            let generator = UIImpactFeedbackGenerator(style: style)
+        generator.impactOccurred(intensity: 1.0)
+        }
+    
+    func triggerNotificationFeedback(type: UINotificationFeedbackGenerator.FeedbackType) {
+            let generator = UINotificationFeedbackGenerator()
+            generator.notificationOccurred(type)
+        }
+        
+        func triggerSelectionFeedback() {
+            let generator = UISelectionFeedbackGenerator()
+            generator.selectionChanged()
+        }
+    
     private func prepareHaptics() {
         do {
             engine = try CHHapticEngine()
