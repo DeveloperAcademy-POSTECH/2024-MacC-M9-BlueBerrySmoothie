@@ -98,16 +98,9 @@ struct UsingAlertView: View {
             .background(Color.gray7)
             .navigationTitle(busAlert.alertLabel ?? "알람")
             .navigationBarTitleDisplayMode(.inline)
-//            .onAppear {
-//                currentBusViewModel.startUpdating() // 뷰가 보일 때 뷰모델에서 위치 업데이트 시작
-//                startRefreshTimer() // 타이머 시작
-//                refreshData() // 초기 로드
-//            }
             .onDisappear {
                 currentBusViewModel.stopUpdating() // 뷰가 사라질 때 뷰모델에서 위치 업데이트 중단
                 stopRefreshTimer() // 뷰 사라질 때 타이머 중단
-//                isFinishedLoading = false
-//                isScrollTriggered = false
             }
             RefreshButton(isRefreshing: isRefreshing, isScrollTriggered: $isScrollTriggered) {
                 refreshData()
@@ -128,14 +121,9 @@ struct UsingAlertView: View {
         }
         .toolbar(.hidden)
         .onAppear {
+            refreshData() // 초기 로드
             currentBusViewModel.startUpdating() // 뷰가 보일 때 뷰모델에서 위치 업데이트 시작
             startRefreshTimer() // 타이머 시작
-            refreshData() // 초기 로드
-//            isFinishedLoading = false
-//            isScrollTriggered = false
-            print("온어피어")
-            print(isFinishedLoading)
-            print(isScrollTriggered)
         }
         .onChange(of: currentBusViewModel.closestBusLocation != nil) { isNotNil in
             if isNotNil {
@@ -149,8 +137,7 @@ struct UsingAlertView: View {
         .onDisappear {
             currentBusViewModel.stopUpdating() // 뷰가 사라질 때 뷰모델에서 위치 업데이트 중단
             stopRefreshTimer() // 뷰 사라질 때 타이머 중단
-//            isFinishedLoading = false
-//            isScrollTriggered = false
+            currentBusViewModel.closestBusLocation = nil
         }
     }
     
