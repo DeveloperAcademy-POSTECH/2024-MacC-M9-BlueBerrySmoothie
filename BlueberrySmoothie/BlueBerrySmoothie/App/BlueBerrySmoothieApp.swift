@@ -16,7 +16,7 @@ struct BlueBerrySmoothieApp: App {
 
     var body: some Scene {
         WindowGroup {
-            AppView()
+            SplashView()
                 .environmentObject(busStopViewModel)
                 .modelContainer(for: [BusAlert.self, BusStopLocal.self])
 //          .onAppear {
