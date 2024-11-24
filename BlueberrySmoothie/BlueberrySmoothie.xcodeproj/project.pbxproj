@@ -42,6 +42,7 @@
 		9D19E4B42CEF62360065967E /* KeyboardDismiss.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D19E4B32CEF62270065967E /* KeyboardDismiss.swift */; };
 		9D19E4B62CEF8F610065967E /* CitySettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D19E4B52CEF8F550065967E /* CitySettingView.swift */; };
 		9D30E7222CF1BE0600B1448D /* Untitled.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D30E7212CF1BE0400B1448D /* Untitled.swift */; };
+		9D3382CA2CF2D318008F560A /* HapticManagerforstart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3382C92CF2D318008F560A /* HapticManagerforstart.swift */; };
 		9DBC2A442CDC6F4D00EB19A9 /* UsingAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DBC2A432CDC6F4D00EB19A9 /* UsingAlertView.swift */; };
 		9DEA523F2CD362CA00A3AE68 /* SelectBusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEA523E2CD362C100A3AE68 /* SelectBusView.swift */; };
 		9DEA52432CD3637C00A3AE68 /* BusModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEA52422CD3637900A3AE68 /* BusModel.swift */; };
@@ -126,6 +127,7 @@
 		9D19E4B32CEF62270065967E /* KeyboardDismiss.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardDismiss.swift; sourceTree = "<group>"; };
 		9D19E4B52CEF8F550065967E /* CitySettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitySettingView.swift; sourceTree = "<group>"; };
 		9D30E7212CF1BE0400B1448D /* Untitled.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Untitled.swift; sourceTree = "<group>"; };
+		9D3382C92CF2D318008F560A /* HapticManagerforstart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticManagerforstart.swift; sourceTree = "<group>"; };
 		9DBC2A432CDC6F4D00EB19A9 /* UsingAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsingAlertView.swift; sourceTree = "<group>"; };
 		9DEA523E2CD362C100A3AE68 /* SelectBusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectBusView.swift; sourceTree = "<group>"; };
 		9DEA52422CD3637900A3AE68 /* BusModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusModel.swift; sourceTree = "<group>"; };
@@ -304,6 +306,7 @@
 		1232B3E52CD1D49000C48414 /* Manager */ = {
 			isa = PBXGroup;
 			children = (
+				9D3382C92CF2D318008F560A /* HapticManagerforstart.swift */,
 				9D19E4B32CEF62270065967E /* KeyboardDismiss.swift */,
 				8BF2EFA92CD3AA2B008A6644 /* NotificationManager.swift */,
 				8BF2EFAB2CD3AA44008A6644 /* LocationManager.swift */,
@@ -494,6 +497,7 @@
 				9DEA524E2CD46EF400A3AE68 /* BusDetailView.swift in Sources */,
 				9D0C411B2CDA3D780005A6CC /* StationPickerModal.swift in Sources */,
 				9D30E7222CF1BE0600B1448D /* Untitled.swift in Sources */,
+				9D3382CA2CF2D318008F560A /* HapticManagerforstart.swift in Sources */,
 				12D2B6CC2CD3706F005CF771 /* fetchBusStopAPI.swift in Sources */,
 				D968D5CA2CD912C5002DF70B /* MainView.swift in Sources */,
 				8B0860FB2CE1DDE3007C109A /* ToastMessage.swift in Sources */,

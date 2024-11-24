@@ -16,14 +16,13 @@ struct BlueBerrySmoothieApp: App {
 
     var body: some Scene {
         WindowGroup {
-//            MainView()
-//                .environmentObject(busStopViewModel)
-//                .modelContainer(for: [BusAlert.self, BusStopLocal.self])
-//          .onAppear {
-//                    // 필요시 추가 초기화 작업
-//                    NotificationManager.instance.requestAuthorization() // 권한 요청 예시
-//                }
-            CitySettingView()
+            MainView()
+                .environmentObject(busStopViewModel)
+                .modelContainer(for: [BusAlert.self, BusStopLocal.self])
+          .onAppear {
+                    // 필요시 추가 초기화 작업
+                    NotificationManager.instance.requestAuthorization() // 권한 요청 예시
+                }
         }
 
     }
