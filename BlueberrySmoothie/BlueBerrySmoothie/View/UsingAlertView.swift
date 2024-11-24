@@ -25,65 +25,33 @@ struct UsingAlertView: View {
     var body: some View {
         ZStack {
             VStack {
-                VStack {
-                    HStack {
-                        // x 종료 버튼
-                        Button(action: {
-                            self.showExitConfirmation.toggle();
-                        }, label: {
-                            Image(systemName: "xmark")
-                                .foregroundStyle(.black)
-                        })
-                        Spacer()
-                    }
-                    .alert(isPresented: $showExitConfirmation) {
-                        exitConfirmAlert()
-                    }
-                    .padding(.horizontal, 20)
-                    VStack {
-                        HStack {
-                            Text("\(busAlert.busNo)")
-                                .foregroundColor(Color.gray3)
-                                .font(.title3)
-                            Image(systemName: "suit.diamond.fill")
-                                .font(.caption2)
-                                .foregroundStyle(.midbrand)
-                            Text("\(busAlert.arrivalBusStopNm)")
-                                .foregroundColor(Color.gray2)
-                                .font(.title3)
-                            Spacer()
-                        }
-                        .padding(.bottom, 26)
-                        
-                        HStack {
-                            Text("\(busAlert.alertBusStop)정류장 전 알림")
-                                .foregroundStyle(.brand)
-                                .font(.body2)
-                            Spacer()
-                        }
-                        .padding(.bottom, 8)
-                        
-                        HStack {
-                            ZStack {
-                                Circle()
-                                    .frame(width: 26, height: 26)
-                                    .foregroundColor(Color.gray7)
-                                Image(systemName: "bell.fill")
-                                    .frame(width: 14, height: 14)
-                                    .foregroundColor(Color.midbrand)
-                            }
-                            Text("\(alertStop!.nodenm)")
-                                .foregroundColor(Color.black)
-                                .font(.title)
-                            Spacer()
-                        }
-                        
-                    }
-                    .padding(.horizontal, 20)
-                    .padding(.top)
-                    .padding(.bottom, 28)
+                HStack {
+                    // x 종료 버튼
+                    Button(action: {
+                        self.showExitConfirmation.toggle();
+                    }, label: {
+                        Image(systemName: "xmark")
+                            .foregroundStyle(.black)
+                    })
+                    Spacer()
                 }
+                .padding(.horizontal, 20)
+                .alert("알람 종료", isPresented: $showExitConfirmation) {
+                    Button("종료", role: .destructive) {
+                        // 알림 취소
+                        stopRefreshTimer() // 알람 종료 시 타이머도 중단
+                        notificationManager.notificationReceived = false // 오버레이 닫기
+                        locationManager.unregisterBusAlert(busAlert)
+                        dismiss() // Dismiss the view if confirmed
+                    }
+                    Button("취소", role: .cancel){}
+                } message: {
+                    Text("알람을 종료하시겠습니까?")
+                }
+                
+                BusAlertInfoView(busAlert: busAlert, alertStop: alertStop, isRefreshing: $isRefreshing) //여기에 BusAlertInfoView
                 .background(Color.lightbrand)
+                
                 
                 BusStopScrollView(
                     closestBus: $currentBusViewModel.closestBusLocation,
@@ -138,6 +106,59 @@ struct UsingAlertView: View {
             currentBusViewModel.stopUpdating() // 뷰가 사라질 때 뷰모델에서 위치 업데이트 중단
             stopRefreshTimer() // 뷰 사라질 때 타이머 중단
             currentBusViewModel.closestBusLocation = nil
+        }
+    }
+    
+    struct BusAlertInfoView: View {
+        let busAlert: BusAlert
+        let alertStop: BusStopLocal? // 알림 정류장
+        @Binding var isRefreshing: Bool
+        
+        var body: some View {
+            VStack {
+                VStack {
+                    HStack {
+                        Text("\(busAlert.busNo)")
+                            .foregroundColor(Color.gray3)
+                            .font(.title3)
+                        Image(systemName: "suit.diamond.fill")
+                            .font(.caption2)
+                            .foregroundStyle(.midbrand)
+                        Text("\(busAlert.arrivalBusStopNm)")
+                            .foregroundColor(Color.gray2)
+                            .font(.title3)
+                        Spacer()
+                    }
+                    .padding(.bottom, 26)
+                    
+                    HStack {
+                        Text("\(busAlert.alertBusStop)정류장 전 알림")
+                            .foregroundStyle(.brand)
+                            .font(.body2)
+                        Spacer()
+                    }
+                    .padding(.bottom, 8)
+                    
+                    HStack {
+                        ZStack {
+                            Circle()
+                                .frame(width: 26, height: 26)
+                                .foregroundColor(Color.gray7)
+                            Image(systemName: "bell.fill")
+                                .frame(width: 14, height: 14)
+                                .foregroundColor(Color.midbrand)
+                        }
+                        Text("\(alertStop!.nodenm)")
+                            .foregroundColor(Color.black)
+                            .font(.title)
+                        Spacer()
+                    }
+                    
+                }
+                .padding(.horizontal, 20)
+                .padding(.top)
+                .padding(.bottom, 28)
+            }
         }
     }
     
@@ -206,56 +227,45 @@ struct UsingAlertView: View {
         var body: some View {
             HStack {
                 if isCurrentLocation {
-                    Image(systemName: "bus.fill")
+                    Image("tagComponent")
                         .foregroundStyle(.brand)
-                        .padding(.leading, 10)
+//                        .padding(.leading, 10)
+                        .padding(.leading, 8)
                         .id(busStop.nodeid)
+                        .overlay{
+                            Text("현위치")
+                                .font(.caption2)
+                                .foregroundStyle(.brand)
+                        }
                 } else {
-                    Image(systemName: "bus.fill")
+                    Image("tagComponent")
                         .opacity(0)
-                        .padding(.leading, 10)
+                        .padding(.leading, 8)
                 }
                 VStack {
-                    if busStop.nodeid == arrivalBusStopID {
-                        Image("endpoint")
-                            .frame(width: 20, height: 20)
+                    if busStop.nodeord == 1 {
+                        Image("Line_FirstBusStop")
+                    } else if busStop.nodeid == arrivalBusStopID {
+                        Image("Line_EndBusStop")
+                            .padding(.leading, -3)
                     } else if busStop.nodeid == alertStop?.nodeid {
-                        Image("AlertBusStop")
-                            .frame(width: 20, height: 20)
+                        Image("Line_AlertBusStop")
+                            .padding(.leading, -4)
+                    } else if isCurrentLocation {
+                        Image("Line_CurrentBusStop")
+                            .padding(.leading, -3)
                     }
                     else {
-                        Rectangle()
-                            .frame(width: 1)
-                            .foregroundStyle(.gray5)
-                        ZStack {
-                            Circle()
-                                .frame(width: 20, height: 20)
-                                .foregroundColor(Color.gray6)
-                            Circle()
-                                .frame(width: 14, height: 14)
-                                .foregroundColor(Color.lightbrand)
-                            
-                            Image(systemName: "chevron.down")
-                                .foregroundStyle(isCurrentLocation ? .red : .gray4)
-                                .font(.caption2)
-                                .bold()
-                                .padding(.vertical, 2)
-                        }
-                        Rectangle()
-                            .frame(width: 1)
-                            .foregroundStyle(.gray5)
+                        Image("Line_NormalBusStop")
                     }
                 }
-                .foregroundStyle(.gray)
-                .padding(.leading, 10)
-                
                 Text(busStop.nodenm)
-                    .padding(.leading, 25)
+                    .padding(.leading, 22)
                     .foregroundColor(Color.black)
-                    .font(.body2)
+                    .font(isCurrentLocation ? .body1 : .caption1)
                 Spacer()
             }
-            .frame(height: 60)
+            .frame(height: busStop.nodeid == alertStop?.nodeid ? 88 : 60)
         }
     }
     
@@ -276,20 +286,20 @@ struct UsingAlertView: View {
     }
     
     /// 알람 종료를 위한 Alert 표시
-    private func exitConfirmAlert() -> SwiftUI.Alert {
-        return SwiftUI.Alert(
-            title: Text("알람 종료"),
-            message: Text("알람을 종료하시겠습니까?"),
-            primaryButton: .destructive(Text("종료")) {
-                // 알림 취소
-                stopRefreshTimer() // 알람 종료 시 타이머도 중단
-                notificationManager.notificationReceived = false // 오버레이 닫기
-                locationManager.unregisterBusAlert(busAlert)
-                dismiss() // Dismiss the view if confirmed
-            },
-            secondaryButton: .cancel(Text("취소"))
-        )
-    }
+//    private func exitConfirmAlert() -> SwiftUI.Alert {
+//        return SwiftUI.Alert(
+//            title: Text("알람 종료"),
+//            message: Text("알람을 종료하시겠습니까?"),
+//            primaryButton: .destructive(Text("종료")) {
+//                // 알림 취소
+//                stopRefreshTimer() // 알람 종료 시 타이머도 중단
+//                notificationManager.notificationReceived = false // 오버레이 닫기
+//                locationManager.unregisterBusAlert(busAlert)
+//                dismiss() // Dismiss the view if confirmed
+//            },
+//            secondaryButton: .cancel(Text("취소"))
+//        )
+//    }
     
     // 새로고침 함수
     func refreshData() {
