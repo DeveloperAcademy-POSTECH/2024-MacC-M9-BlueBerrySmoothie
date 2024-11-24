@@ -43,6 +43,8 @@
 		9D19E4B62CEF8F610065967E /* CitySettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D19E4B52CEF8F550065967E /* CitySettingView.swift */; };
 		9D30E7222CF1BE0600B1448D /* Untitled.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D30E7212CF1BE0400B1448D /* Untitled.swift */; };
 		9D3382CA2CF2D318008F560A /* HapticManagerforstart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3382C92CF2D318008F560A /* HapticManagerforstart.swift */; };
+		9D3382CC2CF2E694008F560A /* AppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3382CB2CF2E694008F560A /* AppView.swift */; };
+		9D3382CE2CF2E69F008F560A /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3382CD2CF2E69F008F560A /* OnboardingView.swift */; };
 		9DBC2A442CDC6F4D00EB19A9 /* UsingAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DBC2A432CDC6F4D00EB19A9 /* UsingAlertView.swift */; };
 		9DEA523F2CD362CA00A3AE68 /* SelectBusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEA523E2CD362C100A3AE68 /* SelectBusView.swift */; };
 		9DEA52432CD3637C00A3AE68 /* BusModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEA52422CD3637900A3AE68 /* BusModel.swift */; };
@@ -130,6 +132,8 @@
 		9D19E4B52CEF8F550065967E /* CitySettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitySettingView.swift; sourceTree = "<group>"; };
 		9D30E7212CF1BE0400B1448D /* Untitled.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Untitled.swift; sourceTree = "<group>"; };
 		9D3382C92CF2D318008F560A /* HapticManagerforstart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticManagerforstart.swift; sourceTree = "<group>"; };
+		9D3382CB2CF2E694008F560A /* AppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppView.swift; sourceTree = "<group>"; };
+		9D3382CD2CF2E69F008F560A /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		9DBC2A432CDC6F4D00EB19A9 /* UsingAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsingAlertView.swift; sourceTree = "<group>"; };
 		9DEA523E2CD362C100A3AE68 /* SelectBusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectBusView.swift; sourceTree = "<group>"; };
 		9DEA52422CD3637900A3AE68 /* BusModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusModel.swift; sourceTree = "<group>"; };
@@ -271,6 +275,8 @@
 			isa = PBXGroup;
 			children = (
 				8B112CA22CF060B0000827C7 /* AlertLoadingView.swift */,
+				9D3382CD2CF2E69F008F560A /* OnboardingView.swift */,
+				9D3382CB2CF2E694008F560A /* AppView.swift */,
 				9D30E7212CF1BE0400B1448D /* Untitled.swift */,
 				9D19E4B52CEF8F550065967E /* CitySettingView.swift */,
 				9D19E4B12CEF321A0065967E /* SelectCityView.swift */,
@@ -488,6 +494,7 @@
 				D94BF93C2CEB7F7700973D08 /* AlarmTestView.swift in Sources */,
 				8BF2EFB52CD92BE0008A6644 /* HapticHelper.swift in Sources */,
 				8BF2EFAA2CD3AA2B008A6644 /* NotificationManager.swift in Sources */,
+				9D3382CC2CF2E694008F560A /* AppView.swift in Sources */,
 				8BF2EFA82CD3A7F2008A6644 /* Alert.swift in Sources */,
 				1232B3B02CD1D3DE00C48414 /* BlueBerrySmoothieApp.swift in Sources */,
 				8BF2EFAC2CD3AA44008A6644 /* LocationManager.swift in Sources */,
@@ -520,6 +527,7 @@
 				D968D5C82CD89EF4002DF70B /* SavedBus.swift in Sources */,
 				9DEA52542CD4D5B500A3AE68 /* FetchAllBusData.swift in Sources */,
 				9D19E4B42CEF62360065967E /* KeyboardDismiss.swift in Sources */,
+				9D3382CE2CF2E69F008F560A /* OnboardingView.swift in Sources */,
 				121D491B2CE1B46B00EF5269 /* NowBusLocationViewModel.swift in Sources */,
 				12D2B6CA2CD36ED8005CF771 /* BusStopDecoderModel.swift in Sources */,
 				D968D6002CDB165B002DF70B /* UIfont.swift in Sources */,
