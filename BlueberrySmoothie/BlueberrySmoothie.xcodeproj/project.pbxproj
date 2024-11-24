@@ -226,6 +226,7 @@
 		1232B3AE2CD1D3DE00C48414 /* BlueBerrySmoothie */ = {
 			isa = PBXGroup;
 			children = (
+				B8938A8C2CF19CFA00F9FD9C /* DesignSystem */,
 				8BF2EFAF2CD3AABF008A6644 /* Info.plist */,
 				121D49222CE1B5E600EF5269 /* Resource */,
 				D90E0C112CD89C620089883F /* Component */,
@@ -347,6 +348,13 @@
 				6300BEEF2CEAE36D0004E1A4 /* SwiftUI.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B8938A8C2CF19CFA00F9FD9C /* DesignSystem */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = DesignSystem;
 			sourceTree = "<group>";
 		};
 		D90E0C112CD89C620089883F /* Component */ = {
