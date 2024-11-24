@@ -6,9 +6,6 @@
 //
 import SwiftUI
 
-import SwiftUI
-
-import SwiftUI
 
 struct StationPickerModal: View {
     @Binding var isPresented: Bool
@@ -33,7 +30,7 @@ struct StationPickerModal: View {
                     HStack {
                         Text("목적지 전 정류장에서 알람")
                             .foregroundColor(Color.black)
-                            .font(.regular16)
+                            .font(.body2)
                             .padding(.top, 20)
                             .padding(.horizontal, 20)
                             .padding(.bottom, 12)
@@ -101,7 +98,7 @@ struct StationPickerModal: View {
         HStack {
             Text(stationText)
                 .foregroundColor(isEnabled ? Color.gray2 : Color.gray6)
-                .font(.regular16)
+                .font(.body2)
                 .onTapGesture {
                     if isEnabled, let action = action {
                         action()

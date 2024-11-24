@@ -27,7 +27,7 @@ struct CitySettingView: View {
             HStack {
                 Text("버스 타는 지역을 설정해주세요")
                     .foregroundStyle(.gray3)
-                    .font(.regular14)
+                    .font(.caption1)
                 Spacer()
             }
             
@@ -45,12 +45,12 @@ struct CitySettingView: View {
                 .overlay(
                     HStack {
                         Text("지역")
-                            .font(.regular16) // 텍스트 스타일
+                            .font(.body2) // 텍스트 스타일
                         Spacer()
                         Button(action:{isSelectCitySheetPresented = true}) {
                         Text("\(selectedCity.name)")
-                                .font(.regular16)
-                                .foregroundStyle(.black1)
+                                .font(.body2)
+                                .foregroundStyle(.black)
                         }
                         
                     }

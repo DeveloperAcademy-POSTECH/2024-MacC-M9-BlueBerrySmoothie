@@ -36,7 +36,7 @@ struct AlertSettingMain: View {
             VStack {
                 HStack {
                     Text("알람 설정")
-                        .font(.medium24)
+                        .font(.body2)
                         .foregroundColor(.black)
                     Spacer()
                 }
@@ -44,7 +44,7 @@ struct AlertSettingMain: View {
                 
                 HStack {
                     Text("종착지에 도착하기 전에 깨워드려요")
-                        .font(.regular16)
+                        .font(.caption1)
                         .foregroundColor(Color.gray3)
                     Spacer()
                 }
@@ -54,7 +54,7 @@ struct AlertSettingMain: View {
                 HStack {
                     Text("도시 코드")
                         .foregroundColor(Color.black)
-                        .font(.regular16)
+                        .font(.body2)
                     Spacer()
                     ZStack {
                         Rectangle()
@@ -68,7 +68,7 @@ struct AlertSettingMain: View {
                             TextField("예: 21", text: $cityCodeInput, prompt: Text("도시 코드 입력").foregroundColor(Color.gray4))
                                 .keyboardType(.numberPad)
                                 .foregroundColor(Color.black)
-                                .font(.regular16)
+                                .font(.body2)
                                 .padding(.vertical, 10)
                                 .padding(.horizontal, 12)
                             Spacer()
@@ -83,10 +83,10 @@ struct AlertSettingMain: View {
                     HStack(spacing: 2) {
                         Text("버스 및 종착지")
                             .foregroundColor(.black)
-                            .font(.regular16)
+                            .font(.body2)
                         Image(systemName: "asterisk")
                             .foregroundColor(Color.brand)
-                            .font(.regular10)
+                            .font(.body2)
                             .bold()
                             .padding(.trailing)
                         
@@ -100,7 +100,7 @@ struct AlertSettingMain: View {
                                 }
                             HStack {
                                 Text(busStopAlert?.bus.routeno ?? "선택 안됨")  // 선택된 버스 표시
-                                    .font(.regular16)
+                                    .font(.body2)
                                     .foregroundColor(Color.black)
                                     .padding(.horizontal, 12)
                                     .padding(.vertical, 10)
@@ -168,7 +168,7 @@ struct AlertSettingMain: View {
                         HStack {
                             Text("\(busStopAlert?.arrivalBusStop.nodenm ?? "선택해주세요")")
                                 .foregroundColor(Color.black)
-                                .font(.regular16)
+                                .font(.body1)
                                 .padding(.horizontal, 12)
                                 .padding(.vertical, 10)
                             Spacer()
@@ -181,11 +181,11 @@ struct AlertSettingMain: View {
                 // 일어날 정류장 선택
                 HStack(spacing: 2) {
                     Text("일어날 정류장")
-                        .font(.medium16)
+                        .font(.body1)
                         .foregroundColor(Color.black)
                     Image(systemName: "asterisk")
                         .foregroundColor(Color.brand)
-                        .font(.regular10)
+                        .font(.caption2)
                         .bold()
                         .padding(.trailing)
                     
@@ -201,13 +201,13 @@ struct AlertSettingMain: View {
                         HStack {
                             Text("\(selectedStation)")
                                 .foregroundColor(Color.black)
-                                .font(.regular16)
+                                .font(.body2)
                             
                             Spacer()
                             
                             Image(systemName: "chevron.down")
                                 .foregroundColor(Color.gray3)
-                                .font(.regular10)
+                                .font(.caption2)
                         }
                         .padding(.horizontal, 12)
                         .padding(.vertical, 10)
@@ -223,7 +223,7 @@ struct AlertSettingMain: View {
                 HStack {
                     Text("알람 레이블")
                         .foregroundColor(Color.black)
-                        .font(.regular16)
+                        .font(.body2)
                     Spacer()
                     Spacer()
                     Spacer()
@@ -239,7 +239,7 @@ struct AlertSettingMain: View {
                         HStack {
                             TextField("통학", text: $label, prompt: Text("통학").foregroundColor(Color.gray4))
                                 .foregroundColor(Color.black)
-                                .font(.regular16)
+                                .font(.body2)
                                 .padding(.vertical, 10)
                                 .padding(.horizontal, 12)
                             Spacer()
@@ -296,7 +296,7 @@ struct AlertSettingMain: View {
                     }
                 }) {
                     Text("저장")
-                        .font(.regular16)
+                        .font(.body2)
                         .foregroundColor(Color.brand)
                 }
             }
@@ -307,7 +307,7 @@ struct AlertSettingMain: View {
                     dismiss()  // 현재 화면을 닫는 동작
                 }) {
                     Text("닫기")
-                        .font(.regular16)
+                        .font(.body2)
                         .foregroundColor(Color.brand) // 원하는 색상으로 변경 가능
                 }
             }

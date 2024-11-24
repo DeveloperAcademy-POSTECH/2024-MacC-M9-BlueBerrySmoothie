@@ -44,13 +44,13 @@ struct UsingAlertView: View {
                         HStack {
                             Text("\(busAlert.busNo)")
                                 .foregroundColor(Color.gray3)
-                                .font(.regular20)
+                                .font(.title3)
                             Image(systemName: "suit.diamond.fill")
-                                .font(.regular10)
+                                .font(.caption2)
                                 .foregroundStyle(.midbrand)
                             Text("\(busAlert.arrivalBusStopNm)")
                                 .foregroundColor(Color.gray2)
-                                .font(.regular20)
+                                .font(.title3)
                             Spacer()
                         }
                         .padding(.bottom, 26)
@@ -58,7 +58,7 @@ struct UsingAlertView: View {
                         HStack {
                             Text("\(busAlert.alertBusStop)정류장 전 알림")
                                 .foregroundStyle(.brand)
-                                .font(.regular16)
+                                .font(.body2)
                             Spacer()
                         }
                         .padding(.bottom, 8)
@@ -74,7 +74,7 @@ struct UsingAlertView: View {
                             }
                             Text("\(alertStop!.nodenm)")
                                 .foregroundColor(Color.black)
-                                .font(.medium30)
+                                .font(.title)
                             Spacer()
                         }
                         
@@ -170,11 +170,11 @@ struct UsingAlertView: View {
                             // 로딩 중일 때 로딩 인디케이터 표시
                             ProgressView("가장 가까운 버스 위치를 찾고 있습니다...")
                                 .foregroundColor(Color.black)
-                                .font(.regular16)
+                                .font(.caption1)
                         } else {
                             Text("가장 가까운 버스 위치를 찾고 있습니다...")
                                 .foregroundColor(Color.black)
-                                .font(.regular16)
+                                .font(.caption1)
                         }
                         Spacer()
                     }
@@ -237,7 +237,7 @@ struct UsingAlertView: View {
                             
                             Image(systemName: "chevron.down")
                                 .foregroundStyle(isCurrentLocation ? .red : .gray4)
-                                .font(.regular10)
+                                .font(.caption2)
                                 .bold()
                                 .padding(.vertical, 2)
                         }
@@ -252,7 +252,7 @@ struct UsingAlertView: View {
                 Text(busStop.nodenm)
                     .padding(.leading, 25)
                     .foregroundColor(Color.black)
-                    .font(.regular16)
+                    .font(.body2)
                 Spacer()
             }
             .frame(height: 60)

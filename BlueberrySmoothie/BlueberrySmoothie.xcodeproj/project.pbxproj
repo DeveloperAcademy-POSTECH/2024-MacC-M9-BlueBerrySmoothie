@@ -31,7 +31,6 @@
 		8B0860F72CDDA237007C109A /* HapticManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0860F62CDDA237007C109A /* HapticManager.swift */; };
 		8B0860F92CE1A0A9007C109A /* silentSound.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8B0860F82CE1A0A8007C109A /* silentSound.wav */; };
 		8B0860FB2CE1DDE3007C109A /* ToastMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0860FA2CE1DDE3007C109A /* ToastMessage.swift */; };
-		8B0861052CE88F4B007C109A /* AlertStopMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0861042CE88F4B007C109A /* AlertStopMapView.swift */; };
 		8B112CA32CF060C5000827C7 /* AlertLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B112CA22CF060B0000827C7 /* AlertLoadingView.swift */; };
 		8BF2EFA82CD3A7F2008A6644 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF2EFA72CD3A7F2008A6644 /* Alert.swift */; };
 		8BF2EFAA2CD3AA2B008A6644 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF2EFA92CD3AA2B008A6644 /* NotificationManager.swift */; };
@@ -118,7 +117,6 @@
 		8B0860F62CDDA237007C109A /* HapticManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticManager.swift; sourceTree = "<group>"; };
 		8B0860F82CE1A0A8007C109A /* silentSound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = silentSound.wav; sourceTree = "<group>"; };
 		8B0860FA2CE1DDE3007C109A /* ToastMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastMessage.swift; sourceTree = "<group>"; };
-		8B0861042CE88F4B007C109A /* AlertStopMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertStopMapView.swift; sourceTree = "<group>"; };
 		8B112CA22CF060B0000827C7 /* AlertLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertLoadingView.swift; sourceTree = "<group>"; };
 		8BF2EFA72CD3A7F2008A6644 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		8BF2EFA92CD3AA2B008A6644 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
@@ -228,7 +226,6 @@
 		1232B3AE2CD1D3DE00C48414 /* BlueBerrySmoothie */ = {
 			isa = PBXGroup;
 			children = (
-				B8938A8C2CF19CFA00F9FD9C /* DesignSystem */,
 				8BF2EFAF2CD3AABF008A6644 /* Info.plist */,
 				121D49222CE1B5E600EF5269 /* Resource */,
 				D90E0C112CD89C620089883F /* Component */,
@@ -285,7 +282,6 @@
 				9DEA523E2CD362C100A3AE68 /* SelectBusView.swift */,
 				12D2B6C52CD36E70005CF771 /* SelectBusStopView.swift */,
 				D968D5C92CD912C5002DF70B /* MainView.swift */,
-				8B0861042CE88F4B007C109A /* AlertStopMapView.swift */,
 				D94BF93B2CEB7F7700973D08 /* AlarmTestView.swift */,
 			);
 			path = View;
@@ -351,13 +347,6 @@
 				6300BEEF2CEAE36D0004E1A4 /* SwiftUI.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		B8938A8C2CF19CFA00F9FD9C /* DesignSystem */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = DesignSystem;
 			sourceTree = "<group>";
 		};
 		D90E0C112CD89C620089883F /* Component */ = {
@@ -505,7 +494,6 @@
 				12D2B6D42CD3F5BE005CF771 /* getAPIKey.swift in Sources */,
 				1232B3DB2CD1D40500C48414 /* BusDecoderModel.swift in Sources */,
 				9DEA523F2CD362CA00A3AE68 /* SelectBusView.swift in Sources */,
-				8B0861052CE88F4B007C109A /* AlertStopMapView.swift in Sources */,
 				D90E0C1A2CD89CB20089883F /* AlertSettingMain.swift in Sources */,
 				12D2B6D82CD63D6A005CF771 /* AlertModel.swift in Sources */,
 				9DEA52432CD3637C00A3AE68 /* BusModel.swift in Sources */,
@@ -689,8 +677,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"BlueBerrySmoothie/Preview Content\"";
-				DEVELOPMENT_TEAM = UW9295Z57Q;
-
+				DEVELOPMENT_TEAM = GF3B5LP7RQ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BlueBerrySmoothie/Info.plist;
@@ -776,7 +763,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = UW9295Z57Q;
+				DEVELOPMENT_TEAM = GF3B5LP7RQ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = LiveActWidget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = LiveActWidget;

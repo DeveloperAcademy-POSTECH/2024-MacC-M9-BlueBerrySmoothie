@@ -21,7 +21,7 @@ struct AlertLoadingView: View {
                 Image("BusIllustration")
                     .padding(.bottom, 20)
                 Text("버스 노선을 불러오고 있어요" + String(repeating: ".", count: dotCount))
-                    .font(.regular16)
+                    .font(.body2)
                     .animation(.easeInOut(duration: animationInterval), value: dotCount)
                     .onAppear {
                         startDotAnimation()

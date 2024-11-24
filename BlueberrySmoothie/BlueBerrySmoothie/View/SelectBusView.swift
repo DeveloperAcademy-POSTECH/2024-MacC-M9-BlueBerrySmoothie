@@ -51,7 +51,7 @@ struct SelectBusView: View {
                         dismiss()  // 현재 화면을 닫는 동작
                     }) {
                         Text("닫기")
-                            .font(.regular16)
+                            .font(.body)
                             .foregroundColor(Color.brand) // 원하는 색상으로 변경 가능
                     }
                 }
