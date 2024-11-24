@@ -24,35 +24,26 @@ struct UsingAlertView: View {
     
     var body: some View {
         ZStack {
+            Color.lightbrand
+                .ignoresSafeArea()
+            
             VStack {
-                HStack {
-                    // x 종료 버튼
-                    Button(action: {
-                        self.showExitConfirmation.toggle();
-                    }, label: {
-                        Image(systemName: "xmark")
-                            .foregroundStyle(.black)
-                    })
-                    Spacer()
-                }
-                .padding(.horizontal, 20)
-                .alert("알람 종료", isPresented: $showExitConfirmation) {
-                    Button("종료", role: .destructive) {
-                        // 알림 취소
-                        stopRefreshTimer() // 알람 종료 시 타이머도 중단
-                        notificationManager.notificationReceived = false // 오버레이 닫기
-                        locationManager.unregisterBusAlert(busAlert)
-                        dismiss() // Dismiss the view if confirmed
+                // 상단 네모박스 정보 뷰
+                BusAlertInfoView(
+                    busAlert: busAlert,
+                    alertStop: alertStop,
+                    isRefreshing: $isRefreshing,
+                    viewModel: currentBusViewModel,
+                    lastRefreshTime: $lastRefreshTime,
+                    refreshAction: {
+                        refreshData()
+                        isScrollTriggered = true // 스크롤 동작 트리거
                     }
-                    Button("취소", role: .cancel){}
-                } message: {
-                    Text("알람을 종료하시겠습니까?")
-                }
+                ).padding(10)
+                    .padding(.trailing, -8)
+                    .padding(.top, -10)
                 
-                BusAlertInfoView(busAlert: busAlert, alertStop: alertStop, isRefreshing: $isRefreshing) //여기에 BusAlertInfoView
-                .background(Color.lightbrand)
-                
-                
+                // 노션뷰
                 BusStopScrollView(
                     closestBus: $currentBusViewModel.closestBusLocation,
                     isRefreshing: $isRefreshing,
@@ -63,17 +54,12 @@ struct UsingAlertView: View {
                     isScrollTriggered: $isScrollTriggered
                 )
             }
-            .background(Color.gray7)
+            .navigationBarBackButtonHidden()
             .navigationTitle(busAlert.alertLabel ?? "알람")
             .navigationBarTitleDisplayMode(.inline)
             .onDisappear {
                 currentBusViewModel.stopUpdating() // 뷰가 사라질 때 뷰모델에서 위치 업데이트 중단
                 stopRefreshTimer() // 뷰 사라질 때 타이머 중단
-            }
-            RefreshButton(isRefreshing: isRefreshing, isScrollTriggered: $isScrollTriggered) {
-                refreshData()
-                isScrollTriggered = true
-                print("refresh 버튼")
             }
             
             // 알람 로딩 오버레이 뷰
@@ -87,7 +73,29 @@ struct UsingAlertView: View {
                     .edgesIgnoringSafeArea(.all) // 전체 화면에 적용
             }
         }
-        .toolbar(.hidden)
+        .toolbar {
+            // x 버튼
+            ToolbarItem(placement: .navigationBarLeading) {
+                Button(action: {
+                    self.showExitConfirmation.toggle();
+                }, label: {
+                    Image(systemName: "xmark")
+                        .foregroundStyle(.black)
+                })
+            }
+        }
+        .alert("알람 종료", isPresented: $showExitConfirmation) {
+            Button("종료", role: .destructive) {
+                // 알림 취소
+                stopRefreshTimer() // 알람 종료 시 타이머도 중단
+                notificationManager.notificationReceived = false // 오버레이 닫기
+                locationManager.unregisterBusAlert(busAlert)
+                dismiss() // Dismiss the view if confirmed
+            }
+            Button("취소", role: .cancel){}
+        } message: {
+            Text("알람을 종료하시겠습니까?")
+        }
         .onAppear {
             refreshData() // 초기 로드
             currentBusViewModel.startUpdating() // 뷰가 보일 때 뷰모델에서 위치 업데이트 시작
@@ -113,52 +121,83 @@ struct UsingAlertView: View {
         let busAlert: BusAlert
         let alertStop: BusStopLocal? // 알림 정류장
         @Binding var isRefreshing: Bool
+        @ObservedObject var viewModel: NowBusLocationViewModel // ViewModel을 상위 뷰에서 전달받도록 변경
+        @Binding var lastRefreshTime: Date? // 상위 뷰에서 전달받은 값
+        var refreshAction: () -> Void // 새로고침 액션 전달받기
         
         var body: some View {
-            VStack {
-                VStack {
+            ZStack {
+                Image("BusAlertInfoBG")
+                    .resizable()
+                    .frame(maxWidth: .infinity, maxHeight: 224)
+
+                VStack(alignment: .leading) {
+                    // 버스 정보
                     HStack {
-                        Text("\(busAlert.busNo)")
-                            .foregroundColor(Color.gray3)
-                            .font(.title3)
-                        Image(systemName: "suit.diamond.fill")
-                            .font(.caption2)
-                            .foregroundStyle(.midbrand)
-                        Text("\(busAlert.arrivalBusStopNm)")
-                            .foregroundColor(Color.gray2)
-                            .font(.title3)
-                        Spacer()
-                    }
-                    .padding(.bottom, 26)
-                    
-                    HStack {
-                        Text("\(busAlert.alertBusStop)정류장 전 알림")
+                        Image(systemName: "square.fill")
                             .foregroundStyle(.brand)
-                            .font(.body2)
-                        Spacer()
-                    }
-                    .padding(.bottom, 8)
+                            .frame(width: 12, height: 12)
+                        
+                        Text("\(busAlert.busNo)번")
+                            .font(.caption2)
+                            .foregroundStyle(.gray3)
+                        
+                        Rectangle()
+                            .frame(width: 2, height: 8)
+                            .foregroundStyle(.gray3)
+                        
+                        Text(busAlert.arrivalBusStopNm)
+                            .font(.caption2)
+                            .foregroundStyle(.gray3)
+                    }.padding(.bottom, 16)
                     
-                    HStack {
-                        ZStack {
-                            Circle()
-                                .frame(width: 26, height: 26)
-                                .foregroundColor(Color.gray7)
-                            Image(systemName: "bell.fill")
-                                .frame(width: 14, height: 14)
-                                .foregroundColor(Color.midbrand)
+                    // 현재 위치 정보
+                    if let closestBus = viewModel.closestBusLocation {
+                        Text("알람까지 \(busAlert.arrivalBusStopNord - (Int(closestBus.nodeord) ?? 0)) 정류장 남았습니다.")
+                            .font(.title2)
+                            .foregroundStyle(.black)
+                            .padding(.bottom, 13)
+                        
+                        Text("현재 정류장은")
+                            .font(.caption1)
+                            .foregroundStyle(.gray1)
+                        HStack{
+                            Text("\(closestBus.nodenm)")
+                                .font(.caption1)
+                                .foregroundStyle(.brand)
+                            Text("입니다.")
+                                .font(.caption1)
+                                .foregroundStyle(.gray1)
                         }
-                        Text("\(alertStop!.nodenm)")
-                            .foregroundColor(Color.black)
-                            .font(.title)
-                        Spacer()
                     }
                     
+                    //새로고침 시간, 새로고침 버튼
+                    HStack{
+                        Spacer()
+                        if let lastRefreshTime = lastRefreshTime {
+                            Text(formattedTime(from: lastRefreshTime))
+                                .font(.caption2)
+                                .foregroundStyle(.gray3)
+                        }
+                        Button(action: refreshAction) {
+                            Image(systemName: "arrow.clockwise")
+                                .resizable()
+                                .frame(width: 24, height: 24)
+                                .foregroundColor(isRefreshing ? .gray3 : .gray1)
+                        }
+                        .disabled(isRefreshing)
+                    }
+                    .padding(.trailing, 8)
                 }
-                .padding(.horizontal, 20)
-                .padding(.top)
-                .padding(.bottom, 28)
+                .padding(24)
             }
+        }
+        /// 시간 포맷팅 함수
+        private func formattedTime(from date: Date) -> String {
+            let formatter = DateFormatter()
+            formatter.locale = Locale(identifier: "ko_KR") // 한국어 로케일 설정
+            formatter.dateFormat = "a h:mm" // 오전/오후 h:mm 형식
+            return formatter.string(from: date)
         }
     }
     
@@ -184,7 +223,8 @@ struct UsingAlertView: View {
                                     busStop: busStop,
                                     isCurrentLocation: busStop.nodeid == closestBus.nodeid,
                                     arrivalBusStopID: busAlert.arrivalBusStopID,
-                                    alertStop: alertStop
+                                    alertStop: alertStop,
+                                    isLastBusStop: busStop.nodeord == busStops.last?.nodeord
                                 )
                             }
                         } else if isRefreshing {
@@ -199,7 +239,7 @@ struct UsingAlertView: View {
                         }
                         Spacer()
                     }
-                    .background(.clear)
+                    .background(.white)
                 }
                 // 해당 버스 노드 위치로 스크롤하는 에니메이션
                 .onChange(of: isScrollTriggered) { value in
@@ -224,12 +264,13 @@ struct UsingAlertView: View {
         let isCurrentLocation: Bool
         let arrivalBusStopID: String
         let alertStop: BusStopLocal?
+        let isLastBusStop: Bool
+        
         var body: some View {
             HStack {
                 if isCurrentLocation {
                     Image("tagComponent")
                         .foregroundStyle(.brand)
-//                        .padding(.leading, 10)
                         .padding(.leading, 8)
                         .id(busStop.nodeid)
                         .overlay{
@@ -254,13 +295,15 @@ struct UsingAlertView: View {
                     } else if isCurrentLocation {
                         Image("Line_CurrentBusStop")
                             .padding(.leading, -3)
+                    } else if isLastBusStop {
+                        Image("Line_LastBusStop")
                     }
                     else {
                         Image("Line_NormalBusStop")
                     }
                 }
                 Text(busStop.nodenm)
-                    .padding(.leading, 22)
+                    .padding(.leading, 20)
                     .foregroundColor(Color.black)
                     .font(isCurrentLocation ? .body1 : .caption1)
                 Spacer()
@@ -284,22 +327,6 @@ struct UsingAlertView: View {
         refreshTimerCancellable?.cancel()
         refreshTimerCancellable = nil
     }
-    
-    /// 알람 종료를 위한 Alert 표시
-//    private func exitConfirmAlert() -> SwiftUI.Alert {
-//        return SwiftUI.Alert(
-//            title: Text("알람 종료"),
-//            message: Text("알람을 종료하시겠습니까?"),
-//            primaryButton: .destructive(Text("종료")) {
-//                // 알림 취소
-//                stopRefreshTimer() // 알람 종료 시 타이머도 중단
-//                notificationManager.notificationReceived = false // 오버레이 닫기
-//                locationManager.unregisterBusAlert(busAlert)
-//                dismiss() // Dismiss the view if confirmed
-//            },
-//            secondaryButton: .cancel(Text("취소"))
-//        )
-//    }
     
     // 새로고침 함수
     func refreshData() {
