@@ -57,6 +57,29 @@ struct UsingAlertView: View {
             .navigationBarBackButtonHidden()
             .navigationTitle(busAlert.alertLabel ?? "알람")
             .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                // x 버튼
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button(action: {
+                        self.showExitConfirmation.toggle();
+                    }, label: {
+                        Image(systemName: "xmark")
+                            .foregroundStyle(.black)
+                    })
+                }
+            }
+            .alert("알람 종료", isPresented: $showExitConfirmation) {
+                Button("종료", role: .destructive) {
+                    // 알림 취소
+                    stopRefreshTimer() // 알람 종료 시 타이머도 중단
+                    notificationManager.notificationReceived = false // 오버레이 닫기
+                    locationManager.unregisterBusAlert(busAlert)
+                    dismiss() // Dismiss the view if confirmed
+                }
+                Button("취소", role: .cancel){}
+            } message: {
+                Text("알람을 종료하시겠습니까?")
+            }
             .onDisappear {
                 currentBusViewModel.stopUpdating() // 뷰가 사라질 때 뷰모델에서 위치 업데이트 중단
                 stopRefreshTimer() // 뷰 사라질 때 타이머 중단
@@ -72,29 +95,6 @@ struct UsingAlertView: View {
                 AfterAlertView()
                     .edgesIgnoringSafeArea(.all) // 전체 화면에 적용
             }
-        }
-        .toolbar {
-            // x 버튼
-            ToolbarItem(placement: .navigationBarLeading) {
-                Button(action: {
-                    self.showExitConfirmation.toggle();
-                }, label: {
-                    Image(systemName: "xmark")
-                        .foregroundStyle(.black)
-                })
-            }
-        }
-        .alert("알람 종료", isPresented: $showExitConfirmation) {
-            Button("종료", role: .destructive) {
-                // 알림 취소
-                stopRefreshTimer() // 알람 종료 시 타이머도 중단
-                notificationManager.notificationReceived = false // 오버레이 닫기
-                locationManager.unregisterBusAlert(busAlert)
-                dismiss() // Dismiss the view if confirmed
-            }
-            Button("취소", role: .cancel){}
-        } message: {
-            Text("알람을 종료하시겠습니까?")
         }
         .onAppear {
             refreshData() // 초기 로드
@@ -370,31 +370,64 @@ struct UsingAlertView: View {
     // 알람 비활성화 뷰
     @ViewBuilder
     func AfterAlertView() -> some View {
-        VStack {
-            Image("AfterAlertImg")
-                .padding()
+        ZStack{
+            Image("AfterAlertViewBG")
+                .edgesIgnoringSafeArea(.all)
             
-            // 알람 종료 버튼
-            Button(action: {
-                stopRefreshTimer() // 알람 종료 시 타이머도 중단
-                notificationManager.notificationReceived = false // 오버레이 닫기
-                locationManager.unregisterBusAlert(busAlert)
-                locationManager.stopAudio()
-                dismiss()
-            }, label: {
-                Text("종료")
-                    .foregroundStyle(.white)
-                    .font(.largeTitle)
-                    .padding()
-                    .padding(.horizontal, 20)
-                    .background(Capsule().foregroundStyle(Color.black))
-            })
+            RoundedRectangle(cornerRadius: 40)
+                .background(.thinMaterial)
+                .padding(.horizontal, 20)
+                .padding(.vertical, 130)
+                .overlay{
+                    //로띠.
+                    // 일단 아무거나 넣음
+                    VStack{
+                        Image("OnboardingEndView")
+                        
+                        Spacer()
+                        
+                        Button(action: {
+                            stopRefreshTimer() // 알람 종료 시 타이머도 중단
+                            notificationManager.notificationReceived = false // 오버레이 닫기
+                            locationManager.unregisterBusAlert(busAlert)
+                            locationManager.stopAudio()
+                            dismiss()
+                        }, label: {
+                            Text("알람종료")
+                                .foregroundStyle(.white)
+                                .font(.title2)
+                                .padding()
+                                .padding(.horizontal, 22)
+                                .background(RoundedRectangle(cornerRadius: 8).foregroundStyle(.black))
+                                .frame(width: 135, height: 44)
+                        })
+                    }
+                }
             
+//            VStack {
+//                Image("AfterAlertImg")
+//                    .padding()
+//                
+//                // 알람 종료 버튼
+//                Button(action: {
+//                    stopRefreshTimer() // 알람 종료 시 타이머도 중단
+//                    notificationManager.notificationReceived = false // 오버레이 닫기
+//                    locationManager.unregisterBusAlert(busAlert)
+//                    locationManager.stopAudio()
+//                    dismiss()
+//                }, label: {
+//                    Text("알람종료")
+//                        .foregroundStyle(.white)
+//                        .font(.title2)
+//                        .padding()
+//                        .padding(.horizontal, 22)
+//                        .background(RoundedRectangle(cornerRadius: 8).foregroundStyle(.black))
+//                        .frame(width: 135, height: 44)
+//                })
+//                
+//            }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color.gray.opacity(0.8))
-        .cornerRadius(10)
-        .shadow(radius: 10)
         .onDisappear{
             locationManager.unregisterBusAlert(busAlert)
             locationManager.stopAllMonitoring()
