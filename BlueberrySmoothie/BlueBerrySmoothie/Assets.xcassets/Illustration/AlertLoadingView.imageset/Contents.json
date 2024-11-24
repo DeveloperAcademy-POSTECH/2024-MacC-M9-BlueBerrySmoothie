@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "AlertLoadingView. 1.png",
+      "filename" : "Variant4 1.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
@@ -12,7 +12,7 @@
           "value" : "light"
         }
       ],
-      "filename" : "AlertLoadingView. 3.png",
+      "filename" : "Variant4.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
@@ -23,12 +23,12 @@
           "value" : "dark"
         }
       ],
-      "filename" : "DAlertLoadingView.png",
+      "filename" : "Variant3.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "AlertLoadingView..png",
+      "filename" : "Variant4 2.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
@@ -39,7 +39,7 @@
           "value" : "light"
         }
       ],
-      "filename" : "AlertLoadingView. 4.png",
+      "filename" : "Variant4 3.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
@@ -50,12 +50,12 @@
           "value" : "dark"
         }
       ],
-      "filename" : "DAlertLoadingView 1.png",
+      "filename" : "Variant3 1.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "AlertLoadingView. 2.png",
+      "filename" : "Variant4 4.png",
       "idiom" : "universal",
       "scale" : "3x"
     },
@@ -66,7 +66,7 @@
           "value" : "light"
         }
       ],
-      "filename" : "AlertLoadingView. 5.png",
+      "filename" : "Variant4 5.png",
       "idiom" : "universal",
       "scale" : "3x"
     },
@@ -77,7 +77,7 @@
           "value" : "dark"
         }
       ],
-      "filename" : "DAlertLoadingView 2.png",
+      "filename" : "Variant3 2.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
