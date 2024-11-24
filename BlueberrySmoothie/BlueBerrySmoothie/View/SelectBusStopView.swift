@@ -16,7 +16,8 @@ struct SelectBusStopView: View {
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var busStopViewModel: BusStopViewModel
     @State private var stop: String = ""
-    @State private var updowncdselection: Int = 1
+    @State private var updowncdselection: Int = 1 // 상행 하행 구분
+    @State private var isAutoScroll: Bool = false // 상행 하행 버튼과 스크롤로 이동될 때의 action이 중복되지 않도록 방지하는 변수
     @Binding var showSelectBusSheet: Bool
     @State private var isAnimating = false // 버스 리스트가 아래에서 위로 올라오는 애니메이션 실행 여부
     
@@ -42,23 +43,25 @@ struct SelectBusStopView: View {
             VStack {
                 HStack {
                     directionView(
-                        directionName: "\(bus.endnodenm)방면",
+                        directionName: "\(bus.endnodenm)방면", // 상행
                         isSelected: updowncdselection == 1,
                         selectedColor: .midbrand,
                         unselectedColor: .gray2
                     )
                     .onTapGesture {
                         updowncdselection = 1
+                        isAutoScroll = true // 버튼을 누르면 자동으로 해당 위치로 스크롤 되도록함
                     }
                     
                     directionView(
-                        directionName: "\(bus.startnodenm)방면",
+                        directionName: "\(bus.startnodenm)방면", // 하행
                         isSelected: updowncdselection == 2,
                         selectedColor: .midbrand,
                         unselectedColor: .gray2
                     )
                     .onTapGesture {
                         updowncdselection = 2
+                        isAutoScroll = true // 버튼을 누르면 자동으로 해당 위치로 스크롤 되도록함
                     }
                 }
                 //BusStop 리스트 View
@@ -113,25 +116,37 @@ struct SelectBusStopView: View {
                                 Text("\(busstop.nodenm)")
                                     .padding(.leading, 24)
                                     .foregroundStyle(.black)
-                                Text("\(busstop.nodeid)")
-                                    .font(.system(size: 10))
-                                    .foregroundStyle(.gray)
                                 
                                 Spacer()
                             }
                             Spacer()
-                            Divider()
+                            Divider() // 상행의 마지막 item의 divider의 색과 굵기 변경
+                                .frame(height: busstop.nodeord == busStopViewModel.maxUpwardNodeord! ? 2 : 1)
+                                .background(busstop.nodeord == busStopViewModel.maxUpwardNodeord! ? .gray1 : .gray5)
+                                .overlay(
+                                    // 상행의 마지막 item을 스크롤 할 때 상단의 방면이 자동으로 변경되도록 함
+                                    busstop.nodeord == busStopViewModel.maxUpwardNodeord! ? GeometryReader { proxy in
+                                        Color.clear
+                                            .onChange(of: proxy.frame(in: .global).midY) {_, midY in
+                                                handleScrollChange(midY: midY)
+                                            }
+                                    } : nil
+                                )
                         }
                         .frame(height: 60)
                     }
                     .id(busstop.nodeid) // 각 정류장에 고유 ID를 설정
                 }
             }
-            .onChange(of: updowncdselection) { _ in
-                if updowncdselection == 1 {
-                    scrollToTop(proxy: proxy)
-                } else {
-                    scrollToMiddle(proxy: proxy)
+            .onChange(of: updowncdselection) { _, _ in
+                // 상행, 하행 버튼을 눌렀을 경우에만 자동 스크롤이 되도록 함
+                if isAutoScroll {
+                    if updowncdselection == 1 {
+                        scrollToTop(proxy: proxy)
+                    } else {
+                        scrollToMiddle(proxy: proxy)
+                    }
+                    isAutoScroll = false // 실행 후 자동 스크롤 변수 초기화
                 }
             }
         }
@@ -147,9 +162,20 @@ struct SelectBusStopView: View {
     // 하행의 첫 인덱스로 스크롤하는 함수
     private func scrollToMiddle(proxy: ScrollViewProxy) {
         // 하행의 가장 작은 order 구함
-        if let maxUpwardNodeord = busStopViewModel.busStopList.filter({ $0.updowncd == 1 }).map({ $0.nodeord }).min() {
+        if let minDownwardNodeord = busStopViewModel.busStopList.filter({ $0.updowncd == 1 }).map({ $0.nodeord }).min() {
             //해당 order로 스크롤을 이동함
-            proxy.scrollTo(maxUpwardNodeord, anchor: .center)
+            proxy.scrollTo(minDownwardNodeord, anchor: .center)
+        }
+    }
+    
+    private func handleScrollChange(midY: CGFloat) {
+        let screenHeight = UIScreen.main.bounds.height
+        let centerY = screenHeight / 3 * 2
+        
+        if midY > centerY {
+            updowncdselection = 1 // 중앙 아래
+        } else {
+            updowncdselection = 2 // 중앙 위
         }
     }
     
