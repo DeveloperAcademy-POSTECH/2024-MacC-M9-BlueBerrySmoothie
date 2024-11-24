@@ -44,6 +44,7 @@
 		9D3382CA2CF2D318008F560A /* HapticManagerforstart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3382C92CF2D318008F560A /* HapticManagerforstart.swift */; };
 		9D3382CC2CF2E694008F560A /* AppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3382CB2CF2E694008F560A /* AppView.swift */; };
 		9D3382CE2CF2E69F008F560A /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3382CD2CF2E69F008F560A /* OnboardingView.swift */; };
+		9D3383392CF31638008F560A /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3383382CF31638008F560A /* SplashView.swift */; };
 		9DBC2A442CDC6F4D00EB19A9 /* UsingAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DBC2A432CDC6F4D00EB19A9 /* UsingAlertView.swift */; };
 		9DEA523F2CD362CA00A3AE68 /* SelectBusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEA523E2CD362C100A3AE68 /* SelectBusView.swift */; };
 		9DEA52432CD3637C00A3AE68 /* BusModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEA52422CD3637900A3AE68 /* BusModel.swift */; };
@@ -132,6 +133,7 @@
 		9D3382C92CF2D318008F560A /* HapticManagerforstart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticManagerforstart.swift; sourceTree = "<group>"; };
 		9D3382CB2CF2E694008F560A /* AppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppView.swift; sourceTree = "<group>"; };
 		9D3382CD2CF2E69F008F560A /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		9D3383382CF31638008F560A /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		9DBC2A432CDC6F4D00EB19A9 /* UsingAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsingAlertView.swift; sourceTree = "<group>"; };
 		9DEA523E2CD362C100A3AE68 /* SelectBusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectBusView.swift; sourceTree = "<group>"; };
 		9DEA52422CD3637900A3AE68 /* BusModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusModel.swift; sourceTree = "<group>"; };
@@ -228,6 +230,7 @@
 		1232B3AE2CD1D3DE00C48414 /* BlueBerrySmoothie */ = {
 			isa = PBXGroup;
 			children = (
+				9D3383372CF315FC008F560A /* OnBoarding&Splash */,
 				8BF2EFAF2CD3AABF008A6644 /* Info.plist */,
 				121D49222CE1B5E600EF5269 /* Resource */,
 				D90E0C112CD89C620089883F /* Component */,
@@ -273,8 +276,6 @@
 			isa = PBXGroup;
 			children = (
 				8B112CA22CF060B0000827C7 /* AlertLoadingView.swift */,
-				9D3382CD2CF2E69F008F560A /* OnboardingView.swift */,
-				9D3382CB2CF2E694008F560A /* AppView.swift */,
 				9D19E4B52CEF8F550065967E /* CitySettingView.swift */,
 				9D19E4B12CEF321A0065967E /* SelectCityView.swift */,
 				9DBC2A432CDC6F4D00EB19A9 /* UsingAlertView.swift */,
@@ -350,6 +351,16 @@
 				6300BEEF2CEAE36D0004E1A4 /* SwiftUI.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9D3383372CF315FC008F560A /* OnBoarding&Splash */ = {
+			isa = PBXGroup;
+			children = (
+				9D3383382CF31638008F560A /* SplashView.swift */,
+				9D3382CB2CF2E694008F560A /* AppView.swift */,
+				9D3382CD2CF2E69F008F560A /* OnboardingView.swift */,
+			);
+			path = "OnBoarding&Splash";
 			sourceTree = "<group>";
 		};
 		D90E0C112CD89C620089883F /* Component */ = {
@@ -497,6 +508,7 @@
 				8BF2EFAC2CD3AA44008A6644 /* LocationManager.swift in Sources */,
 				12D2B6D42CD3F5BE005CF771 /* getAPIKey.swift in Sources */,
 				1232B3DB2CD1D40500C48414 /* BusDecoderModel.swift in Sources */,
+				9D3383392CF31638008F560A /* SplashView.swift in Sources */,
 				9DEA523F2CD362CA00A3AE68 /* SelectBusView.swift in Sources */,
 				D90E0C1A2CD89CB20089883F /* AlertSettingMain.swift in Sources */,
 				12D2B6D82CD63D6A005CF771 /* AlertModel.swift in Sources */,
