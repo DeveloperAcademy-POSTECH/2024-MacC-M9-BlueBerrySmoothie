@@ -38,12 +38,15 @@
 		8BF2EFAC2CD3AA44008A6644 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF2EFAB2CD3AA44008A6644 /* LocationManager.swift */; };
 		8BF2EFB52CD92BE0008A6644 /* HapticHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF2EFB42CD92BE0008A6644 /* HapticHelper.swift */; };
 		9D0C411B2CDA3D780005A6CC /* StationPickerModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D0C411A2CDA3D780005A6CC /* StationPickerModal.swift */; };
+		9D19E4B02CEF30D90065967E /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D19E4AF2CEF30D70065967E /* City.swift */; };
+		9D19E4B22CEF321E0065967E /* SelectCityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D19E4B12CEF321A0065967E /* SelectCityView.swift */; };
+		9D19E4B42CEF62360065967E /* KeyboardDismiss.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D19E4B32CEF62270065967E /* KeyboardDismiss.swift */; };
+		9D19E4B62CEF8F610065967E /* CitySettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D19E4B52CEF8F550065967E /* CitySettingView.swift */; };
+		9D30E7222CF1BE0600B1448D /* Untitled.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D30E7212CF1BE0400B1448D /* Untitled.swift */; };
+		9D3382CA2CF2D318008F560A /* HapticManagerforstart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3382C92CF2D318008F560A /* HapticManagerforstart.swift */; };
 		9DBC2A442CDC6F4D00EB19A9 /* UsingAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DBC2A432CDC6F4D00EB19A9 /* UsingAlertView.swift */; };
 		9DEA523F2CD362CA00A3AE68 /* SelectBusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEA523E2CD362C100A3AE68 /* SelectBusView.swift */; };
-		9DEA52412CD3630200A3AE68 /* CityDecoderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEA52402CD362FC00A3AE68 /* CityDecoderModel.swift */; };
 		9DEA52432CD3637C00A3AE68 /* BusModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEA52422CD3637900A3AE68 /* BusModel.swift */; };
-		9DEA52452CD3639100A3AE68 /* CityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEA52442CD3638E00A3AE68 /* CityModel.swift */; };
-		9DEA52472CD363AD00A3AE68 /* FetchCityAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEA52462CD363A100A3AE68 /* FetchCityAPI.swift */; };
 		9DEA524C2CD3B79B00A3AE68 /* ScrollingTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEA524B2CD3B79B00A3AE68 /* ScrollingTextView.swift */; };
 		9DEA524E2CD46EF400A3AE68 /* BusDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEA524D2CD46EF400A3AE68 /* BusDetailView.swift */; };
 		9DEA52502CD4D56400A3AE68 /* busColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEA524F2CD4D56400A3AE68 /* busColor.swift */; };
@@ -51,6 +54,8 @@
 		9DEA52542CD4D5B500A3AE68 /* FetchAllBusData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEA52532CD4D5B500A3AE68 /* FetchAllBusData.swift */; };
 		D90E0C1A2CD89CB20089883F /* AlertSettingMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = D90E0C192CD89CB20089883F /* AlertSettingMain.swift */; };
 		D94BF93C2CEB7F7700973D08 /* AlarmTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94BF93B2CEB7F7700973D08 /* AlarmTestView.swift */; };
+		D94BF98E2CF1CC2000973D08 /* AlarmSound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D94BF98D2CF1CC2000973D08 /* AlarmSound.mp3 */; };
+		D94BF98F2CF1CC2000973D08 /* AlarmSound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D94BF98D2CF1CC2000973D08 /* AlarmSound.mp3 */; };
 		D968D5C62CD89EC4002DF70B /* ActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D968D5C52CD89EC4002DF70B /* ActionButton.swift */; };
 		D968D5C82CD89EF4002DF70B /* SavedBus.swift in Sources */ = {isa = PBXBuildFile; fileRef = D968D5C72CD89EF4002DF70B /* SavedBus.swift */; };
 		D968D5CA2CD912C5002DF70B /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D968D5C92CD912C5002DF70B /* MainView.swift */; };
@@ -121,12 +126,15 @@
 		8BF2EFAF2CD3AABF008A6644 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8BF2EFB42CD92BE0008A6644 /* HapticHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticHelper.swift; sourceTree = "<group>"; };
 		9D0C411A2CDA3D780005A6CC /* StationPickerModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationPickerModal.swift; sourceTree = "<group>"; };
+		9D19E4AF2CEF30D70065967E /* City.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = City.swift; sourceTree = "<group>"; };
+		9D19E4B12CEF321A0065967E /* SelectCityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCityView.swift; sourceTree = "<group>"; };
+		9D19E4B32CEF62270065967E /* KeyboardDismiss.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardDismiss.swift; sourceTree = "<group>"; };
+		9D19E4B52CEF8F550065967E /* CitySettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitySettingView.swift; sourceTree = "<group>"; };
+		9D30E7212CF1BE0400B1448D /* Untitled.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Untitled.swift; sourceTree = "<group>"; };
+		9D3382C92CF2D318008F560A /* HapticManagerforstart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticManagerforstart.swift; sourceTree = "<group>"; };
 		9DBC2A432CDC6F4D00EB19A9 /* UsingAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsingAlertView.swift; sourceTree = "<group>"; };
 		9DEA523E2CD362C100A3AE68 /* SelectBusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectBusView.swift; sourceTree = "<group>"; };
-		9DEA52402CD362FC00A3AE68 /* CityDecoderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityDecoderModel.swift; sourceTree = "<group>"; };
 		9DEA52422CD3637900A3AE68 /* BusModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusModel.swift; sourceTree = "<group>"; };
-		9DEA52442CD3638E00A3AE68 /* CityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityModel.swift; sourceTree = "<group>"; };
-		9DEA52462CD363A100A3AE68 /* FetchCityAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchCityAPI.swift; sourceTree = "<group>"; };
 		9DEA524B2CD3B79B00A3AE68 /* ScrollingTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollingTextView.swift; sourceTree = "<group>"; };
 		9DEA524D2CD46EF400A3AE68 /* BusDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusDetailView.swift; sourceTree = "<group>"; };
 		9DEA524F2CD4D56400A3AE68 /* busColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = busColor.swift; sourceTree = "<group>"; };
@@ -134,6 +142,7 @@
 		9DEA52532CD4D5B500A3AE68 /* FetchAllBusData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchAllBusData.swift; sourceTree = "<group>"; };
 		D90E0C192CD89CB20089883F /* AlertSettingMain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertSettingMain.swift; sourceTree = "<group>"; };
 		D94BF93B2CEB7F7700973D08 /* AlarmTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmTestView.swift; sourceTree = "<group>"; };
+		D94BF98D2CF1CC2000973D08 /* AlarmSound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = AlarmSound.mp3; sourceTree = "<group>"; };
 		D968D5C52CD89EC4002DF70B /* ActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionButton.swift; sourceTree = "<group>"; };
 		D968D5C72CD89EF4002DF70B /* SavedBus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedBus.swift; sourceTree = "<group>"; };
 		D968D5C92CD912C5002DF70B /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -190,6 +199,7 @@
 			isa = PBXGroup;
 			children = (
 				D968D5F82CDB165B002DF70B /* UIfont.swift */,
+				D94BF98D2CF1CC2000973D08 /* AlarmSound.mp3 */,
 				8B0860F82CE1A0A8007C109A /* silentSound.wav */,
 				D968D5F92CDB165B002DF70B /* Fonts */,
 			);
@@ -246,9 +256,8 @@
 		1232B3D92CD1D3F700C48414 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				9D19E4AF2CEF30D70065967E /* City.swift */,
 				8BF2EFA72CD3A7F2008A6644 /* Alert.swift */,
-				9DEA52402CD362FC00A3AE68 /* CityDecoderModel.swift */,
-				9DEA52442CD3638E00A3AE68 /* CityModel.swift */,
 				1232B3DA2CD1D40500C48414 /* BusDecoderModel.swift */,
 				9DEA52422CD3637900A3AE68 /* BusModel.swift */,
 				12D2B6C72CD36E94005CF771 /* BusStopModel.swift */,
@@ -264,6 +273,9 @@
 			isa = PBXGroup;
 			children = (
 				8B112CA22CF060B0000827C7 /* AlertLoadingView.swift */,
+				9D30E7212CF1BE0400B1448D /* Untitled.swift */,
+				9D19E4B52CEF8F550065967E /* CitySettingView.swift */,
+				9D19E4B12CEF321A0065967E /* SelectCityView.swift */,
 				9DBC2A432CDC6F4D00EB19A9 /* UsingAlertView.swift */,
 				9D0C411A2CDA3D780005A6CC /* StationPickerModal.swift */,
 				9DEA524D2CD46EF400A3AE68 /* BusDetailView.swift */,
@@ -292,7 +304,6 @@
 			isa = PBXGroup;
 			children = (
 				1232B3E32CD1D48600C48414 /* FetchBusAPI.swift */,
-				9DEA52462CD363A100A3AE68 /* FetchCityAPI.swift */,
 				12D2B6CB2CD3706F005CF771 /* fetchBusStopAPI.swift */,
 				121D49202CE1B4E000EF5269 /* FetchBusLocationAPI.swift */,
 			);
@@ -302,6 +313,8 @@
 		1232B3E52CD1D49000C48414 /* Manager */ = {
 			isa = PBXGroup;
 			children = (
+				9D3382C92CF2D318008F560A /* HapticManagerforstart.swift */,
+				9D19E4B32CEF62270065967E /* KeyboardDismiss.swift */,
 				8BF2EFA92CD3AA2B008A6644 /* NotificationManager.swift */,
 				8BF2EFAB2CD3AA44008A6644 /* LocationManager.swift */,
 				9DEA52532CD4D5B500A3AE68 /* FetchAllBusData.swift */,
@@ -454,6 +467,7 @@
 				D968D6042CDB165B002DF70B /* SpoqaHanSansNeo-Thin.otf in Resources */,
 				D968D6052CDB165B002DF70B /* SpoqaHanSansNeo-Regular.otf in Resources */,
 				1232B3B72CD1D3DF00C48414 /* Preview Assets.xcassets in Resources */,
+				D94BF98F2CF1CC2000973D08 /* AlarmSound.mp3 in Resources */,
 				1232B3B42CD1D3DF00C48414 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -462,6 +476,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D94BF98E2CF1CC2000973D08 /* AlarmSound.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -486,11 +501,13 @@
 				D90E0C1A2CD89CB20089883F /* AlertSettingMain.swift in Sources */,
 				12D2B6D82CD63D6A005CF771 /* AlertModel.swift in Sources */,
 				9DEA52432CD3637C00A3AE68 /* BusModel.swift in Sources */,
-				9DEA52412CD3630200A3AE68 /* CityDecoderModel.swift in Sources */,
 				9DEA52502CD4D56400A3AE68 /* busColor.swift in Sources */,
 				8B112CA32CF060C5000827C7 /* AlertLoadingView.swift in Sources */,
+				9D19E4B22CEF321E0065967E /* SelectCityView.swift in Sources */,
 				9DEA524E2CD46EF400A3AE68 /* BusDetailView.swift in Sources */,
 				9D0C411B2CDA3D780005A6CC /* StationPickerModal.swift in Sources */,
+				9D30E7222CF1BE0600B1448D /* Untitled.swift in Sources */,
+				9D3382CA2CF2D318008F560A /* HapticManagerforstart.swift in Sources */,
 				12D2B6CC2CD3706F005CF771 /* fetchBusStopAPI.swift in Sources */,
 				D968D5CA2CD912C5002DF70B /* MainView.swift in Sources */,
 				8B0860FB2CE1DDE3007C109A /* ToastMessage.swift in Sources */,
@@ -500,12 +517,13 @@
 				D968D5C62CD89EC4002DF70B /* ActionButton.swift in Sources */,
 				121D491D2CE1B49000EF5269 /* BusLocationModel.swift in Sources */,
 				12D2B6D12CD3B104005CF771 /* NetworkHelper.swift in Sources */,
-				9DEA52472CD363AD00A3AE68 /* FetchCityAPI.swift in Sources */,
 				9DEA524C2CD3B79B00A3AE68 /* ScrollingTextView.swift in Sources */,
-				9DEA52452CD3639100A3AE68 /* CityModel.swift in Sources */,
+				9D19E4B62CEF8F610065967E /* CitySettingView.swift in Sources */,
+				9D19E4B02CEF30D90065967E /* City.swift in Sources */,
 				63B4393C2CEB96DA00B77F4D /* LiveActivityManager.swift in Sources */,
 				D968D5C82CD89EF4002DF70B /* SavedBus.swift in Sources */,
 				9DEA52542CD4D5B500A3AE68 /* FetchAllBusData.swift in Sources */,
+				9D19E4B42CEF62360065967E /* KeyboardDismiss.swift in Sources */,
 				121D491B2CE1B46B00EF5269 /* NowBusLocationViewModel.swift in Sources */,
 				12D2B6CA2CD36ED8005CF771 /* BusStopDecoderModel.swift in Sources */,
 				D968D6002CDB165B002DF70B /* UIfont.swift in Sources */,
@@ -587,7 +605,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -644,7 +662,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -663,11 +681,14 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"BlueBerrySmoothie/Preview Content\"";
-				DEVELOPMENT_TEAM = GF3B5LP7RQ;
+				DEVELOPMENT_TEAM = UW9295Z57Q;
+
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BlueBerrySmoothie/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "핫챠";
+				INFOPLIST_KEY_NSAppleMusicUsageDescription = "비디오를 선택하여 앱에서 사용하기 위해 미디어 라이브러리 접근 권한이 필요합니다.";
+				INFOPLIST_KEY_NSFileProviderDomainUsageDescription = "";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "현재 위치를 기반으로 서비스 제공을 위해 위치 정보가 필요합니다.";
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "앱이 백그라운드에서도 주변 장소를 보여주기 위해 위치 정보가 필요합니다.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "현재 위치를 기반으로 서비스 제공을 위해 위치 정보가 필요합니다.";
@@ -705,11 +726,13 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"BlueBerrySmoothie/Preview Content\"";
-				DEVELOPMENT_TEAM = UW9295Z57Q;
+				DEVELOPMENT_TEAM = V9J26YADA8;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BlueBerrySmoothie/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "핫챠";
+				INFOPLIST_KEY_NSAppleMusicUsageDescription = "비디오를 선택하여 앱에서 사용하기 위해 미디어 라이브러리 접근 권한이 필요합니다.";
+				INFOPLIST_KEY_NSFileProviderDomainUsageDescription = "";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "현재 위치를 기반으로 서비스 제공을 위해 위치 정보가 필요합니다.";
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "앱이 백그라운드에서도 주변 장소를 보여주기 위해 위치 정보가 필요합니다.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "현재 위치를 기반으로 서비스 제공을 위해 위치 정보가 필요합니다.";
@@ -745,7 +768,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = GF3B5LP7RQ;
+				DEVELOPMENT_TEAM = UW9295Z57Q;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = LiveActWidget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = LiveActWidget;
@@ -773,7 +796,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 6Q3GG57US3;
+				DEVELOPMENT_TEAM = V9J26YADA8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = LiveActWidget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = LiveActWidget;

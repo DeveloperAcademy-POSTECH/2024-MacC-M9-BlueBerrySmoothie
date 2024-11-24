@@ -13,7 +13,7 @@ import SwiftData
 struct BlueBerrySmoothieApp: App {
     @StateObject private var busStopViewModel = BusStopViewModel()// AppDelegate 역할 클래스와 연결
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
-    
+
     var body: some Scene {
         WindowGroup {
             MainView()
