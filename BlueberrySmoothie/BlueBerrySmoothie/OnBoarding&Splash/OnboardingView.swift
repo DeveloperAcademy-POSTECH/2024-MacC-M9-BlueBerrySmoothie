@@ -31,11 +31,11 @@ struct OnboardingView: View {
     }
     
     var onboardingPages = [
-        OnboardingPage(imageName: "Onboarding_complete", title1: "알림권한이 필요해요.여기는 미완성", title2: "", description: "정류장 기반 알람을 주기 위해서는 알림권한이 꼭 필요해요.", buttonText: "다음"),
-        OnboardingPage(imageName: "Onboarding_complete", title1: "위치권한이 필요해요.여기는 미완성", title2: "", description: "정류장 기반 알람을 주기 위해서는 위치권한이 꼭 필요해요.", buttonText: "다음"),
+        OnboardingPage(imageName: "OnboardingEndView", title1: "알림권한이 필요해요.여기는 미완성", title2: "", description: "정류장 기반 알람을 주기 위해서는 알림권한이 꼭 필요해요.", buttonText: "다음"),
+        OnboardingPage(imageName: "OnboardingEndView", title1: "위치권한이 필요해요.여기는 미완성", title2: "", description: "정류장 기반 알람을 주기 위해서는 위치권한이 꼭 필요해요.", buttonText: "다음"),
 
-        OnboardingPage(imageName: "Onboarding_location", title1: "평소 버스를 이용하는 지역은", title2: "어디신가요?", description: "핫챠는 정류장 위치기반 알람이에요.", buttonText: "지역 선택하기"),
-        OnboardingPage(imageName: "Onboarding_complete", title1: "지역이 부산으로 설정되었어요", title2: "", description: "항상 이용하는 버스와 정류장으로 알람을 설정해보세요.", buttonText: "시작하기")
+        OnboardingPage(imageName: "OnboardingStartView", title1: "평소 버스를 이용하는 지역은", title2: "어디신가요?", description: "핫챠는 정류장 위치기반 알람이에요.", buttonText: "지역 선택하기"),
+        OnboardingPage(imageName: "OnboardingEndView", title1: "지역이 부산으로 설정되었어요", title2: "", description: "항상 이용하는 버스와 정류장으로 알람을 설정해보세요.", buttonText: "시작하기")
     ]
     
     var body: some View {
@@ -167,7 +167,7 @@ struct OnboardingView: View {
                         .font(.headline)
                         .padding()
                         .frame(maxWidth: .infinity)
-                        .background(.dgray1)
+                        .background(.darkgray1)
                         .foregroundColor(.white)
                         .cornerRadius(10)
                 }
