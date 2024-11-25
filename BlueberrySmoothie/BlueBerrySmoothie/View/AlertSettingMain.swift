@@ -14,8 +14,8 @@ struct AlertSettingMain: View {
     @State private var label: String = "알람"
     @State private var selectedStation: String = "정류장 수"
   
-    // 사용자 입력을 받을 cityCode
-    @State private var cityCodeInput: String = UserDefaults.standard.string(forKey: "CityCodeKeyID") ?? "1"// ← 추가된 상태 변수)
+    // 설정된 cityCode 가져오기
+    @State private var cityCodeInput: String = UserDefaults.standard.string(forKey: "CityCodeKeyID") ?? "설정 안됨"
     
     @State private var showSelectBusSheet: Bool = false // SelectBusView를 sheet로 표시할지 여부
     @State private var busStopAlert: BusStopAlert? // 사용자 선택 사항
