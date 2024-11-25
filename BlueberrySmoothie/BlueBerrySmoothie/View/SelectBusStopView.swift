@@ -45,7 +45,7 @@ struct SelectBusStopView: View {
                     directionView(
                         directionName: "\(bus.endnodenm)방면", // 상행
                         isSelected: updowncdselection == 1,
-                        selectedColor: .midbrand,
+                        selectedColor: .brand,
                         unselectedColor: .gray2
                     )
                     .onTapGesture {
@@ -56,7 +56,7 @@ struct SelectBusStopView: View {
                     directionView(
                         directionName: "\(bus.startnodenm)방면", // 하행
                         isSelected: updowncdselection == 2,
-                        selectedColor: .midbrand,
+                        selectedColor: .brand,
                         unselectedColor: .gray2
                     )
                     .onTapGesture {
@@ -122,7 +122,7 @@ struct SelectBusStopView: View {
                             Spacer()
                             Divider() // 상행의 마지막 item의 divider의 색과 굵기 변경
                                 .frame(height: busstop.nodeord == busStopViewModel.maxUpwardNodeord! ? 2 : 1)
-                                .background(busstop.nodeord == busStopViewModel.maxUpwardNodeord! ? .gray1 : .gray5)
+                                .background(busstop.nodeord == busStopViewModel.maxUpwardNodeord! ? .midbrand : .gray5)
                                 .overlay(
                                     // 상행의 마지막 item을 스크롤 할 때 상단의 방면이 자동으로 변경되도록 함
                                     busstop.nodeord == busStopViewModel.maxUpwardNodeord! ? GeometryReader { proxy in
