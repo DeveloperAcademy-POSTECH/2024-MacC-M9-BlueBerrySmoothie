@@ -53,6 +53,10 @@
 		9DEA52502CD4D56400A3AE68 /* busColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEA524F2CD4D56400A3AE68 /* busColor.swift */; };
 		9DEA52522CD4D57A00A3AE68 /* filterBuses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEA52512CD4D57A00A3AE68 /* filterBuses.swift */; };
 		9DEA52542CD4D5B500A3AE68 /* FetchAllBusData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEA52532CD4D5B500A3AE68 /* FetchAllBusData.swift */; };
+		B8D679822CF38D240003A86C /* AlarmLottie.json in Resources */ = {isa = PBXBuildFile; fileRef = B8D679812CF38D240003A86C /* AlarmLottie.json */; };
+		B8D679832CF38D240003A86C /* AlarmLottie.json in Resources */ = {isa = PBXBuildFile; fileRef = B8D679812CF38D240003A86C /* AlarmLottie.json */; };
+		B8D679872CF3928E0003A86C /* refreshLottie.json in Resources */ = {isa = PBXBuildFile; fileRef = B8D679862CF3928E0003A86C /* refreshLottie.json */; };
+		B8D679882CF3928E0003A86C /* refreshLottie.json in Resources */ = {isa = PBXBuildFile; fileRef = B8D679862CF3928E0003A86C /* refreshLottie.json */; };
 		D90E0C1A2CD89CB20089883F /* AlertSettingMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = D90E0C192CD89CB20089883F /* AlertSettingMain.swift */; };
 		D94BF93C2CEB7F7700973D08 /* AlarmTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94BF93B2CEB7F7700973D08 /* AlarmTestView.swift */; };
 		D94BF98E2CF1CC2000973D08 /* AlarmSound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D94BF98D2CF1CC2000973D08 /* AlarmSound.mp3 */; };
@@ -142,6 +146,8 @@
 		9DEA524F2CD4D56400A3AE68 /* busColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = busColor.swift; sourceTree = "<group>"; };
 		9DEA52512CD4D57A00A3AE68 /* filterBuses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = filterBuses.swift; sourceTree = "<group>"; };
 		9DEA52532CD4D5B500A3AE68 /* FetchAllBusData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchAllBusData.swift; sourceTree = "<group>"; };
+		B8D679812CF38D240003A86C /* AlarmLottie.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = AlarmLottie.json; sourceTree = "<group>"; };
+		B8D679862CF3928E0003A86C /* refreshLottie.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = refreshLottie.json; sourceTree = "<group>"; };
 		D90E0C192CD89CB20089883F /* AlertSettingMain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertSettingMain.swift; sourceTree = "<group>"; };
 		D94BF93B2CEB7F7700973D08 /* AlarmTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmTestView.swift; sourceTree = "<group>"; };
 		D94BF98D2CF1CC2000973D08 /* AlarmSound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = AlarmSound.mp3; sourceTree = "<group>"; };
@@ -203,6 +209,8 @@
 				D968D5F82CDB165B002DF70B /* UIfont.swift */,
 				D94BF98D2CF1CC2000973D08 /* AlarmSound.mp3 */,
 				8B0860F82CE1A0A8007C109A /* silentSound.wav */,
+				B8D679862CF3928E0003A86C /* refreshLottie.json */,
+				B8D679812CF38D240003A86C /* AlarmLottie.json */,
 				D968D5F92CDB165B002DF70B /* Fonts */,
 			);
 			path = Resource;
@@ -475,10 +483,12 @@
 				D968D6022CDB165B002DF70B /* SpoqaHanSansNeo-Medium.otf in Resources */,
 				D968D6032CDB165B002DF70B /* SpoqaHanSansNeo-Light.otf in Resources */,
 				8B0860F92CE1A0A9007C109A /* silentSound.wav in Resources */,
+				B8D679822CF38D240003A86C /* AlarmLottie.json in Resources */,
 				D968D6042CDB165B002DF70B /* SpoqaHanSansNeo-Thin.otf in Resources */,
 				D968D6052CDB165B002DF70B /* SpoqaHanSansNeo-Regular.otf in Resources */,
 				1232B3B72CD1D3DF00C48414 /* Preview Assets.xcassets in Resources */,
 				D94BF98F2CF1CC2000973D08 /* AlarmSound.mp3 in Resources */,
+				B8D679872CF3928E0003A86C /* refreshLottie.json in Resources */,
 				1232B3B42CD1D3DF00C48414 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -487,6 +497,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B8D679882CF3928E0003A86C /* refreshLottie.json in Resources */,
+				B8D679832CF38D240003A86C /* AlarmLottie.json in Resources */,
 				D94BF98E2CF1CC2000973D08 /* AlarmSound.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -693,7 +705,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"BlueBerrySmoothie/Preview Content\"";
-				DEVELOPMENT_TEAM = UW9295Z57Q;
+				DEVELOPMENT_TEAM = S6A9QNGA6J;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BlueBerrySmoothie/Info.plist;
@@ -737,7 +749,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"BlueBerrySmoothie/Preview Content\"";
-				DEVELOPMENT_TEAM = UW9295Z57Q;
+				DEVELOPMENT_TEAM = S6A9QNGA6J;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BlueBerrySmoothie/Info.plist;
@@ -779,7 +791,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = UW9295Z57Q;
+				DEVELOPMENT_TEAM = S6A9QNGA6J;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = LiveActWidget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = LiveActWidget;
@@ -807,7 +819,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = V9J26YADA8;
+				DEVELOPMENT_TEAM = S6A9QNGA6J;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = LiveActWidget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = LiveActWidget;
