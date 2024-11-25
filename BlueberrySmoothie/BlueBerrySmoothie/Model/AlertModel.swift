@@ -25,6 +25,7 @@ class BusAlert {
     var alertHaptic: Bool? // 알람 진동 (옵셔널)
     var alertCycle: Double? // 알람 주기 (옵셔널)
     var updowncd: Int
+    var isPinned: Bool = false
     
     init(id: String, cityCode: Double, busNo: String, routeid: String, arrivalBusStopID: String, arrivalBusStopNm: String, arrivalBusStopNord: Int ,alertBusStop: Int, /*alertBusStopID: String, alertBusStopNm: String,*/ alertLabel: String, alertSound: Bool? = nil, alertHaptic: Bool? = nil, alertCycle: Double? = nil, updowncd: Int) {
         self.id = id

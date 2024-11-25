@@ -49,10 +49,8 @@
 		9DEA52522CD4D57A00A3AE68 /* filterBuses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEA52512CD4D57A00A3AE68 /* filterBuses.swift */; };
 		9DEA52542CD4D5B500A3AE68 /* FetchAllBusData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEA52532CD4D5B500A3AE68 /* FetchAllBusData.swift */; };
 		D90E0C1A2CD89CB20089883F /* AlertSettingMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = D90E0C192CD89CB20089883F /* AlertSettingMain.swift */; };
-		D94BF93C2CEB7F7700973D08 /* AlarmTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94BF93B2CEB7F7700973D08 /* AlarmTestView.swift */; };
 		D94BF98E2CF1CC2000973D08 /* AlarmSound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D94BF98D2CF1CC2000973D08 /* AlarmSound.mp3 */; };
 		D94BF98F2CF1CC2000973D08 /* AlarmSound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D94BF98D2CF1CC2000973D08 /* AlarmSound.mp3 */; };
-		D968D5C62CD89EC4002DF70B /* ActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D968D5C52CD89EC4002DF70B /* ActionButton.swift */; };
 		D968D5C82CD89EF4002DF70B /* SavedBus.swift in Sources */ = {isa = PBXBuildFile; fileRef = D968D5C72CD89EF4002DF70B /* SavedBus.swift */; };
 		D968D5CA2CD912C5002DF70B /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D968D5C92CD912C5002DF70B /* MainView.swift */; };
 		D968D6002CDB165B002DF70B /* UIfont.swift in Sources */ = {isa = PBXBuildFile; fileRef = D968D5F82CDB165B002DF70B /* UIfont.swift */; };
@@ -133,9 +131,7 @@
 		9DEA52512CD4D57A00A3AE68 /* filterBuses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = filterBuses.swift; sourceTree = "<group>"; };
 		9DEA52532CD4D5B500A3AE68 /* FetchAllBusData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchAllBusData.swift; sourceTree = "<group>"; };
 		D90E0C192CD89CB20089883F /* AlertSettingMain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertSettingMain.swift; sourceTree = "<group>"; };
-		D94BF93B2CEB7F7700973D08 /* AlarmTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmTestView.swift; sourceTree = "<group>"; };
 		D94BF98D2CF1CC2000973D08 /* AlarmSound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = AlarmSound.mp3; sourceTree = "<group>"; };
-		D968D5C52CD89EC4002DF70B /* ActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionButton.swift; sourceTree = "<group>"; };
 		D968D5C72CD89EF4002DF70B /* SavedBus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedBus.swift; sourceTree = "<group>"; };
 		D968D5C92CD912C5002DF70B /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		D968D5F32CDB165B002DF70B /* SpoqaHanSansNeo-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Bold.otf"; sourceTree = "<group>"; };
@@ -265,8 +261,8 @@
 		1232B3DC2CD1D40800C48414 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				9DBC2A432CDC6F4D00EB19A9 /* UsingAlertView.swift */,
 				9D0C411A2CDA3D780005A6CC /* StationPickerModal.swift */,
+				9DBC2A432CDC6F4D00EB19A9 /* UsingAlertView.swift */,
 				9DEA524D2CD46EF400A3AE68 /* BusDetailView.swift */,
 				9DEA524B2CD3B79B00A3AE68 /* ScrollingTextView.swift */,
 				D90E0C192CD89CB20089883F /* AlertSettingMain.swift */,
@@ -274,7 +270,6 @@
 				12D2B6C52CD36E70005CF771 /* SelectBusStopView.swift */,
 				D968D5C92CD912C5002DF70B /* MainView.swift */,
 				8B0861042CE88F4B007C109A /* AlertStopMapView.swift */,
-				D94BF93B2CEB7F7700973D08 /* AlarmTestView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -344,7 +339,6 @@
 			isa = PBXGroup;
 			children = (
 				D968D5C72CD89EF4002DF70B /* SavedBus.swift */,
-				D968D5C52CD89EC4002DF70B /* ActionButton.swift */,
 				8B0860FA2CE1DDE3007C109A /* ToastMessage.swift */,
 			);
 			path = Component;
@@ -476,7 +470,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				8B0860F72CDDA237007C109A /* HapticManager.swift in Sources */,
-				D94BF93C2CEB7F7700973D08 /* AlarmTestView.swift in Sources */,
 				8BF2EFB52CD92BE0008A6644 /* HapticHelper.swift in Sources */,
 				8BF2EFAA2CD3AA2B008A6644 /* NotificationManager.swift in Sources */,
 				8BF2EFA82CD3A7F2008A6644 /* Alert.swift in Sources */,
@@ -499,7 +492,6 @@
 				1232B3E42CD1D48600C48414 /* FetchBusAPI.swift in Sources */,
 				121D49212CE1B4E000EF5269 /* FetchBusLocationAPI.swift in Sources */,
 				9DEA52522CD4D57A00A3AE68 /* filterBuses.swift in Sources */,
-				D968D5C62CD89EC4002DF70B /* ActionButton.swift in Sources */,
 				121D491D2CE1B49000EF5269 /* BusLocationModel.swift in Sources */,
 				12D2B6D12CD3B104005CF771 /* NetworkHelper.swift in Sources */,
 				9DEA52472CD363AD00A3AE68 /* FetchCityAPI.swift in Sources */,
