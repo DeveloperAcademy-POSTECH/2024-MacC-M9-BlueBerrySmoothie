@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "AfterAlertViewBG_1X.png",
+      "filename" : "AfterAlertRetangle_1X.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
@@ -12,12 +12,12 @@
           "value" : "dark"
         }
       ],
-      "filename" : "AfterAlertViewBG_Dark_1X.png",
+      "filename" : "AfterAlertRetangle_Dark_1X.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "AfterAlertViewBG_2X.png",
+      "filename" : "AfterAlertRetangle_2X.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
@@ -28,12 +28,12 @@
           "value" : "dark"
         }
       ],
-      "filename" : "AfterAlertViewBG_Dark_2X.png",
+      "filename" : "AfterAlertRetangle_Dark_2X.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "AfterAlertViewBG_3X.png",
+      "filename" : "AfterAlertRetangle_3X.png",
       "idiom" : "universal",
       "scale" : "3x"
     },
@@ -44,7 +44,7 @@
           "value" : "dark"
         }
       ],
-      "filename" : "AfterAlertViewBG_Dark_3X.png",
+      "filename" : "AfterAlertRetangle_Dark_3X.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
