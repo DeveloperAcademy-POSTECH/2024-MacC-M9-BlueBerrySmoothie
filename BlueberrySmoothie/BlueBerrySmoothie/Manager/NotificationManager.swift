@@ -16,7 +16,6 @@ import AVFoundation
 class NotificationManager: NSObject, CLLocationManagerDelegate, ObservableObject, UNUserNotificationCenterDelegate {
     static let instance = NotificationManager() //Singleton
     @Published var notificationReceived = false // 알림 수신 상태
-    let hapticManager = HapticManager()
     
     override init() {
         super.init()
