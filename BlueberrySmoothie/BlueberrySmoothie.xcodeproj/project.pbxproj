@@ -27,6 +27,9 @@
 		6300BEEE2CEAE36D0004E1A4 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6300BEED2CEAE36D0004E1A4 /* WidgetKit.framework */; };
 		6300BEF02CEAE36D0004E1A4 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6300BEEF2CEAE36D0004E1A4 /* SwiftUI.framework */; };
 		6300BF012CEAE36F0004E1A4 /* LiveActWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 6300BEEB2CEAE36D0004E1A4 /* LiveActWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		634C334D2CF30801008EF1C0 /* MyLiveActivityAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634C33472CF30801008EF1C0 /* MyLiveActivityAttributes.swift */; };
+		634C33562CF32010008EF1C0 /* LiveActivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B4393B2CEB96C800B77F4D /* LiveActivityManager.swift */; };
+		634C335A2CF38628008EF1C0 /* MyLiveActivityAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634C33472CF30801008EF1C0 /* MyLiveActivityAttributes.swift */; };
 		63B4393C2CEB96DA00B77F4D /* LiveActivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B4393B2CEB96C800B77F4D /* LiveActivityManager.swift */; };
 		8B0860F92CE1A0A9007C109A /* silentSound.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8B0860F82CE1A0A8007C109A /* silentSound.wav */; };
 		8B0860FB2CE1DDE3007C109A /* ToastMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0860FA2CE1DDE3007C109A /* ToastMessage.swift */; };
@@ -121,6 +124,7 @@
 		6300BEEB2CEAE36D0004E1A4 /* LiveActWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = LiveActWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		6300BEED2CEAE36D0004E1A4 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		6300BEEF2CEAE36D0004E1A4 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		634C33472CF30801008EF1C0 /* MyLiveActivityAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLiveActivityAttributes.swift; sourceTree = "<group>"; };
 		63B4393B2CEB96C800B77F4D /* LiveActivityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveActivityManager.swift; sourceTree = "<group>"; };
 		8B0860F82CE1A0A8007C109A /* silentSound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = silentSound.wav; sourceTree = "<group>"; };
 		8B0860FA2CE1DDE3007C109A /* ToastMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastMessage.swift; sourceTree = "<group>"; };
@@ -166,24 +170,24 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		6300BF022CEAE36F0004E1A4 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Info.plist,
-			);
-			target = 6300BEEA2CEAE36D0004E1A4 /* LiveActWidgetExtension */;
-		};
-		63B439F92CED6D8E00B77F4D /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+		6309E0FC2CF1B5AE00350CC3 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				LiveActivityUI.swift,
 			);
 			target = 1232B3AB2CD1D3DE00C48414 /* BlueBerrySmoothie */;
 		};
+		6309E0FD2CF1B5B300350CC3 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 6300BEEA2CEAE36D0004E1A4 /* LiveActWidgetExtension */;
+		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		6300BEF12CEAE36D0004E1A4 /* LiveActWidget */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (63B439F92CED6D8E00B77F4D /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 6300BF022CEAE36F0004E1A4 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = LiveActWidget; sourceTree = "<group>"; };
+		6300BEF12CEAE36D0004E1A4 /* LiveActWidget */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (6309E0FC2CF1B5AE00350CC3 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 6309E0FD2CF1B5B300350CC3 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = LiveActWidget; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -225,6 +229,7 @@
 			children = (
 				1232B3AE2CD1D3DE00C48414 /* BlueBerrySmoothie */,
 				6300BEF12CEAE36D0004E1A4 /* LiveActWidget */,
+				634C33592CF385E7008EF1C0 /* Shared */,
 				6300BEEC2CEAE36D0004E1A4 /* Frameworks */,
 				1232B3AD2CD1D3DE00C48414 /* Products */,
 			);
@@ -365,6 +370,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+
+		634C33592CF385E7008EF1C0 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				634C33472CF30801008EF1C0 /* MyLiveActivityAttributes.swift */,
+			);
+			path = Shared;
+
 		9D3383372CF315FC008F560A /* OnBoarding&Splash */ = {
 			isa = PBXGroup;
 			children = (
@@ -374,6 +387,7 @@
 				9D5452A52CF4177500722B16 /* InfoCardView.swift */,
 			);
 			path = "OnBoarding&Splash";
+
 			sourceTree = "<group>";
 		};
 		D90E0C112CD89C620089883F /* Component */ = {
@@ -520,6 +534,7 @@
 			files = (
 				D94BF93C2CEB7F7700973D08 /* AlarmTestView.swift in Sources */,
 				8BF2EFB52CD92BE0008A6644 /* HapticHelper.swift in Sources */,
+				634C335A2CF38628008EF1C0 /* MyLiveActivityAttributes.swift in Sources */,
 				8BF2EFAA2CD3AA2B008A6644 /* NotificationManager.swift in Sources */,
 				9D3382CC2CF2E694008F560A /* AppView.swift in Sources */,
 				8BF2EFA82CD3A7F2008A6644 /* Alert.swift in Sources */,
@@ -572,6 +587,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				634C33562CF32010008EF1C0 /* LiveActivityManager.swift in Sources */,
+				634C334D2CF30801008EF1C0 /* MyLiveActivityAttributes.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -714,7 +731,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"BlueBerrySmoothie/Preview Content\"";
-				DEVELOPMENT_TEAM = GF3B5LP7RQ;
+				DEVELOPMENT_TEAM = 6Q3GG57US3;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BlueBerrySmoothie/Info.plist;
@@ -730,7 +747,10 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
+
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -757,7 +777,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"BlueBerrySmoothie/Preview Content\"";
-				DEVELOPMENT_TEAM = UW9295Z57Q;
+				DEVELOPMENT_TEAM = 6Q3GG57US3;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BlueBerrySmoothie/Info.plist;
@@ -773,7 +793,10 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
+
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -803,8 +826,10 @@
 				INFOPLIST_FILE = LiveActWidget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = LiveActWidget;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
+
 				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.1;
+
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -832,8 +857,9 @@
 				INFOPLIST_FILE = LiveActWidget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = LiveActWidget;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+
 				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.1;
+
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
