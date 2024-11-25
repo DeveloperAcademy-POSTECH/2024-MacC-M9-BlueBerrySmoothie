@@ -67,7 +67,7 @@ struct MainView: View {
                     }
                     ToolbarItem(placement: .navigationBarLeading) {
                         Text("버스 알람: 햣챠")
-                            .font(.mediumbold24)
+                            .font(.title)
                             .foregroundStyle(.black)
                     }
                 }

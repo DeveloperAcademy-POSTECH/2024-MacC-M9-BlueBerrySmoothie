@@ -7,6 +7,8 @@
 
 import SwiftUI
 import CoreLocation
+import AVFoundation
+import MediaPlayer
 
 class LocationManager: NSObject, ObservableObject {
     private let notificationManager = NotificationManager.instance
@@ -16,6 +18,10 @@ class LocationManager: NSObject, ObservableObject {
     private var backgroundTasks: [String: UIBackgroundTaskIdentifier] = [:]
     private var notificationTimers: [String: Timer] = [:]
     private var activeAlarms: Set<String> = [] // 활성화된 알람을 추적하기 위한 Set
+    
+    private var player: AVAudioPlayer?
+    private var originalVolume: Float = 0.0
+    private let volumeView = MPVolumeView()
     
     @Published var location: CLLocation?
     @Published var region: CLLocation?
@@ -30,6 +36,8 @@ class LocationManager: NSObject, ObservableObject {
         manager.desiredAccuracy = kCLLocationAccuracyBest // locationManager의 정확도를 최고로 설정
         manager.allowsBackgroundLocationUpdates = true // 백그라운드에서도 위치를 업데이트하도록 설정
         manager.pausesLocationUpdatesAutomatically = false // 백그라운드에서 업데이트가 중지되지 않도록 설정
+        setupAudioSession()
+        loadAudioFile()
         checkIfLocationServicesIsEnabled()
     }
     
@@ -93,6 +101,8 @@ class LocationManager: NSObject, ObservableObject {
         content.title = "\(busAlert.arrivalBusStopNm) \(busAlert.alertBusStop)정거장 전입니다."
         content.body = "일어나서 내릴 준비를 해야해요!"
         content.sound = .default
+        
+        playAudio()
         
         // 앱이 포그라운드 상태일 때
         if UIApplication.shared.applicationState == .active {
@@ -166,23 +176,47 @@ class LocationManager: NSObject, ObservableObject {
             errorMessage = "위치 서비스가 비활성화되어 있습니다. 설정에서 위치 서비스를 켜주세요."
         }
     }
-    
-    /// 현재 위치 권한 상태를 확인하고, 권한이 없을 경우 요청
-    private func checkLocationAuthorization() {
+    /// 위치 권한 상태를 확인하고 필요한 요청을 수행하는 함수
+    public func checkLocationAuthorization() {
         switch manager.authorizationStatus {
         case .notDetermined:
-            manager.requestWhenInUseAuthorization()
+            requestWhenInUsePermission()
+        case .authorizedWhenInUse:
+            requestAlwaysPermission()
+        case .authorizedAlways:
+            print("Always 권한 이미 허용됨.")
         case .restricted:
             errorMessage = "위치 서비스 접근이 제한되어 있습니다."
         case .denied:
             errorMessage = "위치 서비스 권한이 거부되었습니다. 설정에서 권한을 허용해주세요."
-        case .authorizedAlways, .authorizedWhenInUse:
-            //            manager.startUpdatingLocation()
-            manager.requestAlwaysAuthorization()
         @unknown default:
-            break
+            print("알 수 없는 권한 상태")
         }
     }
+
+    /// "앱을 사용하는 동안" 권한 요청
+    public func requestWhenInUsePermission() {
+        print("WhenInUse 권한 요청 중...")
+        manager.requestWhenInUseAuthorization()
+    }
+
+    /// "항상 허용" 권한 요청
+    public func requestAlwaysPermission() {
+        print("Always 권한 요청 중...")
+        manager.requestAlwaysAuthorization()
+    }
+
+    /// 권한 상태가 변경될 때 호출
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        locationStatus = status
+        print("권한 상태 변경됨: \(status.rawValue)")
+        
+        // 변경된 상태에 따라 필요한 동작 수행
+        checkLocationAuthorization()
+    }
+    
+
+
     
     // BusAlert 조회 메서드
     private func getBusAlert(for identifier: String) -> BusAlert? {
@@ -202,6 +236,80 @@ class LocationManager: NSObject, ObservableObject {
 //    func isNotificationActive(for busAlert: BusAlert) -> Bool {
 //        return activeNotifications.contains(busAlert.id)
 //    }
+    
+    private func setupAudioSession() {
+        do {
+            try AVAudioSession.sharedInstance().setCategory(
+                .playback,
+                mode: .default,
+                options: [.mixWithOthers, .duckOthers]
+            )
+            // 무음 모드에서도 재생되도록 설정
+            try AVAudioSession.sharedInstance().setActive(true, options: .notifyOthersOnDeactivation)
+            try AVAudioSession.sharedInstance().overrideOutputAudioPort(.speaker)
+        } catch {
+            print("오디오 세션 설정 실패: \(error)")
+        }
+    }
+    
+    private func loadAudioFile() {
+        if let path = Bundle.main.path(forResource: "AlarmSound", ofType: "mp3") {
+            // forResourece : 안에 오디오 파일 이름 넣기
+            let url = URL(fileURLWithPath: path)
+            do {
+                player = try AVAudioPlayer(contentsOf: url)
+                // 오디오 파일 미리 로드
+                player?.prepareToPlay()
+                // 볼륨을 최대로 설정
+                player?.volume = 0.8
+                print("오디오 파일 로드 성공")
+            } catch {
+                print("오디오 파일 로드 실패: \(error)")
+                print("파일 경로: \(path)")
+            }
+        } else {
+            print("AlarmSound.mp3 파일이 없습니다.")
+        }
+    }
+    
+    func playAudio() {
+        // 현재 시스템 볼륨 저장
+        originalVolume = AVAudioSession.sharedInstance().outputVolume
+        
+        // 볼륨이 낮으면 최대로 설정
+        if originalVolume < 1 {
+            maximizeVolume()
+        }
+        
+        // 여러 번 반복 재생 설정
+        player?.numberOfLoops = 5  // 5번 반복
+        player?.play()
+        
+        // 20초 후에 원래 볼륨으로 복구
+        DispatchQueue.main.asyncAfter(deadline: .now() + 20) { [weak self] in
+            self?.restoreVolume()
+        }
+    }
+    
+    func stopAudio() {
+        player?.stop()
+        restoreVolume()
+    }
+    
+    private func maximizeVolume() {
+        // MPVolumeView를 통해 시스템 볼륨을 최대로 설정
+        if let slider = volumeView.subviews.first(where: { $0 is UISlider }) as? UISlider {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                slider.value = 0.8  // 최대 볼륨
+            }
+        }
+    }
+    
+    private func restoreVolume() {
+        if let slider = volumeView.subviews.first(where: { $0 is UISlider }) as? UISlider {
+            slider.value = originalVolume
+        }
+    }
 }
 
 extension LocationManager: CLLocationManagerDelegate {
@@ -223,10 +331,11 @@ extension LocationManager: CLLocationManagerDelegate {
         print("Location error: \(error.localizedDescription)")
         errorMessage = "위치를 찾을 수 없습니다: \(error.localizedDescription)"
     }
-    
-    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        locationStatus = status
-        checkLocationAuthorization()
-    }
+//    
+//    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+//        locationStatus = status
+//        checkLocationAuthorization()
+//    }
+
 }
 

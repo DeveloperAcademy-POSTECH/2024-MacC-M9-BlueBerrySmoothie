@@ -13,16 +13,16 @@ import SwiftData
 struct BlueBerrySmoothieApp: App {
     @StateObject private var busStopViewModel = BusStopViewModel()// AppDelegate 역할 클래스와 연결
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
-    
+
     var body: some Scene {
         WindowGroup {
-            MainView()
+            SplashView()
                 .environmentObject(busStopViewModel)
                 .modelContainer(for: [BusAlert.self, BusStopLocal.self])
-          .onAppear {
-                    // 필요시 추가 초기화 작업
-                    NotificationManager.instance.requestAuthorization() // 권한 요청 예시
-                }
+//          .onAppear {
+//                    // 필요시 추가 초기화 작업
+//                    NotificationManager.instance.requestAuthorization() // 권한 요청 예시
+//                }
         }
 
     }
