@@ -65,9 +65,10 @@ struct MainView: View {
                             }
                         }
                     }
+                    //오류
                     ToolbarItem(placement: .navigationBarLeading) {
                         Text("버스 알람: 햣챠")
-                            .font(.title)
+                            .font(.title3)
                             .foregroundStyle(.black)
                     }
                 }
@@ -116,7 +117,8 @@ struct MainView: View {
             }
             
             // 라이브 액티비티 시작
-            LiveActivityManager.shared.startLiveActivity()
+            LiveActivityManager.shared.startLiveActivity(stationName: selectedAlert.arrivalBusStopNm, initialProgress: 3, currentStop: selectedAlert.arrivalBusStopNm, stopsRemaining: 5)
+            
             
             // 알림 설정
             isUsingAlertActive = true // Activate navigation
