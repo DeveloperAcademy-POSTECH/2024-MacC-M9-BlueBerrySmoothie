@@ -93,13 +93,13 @@ struct UsingAlertView: View {
             // 알람종료 오버레이 뷰
             if notificationManager.notificationReceived {
                 AfterAlertView()
-                    .edgesIgnoringSafeArea(.all) // 전체 화면에 적용
             }
         }
         .onAppear {
             refreshData() // 초기 로드
             currentBusViewModel.startUpdating() // 뷰가 보일 때 뷰모델에서 위치 업데이트 시작
             startRefreshTimer() // 타이머 시작
+//            notificationManager.notificationReceived = true // AfterAlertView 수정위한 임시 설정
         }
         .onChange(of: currentBusViewModel.closestBusLocation != nil) { isNotNil in
             if isNotNil {
@@ -130,10 +130,10 @@ struct UsingAlertView: View {
                 Image("BusAlertInfoBG")
                     .resizable()
                     .frame(maxWidth: .infinity, maxHeight: 224)
-
+                
                 VStack(alignment: .leading) {
                     // 버스 정보
-                    HStack {
+                    HStack(spacing: 4) {
                         Image(systemName: "square.fill")
                             .foregroundStyle(.brand)
                             .frame(width: 12, height: 12)
@@ -161,7 +161,7 @@ struct UsingAlertView: View {
                         Text("현재 정류장은")
                             .font(.caption1)
                             .foregroundStyle(.gray1)
-                        HStack{
+                        HStack(spacing: 2){
                             Text("\(closestBus.nodenm)")
                                 .font(.caption1)
                                 .foregroundStyle(.brand)
@@ -172,7 +172,7 @@ struct UsingAlertView: View {
                     }
                     
                     //새로고침 시간, 새로고침 버튼
-                    HStack{
+                    HStack(spacing: 8){
                         Spacer()
                         if let lastRefreshTime = lastRefreshTime {
                             Text(formattedTime(from: lastRefreshTime))
@@ -305,7 +305,7 @@ struct UsingAlertView: View {
                 Text(busStop.nodenm)
                     .padding(.leading, 20)
                     .foregroundColor(Color.black)
-                    .font(isCurrentLocation ? .body1 : .caption1)
+                    .font(isCurrentLocation || busStop.nodeid == arrivalBusStopID || busStop.nodeid == alertStop?.nodeid ? .body1 : .caption1)
                 Spacer()
             }
             .frame(height: busStop.nodeid == alertStop?.nodeid ? 88 : 60)
@@ -372,82 +372,45 @@ struct UsingAlertView: View {
     func AfterAlertView() -> some View {
         ZStack{
             Image("AfterAlertViewBG")
-                .edgesIgnoringSafeArea(.all)
+                .resizable()
+                .ignoresSafeArea()
             
             RoundedRectangle(cornerRadius: 40)
-                .background(.thinMaterial)
+                .fill(.thinMaterial)
                 .padding(.horizontal, 20)
                 .padding(.vertical, 130)
-                .overlay{
-                    //로띠.
-                    // 일단 아무거나 넣음
-                    VStack{
-                        Image("OnboardingEndView")
-                        
-                        Spacer()
-                        
-                        Button(action: {
-                            stopRefreshTimer() // 알람 종료 시 타이머도 중단
-                            notificationManager.notificationReceived = false // 오버레이 닫기
-                            locationManager.unregisterBusAlert(busAlert)
-                            locationManager.stopAudio()
-                            dismiss()
-                        }, label: {
-                            Text("알람종료")
-                                .foregroundStyle(.white)
-                                .font(.title2)
-                                .padding()
-                                .padding(.horizontal, 22)
-                                .background(RoundedRectangle(cornerRadius: 8).foregroundStyle(.black))
-                                .frame(width: 135, height: 44)
-                        })
-                    }
-                }
             
-//            VStack {
-//                Image("AfterAlertImg")
-//                    .padding()
-//                
-//                // 알람 종료 버튼
-//                Button(action: {
-//                    stopRefreshTimer() // 알람 종료 시 타이머도 중단
-//                    notificationManager.notificationReceived = false // 오버레이 닫기
-//                    locationManager.unregisterBusAlert(busAlert)
-//                    locationManager.stopAudio()
-//                    dismiss()
-//                }, label: {
-//                    Text("알람종료")
-//                        .foregroundStyle(.white)
-//                        .font(.title2)
-//                        .padding()
-//                        .padding(.horizontal, 22)
-//                        .background(RoundedRectangle(cornerRadius: 8).foregroundStyle(.black))
-//                        .frame(width: 135, height: 44)
-//                })
-//                
-//            }
+            //로띠.
+            VStack{
+                Spacer()
+                Image("OnboardingEndView")
+                
+                Spacer()
+                
+                Button(action: {
+                    stopRefreshTimer() // 알람 종료 시 타이머도 중단
+                    notificationManager.notificationReceived = false // 오버레이 닫기
+                    locationManager.unregisterBusAlert(busAlert)
+                    locationManager.stopAudio()
+                    dismiss()
+                }, label: {
+                    Text("알람종료")
+                        .foregroundStyle(.white)
+                        .font(.title2)
+                        .padding(.vertical, 12)
+                        .padding(.horizontal, 28)
+                        .background(RoundedRectangle(cornerRadius: 8).fill(.black))
+                        .frame(width: 133, height: 49)
+                })
+                Spacer()
+            }
+            .padding(.horizontal, 20)
+            .padding(.vertical, 130)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .onDisappear{
             locationManager.unregisterBusAlert(busAlert)
             locationManager.stopAllMonitoring()
         }
-    }
-    
-    /// 알람 울릴 버스 정류소 계산
-    func findAlertBusStop(busAlert: BusAlert, busStops: [BusStopLocal]) -> BusStopLocal? {
-        // 1. BusStopLocal에서 routeid가 동일한 노선 찾기
-        let filteredStops = busStops.filter { $0.routeid == busAlert.routeid }
-        
-        // 2. 도착 정류소 ID에 해당하는 정류소 찾기
-        guard let arrivalStop = filteredStops.first(where: { $0.nodeid == busAlert.arrivalBusStopID }) else {
-            return nil // 도착 정류소가 없으면 nil 반환
-        }
-        
-        // 3. 도착 정류소의 nodeord에서 alertBusStop을 뺀 정류소 찾기
-        let targetNodeOrd = arrivalStop.nodeord - busAlert.alertBusStop
-        
-        // 4. 해당 nodeord에 해당하는 정류소 반환
-        return filteredStops.first(where: { $0.nodeord == targetNodeOrd })
     }
 }
