@@ -20,7 +20,7 @@ struct SelectBusStopView: View {
     @State private var isAutoScroll: Bool = false // 상행 하행 버튼과 스크롤로 이동될 때의 action이 중복되지 않도록 방지하는 변수
     @Binding var showSelectBusSheet: Bool
     @State private var isAnimating = false // 버스 리스트가 아래에서 위로 올라오는 애니메이션 실행 여부
-    
+
     var body: some View {
         VStack{
             HStack {
@@ -125,17 +125,17 @@ struct SelectBusStopView: View {
                             Spacer()
                             Divider()
                             // 상행의 마지막 item의 divider의 색과 굵기 변경
-//                                .frame(height: busstop.nodeord == busStopViewModel.maxUpwardNodeord! ? 2 : 1)
-//                                .background(busstop.nodeord == busStopViewModel.maxUpwardNodeord! ? .midbrand : .gray5)
-//                                .overlay(
-//                                    // 상행의 마지막 item을 스크롤 할 때 상단의 방면이 자동으로 변경되도록 함
-//                                    busstop.nodeord == busStopViewModel.maxUpwardNodeord! ? GeometryReader { proxy in
-//                                        Color.clear
-//                                            .onChange(of: proxy.frame(in: .global).midY) {_, midY in
-//                                                handleScrollChange(midY: midY)
-//                                            }
-//                                    } : nil
-//                                )
+                                .frame(height: busstop.nodeord == busStopViewModel.maxUpwardNodeord ? 2 : 1)
+                                .background(busstop.nodeord == busStopViewModel.maxUpwardNodeord ? .midbrand : .gray5)
+                                .overlay(
+                                    // 상행의 마지막 item을 스크롤 할 때 상단의 방면이 자동으로 변경되도록 함
+                                    busstop.nodeord == busStopViewModel.maxUpwardNodeord ? GeometryReader { proxy in
+                                        Color.clear
+                                            .onChange(of: proxy.frame(in: .global).midY) {_, midY in
+                                                handleScrollChange(midY: midY)
+                                            }
+                                    } : nil
+                                )
                         }
                         .frame(height: 60)
                     }
@@ -168,7 +168,11 @@ struct SelectBusStopView: View {
         // 하행의 가장 작은 order 구함
         if let minDownwardNodeord = busStopViewModel.busStopList.filter({ $0.updowncd == 1 }).map({ $0.nodeord }).min() {
             //해당 order로 스크롤을 이동함
-            proxy.scrollTo(minDownwardNodeord, anchor: .center)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                withAnimation(.smooth) {
+                    proxy.scrollTo(minDownwardNodeord, anchor: .center)
+                }
+            }
         }
     }
     
