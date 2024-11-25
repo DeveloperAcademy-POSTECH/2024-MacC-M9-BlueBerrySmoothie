@@ -59,7 +59,7 @@ struct SelectCityView: View {
                         Spacer()
                         Image("magnifyingglass")
                             .frame(width: 24, height: 24)
-                            .foregroundStyle(.gray3) 
+                            .foregroundStyle(.gray3)
                             .padding(.trailing, 20.67)
                         
                     }

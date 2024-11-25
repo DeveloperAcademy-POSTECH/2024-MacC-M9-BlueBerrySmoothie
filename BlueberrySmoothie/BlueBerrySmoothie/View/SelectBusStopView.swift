@@ -120,18 +120,19 @@ struct SelectBusStopView: View {
                                 Spacer()
                             }
                             Spacer()
-                            Divider() // 상행의 마지막 item의 divider의 색과 굵기 변경
-                                .frame(height: busstop.nodeord == busStopViewModel.maxUpwardNodeord! ? 2 : 1)
-                                .background(busstop.nodeord == busStopViewModel.maxUpwardNodeord! ? .midbrand : .gray5)
-                                .overlay(
-                                    // 상행의 마지막 item을 스크롤 할 때 상단의 방면이 자동으로 변경되도록 함
-                                    busstop.nodeord == busStopViewModel.maxUpwardNodeord! ? GeometryReader { proxy in
-                                        Color.clear
-                                            .onChange(of: proxy.frame(in: .global).midY) {_, midY in
-                                                handleScrollChange(midY: midY)
-                                            }
-                                    } : nil
-                                )
+                            Divider()
+                            // 상행의 마지막 item의 divider의 색과 굵기 변경
+//                                .frame(height: busstop.nodeord == busStopViewModel.maxUpwardNodeord! ? 2 : 1)
+//                                .background(busstop.nodeord == busStopViewModel.maxUpwardNodeord! ? .midbrand : .gray5)
+//                                .overlay(
+//                                    // 상행의 마지막 item을 스크롤 할 때 상단의 방면이 자동으로 변경되도록 함
+//                                    busstop.nodeord == busStopViewModel.maxUpwardNodeord! ? GeometryReader { proxy in
+//                                        Color.clear
+//                                            .onChange(of: proxy.frame(in: .global).midY) {_, midY in
+//                                                handleScrollChange(midY: midY)
+//                                            }
+//                                    } : nil
+//                                )
                         }
                         .frame(height: 60)
                     }
