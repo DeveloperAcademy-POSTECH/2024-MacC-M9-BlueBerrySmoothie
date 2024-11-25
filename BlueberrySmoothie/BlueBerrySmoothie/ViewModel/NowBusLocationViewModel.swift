@@ -57,7 +57,7 @@ class NowBusLocationViewModel: NSObject, ObservableObject, CLLocationManagerDele
                 print("------------------------------------------------------------------------------------")
                 // 좌표 검증 후 업데이트
                 self?.NowbusLocations = locations.map { self?.validateAndFixCoordinates(for: $0) ?? $0 }
-                self?.findClosestBusLocation() // 데이터 가져온 후 가장 가까운 버스 위치 계산
+//                self?.findClosestBusLocation() // 데이터 가져온 후 가장 가까운 버스 위치 계산
 //                self?.printUserLocationAndClosestBus() // 사용자 위치 및 가장 가까운 버스 정보 출력
             }
         }

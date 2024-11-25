@@ -46,16 +46,21 @@ struct AlertSettingMain: View {
                     selectedField = nil // 선택된 영역 초기화
                     isFieldFocused = false // textField 선택된 영역 초기화
                 }
-            VStack(alignment: .leading) {
-                // 상단 타이틀, 페이지 설명
-                Text("알람 설정")
-                    .font(.regular16)
-                    .foregroundColor(.black)
-                    .padding(.bottom, 8)
-                Text("종착지에 도착하기 전에 깨워드려요")
-                    .font(.regular14)
-                    .foregroundColor(.gray3)
-                    .padding(.bottom, 32)
+            VStack {
+                HStack {
+                    Text("알람 설정")
+                        .font(.body2)
+                        .foregroundColor(.black)
+                    Spacer()
+                }
+                .padding(.bottom, 8)
+                
+                HStack {
+                    Text("종착지에 도착하기 전에 깨워드려요")
+                        .font(.caption1)
+                        .foregroundColor(Color.gray3)
+                    Spacer()
+                }
                 
                 VStack(alignment:.trailing, spacing: 12) {
                     HStack() {

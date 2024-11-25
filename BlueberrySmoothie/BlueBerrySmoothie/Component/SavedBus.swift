@@ -28,7 +28,7 @@ struct SavedBus: View {
             VStack {
                 HStack(alignment: .bottom) {
                     Text(busAlert?.alertLabel ?? "알림")
-                            .font(.regular12)
+                        .font(.title2)
                         .foregroundColor(Color.gray2)
                     Spacer()
                     Menu {
@@ -49,7 +49,7 @@ struct SavedBus: View {
                         
                     } label: {
                         Image(systemName: "ellipsis")
-                            .font(.regular20)
+                            .font(.title3)
                             .foregroundColor(Color.gray4)
                             .padding(.vertical, 20)
                     }
@@ -57,9 +57,9 @@ struct SavedBus: View {
                 }
                 HStack {
                     Text(busAlert?.busNo ?? "버스번호없음")
-                        .font(.regular20)
+                        .font(.title3)
                     Text(busAlert?.arrivalBusStopNm ?? "도착정류장")
-                        .font(.regular20)
+                        .font(.title3)
                     
                     Spacer()
                 }
@@ -70,10 +70,10 @@ struct SavedBus: View {
                 
                 HStack(spacing: 4) {
                     Image(systemName: "bell.fill")
-                        .font(.regular12)
+                        .font(.caption2)
                         .foregroundColor(Color.brand)
                     Text("\(busAlert!.alertBusStop) 정류장 전 알람")
-                        .font(.regular14)
+                        .font(.caption1)
                         .foregroundColor(Color.brand)
                     
                     Rectangle()
@@ -82,7 +82,7 @@ struct SavedBus: View {
                         .background(Color.gray5)
                     
                     Text(findAlertBusStop(busAlert: busAlert!, busStops: busStopLocals)?.nodenm ?? "정류장명없음")
-                        .font(.regular14)
+                        .font(.caption1)
                         .foregroundColor(Color.gray3)
                     
                     Spacer()

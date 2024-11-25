@@ -29,7 +29,7 @@ struct StationPickerModal: View {
                     HStack {
                         Text("알람이 울릴 정류장 선택")
                             .foregroundColor(Color.black)
-                            .font(.regular16)
+                            .font(.body2)
                             .padding(.top, 20)
                             .padding(.horizontal, 20)
                             .padding(.bottom, 12)

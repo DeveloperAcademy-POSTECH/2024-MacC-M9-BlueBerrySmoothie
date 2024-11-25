@@ -18,7 +18,7 @@ struct startButtonUI: View {
                 .cornerRadius(10.0)
             
             Text("시작하기")
-                .font(.medium16)
+                .font(.caption1)
                 .foregroundColor(.white)
                 .padding(20)
         }
