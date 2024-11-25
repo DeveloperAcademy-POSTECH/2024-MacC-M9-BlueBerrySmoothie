@@ -176,7 +176,7 @@ struct SelectBusStopView: View {
             updowncdselection = 1 // 중앙 아래
             HapticManager.shared.triggerImpactFeedback(style: .light) // TODO: 머지 후 HapticManager 이름 변경
         } else {
-            if updowncdselection != 2 { // updowncdselection의 상태가 변경될 때만 실행,
+            if midY < centerY && updowncdselection != 2 { // updowncdselection의 상태가 변경될 때만 실행,
                 updowncdselection = 2 // 중앙 위
                 HapticManager.shared.triggerImpactFeedback(style: .light) // TODO: 머지 후 HapticManager 이름 변경
             }
