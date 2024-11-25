@@ -127,7 +127,7 @@ struct UsingAlertView: View {
         @ObservedObject var viewModel: NowBusLocationViewModel // ViewModel을 상위 뷰에서 전달받도록 변경
         @Binding var lastRefreshTime: Date? // 상위 뷰에서 전달받은 값
         var refreshAction: () -> Void // 새로고침 액션 전달받기
-        var refreshButtonLottie = LottieManager(filename: "refreshLottie", loopMode: .playOnce)
+        @State var refreshButtonLottie = LottieManager(filename: "refreshLottie", loopMode: .playOnce)
         
         var body: some View {
             ZStack {
@@ -183,18 +183,40 @@ struct UsingAlertView: View {
                                 .font(.caption2)
                                 .foregroundStyle(.gray3)
                         }
-                        Button(action: {
-                            refreshAction() // 새로고침 로직 호출
-                            //----------------------------------------------------------------------------
-                            //TODO: refresh 로띠 실행안됨
-                            refreshButtonLottie.play() // 버튼 클릭 시 애니메이션 실행
-                        }) {
+//                        Button(action: {
+//                            refreshAction() // 새로고침 로직 호출
+//                            //----------------------------------------------------------------------------
+//                            //TODO: refresh 로띠 실행안됨
+//                            refreshButtonLottie.stop() // 버튼 클릭 시 애니메이션 실행
+//                            print("ㅋㅋ")
+//                            refreshButtonLottie.play() // 버튼 클릭 시 애니메이션 실행
+//                        }) {
+//                            refreshButtonLottie
+//                                .frame(width: 24, height: 24)
+//                                .foregroundColor(isRefreshing ? .gray3 : .gray1)
+//                            //----------------------------------------------------------------------------
+//                        }
+//                        .disabled(isRefreshing)
+                   
+                      
+                      
                             refreshButtonLottie
                                 .frame(width: 24, height: 24)
                                 .foregroundColor(isRefreshing ? .gray3 : .gray1)
-                            //----------------------------------------------------------------------------
-                        }
-                        .disabled(isRefreshing)
+                                .onTapGesture {
+                                    refreshAction() // 새로고침 로직 호출
+                                    refreshButtonLottie.stop() // 버튼 클릭 시 애니메이션 실행
+                                    print("ㅋㅋ")
+                                    refreshButtonLottie.play() // 버튼 클릭 시 애니메이션 실행
+                                    DispatchQueue.main.asyncAfter(deadline: .now()) {
+                                        HapticManager.shared.triggerImpactFeedback(style: .medium)
+                                    }
+                                }
+                      
+                        
+                        
+                        
+                        
                     }
                     .padding(.trailing, 8)
                 }

@@ -50,7 +50,7 @@ struct CitySettingView: View {
                         Button(action:{isSelectCitySheetPresented = true}) {
                         Text("\(selectedCity.name)")
                                 .font(.body2)
-                                .foregroundStyle(.black)
+                                .foregroundStyle(.blackasset)
                         }
                         
                     }
