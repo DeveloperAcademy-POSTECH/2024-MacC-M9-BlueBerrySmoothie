@@ -13,9 +13,9 @@ struct AlertSettingMain: View {
     // 초기화 데이터들
     @State private var label: String = "알람"
     @State private var selectedStation: String = "정류장 수"
-    
+  
     // 사용자 입력을 받을 cityCode
-    @State private var cityCodeInput: String = "21" // ← 추가된 상태 변수
+    @State private var cityCodeInput: String = UserDefaults.standard.string(forKey: "CityCodeKeyID") ?? "1"// ← 추가된 상태 변수)
     
     @State private var showSelectBusSheet: Bool = false // SelectBusView를 sheet로 표시할지 여부
     @State private var busStopAlert: BusStopAlert? // 사용자 선택 사항
@@ -34,6 +34,7 @@ struct AlertSettingMain: View {
     init(busAlert: BusAlert? = nil, isEditing: Bool? = nil) {
         self.busAlert = busAlert
         self.isEditing = isEditing ?? false
+        
     }
     
     var body: some View {
