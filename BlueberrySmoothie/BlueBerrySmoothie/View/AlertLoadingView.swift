@@ -14,7 +14,7 @@ struct AlertLoadingView: View {
     
     var body: some View {
         ZStack{
-            Color.white // 배경 색
+            Color.gray7 // 배경 색
                 .edgesIgnoringSafeArea(.all) // 화면 전체 배경 적용
             
             VStack {
@@ -28,6 +28,7 @@ struct AlertLoadingView: View {
                             startDotAnimation()
                         }
                 }.font(.body2)
+                    .foregroundStyle(.gray1)
             }
         }
     }

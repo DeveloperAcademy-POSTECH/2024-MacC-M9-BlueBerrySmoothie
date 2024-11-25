@@ -83,7 +83,7 @@ struct UsingAlertView: View {
                     self.showExitConfirmation.toggle();
                 }, label: {
                     Image(systemName: "xmark")
-                        .foregroundStyle(.black)
+                        .foregroundStyle(.gray1)
                 })
             }
         }
@@ -159,7 +159,7 @@ struct UsingAlertView: View {
                     if let closestBus = viewModel.closestBusLocation {
                         Text("알람까지 \(busAlert.arrivalBusStopNord - (Int(closestBus.nodeord) ?? 0) - 1 ) 정류장 남았습니다.")
                             .font(.title2)
-                            .foregroundStyle(.black)
+                            .foregroundStyle(.gray1)
                             .padding(.bottom, 13)
                         
                         Text("현재 정류장은")
@@ -251,7 +251,7 @@ struct UsingAlertView: View {
                         }
                         Spacer()
                     }
-                    .background(.white)
+                    .background(.whiteasset)
                 }
                 // 해당 버스 노드 위치로 스크롤하는 에니메이션
                 .onChange(of: isScrollTriggered) { value in
@@ -282,7 +282,6 @@ struct UsingAlertView: View {
             HStack {
                 if isCurrentLocation {
                     Image("tagComponent")
-                        .foregroundStyle(.brand)
                         .padding(.leading, 8)
                         .id(busStop.nodeid)
                         .overlay{
@@ -316,8 +315,12 @@ struct UsingAlertView: View {
                 }
                 Text(busStop.nodenm)
                     .padding(.leading, 20)
-                    .foregroundColor(Color.black)
+                    .foregroundStyle(.gray1)
                     .font(isCurrentLocation || busStop.nodeid == arrivalBusStopID || busStop.nodeid == alertStop?.nodeid ? .body1 : .caption1)
+                if busStop.nodeid == alertStop?.nodeid {
+                    // TODO: 알람 레이블 여기 넣기
+                    Text("알람레이블")
+                }
                 Spacer()
             }
             .frame(height: busStop.nodeid == alertStop?.nodeid ? 88 : 60)
@@ -403,15 +406,18 @@ struct UsingAlertView: View {
                         .frame(width: 133, height: 49)
                         .foregroundStyle(.white)
                         .font(.title2)
-                        .background(RoundedRectangle(cornerRadius: 8).fill(.black))
+                        .background(RoundedRectangle(cornerRadius: 8).fill(.darkgray1))
 
                 })
                 .padding(.bottom, 48)
                 
             }
             .background(
-                RoundedRectangle(cornerRadius: 30)
-                    .fill(.thinMaterial)
+                Image("AfterAlertRectangle")
+                    .resizable()
+                    .frame(maxWidth: .infinity, maxHeight: 500)
+//                RoundedRectangle(cornerRadius: 30)
+//                    .fill(.thinMaterial)
             )
             .padding(.horizontal, 20)
             .padding(.top, 120)
