@@ -16,6 +16,7 @@ struct ToastMessage: ViewModifier {
     func body(content: Content) -> some View {
         ZStack {
             content
+            
             if isShowing {
                 VStack {
                     Spacer()
@@ -26,6 +27,14 @@ struct ToastMessage: ViewModifier {
                         .foregroundColor(.white)
                         .cornerRadius(8)
                         .padding(.bottom, 40)
+                        .onTapGesture {  // 탭 제스처 추가
+                            withAnimation {
+                                isShowing = false
+                            }
+                            // 예약된 작업 취소
+                            toastWorkingItem?.cancel()
+                            toastWorkingItem = nil
+                        }
                         .onAppear {
                             // 이미 실행 중인 토스트 메시지 작업이 있다면 취소
                             toastWorkingItem?.cancel()
@@ -44,7 +53,6 @@ struct ToastMessage: ViewModifier {
                 }
                 .transition(.move(edge: .bottom))
                 .animation(.easeInOut, value: isShowing)
-                .zIndex(0) // toast 메시지가 사라지지 않은 상태로 누를 경우 toast가 일어날 정류장 선택 sheet위로 올라오기 때문에 dimension을 sheet보다 아래로 조정해줌
             }
         }
     }
