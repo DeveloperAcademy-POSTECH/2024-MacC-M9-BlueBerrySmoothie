@@ -82,6 +82,10 @@ struct SelectCityView: View {
                         ScrollView(showsIndicators: false) {
                             ForEach(filteredCities.sorted(by: {$0.name < $1.name})) { city in
                                 Button(action: {
+                                    DispatchQueue.main.asyncAfter(deadline: .now()) {
+                                        HapticManager.shared.triggerImpactFeedback(style: .medium)
+                                    }
+                                    
                                     selectedCity = city // 선택된 도시 저장
                                     dismiss()
                                     saveCityCode()
@@ -123,10 +127,10 @@ struct SelectCityView: View {
                             Text(letter)
                                 .font(.title2)
                                 .foregroundStyle(.gray3)
-                                .frame(width: 20, height: 30) // 텍스트 크기 설정
+                                .frame(width: 15, height: 23) // 텍스트 크기 설정
                         }
                     }
-                    .frame(width: 18, height: 420) // 높이를 고정 500으로 설정
+                    .frame(width: 18, height: 322) // 높이를 고정 500으로 설정
 //                    .overlay( // 네모 테두리 추가
 //                        RoundedRectangle(cornerRadius: 30) // 모서리가 약간 둥근 사각형
 //                            .stroke(Color.black, lineWidth: 2) // 테두리 색상과 두께
@@ -141,8 +145,8 @@ struct SelectCityView: View {
                             .onChanged { value in
                                 // 터치 위치로 초성 계산
                                 let location = value.location.y
-                                let letterHeight = 30
-                                let position = max(0, min(Int(location / 30), index.count - 1))
+                                let letterHeight = 23
+                                let position = max(0, min(Int(location / 23), index.count - 1))
                                 let selectedLetter = index[position]
                                 
                                 if scrollToIndex != selectedLetter {
@@ -166,7 +170,7 @@ struct SelectCityView: View {
                 }
                 .frame(width: 18) // 인덱스 스크롤바의 너비
             }
-                .padding(.top, 150)
+                .padding(.top, 170)
                 .padding(.horizontal, 10)
                 
                 
