@@ -18,7 +18,7 @@ struct AlertLoadingView: View {
                 .edgesIgnoringSafeArea(.all) // 화면 전체 배경 적용
             
             VStack {
-                Image("BusIllustration")
+                Image("AlertLoadingView")
                     .padding(.bottom, 20)
                 HStack(spacing:2) {
                     Text("버스 노선을 불러오고 있어요")

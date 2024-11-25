@@ -21,9 +21,8 @@ struct UsingAlertView: View {
     @Binding var alertStop: BusStopLocal? // alertStop을 상태로 관리
     @State private var isScrollTriggered: Bool = false
     @State private var isFinishedLoading: Bool = false
-    var EndAlertLottie = LottieView(filename: "AlarmLottie", loopMode: .loop)
-//    var refreshButtonLottie = LottieManager(filename: "refreshLottie", loopMode: .playOnce)
-
+    var EndAlertLottie = LottieManager(filename: "AlarmLottie", loopMode: .loop)
+    
     
     var body: some View {
         ZStack {
@@ -41,7 +40,6 @@ struct UsingAlertView: View {
                     refreshAction: {
                         refreshData()
                         isScrollTriggered = true // 스크롤 동작 트리거
-//                        refreshButtonLottie.play()
                     }
                 ).padding(10)
                     .padding(.trailing, -8)
@@ -57,6 +55,7 @@ struct UsingAlertView: View {
                     viewModel: currentBusViewModel,
                     isScrollTriggered: $isScrollTriggered
                 )
+                .edgesIgnoringSafeArea(.bottom)
             }
             .onDisappear {
                 currentBusViewModel.stopUpdating() // 뷰가 사라질 때 뷰모델에서 위치 업데이트 중단
@@ -71,6 +70,7 @@ struct UsingAlertView: View {
             // 알람종료 오버레이 뷰
             if notificationManager.notificationReceived {
                 AfterAlertView()
+                    .toolbar(.hidden) // 알람종료 뷰에서는 툴바 숨기기
             }
         }
         .navigationBarBackButtonHidden()
@@ -103,7 +103,6 @@ struct UsingAlertView: View {
             refreshData() // 초기 로드
             currentBusViewModel.startUpdating() // 뷰가 보일 때 뷰모델에서 위치 업데이트 시작
             startRefreshTimer() // 타이머 시작
-            notificationManager.notificationReceived = true // AfterAlertView 수정위한 임시 설정
         }
         .onChange(of: currentBusViewModel.closestBusLocation != nil) { isNotNil in
             if isNotNil {
@@ -128,7 +127,7 @@ struct UsingAlertView: View {
         @ObservedObject var viewModel: NowBusLocationViewModel // ViewModel을 상위 뷰에서 전달받도록 변경
         @Binding var lastRefreshTime: Date? // 상위 뷰에서 전달받은 값
         var refreshAction: () -> Void // 새로고침 액션 전달받기
-        var refreshButtonLottie = LottieView(filename: "refreshLottie", loopMode: .playOnce)
+        var refreshButtonLottie = LottieManager(filename: "refreshLottie", loopMode: .playOnce)
         
         var body: some View {
             ZStack {
@@ -224,14 +223,17 @@ struct UsingAlertView: View {
                     VStack(alignment: .leading, spacing: 0) {
                         // 가장 가까운 버스가 감지 되었을 경우
                         if let closestBus = viewModel.closestBusLocation {
-                            ForEach(busStops.filter { $0.routeid == busAlert.routeid }.sorted(by: { $0.nodeord < $1.nodeord }), id: \.id) { busStop in
-                                
+                            let filteredBusStops = busStops.filter { $0.routeid == busAlert.routeid }
+                                .sorted(by: { $0.nodeord < $1.nodeord })
+                            let maxNodeord = filteredBusStops.last?.nodeord // 마지막 정류장의 nodeord
+                            
+                            ForEach(filteredBusStops, id: \.id) { busStop in
                                 BusStopRow(
                                     busStop: busStop,
                                     isCurrentLocation: busStop.nodeid == closestBus.nodeid,
                                     arrivalBusStopID: busAlert.arrivalBusStopID,
                                     alertStop: alertStop,
-                                    isLastBusStop: busStop.nodeord == busStops.last?.nodeord
+                                    isLastBusStop: busStop.nodeord == maxNodeord // 현재 정류장의 nodeord가 최대값과 같은지 비교
                                 )
                             }
                         } else if isRefreshing {
@@ -377,104 +379,48 @@ struct UsingAlertView: View {
     // 알람 비활성화 뷰
     @ViewBuilder
     func AfterAlertView() -> some View {
-//        ZStack{
-//            Image("AfterAlertViewBG")
-//                .resizable()
-//                .ignoresSafeArea()
-//            
-//            RoundedRectangle(cornerRadius: 40)
-//                .fill(.thinMaterial)
-//                .padding(.horizontal, 20)
-//                .padding(.top, 130)
-//                .padding(.bottom, 150)
-//            
-//            //로띠.
-//            VStack{
-//                Spacer()
-//                EndAlertLottie
-//                    .scaleEffect(2.5)
-//                
-////                Spacer()
-//                
-//                Button(action: {
-//                    stopRefreshTimer() // 알람 종료 시 타이머도 중단
-//                    notificationManager.notificationReceived = false // 오버레이 닫기
-//                    locationManager.unregisterBusAlert(busAlert)
-//                    locationManager.stopAudio()
-//                    dismiss()
-//                }, label: {
-//                    Text("알람종료")
-//                        .foregroundStyle(.white)
-//                        .font(.title2)
-//                        .padding(.vertical, 12)
-//                        .padding(.horizontal, 28)
-//                        .background(RoundedRectangle(cornerRadius: 8).fill(.black))
-//                        .frame(width: 133, height: 49)
-//                })
-//                Spacer()
-//            }
-//            .padding(.horizontal, 20)
-//            .padding(.top, 130)
-//            .padding(.bottom, 150)
-//        }
-//        .frame(maxWidth: .infinity, maxHeight: .infinity)
-//        .onDisappear{
-//            locationManager.unregisterBusAlert(busAlert)
-//            locationManager.stopAllMonitoring()
-//        }
-//        .onAppear {
-//            EndAlertLottie.play()
-//        }
         ZStack {
-               Image("AfterAlertViewBG")
-                   .resizable()
-                   .ignoresSafeArea()
-               
-               ZStack {
-                   // RoundedRectangle을 배경으로 배치
-                   RoundedRectangle(cornerRadius: 40)
-                       .fill(.thinMaterial)
-                       .padding(.horizontal, 20)
-                       .padding(.top, 130)
-                       .padding(.bottom, 150)
-                   
-                   // RoundedRectangle 내부의 콘텐츠
-                   VStack {
-                       Spacer()
-                       EndAlertLottie
-                           .scaleEffect(2.5) // 크기 조절
-                       
-                       Spacer()
-                       
-                       Button(action: {
-                           stopRefreshTimer() // 알람 종료 시 타이머도 중단
-                           notificationManager.notificationReceived = false // 오버레이 닫기
-                           locationManager.unregisterBusAlert(busAlert)
-                           locationManager.stopAudio()
-                           dismiss()
-                       }, label: {
-                           Text("알람종료")
-                               .foregroundStyle(.white)
-                               .font(.title2)
-                               .padding(.vertical, 12)
-                               .padding(.horizontal, 28)
-                               .background(RoundedRectangle(cornerRadius: 8).fill(.black))
-                               .frame(width: 133, height: 49)
-                       })
-                       Spacer()
-                   }
-                   .padding(.horizontal, 20)
-                   .padding(.top, 130)
-                   .padding(.bottom, 150)
-               }
-           }
-           .frame(maxWidth: .infinity, maxHeight: .infinity)
-           .onDisappear {
-               locationManager.unregisterBusAlert(busAlert)
-               locationManager.stopAllMonitoring()
-           }
-           .onAppear {
-               EndAlertLottie.play()
-           }
+            Image("AfterAlertViewBG")
+                .resizable()
+                .ignoresSafeArea()
+            
+            // 둥근 모서리의 반투명한 직사각형과 텍스트
+            VStack {
+                EndAlertLottie
+                    .scaleEffect(2.8) // 크기 조절
+                
+                Button(action: {
+                    stopRefreshTimer() // 알람 종료 시 타이머도 중단
+                    notificationManager.notificationReceived = false // 오버레이 닫기
+                    locationManager.unregisterBusAlert(busAlert)
+                    locationManager.stopAudio()
+                    dismiss()
+                }, label: {
+                    Text("알람 종료")
+                        .frame(width: 133, height: 49)
+                        .foregroundStyle(.white)
+                        .font(.title2)
+                        .background(RoundedRectangle(cornerRadius: 8).fill(.black))
+
+                })
+                .padding(.bottom, 48)
+                
+            }
+            .background(
+                RoundedRectangle(cornerRadius: 30)
+                    .fill(.thinMaterial)
+            )
+            .padding(.horizontal, 20)
+            .padding(.top, 120)
+            .padding(.bottom, 150)
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .onDisappear {
+            locationManager.unregisterBusAlert(busAlert)
+            locationManager.stopAllMonitoring()
+        }
+        .onAppear {
+            EndAlertLottie.play()
+        }
     }
 }

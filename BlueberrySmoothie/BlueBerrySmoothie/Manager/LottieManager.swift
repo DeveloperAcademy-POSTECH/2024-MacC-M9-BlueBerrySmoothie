@@ -10,7 +10,7 @@ import Lottie
 import UIKit
 import SwiftUI
 
-struct LottieView: UIViewRepresentable {
+struct LottieManager: UIViewRepresentable {
     var filename: String
     var loopMode: LottieLoopMode
     let animationView = LottieAnimationView()
