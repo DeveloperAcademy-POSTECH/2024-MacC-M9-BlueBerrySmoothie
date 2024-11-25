@@ -153,7 +153,7 @@ struct UsingAlertView: View {
                     
                     // 현재 위치 정보
                     if let closestBus = viewModel.closestBusLocation {
-                        Text("알람까지 \(busAlert.arrivalBusStopNord - (Int(closestBus.nodeord) ?? 0)) 정류장 남았습니다.")
+                        Text("알람까지 \(busAlert.arrivalBusStopNord - (Int(closestBus.nodeord) ?? 0) - 1 ) 정류장 남았습니다.")
                             .font(.title2)
                             .foregroundStyle(.black)
                             .padding(.bottom, 13)
