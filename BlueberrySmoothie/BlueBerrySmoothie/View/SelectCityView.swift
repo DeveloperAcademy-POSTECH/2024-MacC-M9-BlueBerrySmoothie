@@ -130,7 +130,7 @@ struct SelectCityView: View {
                                 if scrollToIndex != selectedLetter {
                                     scrollToIndex = selectedLetter
                                     showOverlay = true // 오버레이 표시
-                                    HapticManagerforstart.shared.triggerImpactFeedback(style: .medium)
+                                    HapticManager.shared.triggerImpactFeedback(style: .medium)
                                     
                                     withAnimation {
                                         if let firstMatch = filteredCities.first(where: { $0.consonant == selectedLetter }) {

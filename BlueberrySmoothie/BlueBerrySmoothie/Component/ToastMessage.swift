@@ -21,7 +21,7 @@ struct ToastMessage: ViewModifier {
                 VStack {
                     Spacer()
                     Text(message)
-                        .font(.caption) // TODO: body2로 font 바꾸기
+                        .font(.body2)
                         .padding()
                         .background(.gray2.opacity(0.6))
                         .foregroundColor(.white)

@@ -58,9 +58,10 @@ struct AlertSettingMain: View {
                 HStack {
                     Text("종착지에 도착하기 전에 깨워드려요")
                         .font(.caption1)
-                        .foregroundColor(Color.gray3)
+                        .foregroundColor(.gray3)
                     Spacer()
                 }
+                .padding(.bottom, 32)
                 
                 VStack(alignment:.trailing, spacing: 12) {
                     HStack() {
@@ -73,7 +74,7 @@ struct AlertSettingMain: View {
                         
                         // 선택된 버스 번호 표시
                         Text(busStopAlert?.bus.routeno ?? "버스 번호")
-                            .font(.regular16)
+                            .font(.body2)
                             .foregroundColor(busStopAlert?.bus.routeno != nil && isEditing == false ? .black : .gray3)
                             .padding(EdgeInsets(top: 10, leading: 0, bottom: 0,trailing: 20))
                             .onTapGesture {
@@ -92,7 +93,7 @@ struct AlertSettingMain: View {
                     // 버스 정류장 이름 표시
                     Text("\(busStopAlert?.arrivalBusStop.nodenm ?? "하차 정류장")")
                         .foregroundColor(busStopAlert?.arrivalBusStop.nodenm != nil && isEditing == false ? .black : .gray3)
-                        .font(.regular16)
+                        .font(.body2)
                         .padding(EdgeInsets(top: 2, leading: 0, bottom: 22, trailing: 20))
                         .onTapGesture {
                             if isEditing != true {
@@ -125,7 +126,7 @@ struct AlertSettingMain: View {
                     
                     Text("\(selectedStation)")
                         .foregroundColor(selectedStation != "정류장 수" ? .black : .gray3)
-                        .font(.regular16)
+                        .font(.body2)
                         .padding(EdgeInsets(top: 22, leading: 20, bottom: 22, trailing: 20))
                         .onTapGesture {
                             selectedField = 2 // stroke 활성화/비활성화 색
@@ -151,7 +152,7 @@ struct AlertSettingMain: View {
                     TextField("통학", text: $label, prompt: Text("알람").foregroundColor(.gray3))
                         .multilineTextAlignment(.trailing)
                         .foregroundStyle(label == "알람" ? .gray3 : .black)
-                        .font(.regular16)
+                        .font(.body2)
                         .focused($isFieldFocused) // stroke 색 변경을 위한 활성 비활성 구분
                         .padding(EdgeInsets(top: 22, leading: 20, bottom: 22, trailing: 20))
                 }
@@ -227,7 +228,7 @@ struct AlertSettingMain: View {
                 }) {
                     Image(systemName: "xmark")
                         .frame(width: 19.2, height: 19.2)
-                        .foregroundColor(Color.gray1) // 원하는 색상으로 변경 가능
+                        .foregroundColor(.gray1) // 원하는 색상으로 변경 가능
                 }
             }
         }
@@ -237,17 +238,16 @@ struct AlertSettingMain: View {
     
     func settingLabel(text: String) -> some View {
         Text("\(text)")
-            .font(.regular16)
+            .font(.body2)
             .foregroundColor(.gray1)
             .padding(EdgeInsets(top: 22, leading: 20, bottom: 22, trailing: 0))
     }
     
     func astrickImage() -> some View {
-        Image(systemName: "asterisk")
+        Image("asterisk")
             .foregroundColor(Color.brand)
-            .font(.regular10)
             .bold()
-            .padding(.trailing)
+            .padding(.leading, -6)
     }
     
     private func isInputValid() -> Bool {

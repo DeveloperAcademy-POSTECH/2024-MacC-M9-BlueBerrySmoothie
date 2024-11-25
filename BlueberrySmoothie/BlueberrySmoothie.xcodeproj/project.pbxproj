@@ -28,7 +28,6 @@
 		6300BEF02CEAE36D0004E1A4 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6300BEEF2CEAE36D0004E1A4 /* SwiftUI.framework */; };
 		6300BF012CEAE36F0004E1A4 /* LiveActWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 6300BEEB2CEAE36D0004E1A4 /* LiveActWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		63B4393C2CEB96DA00B77F4D /* LiveActivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B4393B2CEB96C800B77F4D /* LiveActivityManager.swift */; };
-		8B0860F72CDDA237007C109A /* HapticManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0860F62CDDA237007C109A /* HapticManager.swift */; };
 		8B0860F92CE1A0A9007C109A /* silentSound.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8B0860F82CE1A0A8007C109A /* silentSound.wav */; };
 		8B0860FB2CE1DDE3007C109A /* ToastMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0860FA2CE1DDE3007C109A /* ToastMessage.swift */; };
 		8B112CA32CF060C5000827C7 /* AlertLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B112CA22CF060B0000827C7 /* AlertLoadingView.swift */; };
@@ -41,7 +40,7 @@
 		9D19E4B22CEF321E0065967E /* SelectCityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D19E4B12CEF321A0065967E /* SelectCityView.swift */; };
 		9D19E4B42CEF62360065967E /* KeyboardDismiss.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D19E4B32CEF62270065967E /* KeyboardDismiss.swift */; };
 		9D19E4B62CEF8F610065967E /* CitySettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D19E4B52CEF8F550065967E /* CitySettingView.swift */; };
-		9D3382CA2CF2D318008F560A /* HapticManagerforstart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3382C92CF2D318008F560A /* HapticManagerforstart.swift */; };
+		9D3382CA2CF2D318008F560A /* HapticManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3382C92CF2D318008F560A /* HapticManager.swift */; };
 		9D3382CC2CF2E694008F560A /* AppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3382CB2CF2E694008F560A /* AppView.swift */; };
 		9D3382CE2CF2E69F008F560A /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3382CD2CF2E69F008F560A /* OnboardingView.swift */; };
 		9D3383392CF31638008F560A /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3383382CF31638008F560A /* SplashView.swift */; };
@@ -120,7 +119,6 @@
 		6300BEED2CEAE36D0004E1A4 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		6300BEEF2CEAE36D0004E1A4 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		63B4393B2CEB96C800B77F4D /* LiveActivityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveActivityManager.swift; sourceTree = "<group>"; };
-		8B0860F62CDDA237007C109A /* HapticManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticManager.swift; sourceTree = "<group>"; };
 		8B0860F82CE1A0A8007C109A /* silentSound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = silentSound.wav; sourceTree = "<group>"; };
 		8B0860FA2CE1DDE3007C109A /* ToastMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastMessage.swift; sourceTree = "<group>"; };
 		8B112CA22CF060B0000827C7 /* AlertLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertLoadingView.swift; sourceTree = "<group>"; };
@@ -134,7 +132,7 @@
 		9D19E4B12CEF321A0065967E /* SelectCityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCityView.swift; sourceTree = "<group>"; };
 		9D19E4B32CEF62270065967E /* KeyboardDismiss.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardDismiss.swift; sourceTree = "<group>"; };
 		9D19E4B52CEF8F550065967E /* CitySettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitySettingView.swift; sourceTree = "<group>"; };
-		9D3382C92CF2D318008F560A /* HapticManagerforstart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticManagerforstart.swift; sourceTree = "<group>"; };
+		9D3382C92CF2D318008F560A /* HapticManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticManager.swift; sourceTree = "<group>"; };
 		9D3382CB2CF2E694008F560A /* AppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppView.swift; sourceTree = "<group>"; };
 		9D3382CD2CF2E69F008F560A /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		9D3383382CF31638008F560A /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
@@ -322,14 +320,13 @@
 		1232B3E52CD1D49000C48414 /* Manager */ = {
 			isa = PBXGroup;
 			children = (
-				9D3382C92CF2D318008F560A /* HapticManagerforstart.swift */,
+				9D3382C92CF2D318008F560A /* HapticManager.swift */,
 				9D19E4B32CEF62270065967E /* KeyboardDismiss.swift */,
 				8BF2EFA92CD3AA2B008A6644 /* NotificationManager.swift */,
 				8BF2EFAB2CD3AA44008A6644 /* LocationManager.swift */,
 				9DEA52532CD4D5B500A3AE68 /* FetchAllBusData.swift */,
 				9DEA52512CD4D57A00A3AE68 /* filterBuses.swift */,
 				9DEA524F2CD4D56400A3AE68 /* busColor.swift */,
-				8B0860F62CDDA237007C109A /* HapticManager.swift */,
 				63B4393B2CEB96C800B77F4D /* LiveActivityManager.swift */,
 			);
 			path = Manager;
@@ -510,7 +507,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8B0860F72CDDA237007C109A /* HapticManager.swift in Sources */,
 				D94BF93C2CEB7F7700973D08 /* AlarmTestView.swift in Sources */,
 				8BF2EFB52CD92BE0008A6644 /* HapticHelper.swift in Sources */,
 				8BF2EFAA2CD3AA2B008A6644 /* NotificationManager.swift in Sources */,
@@ -530,7 +526,7 @@
 				9D19E4B22CEF321E0065967E /* SelectCityView.swift in Sources */,
 				9DEA524E2CD46EF400A3AE68 /* BusDetailView.swift in Sources */,
 				9D0C411B2CDA3D780005A6CC /* StationPickerModal.swift in Sources */,
-				9D3382CA2CF2D318008F560A /* HapticManagerforstart.swift in Sources */,
+				9D3382CA2CF2D318008F560A /* HapticManager.swift in Sources */,
 				12D2B6CC2CD3706F005CF771 /* fetchBusStopAPI.swift in Sources */,
 				D968D5CA2CD912C5002DF70B /* MainView.swift in Sources */,
 				8B0860FB2CE1DDE3007C109A /* ToastMessage.swift in Sources */,
@@ -705,7 +701,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"BlueBerrySmoothie/Preview Content\"";
-				DEVELOPMENT_TEAM = S6A9QNGA6J;
+				DEVELOPMENT_TEAM = H54Z863265;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BlueBerrySmoothie/Info.plist;
@@ -749,7 +745,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"BlueBerrySmoothie/Preview Content\"";
-				DEVELOPMENT_TEAM = S6A9QNGA6J;
+				DEVELOPMENT_TEAM = H54Z863265;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BlueBerrySmoothie/Info.plist;
@@ -791,11 +787,12 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = S6A9QNGA6J;
+				DEVELOPMENT_TEAM = H54Z863265;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = LiveActWidget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = LiveActWidget;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -803,7 +800,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.team.blueberrySmoothie.LiveActWidget;
+				PRODUCT_BUNDLE_IDENTIFIER = com.team.blueberrySmoothie.Dev.LiveActWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -819,11 +816,12 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = S6A9QNGA6J;
+				DEVELOPMENT_TEAM = H54Z863265;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = LiveActWidget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = LiveActWidget;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

@@ -21,7 +21,7 @@ struct SelectBusView: View {
                 VStack(spacing: 20) {
                     HStack(alignment: .center) {
                         TextField("버스 번호", text: $routeNo)
-                            .font(.body) // TODO: body1로 수정
+                            .font(.body1)
                             .foregroundStyle(.black)
                             .textFieldStyle(.plain)
                             .focused($isTextFieldFocused)
@@ -61,9 +61,9 @@ struct SelectBusView: View {
                     }) {
                         HStack {
                             Image(systemName: "chevron.left")
-                                .font(.body) // TODO: body1로 수정
+                                .font(.body1)
                             Text("뒤로")
-                                .font(.body) //TODO: body2로 수정
+                                .font(.body2)
                                 .padding(.leading, -7)
                         }
                         .foregroundStyle(.gray1)
@@ -97,7 +97,7 @@ struct SelectBusView: View {
                             Spacer()
                             VStack(alignment: .leading) {
                                 Text("\(bus.routeno)")
-                                    .font(.body) //TODO: body2로 수정
+                                    .font(.body)
                                     .foregroundStyle(.brand)
                                     .padding(.bottom, 4)
                                 HStack {

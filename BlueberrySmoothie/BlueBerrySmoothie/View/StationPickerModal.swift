@@ -96,7 +96,7 @@ struct StationPickerModal: View {
         HStack {
             Text("\(stationText) 정류장 전 알람")
                 .foregroundColor(isEnabled ? Color.gray1 : Color.gray3)
-                .font(.regular16)
+                .font(.body2)
                 .onTapGesture {
                     if isEnabled, let action = action {
                         action()

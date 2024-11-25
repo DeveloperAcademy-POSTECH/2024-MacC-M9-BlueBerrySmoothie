@@ -86,9 +86,9 @@ struct SelectBusStopView: View {
                 }) {
                     HStack {
                         Image(systemName: "chevron.left")
-                            .font(.body) // TODO: body1로 수정
+                            .font(.body1)
                         Text("뒤로")
-                            .font(.body) //TODO: body2로 수정
+                            .font(.body2)
                             .padding(.leading, -7)
                     }
                     .foregroundStyle(.gray1)
@@ -174,11 +174,11 @@ struct SelectBusStopView: View {
         
         if midY > centerY && updowncdselection != 1 {
             updowncdselection = 1 // 중앙 아래
-            HapticManager.shared.triggerImpactFeedback(style: .light) // TODO: 머지 후 HapticManager 이름 변경
+            HapticManager.shared.triggerImpactFeedback(style: .light)
         } else {
             if midY < centerY && updowncdselection != 2 { // updowncdselection의 상태가 변경될 때만 실행,
                 updowncdselection = 2 // 중앙 위
-                HapticManager.shared.triggerImpactFeedback(style: .light) // TODO: 머지 후 HapticManager 이름 변경
+                HapticManager.shared.triggerImpactFeedback(style: .light)
             }
         }
     }
