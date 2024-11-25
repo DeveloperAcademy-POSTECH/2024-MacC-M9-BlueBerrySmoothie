@@ -116,7 +116,7 @@ struct MainView: View {
             }
             
             // 라이브 액티비티 시작
-            LiveActivityManager.shared.startLiveActivity()
+            LiveActivityManager.shared.startLiveActivity(stationName: selectedAlert.arrivalBusStopNm, initialProgress: 3, currentStop: selectedAlert.arrivalBusStopNm, stopsRemaining: 5)
             
             // 알림 설정
             isUsingAlertActive = true // Activate navigation
