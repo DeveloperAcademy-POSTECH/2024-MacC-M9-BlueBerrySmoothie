@@ -40,7 +40,7 @@ struct AlertSettingMain: View {
     var body: some View {
         ZStack {
             // 배경 (Tap Gesture 추가, 화면을 눌렀을 때 키보드 숨김을 위함)
-            Color(.white)
+            Color(.whiteDBlack)
                 .ignoresSafeArea()
                 .onTapGesture {
                     hideKeyboard() // 키보드 숨김
@@ -51,7 +51,7 @@ struct AlertSettingMain: View {
                 HStack {
                     Text("알람 설정")
                         .font(.body2)
-                        .foregroundColor(.black)
+                        .foregroundColor(.blackDGray7)
                     Spacer()
                 }
                 .padding(.bottom, 8)
@@ -59,7 +59,7 @@ struct AlertSettingMain: View {
                 HStack {
                     Text("종착지에 도착하기 전에 깨워드려요")
                         .font(.caption1)
-                        .foregroundColor(.gray3)
+                        .foregroundColor(.gray3Dgray6)
                     Spacer()
                 }
                 .padding(.bottom, 32)
@@ -76,7 +76,7 @@ struct AlertSettingMain: View {
                         // 선택된 버스 번호 표시
                         Text(busStopAlert?.bus.routeno ?? "버스 번호")
                             .font(.body2)
-                            .foregroundColor(busStopAlert?.bus.routeno != nil && isEditing == false ? .black : .gray3)
+                            .foregroundColor(busStopAlert?.bus.routeno != nil && isEditing == false ? .blackDGray7 : .gray3Dgray3)
                             .padding(EdgeInsets(top: 10, leading: 0, bottom: 0,trailing: 20))
                             .onTapGesture {
                                 if isEditing != true {
@@ -93,7 +93,7 @@ struct AlertSettingMain: View {
                     
                     // 버스 정류장 이름 표시
                     Text("\(busStopAlert?.arrivalBusStop.nodenm ?? "하차 정류장")")
-                        .foregroundColor(busStopAlert?.arrivalBusStop.nodenm != nil && isEditing == false ? .black : .gray3)
+                        .foregroundColor(busStopAlert?.arrivalBusStop.nodenm != nil && isEditing == false ? .blackDGray7 : .gray3Dgray3)
                         .font(.body2)
                         .padding(EdgeInsets(top: 2, leading: 0, bottom: 22, trailing: 20))
                         .onTapGesture {
@@ -107,11 +107,11 @@ struct AlertSettingMain: View {
                         }
                 }
                 .fixedSize(horizontal: false, vertical: true)
-                .background(.gray7)
+                .background(.gray7DGray1)
                 .cornerRadius(20)
                 .overlay {
                     RoundedRectangle(cornerRadius: 20)
-                        .stroke(selectedField == 1 && isFieldFocused != true ? .brand : .gray5, lineWidth: 1)
+                        .stroke(selectedField == 1 && isFieldFocused != true ? .brand : .gray5Dgray3, lineWidth: 1)
                 }
                 .sheet(isPresented: $showSelectBusSheet) { // ← 수정된 부분
                     SelectBusView(cityCode: Int(cityCodeInput) ?? 21, busStopAlert: $busStopAlert, showSelectBusSheet: $showSelectBusSheet)
@@ -126,7 +126,7 @@ struct AlertSettingMain: View {
                     Spacer()
                     
                     Text("\(selectedStation)")
-                        .foregroundColor(selectedStation != "정류장 수" ? .black : .gray3)
+                        .foregroundColor(selectedStation != "정류장 수" ? .blackDGray7 : .gray3Dgray3)
                         .font(.body2)
                         .padding(EdgeInsets(top: 22, leading: 20, bottom: 22, trailing: 20))
                         .onTapGesture {
@@ -135,11 +135,11 @@ struct AlertSettingMain: View {
                             hideKeyboard() // 키보드 숨김
                         }
                 }
-                .background(.gray7)
+                .background(.gray7DGray1)
                 .cornerRadius(20)
                 .overlay {
                     RoundedRectangle(cornerRadius: 20)
-                        .stroke(selectedField == 2 && isFieldFocused != true ? .brand : .gray5, lineWidth: 1)
+                        .stroke(selectedField == 2 && isFieldFocused != true ? .brand : .gray5Dgray3, lineWidth: 1)
                 }
                 .padding(.vertical, 10)
                 
@@ -150,18 +150,18 @@ struct AlertSettingMain: View {
                     
                     Spacer()
                     
-                    TextField("통학", text: $label, prompt: Text("알람").foregroundColor(.gray3))
+                    TextField("통학", text: $label, prompt: Text("알람").foregroundColor(.gray3Dgray3))
                         .multilineTextAlignment(.trailing)
-                        .foregroundStyle(label == "알람" ? .gray3 : .black)
+                        .foregroundStyle(label == "알람" ? .gray3Dgray3 : .blackDGray7)
                         .font(.body2)
                         .focused($isFieldFocused) // stroke 색 변경을 위한 활성 비활성 구분
                         .padding(EdgeInsets(top: 22, leading: 20, bottom: 22, trailing: 20))
                 }
-                .background(.gray7)
+                .background(.gray7DGray1)
                 .cornerRadius(20)
                 .overlay {
                     RoundedRectangle(cornerRadius: 20)
-                        .stroke(selectedField == 3 || isFieldFocused ? .brand : .gray5, lineWidth: 1)
+                        .stroke(selectedField == 3 || isFieldFocused ? .brand : .gray5Dgray3, lineWidth: 1)
                 }
                 Spacer()
             }
@@ -219,7 +219,7 @@ struct AlertSettingMain: View {
                 }) {
                     Text("저장")
                         .font(.body)
-                        .foregroundColor(confirmSaveButton ? .brand : .gray3)
+                        .foregroundColor(confirmSaveButton ? .brand : .gray3Dgray3)
                 }
             }
             // 닫기 버튼
@@ -229,7 +229,7 @@ struct AlertSettingMain: View {
                 }) {
                     Image(systemName: "xmark")
                         .frame(width: 19.2, height: 19.2)
-                        .foregroundColor(.gray1) // 원하는 색상으로 변경 가능
+                        .foregroundColor(.gray1Dgray6) // 원하는 색상으로 변경 가능
                 }
             }
         }
@@ -240,7 +240,7 @@ struct AlertSettingMain: View {
     func settingLabel(text: String) -> some View {
         Text("\(text)")
             .font(.body2)
-            .foregroundColor(.gray1)
+            .foregroundColor(.gray1Dgray6)
             .padding(EdgeInsets(top: 22, leading: 20, bottom: 22, trailing: 0))
     }
     

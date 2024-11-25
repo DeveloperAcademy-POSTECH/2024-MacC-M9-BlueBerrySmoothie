@@ -83,7 +83,7 @@ struct UsingAlertView: View {
                     self.showExitConfirmation.toggle();
                 }, label: {
                     Image(systemName: "xmark")
-                        .foregroundStyle(.gray1)
+                        .foregroundStyle(.gray1Dgray6)
                 })
             }
         }
@@ -103,6 +103,7 @@ struct UsingAlertView: View {
             refreshData() // 초기 로드
             currentBusViewModel.startUpdating() // 뷰가 보일 때 뷰모델에서 위치 업데이트 시작
             startRefreshTimer() // 타이머 시작
+//            notificationManager.notificationReceived = true
         }
         .onChange(of: currentBusViewModel.closestBusLocation != nil) { isNotNil in
             if isNotNil {
@@ -144,34 +145,34 @@ struct UsingAlertView: View {
                         
                         Text("\(busAlert.busNo)번")
                             .font(.caption2)
-                            .foregroundStyle(.gray3)
+                            .foregroundStyle(.gray3Dgray6)
                         
                         Rectangle()
                             .frame(width: 2, height: 8)
-                            .foregroundStyle(.gray3)
+                            .foregroundStyle(.gray3Dgray6)
                         
                         Text(busAlert.arrivalBusStopNm)
                             .font(.caption2)
-                            .foregroundStyle(.gray3)
+                            .foregroundStyle(.gray3Dgray6)
                     }.padding(.bottom, 16)
                     
                     // 현재 위치 정보
                     if let closestBus = viewModel.closestBusLocation {
                         Text("알람까지 \(busAlert.arrivalBusStopNord - (Int(closestBus.nodeord) ?? 0) - 1 ) 정류장 남았습니다.")
                             .font(.title2)
-                            .foregroundStyle(.gray1)
+                            .foregroundStyle(.blackDGray7)
                             .padding(.bottom, 13)
                         
                         Text("현재 정류장은")
                             .font(.caption1)
-                            .foregroundStyle(.gray1)
+                            .foregroundStyle(.gray1Dgray6)
                         HStack(spacing: 2){
                             Text("\(closestBus.nodenm)")
                                 .font(.caption1)
                                 .foregroundStyle(.brand)
                             Text("입니다.")
                                 .font(.caption1)
-                                .foregroundStyle(.gray1)
+                                .foregroundStyle(.gray1Dgray6)
                         }
                     }
                     
@@ -181,27 +182,15 @@ struct UsingAlertView: View {
                         if let lastRefreshTime = lastRefreshTime {
                             Text(formattedTime(from: lastRefreshTime))
                                 .font(.caption2)
-                                .foregroundStyle(.gray3)
+                                .foregroundStyle(.gray3Dgray6)
                         }
-//                        Button(action: {
-//                            refreshAction() // 새로고침 로직 호출
-//                            //----------------------------------------------------------------------------
-//                            //TODO: refresh 로띠 실행안됨
-//                            refreshButtonLottie.stop() // 버튼 클릭 시 애니메이션 실행
-//                            print("ㅋㅋ")
-//                            refreshButtonLottie.play() // 버튼 클릭 시 애니메이션 실행
-//                        }) {
-//                            refreshButtonLottie
-//                                .frame(width: 24, height: 24)
-//                                .foregroundColor(isRefreshing ? .gray3 : .gray1)
-//                            //----------------------------------------------------------------------------
-//                        }
-//                        .disabled(isRefreshing)
+
                    
                       
                       
                             refreshButtonLottie
                                 .frame(width: 24, height: 24)
+
                                 .foregroundColor(isRefreshing ? .gray3 : .gray1)
                                 .onTapGesture {
                                     refreshAction() // 새로고침 로직 호출
@@ -212,11 +201,10 @@ struct UsingAlertView: View {
                                         HapticManager.shared.triggerImpactFeedback(style: .medium)
                                     }
                                 }
-                      
-                        
-                        
-                        
-                        
+
+                        }
+                     //   .disabled(isRefreshing)
+
                     }
                     .padding(.trailing, 8)
                 }
@@ -273,7 +261,6 @@ struct UsingAlertView: View {
                         }
                         Spacer()
                     }
-                    .background(.whiteasset)
                 }
                 // 해당 버스 노드 위치로 스크롤하는 에니메이션
                 .onChange(of: isScrollTriggered) { value in
@@ -337,7 +324,7 @@ struct UsingAlertView: View {
                 }
                 Text(busStop.nodenm)
                     .padding(.leading, 20)
-                    .foregroundStyle(.gray1)
+                    .foregroundStyle(.gray1Dgray6)
                     .font(isCurrentLocation || busStop.nodeid == arrivalBusStopID || busStop.nodeid == alertStop?.nodeid ? .body1 : .caption1)
                 if busStop.nodeid == alertStop?.nodeid {
                     // TODO: 알람 레이블 여기 넣기
@@ -346,6 +333,7 @@ struct UsingAlertView: View {
                 Spacer()
             }
             .frame(height: busStop.nodeid == alertStop?.nodeid ? 88 : 60)
+            .background(busStop.nodeid == arrivalBusStopID || busStop.nodeid == alertStop?.nodeid ? .gray7DGray1 : .whiteDBlack)
         }
     }
     
@@ -428,7 +416,7 @@ struct UsingAlertView: View {
                         .frame(width: 133, height: 49)
                         .foregroundStyle(.white)
                         .font(.title2)
-                        .background(RoundedRectangle(cornerRadius: 8).fill(.darkgray1))
+                        .background(RoundedRectangle(cornerRadius: 8).fill(.blackDBrand))
 
                 })
                 .padding(.bottom, 48)

@@ -9,7 +9,7 @@ import Foundation
 
 class BusStopViewModel: ObservableObject {
     @Published var busStopList: [BusStop] = []
-    @Published var maxUpwardNodeord: Int?
+    @Published var maxUpwardNodeord: Int = 0
     
     var networkManager = NetworkManager()
     
@@ -18,7 +18,7 @@ class BusStopViewModel: ObservableObject {
             let data = try await networkManager.getBusStopData(cityCode: cityCode, routeId: routeId)
             DispatchQueue.main.async {
                 self.busStopList = data
-                self.maxUpwardNodeord = self.busStopList.filter({ $0.updowncd == 0 }).map({ $0.nodeord }).max()
+                self.maxUpwardNodeord = self.busStopList.filter({ $0.updowncd == 0 }).map({ $0.nodeord }).max() ?? 0
             }
         } catch {
             print("Error calling getBusStopData API in busStopViewModel")
