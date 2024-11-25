@@ -115,6 +115,7 @@ struct SelectBusView: View {
                         }
                     }
                 }
+                
             }
         }
         .padding(.horizontal, 20)

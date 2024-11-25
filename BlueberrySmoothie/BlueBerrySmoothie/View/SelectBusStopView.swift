@@ -107,6 +107,9 @@ struct SelectBusStopView: View {
             ScrollView(showsIndicators: false) {
                 ForEach(busStopViewModel.busStopList, id: \.nodeord) { busstop in
                     Button(action: {
+                        DispatchQueue.main.asyncAfter(deadline: .now()) {
+                            HapticManager.shared.triggerImpactFeedback(style: .medium)
+                        }
                         storeBusStop(busStop: busstop)
                         showSelectBusSheet = false
                     }) {
