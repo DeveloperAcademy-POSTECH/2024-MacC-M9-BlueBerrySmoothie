@@ -32,6 +32,8 @@
 		8B0860F92CE1A0A9007C109A /* silentSound.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8B0860F82CE1A0A8007C109A /* silentSound.wav */; };
 		8B0860FB2CE1DDE3007C109A /* ToastMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0860FA2CE1DDE3007C109A /* ToastMessage.swift */; };
 		8B112CA32CF060C5000827C7 /* AlertLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B112CA22CF060B0000827C7 /* AlertLoadingView.swift */; };
+		8B112CED2CF41A5C000827C7 /* LottieManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B112CEC2CF41A56000827C7 /* LottieManager.swift */; };
+		8B112CF02CF41AEB000827C7 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 8B112CEF2CF41AEB000827C7 /* Lottie */; };
 		8BF2EFA82CD3A7F2008A6644 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF2EFA72CD3A7F2008A6644 /* Alert.swift */; };
 		8BF2EFAA2CD3AA2B008A6644 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF2EFA92CD3AA2B008A6644 /* NotificationManager.swift */; };
 		8BF2EFAC2CD3AA44008A6644 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF2EFAB2CD3AA44008A6644 /* LocationManager.swift */; };
@@ -124,6 +126,7 @@
 		8B0860F82CE1A0A8007C109A /* silentSound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = silentSound.wav; sourceTree = "<group>"; };
 		8B0860FA2CE1DDE3007C109A /* ToastMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastMessage.swift; sourceTree = "<group>"; };
 		8B112CA22CF060B0000827C7 /* AlertLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertLoadingView.swift; sourceTree = "<group>"; };
+		8B112CEC2CF41A56000827C7 /* LottieManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieManager.swift; sourceTree = "<group>"; };
 		8BF2EFA72CD3A7F2008A6644 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		8BF2EFA92CD3AA2B008A6644 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		8BF2EFAB2CD3AA44008A6644 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
@@ -188,6 +191,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B112CF02CF41AEB000827C7 /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -322,6 +326,7 @@
 		1232B3E52CD1D49000C48414 /* Manager */ = {
 			isa = PBXGroup;
 			children = (
+				8B112CEC2CF41A56000827C7 /* LottieManager.swift */,
 				9D3382C92CF2D318008F560A /* HapticManagerforstart.swift */,
 				9D19E4B32CEF62270065967E /* KeyboardDismiss.swift */,
 				8BF2EFA92CD3AA2B008A6644 /* NotificationManager.swift */,
@@ -464,6 +469,9 @@
 				Base,
 			);
 			mainGroup = 1232B3A32CD1D3DE00C48414;
+			packageReferences = (
+				8B112CEE2CF41AEB000827C7 /* XCRemoteSwiftPackageReference "lottie-ios" */,
+			);
 			productRefGroup = 1232B3AD2CD1D3DE00C48414 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -520,6 +528,7 @@
 				8BF2EFAC2CD3AA44008A6644 /* LocationManager.swift in Sources */,
 				12D2B6D42CD3F5BE005CF771 /* getAPIKey.swift in Sources */,
 				1232B3DB2CD1D40500C48414 /* BusDecoderModel.swift in Sources */,
+				8B112CED2CF41A5C000827C7 /* LottieManager.swift in Sources */,
 				9D3383392CF31638008F560A /* SplashView.swift in Sources */,
 				9DEA523F2CD362CA00A3AE68 /* SelectBusView.swift in Sources */,
 				D90E0C1A2CD89CB20089883F /* AlertSettingMain.swift in Sources */,
@@ -705,7 +714,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"BlueBerrySmoothie/Preview Content\"";
-				DEVELOPMENT_TEAM = S6A9QNGA6J;
+				DEVELOPMENT_TEAM = GF3B5LP7RQ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BlueBerrySmoothie/Info.plist;
@@ -791,7 +800,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = S6A9QNGA6J;
+				DEVELOPMENT_TEAM = GF3B5LP7RQ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = LiveActWidget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = LiveActWidget;
@@ -871,6 +880,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		8B112CEE2CF41AEB000827C7 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.5.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		8B112CEF2CF41AEB000827C7 /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8B112CEE2CF41AEB000827C7 /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 1232B3A42CD1D3DE00C48414 /* Project object */;
 }

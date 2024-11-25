@@ -20,7 +20,7 @@ struct AlertLoadingView: View {
             VStack {
                 Image("BusIllustration")
                     .padding(.bottom, 20)
-                HStack(spacing: 0) {
+                HStack(spacing:2) {
                     Text("버스 노선을 불러오고 있어요")
                     Text(String(repeating: ".", count: dotCount))
                         .animation(.easeInOut(duration: animationInterval), value: dotCount)
