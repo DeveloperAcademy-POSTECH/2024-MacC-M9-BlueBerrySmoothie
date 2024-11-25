@@ -1,0 +1,23 @@
+{
+  "images" : [
+    {
+      "filename" : "BusAlertInfoBG_1X.png",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "filename" : "BusAlertInfoBG_2X.png",
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "filename" : "BusAlertInfoBG_3X.png",
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

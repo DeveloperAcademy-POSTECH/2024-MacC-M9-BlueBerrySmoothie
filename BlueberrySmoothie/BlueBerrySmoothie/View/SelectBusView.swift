@@ -2,41 +2,51 @@
 import SwiftUI
 
 struct SelectBusView: View {
-//    let city: City = City(citycode: 21, cityname: "부산")
-    let cityCode: Int // ← 추가된 부분
+    let cityCode: Int
     @Binding var busStopAlert: BusStopAlert?
     @State private var allBuses: [Bus] = []
-    @State private var filteredBuses: [Bus] = []
+    @State private var filteredBuses: [Bus] = [] // 버스 번호 검색에 사용
     @State private var routeNo: String = ""
-    @FocusState private var isTextFieldFocused: Bool
+    @FocusState private var isTextFieldFocused: Bool // 검색란 활성화 여부 체크
     @Environment(\.dismiss) private var dismiss
     @Binding var showSelectBusSheet: Bool
     
     var body: some View {
         NavigationStack {
-            VStack(spacing: 20) {
-                HStack {
-                    TextField("버스 번호 입력", text: $routeNo)
-                        .font(.system(size: 25))
-                        .textFieldStyle(.plain)
-                        .focused($isTextFieldFocused)
-                        .keyboardType(.numberPad)
-                        .onChange(of: routeNo) { newRouteNo in
-                            filteredBuses = filterBuses(by: newRouteNo, from: allBuses)
-                        }
-                    Image(systemName: "magnifyingglass")
-                        .foregroundColor(isTextFieldFocused ? .brand : .gray)
+            ZStack {
+                Color(.white)
+                    .onTapGesture {
+                        isTextFieldFocused = false // 다른 곳 클릭 시 키보드 숨김
+                    }
+                VStack(spacing: 20) {
+                    HStack(alignment: .center) {
+                        TextField("버스 번호", text: $routeNo)
+                            .font(.body1)
+                            .foregroundStyle(.black)
+                            .textFieldStyle(.plain)
+                            .focused($isTextFieldFocused)
+                            .padding(EdgeInsets(top: 16, leading: 20, bottom: 16, trailing: 0))
+                            .keyboardType(.numberPad)
+                            .onChange(of: routeNo) { _, newRouteNo in
+                                filteredBuses = filterBuses(by: newRouteNo, from: allBuses)
+                            }
+                        Spacer()
+                        Image("magnifyingglass")
+                            .frame(width: 24, height: 24)
+                            .foregroundStyle(.gray3)
+                            .padding(.trailing, 20.67)
+                        
+                    }
+                    .background(.gray6)
+                    .cornerRadius(20)
+                    .overlay {
+                        RoundedRectangle(cornerRadius: 20)
+                            .stroke(isTextFieldFocused == true ? .brand : .gray5, lineWidth: 1)
+                    }
+                    .padding(EdgeInsets(top: 44, leading: 20, bottom: 8, trailing: 20))
+                    // 버스 리스트
+                    busListScrollView()
                 }
-                .padding(.horizontal, 36)
-                .padding(.bottom, -8)
-                .padding(.top, 30)
-                
-                Rectangle()
-                    .foregroundColor(isTextFieldFocused ? .brand : .gray)
-                    .frame(height: 2)
-                    .padding(.horizontal, 20)
-                
-                busListScrollView()
             }
             .onTapGesture {
                 isTextFieldFocused = false // 다른 곳 클릭 시 키보드 숨김
@@ -44,15 +54,19 @@ struct SelectBusView: View {
             .navigationTitle("버스 검색")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
-                
                 // 닫기 버튼
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button(action: {
                         dismiss()  // 현재 화면을 닫는 동작
                     }) {
-                        Text("닫기")
-                            .font(.body)
-                            .foregroundColor(Color.brand) // 원하는 색상으로 변경 가능
+                        HStack {
+                            Image(systemName: "chevron.left")
+                                .font(.body1)
+                            Text("뒤로")
+                                .font(.body2)
+                                .padding(.leading, -7)
+                        }
+                        .foregroundStyle(.gray1)
                     }
                 }
             }
@@ -83,19 +97,20 @@ struct SelectBusView: View {
                             Spacer()
                             VStack(alignment: .leading) {
                                 Text("\(bus.routeno)")
-                                    .font(.system(size: 20))
-                                    .foregroundColor(busColor(for: bus.routetp))
+                                    .font(.body)
+                                    .foregroundStyle(.brand)
+                                    .padding(.bottom, 4)
                                 HStack {
                                     Text("\(bus.startnodenm) - \(bus.endnodenm)")
-                                        .foregroundStyle(.gray)
+                                        .font(.caption2)
+                                        .foregroundStyle(.gray3)
                                 }
                             }
                             .padding(.horizontal, 16)
-                            Spacer()
                             
                             Divider()
-                                .padding(.top, 16)
-                                .padding(.bottom, 20)
+                                .padding(.top, 20)
+                                .padding(.bottom, 16)
                         }
                     }
                 }
