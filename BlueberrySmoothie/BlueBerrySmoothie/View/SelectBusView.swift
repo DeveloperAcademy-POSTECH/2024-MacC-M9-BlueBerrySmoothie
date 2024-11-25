@@ -30,6 +30,7 @@ struct SelectBusView: View {
                             .onChange(of: routeNo) { _, newRouteNo in
                                 filteredBuses = filterBuses(by: newRouteNo, from: allBuses)
                             }
+                            .tint(.brand)
                         Spacer()
                         Image("magnifyingglass")
                             .frame(width: 24, height: 24)

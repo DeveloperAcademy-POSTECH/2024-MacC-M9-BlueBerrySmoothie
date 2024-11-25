@@ -30,27 +30,49 @@ struct SelectCityView: View {
             
             ZStack {
                 VStack {
+//                        // 검색창
+//                        TextField("도시 이름 검색", text: $searchText)
+//                            .padding(12)
+//                            .background(
+//                                RoundedRectangle(cornerRadius: 20)
+//                                    .fill(isFocused ? Color.white : Color.gray6) // 배경색
+//                            )
+//                            .overlay(
+//                                RoundedRectangle(cornerRadius: 20)
+//                                    .stroke(isFocused ? Color.brand : Color.gray5, lineWidth: 1) // 테두리
+//                            )
+//                            .cornerRadius(20) // cornerRadius를 background와 동일하게 설정
+//                            .padding(.horizontal, 20) // 여백 설정
+//                            .frame(height: 52) // 높이 설정
+//                            .focused($isFocused) // 포커스 상태 업데이트
+//                            .tint(.brand)
                     
-                    // 검색창
-                    TextField("도시 이름 검색", text: $searchText)
-                        .padding(12)
-                        .background(
-                            RoundedRectangle(cornerRadius: 20)
-                                .fill(isFocused ? Color.white : Color.gray6) // 배경색
-                        )
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 20)
-                                .stroke(isFocused ? Color.brand : Color.gray5, lineWidth: 1) // 테두리
-                        )
-                        .cornerRadius(20) // cornerRadius를 background와 동일하게 설정
-                        .padding(.horizontal, 20) // 여백 설정
-                        .frame(height: 52) // 높이 설정
-                        .focused($isFocused) // 포커스 상태 업데이트
-                        .tint(.brand)
+                    HStack(alignment: .center) {
+                        TextField("도시 이름 검색", text: $searchText)
+                            .font(.body1)
+                            .foregroundStyle(.blackasset)
+                            .textFieldStyle(.plain)
+                            .focused($isFocused)
+                            .padding(EdgeInsets(top: 16, leading: 20, bottom: 16, trailing: 0))
+                            .tint(.brand)
+                           
+                        Spacer()
+                        Image("magnifyingglass")
+                            .frame(width: 24, height: 24)
+                            .foregroundStyle(.gray3) 
+                            .padding(.trailing, 20.67)
+                        
+                    }
+                    .background(.gray6)
+                    .cornerRadius(20)
+                    .overlay {
+                        RoundedRectangle(cornerRadius: 20)
+                            .stroke(isFocused == true ? .brand : .gray5, lineWidth: 1)
+                    }
+                    .padding(EdgeInsets(top: 12, leading: 20, bottom: 12, trailing: 20))
                     
-                    //.animation(.easeInOut, value: isFocused) // 애니메이션 추가
                     
-                    
+                     
                     // 세그먼트 피커
                     CustomCategoryPicker(selectedCategory: $selectedCategory, categories: categories)
                         .padding(.vertical, 20)
@@ -74,11 +96,7 @@ struct SelectCityView: View {
                                                 
                                             Spacer()
                                         }
-//                                        .background(
-//                                            RoundedRectangle(cornerRadius: 5)
-//                                                .fill(
-//                                            scrollToIndex == city.consonant ? Color.midbrand.opacity(0.3) : Color.clear))
-//                                        .padding(.trailing, 20)
+
                                         Divider()
                                     }
                                     
@@ -237,9 +255,14 @@ struct CustomCategoryPicker: View {
                     Text(category)
                         .padding(.horizontal, 16)
                         .padding(.vertical, 12.5)
-                        .background(selectedCategory == category ? Color.gray1 : Color.gray.opacity(0.2))
-                        .foregroundColor(selectedCategory == category ? .white : .black)
+                        .background(selectedCategory == category ? Color.gray1 : .clear)
+                        .foregroundColor(selectedCategory == category ? .whiteasset : .blackasset)
                         .cornerRadius(20)
+                        .overlay(
+                                RoundedRectangle(cornerRadius: 20)
+                                    .stroke(.gray2, lineWidth: 0.5)
+                        )
+                        .padding(0.5)
                         .onTapGesture {
                             selectedCategory = category
                         }
