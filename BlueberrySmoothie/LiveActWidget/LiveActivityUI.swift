@@ -8,28 +8,38 @@ struct LiveActivityUI: Widget {
             // 잠금 화면 및 홈 화면 표시 내용
             VStack(alignment: .leading) {
                 HStack {
-                    Image(systemName: "bus") // 아이콘
+                    Image("AppIcon") // 앱 아이콘
                         .resizable()
                         .frame(width: 24, height: 24)
+                        .cornerRadius(4) // 아이콘 모서리 둥글게 처리
                         .padding(.trailing, 8)
 
-                    Text("Hotcha") // 앱 이름
+                    Text("핫챠") // 앱 이름
+                        .font(.headline) // 헤드라인 글씨체
+//                        .fontWeight(.light) // 얇은 글씨체 설정
+                        .foregroundColor(.orange)
+                        .font(.headline)
+                        .fontWeight(.bold)
+                    
+                    Spacer()
+                    Text("등교알람") // 앱 이름
+                        .font(.headline) // 헤드라인 글씨체
+                        .fontWeight(.light) // 얇은 글씨체 설정
+                        .foregroundColor(.orange)
                         .font(.headline)
                         .fontWeight(.bold)
                 }
                 .padding(.bottom, 5)
 
+                Text("알람까지 \(context.state.stopsRemaining) 정거장 남았습니다.") // 남은 정류장
+                    .font(.headline)
+                    .foregroundColor(.black)
+                    .padding(.bottom, 10)
                 
-// 여기 봐주세요..!
-                Text("현재 정류장: \(context.state.currentStop)") // 현재 정류장 정보
+                Text("현재 정류장은 \(context.state.currentStop)입니다.") // 현재 정류장 정보
                     .font(.subheadline)
                     .foregroundColor(.gray)
                     .padding(.bottom, 5)
-
-                Text("알람까지 \(context.state.stopsRemaining) 정거장 남았습니다.") // 남은 정류장
-                    .font(.headline)
-                    .foregroundColor(.blue)
-                    .padding(.bottom, 10)
 
                 VStack {
                     Text(progressMessage(for: context.state.progress)) // 진행 상태 메시지
@@ -50,7 +60,7 @@ struct LiveActivityUI: Widget {
             // Dynamic Island 표시 내용
             DynamicIsland {
                 DynamicIslandExpandedRegion(.leading) {
-                    Image(systemName: "bus") // 아이콘
+                    Image("AppIcon") // 아이콘
                         .resizable()
                         .frame(width: 20, height: 20)
                         .padding(.trailing, 5)
@@ -59,28 +69,31 @@ struct LiveActivityUI: Widget {
                 DynamicIslandExpandedRegion(.trailing) {
                     Text("\(context.state.stopsRemaining) 정거장 전") // 남은 정류장
                         .font(.body)
-                        .foregroundColor(.secondary)
+                                .fontWeight(.bold)  // 볼드체 설정
+                                .foregroundColor(.white)  // 하얀색 텍스트로 설정
                 }
 
                 DynamicIslandExpandedRegion(.center) {
-                    Text("현재 정거장: \(context.state.currentStop)") // 현재 정류장
+                    Text("현재 정류장: \(context.state.currentStop)") // 현재 정류장
                         .font(.body)
                         .foregroundColor(.primary)
                 }
 
                 DynamicIslandExpandedRegion(.bottom) {
-                    Text("Hotcha와 함께 안전한 하차를!") // 메시지
+                    Text("Hotcha와 함께 하차를!") // 메시지
                         .font(.caption)
                         .foregroundColor(.gray)
                 }
             } compactLeading: {
-                Image(systemName: "bus") // 간단한 아이콘
+                Image("AppIcon")
             } compactTrailing: {
-                Text("\(context.state.stopsRemaining) 정거장 전") // 정류장 정보
-                    .font(.caption)
-                    .foregroundColor(.secondary)
+                Text("\(context.state.stopsRemaining) 정거장 전")
+                    .font(.body)
+                            .fontWeight(.bold)  // 볼드체 설정
+                            .foregroundColor(.white)  // 하얀색 텍스트로 설정
+
             } minimal: {
-                Image(systemName: "bus") // 최소 아이콘
+                Image("AppIcon")
             }
         }
     }
@@ -98,85 +111,6 @@ struct LiveActivityUI: Widget {
             return "다음 정류장까지"
         default:
             return "진행 중"
-        }
-    }
-}
-
-// 라이브 액티비티 관리 클래스
-class LiveActivityManager {
-    static let shared = LiveActivityManager()
-    private init() {}
-
-    private var currentActivity: Activity<MyLiveActivityAttributes>?
-
-    // 라이브 액티비티 시작
-    func startLiveActivity(stationName: String, initialProgress: Double, currentStop: String, stopsRemaining: Int) {
-        guard ActivityAuthorizationInfo().areActivitiesEnabled else {
-            print("라이브 액티비티 실행 불가: 권한이 비활성화되어 있습니다.")
-            return
-        }
-
-        let activityAttributes = MyLiveActivityAttributes(
-            title: "Tracking Progress",
-            description: "Your journey is in progress"
-        )
-
-        let initialState = MyLiveActivityAttributes.ContentState(
-            progress: initialProgress,
-            currentStop: currentStop,
-            stopsRemaining: stopsRemaining
-        )
-
-        do {
-            let activity = try Activity<MyLiveActivityAttributes>.request(
-                attributes: activityAttributes,
-                content: .init(state: initialState, staleDate: nil)
-            )
-            currentActivity = activity
-            print("라이브 액티비티 시작됨: \(activity.id)")
-        } catch {
-            print("라이브 액티비티 시작 실패: \(error.localizedDescription)")
-        }
-    }
-
-    // 라이브 액티비티 상태 업데이트
-    func updateLiveActivity(progress: Double, currentStop: String, stopsRemaining: Int) {
-        guard let activity = currentActivity else {
-            print("활동이 시작되지 않았습니다.")
-            return
-        }
-
-        let newState = MyLiveActivityAttributes.ContentState(
-            progress: progress,
-            currentStop: currentStop,
-            stopsRemaining: stopsRemaining
-        )
-
-        Task {
-            do {
-                try await activity.update(using: .init(from: newState as! Decoder))
-                print("라이브 액티비티 업데이트 완료: \(progress)")
-            } catch {
-                print("라이브 액티비티 업데이트 실패: \(error.localizedDescription)")
-            }
-        }
-    }
-
-    // 라이브 액티비티 종료
-    func endLiveActivity() {
-        guard let activity = currentActivity else {
-            print("활동이 시작되지 않았습니다.")
-            return
-        }
-
-        Task {
-            do {
-                await activity.end(dismissalPolicy: .immediate)
-                print("라이브 액티비티 종료됨: \(activity.id)")
-                currentActivity = nil
-            } catch {
-                print("라이브 액티비티 종료 실패: \(error.localizedDescription)")
-            }
         }
     }
 }

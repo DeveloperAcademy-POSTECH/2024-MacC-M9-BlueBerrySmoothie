@@ -11,3 +11,5 @@ struct MyLiveActivityAttributes: ActivityAttributes {
     var title: String         // 라이브 액티비티 제목
     var description: String   // 설명
 }
+
+
