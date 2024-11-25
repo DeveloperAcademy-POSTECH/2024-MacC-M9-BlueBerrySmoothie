@@ -176,23 +176,47 @@ class LocationManager: NSObject, ObservableObject {
             errorMessage = "위치 서비스가 비활성화되어 있습니다. 설정에서 위치 서비스를 켜주세요."
         }
     }
-    
-    /// 현재 위치 권한 상태를 확인하고, 권한이 없을 경우 요청
-    private func checkLocationAuthorization() {
+    /// 위치 권한 상태를 확인하고 필요한 요청을 수행하는 함수
+    public func checkLocationAuthorization() {
         switch manager.authorizationStatus {
         case .notDetermined:
-            manager.requestWhenInUseAuthorization()
+            requestWhenInUsePermission()
+        case .authorizedWhenInUse:
+            requestAlwaysPermission()
+        case .authorizedAlways:
+            print("Always 권한 이미 허용됨.")
         case .restricted:
             errorMessage = "위치 서비스 접근이 제한되어 있습니다."
         case .denied:
             errorMessage = "위치 서비스 권한이 거부되었습니다. 설정에서 권한을 허용해주세요."
-        case .authorizedAlways, .authorizedWhenInUse:
-            //            manager.startUpdatingLocation()
-            manager.requestAlwaysAuthorization()
         @unknown default:
-            break
+            print("알 수 없는 권한 상태")
         }
     }
+
+    /// "앱을 사용하는 동안" 권한 요청
+    public func requestWhenInUsePermission() {
+        print("WhenInUse 권한 요청 중...")
+        manager.requestWhenInUseAuthorization()
+    }
+
+    /// "항상 허용" 권한 요청
+    public func requestAlwaysPermission() {
+        print("Always 권한 요청 중...")
+        manager.requestAlwaysAuthorization()
+    }
+
+    /// 권한 상태가 변경될 때 호출
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        locationStatus = status
+        print("권한 상태 변경됨: \(status.rawValue)")
+        
+        // 변경된 상태에 따라 필요한 동작 수행
+        checkLocationAuthorization()
+    }
+    
+
+
     
     // BusAlert 조회 메서드
     private func getBusAlert(for identifier: String) -> BusAlert? {
@@ -307,10 +331,11 @@ extension LocationManager: CLLocationManagerDelegate {
         print("Location error: \(error.localizedDescription)")
         errorMessage = "위치를 찾을 수 없습니다: \(error.localizedDescription)"
     }
-    
-    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        locationStatus = status
-        checkLocationAuthorization()
-    }
+//    
+//    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+//        locationStatus = status
+//        checkLocationAuthorization()
+//    }
+
 }
 
