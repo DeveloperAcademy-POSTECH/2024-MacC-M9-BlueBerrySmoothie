@@ -35,7 +35,7 @@ struct SelectBusView: View {
                             .frame(width: 24, height: 24)
                             .foregroundStyle(.gray3)
                             .padding(.trailing, 20.67)
-                            
+                        
                     }
                     .background(.gray6)
                     .cornerRadius(20)
@@ -62,7 +62,6 @@ struct SelectBusView: View {
                         HStack {
                             Image(systemName: "chevron.left")
                                 .font(.body) // TODO: body1로 수정
-//                                .frame(width: 17, height: 22)
                             Text("뒤로")
                                 .font(.body) //TODO: body2로 수정
                                 .padding(.leading, -7)

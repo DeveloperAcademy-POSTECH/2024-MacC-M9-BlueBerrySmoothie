@@ -80,9 +80,9 @@ struct AlertSettingMain: View {
                                 }
                             }
                     }
-                        Divider()
-                            .padding(.horizontal, 12)
-                            .padding(.top, -10)
+                    Divider()
+                        .padding(.horizontal, 12)
+                        .padding(.top, -10)
                     
                     // 버스 정류장 이름 표시
                     Text("\(busStopAlert?.arrivalBusStop.nodenm ?? "하차 정류장")")
@@ -107,9 +107,8 @@ struct AlertSettingMain: View {
                         .stroke(selectedField == 1 && isFieldFocused != true ? .brand : .gray5, lineWidth: 1)
                 }
                 .sheet(isPresented: $showSelectBusSheet) { // ← 수정된 부분
-                        SelectBusView(cityCode: Int(cityCodeInput) ?? 21, busStopAlert: $busStopAlert, showSelectBusSheet: $showSelectBusSheet)
-                    }
-
+                    SelectBusView(cityCode: Int(cityCodeInput) ?? 21, busStopAlert: $busStopAlert, showSelectBusSheet: $showSelectBusSheet)
+                }
                 // 일어날 정류장 선택
                 HStack() {
                     // 입력할 내용 라벨
@@ -163,7 +162,6 @@ struct AlertSettingMain: View {
             Spacer()
         }
         .onAppear {
-            //            print("AlertSettingMain onAppear: \(busAlert?.alertLabel)")
             // 이전 정류장 수 선택이 안되어있는 경우
             if busStopAlert?.alertBusStop == 0 {
                 selectedStation = "정류장 수"
@@ -196,8 +194,6 @@ struct AlertSettingMain: View {
         .overlay {
             if showSheet {
                 StationPickerModal(isPresented: $showSheet, selectedStation: $selectedStation, alert: $busStopAlert, nodeord: busAlert?.arrivalBusStopNord ?? 0)
-                    .zIndex(1)
-//                    .presentationDetents([.medium]) // toast 보다 dimension이 위로 오도록 조정
             } else {
                 EmptyView()
             }
@@ -219,7 +215,6 @@ struct AlertSettingMain: View {
                         .foregroundColor(confirmSaveButton ? .brand : .gray3)
                 }
             }
-            
             // 닫기 버튼
             ToolbarItem(placement: .navigationBarLeading) {
                 Button(action: {
