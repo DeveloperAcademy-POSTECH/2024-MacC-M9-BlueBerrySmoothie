@@ -40,7 +40,7 @@ struct MainView: View {
                                 showSetting = true
                             }) {
                                 Image(systemName: "location.circle.fill")
-                                    .font(.regular20)
+//                                    .font(.regular20)
                                     .foregroundColor(Color.gray1)
                             }
                             .sheet(isPresented: $showSetting) {
@@ -53,7 +53,7 @@ struct MainView: View {
                                 showSetting = true
                             }) {
                                 Image(systemName: "plus.square.fill")
-                                    .font(.regular20)
+//                                    .font(.regular20)
                                     .foregroundColor(Color.gray1)
                             }
                             .sheet(isPresented: $showSetting) {

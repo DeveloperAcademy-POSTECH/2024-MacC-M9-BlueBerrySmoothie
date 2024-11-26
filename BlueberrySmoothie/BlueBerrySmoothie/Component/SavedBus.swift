@@ -43,7 +43,7 @@ struct SavedBus: View {
                             .cornerRadius(4)
                         Text(busAlert?.alertLabel ?? "알림")
                             .font(.title2)
-                            .font(.regular12)
+//                            .font(.regular12)
                             .padding(4)
                             .foregroundColor(Color.brand)
                     }
@@ -79,7 +79,7 @@ struct SavedBus: View {
                     } label: {
                         Image(systemName: "ellipsis")
                             .font(.title3)
-                            .font(.regular20)
+//                            .font(.regular20)
                             .foregroundColor(Color.gray3)
                             .padding(.vertical, 20)
                     }
@@ -91,7 +91,8 @@ struct SavedBus: View {
                             .frame(width: 12, height: 12)
                             .foregroundColor(.green)
                         Text(busAlert?.busNo ?? "버스번호없음")
-                            .font(.medium30)
+//                            .font(.medium30)
+                            .font(.caption1)
                         // 고정핀 위치
                         if busAlert?.isPinned == true {
                             Image(systemName: "pin.fill")
@@ -102,7 +103,7 @@ struct SavedBus: View {
                     HStack {
                         Text(busAlert?.arrivalBusStopNm ?? "도착정류장")
                             .font(.title3)
-                            .font(.medium20)
+//                            .font(.medium20)
                         Spacer()
                     }
                 }
@@ -112,12 +113,12 @@ struct SavedBus: View {
                 
                 HStack(spacing: 4) {
                     Image(systemName: "bell.fill")
-                        .font(.caption2)
-                        .font(.regular12)
+                        .font(.caption1)
+//                        .font(.regular12)
                         .foregroundColor(Color.gray2)
                     Text("\(busAlert!.alertBusStop) 정류장 전")
                         .font(.caption1)
-                        .font(.regular14)
+//                        .font(.regular14)
                         .foregroundColor(Color.gray2)
                     Spacer()
                 }
@@ -145,10 +146,10 @@ struct SavedBus: View {
                                 }
                             HStack {
                                 Image(systemName: "play.fill")
-                                    .font(.regular14)
+//                                    .font(.regular14)
                                     .foregroundColor(.gray1)
                                 Text("시작하기")
-                                    .font(.regular14)
+//                                    .font(.regular14)
                                     .foregroundColor(.black)
                             }
                             .padding(.horizontal, 20)
@@ -196,7 +197,7 @@ struct SavedBus: View {
         alertStop = foundStop
         
         // 라이브 액티비티 시작
-        LiveActivityManager.shared.startLiveActivity()
+//        LiveActivityManager.shared.startLiveActivity()
         
         // 알림 설정 및 위치 모니터링 시작
         notificationManager.notificationReceived = false
