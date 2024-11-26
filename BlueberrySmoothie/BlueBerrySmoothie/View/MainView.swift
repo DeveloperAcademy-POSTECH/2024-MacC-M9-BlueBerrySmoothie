@@ -66,6 +66,7 @@ struct MainView: View {
                     //오류
                     ToolbarItem(placement: .navigationBarLeading) {
                         Text("버스 알람: 햣챠")
+                            .font(.title3)
                             .foregroundStyle(.black)
                     }
                 }
@@ -118,6 +119,7 @@ struct MainView: View {
             }
         }
     }
+    
     
     private func deleteBusAlert(_ busAlert: BusAlert) {
         context.delete(busAlert)

@@ -50,6 +50,7 @@ struct SavedBus: View {
                     .fixedSize(horizontal: true, vertical: true)
                     .padding(.top, 8)
                     
+
                     Spacer()
                     
                     Menu {
@@ -81,6 +82,7 @@ struct SavedBus: View {
                             .font(.title3)
 //                            .font(.regular20)
                             .foregroundColor(Color.gray3)
+
                             .padding(.vertical, 20)
                     }
                     
@@ -106,6 +108,7 @@ struct SavedBus: View {
 //                            .font(.medium20)
                         Spacer()
                     }
+
                 }
                 .foregroundColor(Color.black)
                 
@@ -120,6 +123,7 @@ struct SavedBus: View {
                         .font(.caption1)
 //                        .font(.regular14)
                         .foregroundColor(Color.gray2)
+
                     Spacer()
                 }
                 .padding(.bottom, -4)
