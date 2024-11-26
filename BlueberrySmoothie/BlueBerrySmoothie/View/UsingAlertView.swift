@@ -40,7 +40,8 @@ struct UsingAlertView: View {
                     refreshAction: {
                         refreshData()
                         isScrollTriggered = true // 스크롤 동작 트리거
-                    }
+                        
+                    }, isScrollTriggered: $isScrollTriggered
                 ).padding(10)
                     .padding(.trailing, -8)
                     .padding(.top, -10)
@@ -129,6 +130,8 @@ struct UsingAlertView: View {
         @Binding var lastRefreshTime: Date? // 상위 뷰에서 전달받은 값
         var refreshAction: () -> Void // 새로고침 액션 전달받기
         @State var refreshButtonLottie = LottieManager(filename: "refreshLottie", loopMode: .playOnce)
+        @Binding var isScrollTriggered: Bool // 스크롤하게 하는 트리거
+        @State private var isRefreshDisabled = false // 5초 동안 새로고침 비활성화 상태를 추적
         
         var body: some View {
             ZStack {
@@ -185,26 +188,43 @@ struct UsingAlertView: View {
                                 .foregroundStyle(.gray3Dgray6)
                         }
 
-                   
-                      
-                      
-                            refreshButtonLottie
-                                .frame(width: 24, height: 24)
 
-                                .foregroundColor(isRefreshing ? .gray3 : .gray1)
-                                .onTapGesture {
-                                    refreshAction() // 새로고침 로직 호출
-                                    refreshButtonLottie.stop() // 버튼 클릭 시 애니메이션 실행
-                                    print("ㅋㅋ")
-                                    refreshButtonLottie.play() // 버튼 클릭 시 애니메이션 실행
-                                    DispatchQueue.main.asyncAfter(deadline: .now()) {
-                                        HapticManager.shared.triggerImpactFeedback(style: .medium)
-                                    }
+                      
+                        refreshButtonLottie
+                            .frame(width: 24, height: 24) // 버튼의 크기 설정
+                            .foregroundColor(isRefreshing ? .gray3 : .gray1) // 새로고침 중이면 회색3, 아니면 회색1
+                            .onTapGesture {
+                                // 새로고침 비활성화 상태인지 확인
+                                guard !isRefreshDisabled else {
+                                    // 비활성화 상태라면, 스크롤 동작만 트리거하고 종료
+                                    isScrollTriggered = true
+                                    return
+                                }
+                                
+                                // 새로고침 로직 실행
+                                refreshAction() // 새로고침 동작을 수행하는 사용자 정의 함수 호출
+                                isScrollTriggered = true // 스크롤 트리거 활성화
+                                isRefreshDisabled = true // 새로고침 비활성화 설정
+
+                                // 애니메이션 제어
+                                refreshButtonLottie.stop() // 버튼 클릭 시 기존 애니메이션 멈춤
+                                print("ㅋㅋ") // 디버깅 메시지 출력
+                                refreshButtonLottie.play() // 버튼 클릭 시 새 애니메이션 실행
+
+                                // 햅틱 피드백 (진동 효과) 트리거
+                                DispatchQueue.main.asyncAfter(deadline: .now()) {
+                                    HapticManager.shared.triggerImpactFeedback(style: .medium) // 중간 강도의 햅틱 효과 실행
                                 }
 
-                        }
-                     //   .disabled(isRefreshing)
-
+                                // 5초 후 새로고침 버튼 다시 활성화
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                                    isRefreshDisabled = false // 비활성화 플래그 해제
+                                }
+                            }
+                        
+                        
+                        
+                        
                     }
                     .padding(.trailing, 8)
                 }
