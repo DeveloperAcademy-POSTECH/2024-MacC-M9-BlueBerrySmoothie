@@ -30,7 +30,22 @@ struct SelectCityView: View {
             
             ZStack {
                 VStack {
-
+//                        // 검색창
+//                        TextField("도시 이름 검색", text: $searchText)
+//                            .padding(12)
+//                            .background(
+//                                RoundedRectangle(cornerRadius: 20)
+//                                    .fill(isFocused ? Color.white : Color.gray6) // 배경색
+//                            )
+//                            .overlay(
+//                                RoundedRectangle(cornerRadius: 20)
+//                                    .stroke(isFocused ? Color.brand : Color.gray5, lineWidth: 1) // 테두리
+//                            )
+//                            .cornerRadius(20) // cornerRadius를 background와 동일하게 설정
+//                            .padding(.horizontal, 20) // 여백 설정
+//                            .frame(height: 52) // 높이 설정
+//                            .focused($isFocused) // 포커스 상태 업데이트
+//                            .tint(.brand)
                     
                     HStack(alignment: .center) {
                         TextField("도시 이름 검색", text: $searchText)
@@ -80,7 +95,7 @@ struct SelectCityView: View {
                                             Text(city.name)
                                                 .padding(.horizontal,20)
                                                 .padding(.vertical,15)
-                                                .foregroundStyle(.gray1)
+                                                .foregroundStyle(.blackasset)
                                                 
                                             Spacer()
                                         }
@@ -109,7 +124,7 @@ struct SelectCityView: View {
                     VStack(spacing: 0) {
                         ForEach(index, id: \.self) { letter in
                             Text(letter)
-                                .font(.system(size: 13))
+                                .font(.title2)
                                 .foregroundStyle(.gray3)
                                 .frame(width: 15, height: 23) // 텍스트 크기 설정
                         }
