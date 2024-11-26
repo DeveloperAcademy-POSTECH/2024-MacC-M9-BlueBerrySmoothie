@@ -49,17 +49,10 @@ struct MainView: View {
                                 }
                             }
                             
-                            Button(action: {
-                                showSetting = true
-                            }) {
+                            NavigationLink(destination: AlertSettingMain()){
                                 Image(systemName: "plus.square.fill")
 //                                    .font(.regular20)
                                     .foregroundColor(Color.gray1)
-                            }
-                            .sheet(isPresented: $showSetting) {
-                                NavigationView {
-                                    AlertSettingMain()
-                                }
                             }
                         }
                     }
