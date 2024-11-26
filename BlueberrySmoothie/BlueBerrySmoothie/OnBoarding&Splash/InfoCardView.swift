@@ -27,23 +27,25 @@ struct InfoCardView: View {
             
             VStack(alignment: .leading, spacing: 0) {
                 Text(title)
-                    .font(.title3)
+                    .font(.body1)
+                    .foregroundStyle(.blackDGray7)
                 
                 ForEach(descriptions, id: \.self) { description in
                     Text(description)
-                        .foregroundStyle(.gray3)
+                        .font(.caption1)
+                        .foregroundStyle(.gray3Dgray6)
                 }
             }
             Spacer()
         }
         .padding(.vertical, 20)
         .background(
-            Color.gray7
+            Color.gray7DGray1
                 .cornerRadius(20)
         )
         .overlay(
             RoundedRectangle(cornerRadius: 20)
-                .stroke(Color.gray5, lineWidth: 1)
+                .stroke(Color.gray5Dgray3, lineWidth: 1)
         )
     }
         
