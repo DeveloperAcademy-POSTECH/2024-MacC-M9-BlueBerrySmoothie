@@ -124,7 +124,7 @@ struct SelectCityView: View {
                     VStack(spacing: 0) {
                         ForEach(index, id: \.self) { letter in
                             Text(letter)
-                                .font(.title2)
+                                .font(.body2)
                                 .foregroundStyle(.gray3)
                                 .frame(width: 15, height: 23) // 텍스트 크기 설정
                         }

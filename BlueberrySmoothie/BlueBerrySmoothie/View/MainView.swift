@@ -30,7 +30,7 @@ struct MainView: View {
                     .ignoresSafeArea()
                 VStack {
                     alertListView()
-                    
+
                 }
                 .padding(.horizontal, 20)
                 .toolbar {
@@ -64,6 +64,25 @@ struct MainView: View {
                     }
                 }
                 .background(.clear)
+//                VStack(spacing: 0) { // 간격 제거
+//                    Spacer()
+//                    Rectangle()
+////                        .padding(.bottom, -50)
+//                        .foregroundColor(.clear)
+//                        .frame(height: 20
+//                        )
+//                        .background(
+//                            LinearGradient(
+//                                stops: [
+//                                    Gradient.Stop(color: .whiteDBlack.opacity(0), location: 0.00),
+//                                    Gradient.Stop(color: .whiteDBlack.opacity(0.9), location: 1),
+//                                ],
+//                                startPoint: UnitPoint(x: 0.5, y: 0.09),
+//                                endPoint: UnitPoint(x: 0.5, y: 1)
+//                            )
+//                        )
+//
+//                }
             }
         }
     }
