@@ -146,7 +146,7 @@ struct UsingAlertView: View {
                             .foregroundStyle(.brand)
                             .frame(width: 12, height: 12)
                         
-                        Text("\(busAlert.busNo)번")
+                        Text("\(busAlert.busNo)")
                             .font(.caption2)
                             .foregroundStyle(.gray3Dgray6)
                         
@@ -191,8 +191,7 @@ struct UsingAlertView: View {
 
                       
                         refreshButtonLottie
-                            .frame(width: 24, height: 24) // 버튼의 크기 설정
-                            .foregroundColor(isRefreshing ? .gray3 : .gray1) // 새로고침 중이면 회색3, 아니면 회색1
+                            .frame(width: 24, height: 24)
                             .onTapGesture {
                                 // 새로고침 비활성화 상태인지 확인
                                 guard !isRefreshDisabled else {
