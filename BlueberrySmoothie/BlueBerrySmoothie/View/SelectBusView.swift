@@ -26,7 +26,6 @@ struct SelectBusView: View {
                             .textFieldStyle(.plain)
                             .focused($isTextFieldFocused)
                             .padding(EdgeInsets(top: 16, leading: 20, bottom: 16, trailing: 0))
-                            .keyboardType(.numberPad)
                             .onChange(of: routeNo) { _, newRouteNo in
                                 filteredBuses = filterBuses(by: newRouteNo, from: allBuses)
                             }
@@ -81,6 +80,9 @@ struct SelectBusView: View {
     }
     
     private func filterBuses(by routeNo: String, from buses: [Bus]) -> [Bus] {
+        if routeNo.isEmpty { // 검색 텍스트가 없을 땐 버스 전체 리스트 반환
+            return buses
+        }
         return buses.filter { $0.routeno.contains(routeNo) }
     }
     
