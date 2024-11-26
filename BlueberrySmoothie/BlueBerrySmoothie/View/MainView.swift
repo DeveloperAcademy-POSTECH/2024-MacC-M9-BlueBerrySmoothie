@@ -58,9 +58,7 @@ struct MainView: View {
                     }
                     //오류
                     ToolbarItem(placement: .navigationBarLeading) {
-                        Text("햣챠")
-                            .font(.title3)
-                            .foregroundStyle(.brand)
+                        Image("HotCha")
                     }
                 }
                 .background(.clear)
