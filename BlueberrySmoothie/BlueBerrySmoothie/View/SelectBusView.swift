@@ -34,7 +34,6 @@ struct SelectBusView: View {
                         Spacer()
                         Image("magnifyingglass")
                             .frame(width: 24, height: 24)
-                            .foregroundStyle(.gray3Dgray5)
                             .padding(.trailing, 20.67)
                         
                     }
