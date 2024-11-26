@@ -1,11 +1,7 @@
 {
   "images" : [
     {
-<<<<<<< HEAD
-      "filename" : "Variant2 1.png",
-=======
       "filename" : "도시선택일러-1 6.png",
->>>>>>> dd27c45 ([Fix] 로띠,에셋,폰트)
       "idiom" : "universal",
       "scale" : "1x"
     },
@@ -16,11 +12,7 @@
           "value" : "light"
         }
       ],
-<<<<<<< HEAD
-      "filename" : "Variant2.png",
-=======
       "filename" : "도시선택일러-1 11.png",
->>>>>>> dd27c45 ([Fix] 로띠,에셋,폰트)
       "idiom" : "universal",
       "scale" : "1x"
     },
@@ -31,20 +23,12 @@
           "value" : "dark"
         }
       ],
-<<<<<<< HEAD
-      "filename" : "Variant1.png",
-=======
       "filename" : "도시선택일러.png",
->>>>>>> dd27c45 ([Fix] 로띠,에셋,폰트)
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-<<<<<<< HEAD
-      "filename" : "Variant2 3.png",
-=======
       "filename" : "도시선택일러-1 7.png",
->>>>>>> dd27c45 ([Fix] 로띠,에셋,폰트)
       "idiom" : "universal",
       "scale" : "2x"
     },
@@ -55,11 +39,7 @@
           "value" : "light"
         }
       ],
-<<<<<<< HEAD
-      "filename" : "Variant2 2.png",
-=======
       "filename" : "도시선택일러-1 10.png",
->>>>>>> dd27c45 ([Fix] 로띠,에셋,폰트)
       "idiom" : "universal",
       "scale" : "2x"
     },
@@ -70,20 +50,12 @@
           "value" : "dark"
         }
       ],
-<<<<<<< HEAD
-      "filename" : "Variant1 1.png",
-=======
       "filename" : "도시선택일러 4.png",
->>>>>>> dd27c45 ([Fix] 로띠,에셋,폰트)
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-<<<<<<< HEAD
-      "filename" : "Variant2 5.png",
-=======
       "filename" : "도시선택일러-1 8.png",
->>>>>>> dd27c45 ([Fix] 로띠,에셋,폰트)
       "idiom" : "universal",
       "scale" : "3x"
     },
@@ -94,11 +66,7 @@
           "value" : "light"
         }
       ],
-<<<<<<< HEAD
-      "filename" : "Variant2 4.png",
-=======
       "filename" : "도시선택일러-1 9.png",
->>>>>>> dd27c45 ([Fix] 로띠,에셋,폰트)
       "idiom" : "universal",
       "scale" : "3x"
     },
@@ -109,11 +77,7 @@
           "value" : "dark"
         }
       ],
-<<<<<<< HEAD
-      "filename" : "Variant1 2.png",
-=======
       "filename" : "도시선택일러 1.png",
->>>>>>> dd27c45 ([Fix] 로띠,에셋,폰트)
       "idiom" : "universal",
       "scale" : "3x"
     }
