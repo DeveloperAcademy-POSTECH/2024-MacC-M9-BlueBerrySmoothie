@@ -81,6 +81,9 @@ struct SelectBusView: View {
     }
     
     private func filterBuses(by routeNo: String, from buses: [Bus]) -> [Bus] {
+        if routeNo.isEmpty { // 검색 텍스트가 없을 땐 버스 전체 리스트 반환
+            return buses
+        }
         return buses.filter { $0.routeno.contains(routeNo) }
     }
     
