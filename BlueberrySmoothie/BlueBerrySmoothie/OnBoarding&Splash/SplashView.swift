@@ -17,16 +17,13 @@ struct SplashView: View {
             AppView()
         } else {
             // 스플래시 화면
-            ZStack {
                 Image("CuteBus")
-                    .resizable()
-                    .frame(width: 300, height: 300)
+                    .frame(width: 300)
+                    .padding(.bottom, 100)
                 
-                Text("핫챠")
-                    .font(.largeTitle)
-                    .fontWeight(.bold)
-                    .foregroundColor(.white)
-            }
+                
+                
+   
             .onAppear {
                 // 3초 후에 메인 화면으로 전환
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
