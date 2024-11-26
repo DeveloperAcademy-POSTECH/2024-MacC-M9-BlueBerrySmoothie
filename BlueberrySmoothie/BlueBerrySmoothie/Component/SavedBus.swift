@@ -23,18 +23,8 @@ struct SavedBus: View {
     @State private var isUsingAlertActive: Bool = false
     @State private var alertStop: BusStopLocal?
     
-//    var body: some View {
-//        ZStack {
-//            LinearGradient(gradient: Gradient(colors: [Color.clear, Color.gray7.opacity(0.6)]), startPoint: .leading, endPoint: .trailing)
-//                .cornerRadius(12)
-//            Rectangle()
-//                .foregroundColor(Color.clear)
-//                .cornerRadius(12)
-//                .overlay {
-//    Image("MainCardBlue")
-//        .resizable()
-//                }
             var body: some View {
+
                     ZStack {
 //                        LinearGradient(gradient: Gradient(colors: [Color.clear, Color.gray7.opacity(0.6)]), startPoint: .leading, endPoint: .trailing)
 //                            .cornerRadius(12)
@@ -63,6 +53,7 @@ struct SavedBus: View {
                                 }
                                 .fixedSize(horizontal: true, vertical: true)
                                 .padding(.top, 8)
+
 
                                 Spacer()
                                 
