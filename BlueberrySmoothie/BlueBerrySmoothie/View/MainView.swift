@@ -114,31 +114,7 @@ struct MainView: View {
                 }
             }
         }
-    }
-    
-
-    /// 시작하기 버튼
-    private func startButton(arrivalBusStopLocal: BusStopLocal?) -> some View {
-        Button(action: {
-            guard let selectedAlert = selectedAlert,
-                  let alertBusStopLocal = alertStop else {
-                print("선택된 알람 또는 버스 정류장이 설정되지 않았습니다.")
-                return
-            }
-            
-
-            // 알림 설정
-            isUsingAlertActive = true // Activate navigation
-            notificationManager.notificationReceived = false
-            notificationManager.requestAuthorization()
-            locationManager.registerBusAlert(selectedAlert, busStopLocal: alertBusStopLocal)
-        }, label: {
-            // 시작하기 버튼 UI
-            startButtonUI(isEmptyAlert: selectedAlert == nil)
-        })
-        .disabled(selectedAlert == nil)
-    }
-    
+    }    
 
     private func deleteBusAlert(_ busAlert: BusAlert) {
         context.delete(busAlert)

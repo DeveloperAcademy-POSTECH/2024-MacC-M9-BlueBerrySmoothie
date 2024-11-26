@@ -17,13 +17,10 @@ struct SplashView: View {
             AppView()
         } else {
             // 스플래시 화면
-                Image("CuteBus")
+                Image("Splash")
                     .frame(width: 300)
                     .padding(.bottom, 100)
-                
-                
-                
-   
+
             .onAppear {
                 // 3초 후에 메인 화면으로 전환
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {

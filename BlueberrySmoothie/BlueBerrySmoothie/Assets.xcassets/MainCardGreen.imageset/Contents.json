@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "OnboardingStartView_1X.png",
+      "filename" : "Frame 351.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
@@ -12,7 +12,7 @@
           "value" : "light"
         }
       ],
-      "filename" : "OnboardingStartView_1X 1.png",
+      "filename" : "Frame 352.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
@@ -23,12 +23,12 @@
           "value" : "dark"
         }
       ],
-      "filename" : "OnboardingStartView_1X_dark.png",
+      "filename" : "DBusSelet-3 2.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "OnboardingStartView_2X.png",
+      "filename" : "Frame 353.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
@@ -39,7 +39,7 @@
           "value" : "light"
         }
       ],
-      "filename" : "OnboardingStartView_2X 1.png",
+      "filename" : "Frame 354.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
@@ -50,12 +50,12 @@
           "value" : "dark"
         }
       ],
-      "filename" : "OnboardingStartView_2X_dark.png",
+      "filename" : "DBusSelet-3 1.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "OnboardingStartView_3X 1.png",
+      "filename" : "Frame 355.png",
       "idiom" : "universal",
       "scale" : "3x"
     },
@@ -66,7 +66,7 @@
           "value" : "light"
         }
       ],
-      "filename" : "OnboardingStartView_3X.png",
+      "filename" : "Frame 356.png",
       "idiom" : "universal",
       "scale" : "3x"
     },
@@ -77,7 +77,7 @@
           "value" : "dark"
         }
       ],
-      "filename" : "OnboardingStartView_3X_dark.png",
+      "filename" : "DBusSelet-3.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

@@ -143,7 +143,7 @@ struct UsingAlertView: View {
                     .resizable()
                     .frame(maxWidth: .infinity, maxHeight: 224)
                 
-                VStack(alignment: .leading) {
+                VStack(alignment: .leading, spacing: 3) {
                     // 버스 정보
                     HStack(spacing: 4) {
                         Image(systemName: "square.fill")
@@ -168,7 +168,7 @@ struct UsingAlertView: View {
                         Text("알람까지 \(busAlert.arrivalBusStopNord - (Int(closestBus.nodeord) ?? 0) - 1 ) 정류장 남았습니다.")
                             .font(.title2)
                             .foregroundStyle(.blackDGray7)
-                            .padding(.bottom, 13)
+                            .padding(.bottom, 10)
                         
                         Text("현재 정류장은")
                             .font(.caption1)
@@ -182,10 +182,8 @@ struct UsingAlertView: View {
 
                                 .foregroundStyle(.gray1)
                                 .onAppear {
-                                    
                                         LiveActivityManager.shared.startLiveActivity(stationName: busAlert.arrivalBusStopNm, initialProgress: 99, currentStop: closestBus.nodenm, stopsRemaining: busAlert.arrivalBusStopNord - (Int(closestBus.nodeord) ?? 0) - 1 )
                                 }
-
                         }
                     }
                     
@@ -198,8 +196,6 @@ struct UsingAlertView: View {
                                 .foregroundStyle(.gray3Dgray6)
                         }
 
-
-                      
                         refreshButtonLottie
                             .frame(width: 24, height: 24)
                             .onTapGesture {
