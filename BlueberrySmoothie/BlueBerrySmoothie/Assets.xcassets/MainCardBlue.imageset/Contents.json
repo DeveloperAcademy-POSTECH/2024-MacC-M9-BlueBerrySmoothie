@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "Frame 339.png",
+      "filename" : "Frame 341.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
@@ -12,7 +12,7 @@
           "value" : "light"
         }
       ],
-      "filename" : "Frame 340.png",
+      "filename" : "Frame 345.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
@@ -28,7 +28,7 @@
       "scale" : "1x"
     },
     {
-      "filename" : "Frame 341.png",
+      "filename" : "Frame 339.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
@@ -39,7 +39,7 @@
           "value" : "light"
         }
       ],
-      "filename" : "Frame 342.png",
+      "filename" : "Frame 340.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
