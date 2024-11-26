@@ -14,9 +14,9 @@ struct AlertLoadingView: View {
     
     var body: some View {
         ZStack{
-            Color.gray7 // 배경 색
+            Color.gray6DGray1 // 배경 색
                 .edgesIgnoringSafeArea(.all) // 화면 전체 배경 적용
-            
+//            
             VStack {
                 Image("AlertLoadingView")
                     .padding(.bottom, 20)

@@ -20,7 +20,7 @@ struct SelectBusStopView: View {
     @State private var isAutoScroll: Bool = false // 상행 하행 버튼과 스크롤로 이동될 때의 action이 중복되지 않도록 방지하는 변수
     @Binding var showSelectBusSheet: Bool
     @State private var isAnimating = false // 버스 리스트가 아래에서 위로 올라오는 애니메이션 실행 여부
-    
+
     var body: some View {
         VStack{
             HStack {
@@ -29,14 +29,13 @@ struct SelectBusStopView: View {
                 Spacer()
                 Image("magnifyingglass")
                     .frame(width: 24, height: 24)
-                    .foregroundStyle(.gray3)
                     .padding(.trailing, 20.67)
             }
-            .background(.gray6)
+            .background(.gray6Dgray2)
             .cornerRadius(20)
             .overlay {
                 RoundedRectangle(cornerRadius: 20)
-                    .stroke(.gray5, lineWidth: 1)
+                    .stroke(.gray5Dgray3, lineWidth: 1)
             }
             .padding(EdgeInsets(top: 44, leading: 0, bottom: 24, trailing: 0))
             
@@ -46,7 +45,7 @@ struct SelectBusStopView: View {
                         directionName: "\(bus.endnodenm)방면", // 상행
                         isSelected: updowncdselection == 1,
                         selectedColor: .brand,
-                        unselectedColor: .gray2
+                        unselectedColor: .gray5Dgray3
                     )
                     .onTapGesture {
                         updowncdselection = 1
@@ -57,7 +56,7 @@ struct SelectBusStopView: View {
                         directionName: "\(bus.startnodenm)방면", // 하행
                         isSelected: updowncdselection == 2,
                         selectedColor: .brand,
-                        unselectedColor: .gray2
+                        unselectedColor: .gray5Dgray3
                     )
                     .onTapGesture {
                         updowncdselection = 2
@@ -91,7 +90,7 @@ struct SelectBusStopView: View {
                             .font(.body2)
                             .padding(.leading, -7)
                     }
-                    .foregroundStyle(.gray1)
+                    .foregroundStyle(.gray1DBrand)
                 }
             }
         }
@@ -118,24 +117,24 @@ struct SelectBusStopView: View {
                             HStack {
                                 Text("\(busstop.nodenm)")
                                     .padding(.leading, 24)
-                                    .foregroundStyle(.black)
+                                    .foregroundStyle(.gray1Dgray6)
                                 
                                 Spacer()
                             }
                             Spacer()
                             Divider()
                             // 상행의 마지막 item의 divider의 색과 굵기 변경
-//                                .frame(height: busstop.nodeord == busStopViewModel.maxUpwardNodeord! ? 2 : 1)
-//                                .background(busstop.nodeord == busStopViewModel.maxUpwardNodeord! ? .midbrand : .gray5)
-//                                .overlay(
-//                                    // 상행의 마지막 item을 스크롤 할 때 상단의 방면이 자동으로 변경되도록 함
-//                                    busstop.nodeord == busStopViewModel.maxUpwardNodeord! ? GeometryReader { proxy in
-//                                        Color.clear
-//                                            .onChange(of: proxy.frame(in: .global).midY) {_, midY in
-//                                                handleScrollChange(midY: midY)
-//                                            }
-//                                    } : nil
-//                                )
+                                .frame(height: busstop.nodeord == busStopViewModel.maxUpwardNodeord ? 2 : 1)
+                                .background(busstop.nodeord == busStopViewModel.maxUpwardNodeord ? .midbrand : .gray5Dgray3)
+                                .overlay(
+                                    // 상행의 마지막 item을 스크롤 할 때 상단의 방면이 자동으로 변경되도록 함
+                                    busstop.nodeord == busStopViewModel.maxUpwardNodeord ? GeometryReader { proxy in
+                                        Color.clear
+                                            .onChange(of: proxy.frame(in: .global).midY) {_, midY in
+                                                handleScrollChange(midY: midY)
+                                            }
+                                    } : nil
+                                )
                         }
                         .frame(height: 60)
                     }
@@ -168,7 +167,11 @@ struct SelectBusStopView: View {
         // 하행의 가장 작은 order 구함
         if let minDownwardNodeord = busStopViewModel.busStopList.filter({ $0.updowncd == 1 }).map({ $0.nodeord }).min() {
             //해당 order로 스크롤을 이동함
-            proxy.scrollTo(minDownwardNodeord, anchor: .center)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                withAnimation(.smooth) {
+                    proxy.scrollTo(minDownwardNodeord, anchor: .center)
+                }
+            }
         }
     }
     
@@ -204,7 +207,7 @@ struct SelectBusStopView: View {
             HStack {
                 Spacer()
                 Text(directionName)
-                    .foregroundColor(isSelected ? .primary : .gray)
+                    .foregroundColor(isSelected ? .gray1Dgray7 : .gray3Dgray4)
                 Spacer()
             }
             Spacer()

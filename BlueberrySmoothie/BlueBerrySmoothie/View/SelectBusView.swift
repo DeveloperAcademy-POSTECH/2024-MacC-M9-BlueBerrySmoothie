@@ -14,7 +14,7 @@ struct SelectBusView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                Color(.white)
+                Color(.whiteDgray1)
                     .onTapGesture {
                         isTextFieldFocused = false // 다른 곳 클릭 시 키보드 숨김
                     }
@@ -22,7 +22,7 @@ struct SelectBusView: View {
                     HStack(alignment: .center) {
                         TextField("버스 번호", text: $routeNo)
                             .font(.body1)
-                            .foregroundStyle(.black)
+                            .foregroundStyle(.blackDGray7)
                             .textFieldStyle(.plain)
                             .focused($isTextFieldFocused)
                             .padding(EdgeInsets(top: 16, leading: 20, bottom: 16, trailing: 0))
@@ -34,15 +34,14 @@ struct SelectBusView: View {
                         Spacer()
                         Image("magnifyingglass")
                             .frame(width: 24, height: 24)
-                            .foregroundStyle(.gray3)
                             .padding(.trailing, 20.67)
                         
                     }
-                    .background(.gray6)
+                    .background(.gray6Dgray2)
                     .cornerRadius(20)
                     .overlay {
                         RoundedRectangle(cornerRadius: 20)
-                            .stroke(isTextFieldFocused == true ? .brand : .gray5, lineWidth: 1)
+                            .stroke(isTextFieldFocused == true ? .brand : .gray5Dgray3, lineWidth: 1)
                     }
                     .padding(EdgeInsets(top: 44, leading: 20, bottom: 8, trailing: 20))
                     // 버스 리스트
@@ -67,7 +66,7 @@ struct SelectBusView: View {
                                 .font(.body2)
                                 .padding(.leading, -7)
                         }
-                        .foregroundStyle(.gray1)
+                        .foregroundStyle(.gray1DBrand)
                     }
                 }
             }
@@ -104,7 +103,7 @@ struct SelectBusView: View {
                                 HStack {
                                     Text("\(bus.startnodenm) - \(bus.endnodenm)")
                                         .font(.caption2)
-                                        .foregroundStyle(.gray3)
+                                        .foregroundStyle(.gray3Dgray6)
                                 }
                             }
                             .padding(.horizontal, 16)

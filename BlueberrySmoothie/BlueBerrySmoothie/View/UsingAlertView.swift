@@ -40,8 +40,11 @@ struct UsingAlertView: View {
                     refreshAction: {
                         refreshData()
                         isScrollTriggered = true // 스크롤 동작 트리거
+
                         LiveActivityManager.shared.updateLiveActivity(progress: 0.5, currentStop: currentBusViewModel.closestBusLocation?.nodenm ?? "로딩중", stopsRemaining: 3)
-                    }
+                        
+                    }, isScrollTriggered: $isScrollTriggered
+
                 ).padding(10)
                     .padding(.trailing, -8)
                     .padding(.top, -10)
@@ -84,7 +87,7 @@ struct UsingAlertView: View {
                     self.showExitConfirmation.toggle();
                 }, label: {
                     Image(systemName: "xmark")
-                        .foregroundStyle(.gray1)
+                        .foregroundStyle(.gray1Dgray6)
                 })
             }
         }
@@ -104,7 +107,8 @@ struct UsingAlertView: View {
             refreshData() // 초기 로드
             currentBusViewModel.startUpdating() // 뷰가 보일 때 뷰모델에서 위치 업데이트 시작
             startRefreshTimer() // 타이머 시작
-           
+            //            notificationManager.notificationReceived = true
+
         }
         .onChange(of: currentBusViewModel.closestBusLocation != nil) { isNotNil in
             if isNotNil {
@@ -129,7 +133,9 @@ struct UsingAlertView: View {
         @ObservedObject var viewModel: NowBusLocationViewModel // ViewModel을 상위 뷰에서 전달받도록 변경
         @Binding var lastRefreshTime: Date? // 상위 뷰에서 전달받은 값
         var refreshAction: () -> Void // 새로고침 액션 전달받기
-        var refreshButtonLottie = LottieManager(filename: "refreshLottie", loopMode: .playOnce)
+        @State var refreshButtonLottie = LottieManager(filename: "refreshLottie", loopMode: .playOnce)
+        @Binding var isScrollTriggered: Bool // 스크롤하게 하는 트리거
+        @State private var isRefreshDisabled = false // 5초 동안 새로고침 비활성화 상태를 추적
         
         var body: some View {
             ZStack {
@@ -144,40 +150,42 @@ struct UsingAlertView: View {
                             .foregroundStyle(.brand)
                             .frame(width: 12, height: 12)
                         
-                        Text("\(busAlert.busNo)번")
+                        Text("\(busAlert.busNo)")
                             .font(.caption2)
-                            .foregroundStyle(.gray3)
+                            .foregroundStyle(.gray3Dgray6)
                         
                         Rectangle()
                             .frame(width: 2, height: 8)
-                            .foregroundStyle(.gray3)
+                            .foregroundStyle(.gray3Dgray6)
                         
                         Text(busAlert.arrivalBusStopNm)
                             .font(.caption2)
-                            .foregroundStyle(.gray3)
+                            .foregroundStyle(.gray3Dgray6)
                     }.padding(.bottom, 16)
                     
                     // 현재 위치 정보
                     if let closestBus = viewModel.closestBusLocation {
                         Text("알람까지 \(busAlert.arrivalBusStopNord - (Int(closestBus.nodeord) ?? 0) - 1 ) 정류장 남았습니다.")
                             .font(.title2)
-                            .foregroundStyle(.gray1)
+                            .foregroundStyle(.blackDGray7)
                             .padding(.bottom, 13)
                         
                         Text("현재 정류장은")
                             .font(.caption1)
-                            .foregroundStyle(.gray1)
+                            .foregroundStyle(.gray1Dgray6)
                         HStack(spacing: 2){
                             Text("\(closestBus.nodenm)")
                                 .font(.caption1)
                                 .foregroundStyle(.brand)
                             Text("입니다.")
                                 .font(.caption1)
+
                                 .foregroundStyle(.gray1)
                                 .onAppear {
                                     
                                         LiveActivityManager.shared.startLiveActivity(stationName: busAlert.arrivalBusStopNm, initialProgress: 99, currentStop: closestBus.nodenm, stopsRemaining: busAlert.arrivalBusStopNord - (Int(closestBus.nodeord) ?? 0) - 1 )
                                 }
+
                         }
                     }
                     
@@ -187,20 +195,44 @@ struct UsingAlertView: View {
                         if let lastRefreshTime = lastRefreshTime {
                             Text(formattedTime(from: lastRefreshTime))
                                 .font(.caption2)
-                                .foregroundStyle(.gray3)
+                                .foregroundStyle(.gray3Dgray6)
                         }
-                        Button(action: {
-                            refreshAction() // 새로고침 로직 호출
-                            //----------------------------------------------------------------------------
-                            //TODO: refresh 로띠 실행안됨
-                            refreshButtonLottie.play() // 버튼 클릭 시 애니메이션 실행
-                        }) {
-                            refreshButtonLottie
-                                .frame(width: 24, height: 24)
-                                .foregroundColor(isRefreshing ? .gray3 : .gray1)
-                            //----------------------------------------------------------------------------
-                        }
-                        .disabled(isRefreshing)
+
+
+                      
+                        refreshButtonLottie
+                            .frame(width: 24, height: 24)
+                            .onTapGesture {
+                                // 새로고침 비활성화 상태인지 확인
+                                guard !isRefreshDisabled else {
+                                    // 비활성화 상태라면, 스크롤 동작만 트리거하고 종료
+                                    isScrollTriggered = true
+                                    return
+                                }
+                                
+                                // 새로고침 로직 실행
+                                refreshAction() // 새로고침 동작을 수행하는 사용자 정의 함수 호출
+                                isScrollTriggered = true // 스크롤 트리거 활성화
+                                isRefreshDisabled = true // 새로고침 비활성화 설정
+
+                                // 애니메이션 제어
+                                refreshButtonLottie.stop() // 버튼 클릭 시 기존 애니메이션 멈춤
+                                print("ㅋㅋ") // 디버깅 메시지 출력
+                                refreshButtonLottie.play() // 버튼 클릭 시 새 애니메이션 실행
+
+                                // 햅틱 피드백 (진동 효과) 트리거
+                                DispatchQueue.main.asyncAfter(deadline: .now()) {
+                                    HapticManager.shared.triggerImpactFeedback(style: .medium) // 중간 강도의 햅틱 효과 실행
+                                }
+
+                                // 5초 후 새로고침 버튼 다시 활성화
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                                    isRefreshDisabled = false // 비활성화 플래그 해제
+                                }
+                            }
+                        
+                        
+
                     }
                     .padding(.trailing, 8)
                 }
@@ -257,7 +289,6 @@ struct UsingAlertView: View {
                         }
                         Spacer()
                     }
-                    .background(.whiteasset)
                 }
                 // 해당 버스 노드 위치로 스크롤하는 에니메이션
                 .onChange(of: isScrollTriggered) { value in
@@ -321,7 +352,7 @@ struct UsingAlertView: View {
                 }
                 Text(busStop.nodenm)
                     .padding(.leading, 20)
-                    .foregroundStyle(.gray1)
+                    .foregroundStyle(.gray1Dgray6)
                     .font(isCurrentLocation || busStop.nodeid == arrivalBusStopID || busStop.nodeid == alertStop?.nodeid ? .body1 : .caption1)
                 if busStop.nodeid == alertStop?.nodeid {
                     // TODO: 알람 레이블 여기 넣기
@@ -330,6 +361,7 @@ struct UsingAlertView: View {
                 Spacer()
             }
             .frame(height: busStop.nodeid == alertStop?.nodeid ? 88 : 60)
+            .background(busStop.nodeid == arrivalBusStopID || busStop.nodeid == alertStop?.nodeid ? .gray7DGray1 : .whiteDBlack)
         }
     }
     
@@ -412,8 +444,8 @@ struct UsingAlertView: View {
                         .frame(width: 133, height: 49)
                         .foregroundStyle(.white)
                         .font(.title2)
-                        .background(RoundedRectangle(cornerRadius: 8).fill(.darkgray1))
-
+                        .background(RoundedRectangle(cornerRadius: 8).fill(.blackDBrand))
+                    
                 })
                 .padding(.bottom, 48)
                 
@@ -422,8 +454,8 @@ struct UsingAlertView: View {
                 Image("AfterAlertRectangle")
                     .resizable()
                     .frame(maxWidth: .infinity, maxHeight: 500)
-//                RoundedRectangle(cornerRadius: 30)
-//                    .fill(.thinMaterial)
+                //                RoundedRectangle(cornerRadius: 30)
+                //                    .fill(.thinMaterial)
             )
             .padding(.horizontal, 20)
             .padding(.top, 120)

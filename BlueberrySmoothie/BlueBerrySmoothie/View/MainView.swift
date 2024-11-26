@@ -26,55 +26,49 @@ struct MainView: View {
     var body: some View {
         NavigationView {
             ZStack {
-                Color.lightbrand
+                Color.whiteDBlack
                     .ignoresSafeArea()
                 VStack {
                     alertListView()
-                    Spacer()
-                  
-                    NavigationLink(
-                        destination: Group {
-                            if let selectedAlert = selectedAlert {
-                                UsingAlertView(
-                                    busAlert: selectedAlert,
-                                    alertStop: $alertStop
-                                )
-                            }
-                        },
-                        isActive: $isUsingAlertActive
-                    ) {
-                        EmptyView()
-                    }
-                   
-                    // 시작 버튼
-                    startButton(arrivalBusStopLocal: alertStop)
+                    
                 }
-                .padding(20)
+                .padding(.horizontal, 20)
                 .toolbar {
                     ToolbarItem(placement: .navigationBarTrailing) {
-                        Button(action: {
-                            showSetting = true
-                        }) {
-                            Text("추가")
-                                .font(.system(size: 16, weight: .medium))
-                                .foregroundColor(Color.brand)
-                        }
-                        .sheet(isPresented: $showSetting) {
-                            NavigationView {
-                                AlertSettingMain()
+                        HStack {
+                            Button(action: {
+                                showSetting = true
+                            }) {
+                                Image("mark")
+//                                    .font(.regular20)
+                                    .foregroundColor(Color.gray1)
+                            }
+                            .sheet(isPresented: $showSetting) {
+                                NavigationView {
+                                    CitySettingView()// SelectCityMainView 로 바꿔야 함
+                                }
+                            }
+                            
+                            NavigationLink(destination: AlertSettingMain()){
+                                Image("plus")
+//                                    .font(.regular20)
+                                    .foregroundColor(Color.gray1)
                             }
                         }
                     }
                     //오류
                     ToolbarItem(placement: .navigationBarLeading) {
-                        Text("버스 알람: 햣챠")
+                        Text("햣챠")
                             .font(.title3)
-                            .foregroundStyle(.black)
+                            .foregroundStyle(.brand)
                     }
                 }
+                .background(.clear)
             }
         }
     }
+    
+    
     
     private func alertListView() -> some View {
         ZStack {
@@ -89,7 +83,22 @@ struct MainView: View {
                 .background(Color.clear)
             } else {
                 ScrollView(showsIndicators: false) {
-                    ForEach(busAlerts, id: \.self) { alert in
+                    // 고정된 알림들을 먼저 표시
+                    ForEach(busAlerts.filter { $0.isPinned }, id: \.self) { alert in
+                        SavedBus(busStopLocals: busStopLocal, busAlert: alert, isSelected: selectedAlert?.id == alert.id, onDelete: {
+                            deleteBusAlert(alert) // 삭제 동작
+                        })
+                        .onTapGesture {
+                            selectedAlert = alert
+                            if let foundStop = findAlertBusStop(busAlert: alert, busStops: busStopLocal) {
+                                alertStop = foundStop
+                            }
+                        }
+                        .padding(2)
+                        .padding(.bottom, 1)
+                    }
+                    
+                    ForEach(busAlerts.filter { !$0.isPinned }, id: \.self) { alert in
                         SavedBus(busStopLocals: busStopLocal, busAlert: alert, isSelected: selectedAlert?.id == alert.id, onDelete: {
                             deleteBusAlert(alert) // 삭제 동작
                         })
@@ -107,6 +116,7 @@ struct MainView: View {
         }
     }
     
+
     /// 시작하기 버튼
     private func startButton(arrivalBusStopLocal: BusStopLocal?) -> some View {
         Button(action: {
@@ -116,10 +126,7 @@ struct MainView: View {
                 return
             }
             
-            // 라이브 액티비티 시작
-//            LiveActivityManager.shared.startLiveActivity(stationName: selectedAlert.arrivalBusStopNm, initialProgress: 3, currentStop: selectedAlert.arrivalBusStopNm, stopsRemaining: 5)
-            
-            
+
             // 알림 설정
             isUsingAlertActive = true // Activate navigation
             notificationManager.notificationReceived = false
@@ -132,6 +139,7 @@ struct MainView: View {
         .disabled(selectedAlert == nil)
     }
     
+
     private func deleteBusAlert(_ busAlert: BusAlert) {
         context.delete(busAlert)
         // 선택된 알람이 삭제된 경우 nil로 설정

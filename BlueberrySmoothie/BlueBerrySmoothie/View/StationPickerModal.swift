@@ -28,7 +28,7 @@ struct StationPickerModal: View {
                 VStack {
                     HStack {
                         Text("알람이 울릴 정류장 선택")
-                            .foregroundColor(Color.black)
+                            .foregroundColor(.blackDGray7)
                             .font(.body2)
                             .padding(.top, 20)
                             .padding(.horizontal, 20)
@@ -37,7 +37,7 @@ struct StationPickerModal: View {
                     }
                     
                     Divider()
-                        .foregroundColor(Color.gray4)
+                        .foregroundColor(.gray5Dgray3)
                         .padding(.horizontal, 20)
                         .padding(.bottom, 20)
                     
@@ -81,7 +81,7 @@ struct StationPickerModal: View {
                 }
                 .background(
                     RoundedRectangle(cornerRadius: 20)
-                        .fill(Color.white)
+                        .fill(.whiteDBlack)
                 )
                 .frame(maxWidth: .infinity)
                 .frame(height: UIScreen.main.bounds.height * 0.32)
@@ -95,7 +95,7 @@ struct StationPickerModal: View {
     private func stationRow(stationText: Int, isEnabled: Bool, action: (() -> Void)? = nil) -> some View {
         HStack {
             Text("\(stationText) 정류장 전 알람")
-                .foregroundColor(isEnabled ? Color.gray1 : Color.gray3)
+                .foregroundColor(isEnabled ? .gray1Dgray6 : .gray3Dgray3)
                 .font(.body2)
                 .onTapGesture {
                     if isEnabled, let action = action {
