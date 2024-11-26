@@ -120,7 +120,6 @@ struct MainView: View {
         }
     }
     
-    
     private func deleteBusAlert(_ busAlert: BusAlert) {
         context.delete(busAlert)
         // 선택된 알람이 삭제된 경우 nil로 설정

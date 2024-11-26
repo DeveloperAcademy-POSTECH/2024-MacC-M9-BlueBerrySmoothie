@@ -293,7 +293,7 @@
 				D90E0C192CD89CB20089883F /* AlertSettingMain.swift */,
 				9DEA523E2CD362C100A3AE68 /* SelectBusView.swift */,
 				12D2B6C52CD36E70005CF771 /* SelectBusStopView.swift */,
-				D968D5C92CD912C5002DF70B /* MainView.swift */,
+				D968D5C92CD912C5002DF70B /* MainView.swift */
 			);
 			path = View;
 			sourceTree = "<group>";
