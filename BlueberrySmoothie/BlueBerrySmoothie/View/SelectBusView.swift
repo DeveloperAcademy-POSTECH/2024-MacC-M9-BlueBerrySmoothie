@@ -98,7 +98,7 @@ struct SelectBusView: View {
                             VStack(alignment: .leading) {
                                 Text("\(bus.routeno)")
                                     .font(.body)
-                                    .foregroundStyle(.brand)
+                                    .foregroundStyle(busColor(for: bus.routetp))
                                     .padding(.bottom, 4)
                                 HStack {
                                     Text("\(bus.startnodenm) - \(bus.endnodenm)")

@@ -26,9 +26,9 @@ class BusAlert {
     var alertCycle: Double? // 알람 주기 (옵셔널)
     var updowncd: Int
     var isPinned: Bool = false
-//    var routetp: String = "일반버스"
+    var routetp: String = ""
     
-    init(id: String, cityCode: Double, busNo: String, routeid: String, arrivalBusStopID: String, arrivalBusStopNm: String, arrivalBusStopNord: Int ,alertBusStop: Int, /*alertBusStopID: String, alertBusStopNm: String,*/ alertLabel: String, alertSound: Bool? = nil, alertHaptic: Bool? = nil, alertCycle: Double? = nil, updowncd: Int, isPinned: Bool = false) {
+    init(id: String, cityCode: Double, busNo: String, routeid: String, arrivalBusStopID: String, arrivalBusStopNm: String, arrivalBusStopNord: Int ,alertBusStop: Int, /*alertBusStopID: String, alertBusStopNm: String,*/ alertLabel: String, alertSound: Bool? = nil, alertHaptic: Bool? = nil, alertCycle: Double? = nil, updowncd: Int, isPinned: Bool = false, routetp: String = "") {
         self.id = id
         self.cityCode = cityCode
         self.busNo = busNo
@@ -43,6 +43,7 @@ class BusAlert {
         self.alertCycle = alertCycle
         self.updowncd = updowncd
         self.isPinned = isPinned
+        self.routetp = routetp
     }
 }
 
