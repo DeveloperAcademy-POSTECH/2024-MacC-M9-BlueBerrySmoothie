@@ -63,9 +63,9 @@ struct MainView: View {
                             }
                         }
                     }
+                    //오류
                     ToolbarItem(placement: .navigationBarLeading) {
                         Text("버스 알람: 햣챠")
-                            .font(.mediumbold24)
                             .foregroundStyle(.black)
                     }
                 }

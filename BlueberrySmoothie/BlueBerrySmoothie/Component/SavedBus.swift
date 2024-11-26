@@ -42,6 +42,7 @@ struct SavedBus: View {
                             .foregroundColor(Color.lightbrand)
                             .cornerRadius(4)
                         Text(busAlert?.alertLabel ?? "알림")
+                            .font(.title2)
                             .font(.regular12)
                             .padding(4)
                             .foregroundColor(Color.brand)
@@ -77,6 +78,7 @@ struct SavedBus: View {
                         
                     } label: {
                         Image(systemName: "ellipsis")
+                            .font(.title3)
                             .font(.regular20)
                             .foregroundColor(Color.gray3)
                             .padding(.vertical, 20)
@@ -99,6 +101,7 @@ struct SavedBus: View {
                     }
                     HStack {
                         Text(busAlert?.arrivalBusStopNm ?? "도착정류장")
+                            .font(.title3)
                             .font(.medium20)
                         Spacer()
                     }
@@ -109,9 +112,11 @@ struct SavedBus: View {
                 
                 HStack(spacing: 4) {
                     Image(systemName: "bell.fill")
+                        .font(.caption2)
                         .font(.regular12)
                         .foregroundColor(Color.gray2)
                     Text("\(busAlert!.alertBusStop) 정류장 전")
+                        .font(.caption1)
                         .font(.regular14)
                         .foregroundColor(Color.gray2)
                     Spacer()

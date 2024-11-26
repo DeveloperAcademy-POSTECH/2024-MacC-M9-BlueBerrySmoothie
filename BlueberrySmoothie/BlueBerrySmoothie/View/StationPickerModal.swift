@@ -6,10 +6,6 @@
 //
 import SwiftUI
 
-import SwiftUI
-
-import SwiftUI
-
 struct StationPickerModal: View {
     @Binding var isPresented: Bool
     @Binding var selectedStation: String
@@ -31,9 +27,9 @@ struct StationPickerModal: View {
                 
                 VStack {
                     HStack {
-                        Text("목적지 전 정류장에서 알람")
-                            .foregroundColor(Color.black)
-                            .font(.regular16)
+                        Text("알람이 울릴 정류장 선택")
+                            .foregroundColor(.blackDGray7)
+                            .font(.body2)
                             .padding(.top, 20)
                             .padding(.horizontal, 20)
                             .padding(.bottom, 12)
@@ -41,55 +37,54 @@ struct StationPickerModal: View {
                     }
                     
                     Divider()
-                        .foregroundColor(Color.gray4)
+                        .foregroundColor(.gray5Dgray3)
                         .padding(.horizontal, 20)
                         .padding(.bottom, 20)
                     
                     // 각 정류장 선택지
                     if (alert?.firstBeforeBusStop) != nil || nodeord > 1 {
-                        stationRow(stationText: "1 정류장 전에 알람", isEnabled: true) {
-                            selectedStation = "1 정류장 전에 알람"
+                        stationRow(stationText: 1, isEnabled: true) {
+                            selectedStation = "1 정류장 전 알람"
                             alert?.alertBusStop = 1
                             withAnimation {
                                 isPresented = false
                             }
                         }
                     } else {
-                        stationRow(stationText: "1 정류장 전에 알람", isEnabled: false)
+                        stationRow(stationText: 1, isEnabled: false)
                     }
                     
                     if (alert?.secondBeforeBusStop) != nil || nodeord > 2 {
-                        stationRow(stationText: "2 정류장 전에 알람", isEnabled: true) {
-                            selectedStation = "2 정류장 전에 알람"
+                        stationRow(stationText: 2, isEnabled: true) {
+                            selectedStation = "2 정류장 전 알람"
                             alert?.alertBusStop = 2
                             withAnimation {
                                 isPresented = false
                             }
                         }
                     } else {
-                        stationRow(stationText: "2 정류장 전에 알람", isEnabled: false)
+                        stationRow(stationText: 2, isEnabled: false)
                     }
                     
                     if (alert?.thirdBeforeBusStop) != nil || nodeord > 3 {
-                        stationRow(stationText: "3 정류장 전에 알람", isEnabled: true) {
-                            selectedStation = "3 정류장 전에 알람"
+                        stationRow(stationText: 3, isEnabled: true) {
+                            selectedStation = "3 정류장 전 알람"
                             alert?.alertBusStop = 3
                             withAnimation {
                                 isPresented = false
                             }
                         }
                     } else {
-                        stationRow(stationText: "3 정류장 전에 알람", isEnabled: false)
+                        stationRow(stationText: 3, isEnabled: false)
                     }
-                    
                     Spacer()
                 }
-                .frame(maxWidth: .infinity)
                 .background(
                     RoundedRectangle(cornerRadius: 20)
-                        .fill(Color.white)
+                        .fill(.whiteDBlack)
                 )
-                .frame(height: UIScreen.main.bounds.height * 0.3)
+                .frame(maxWidth: .infinity)
+                .frame(height: UIScreen.main.bounds.height * 0.32)
                 .transition(.move(edge: .bottom))
             }
             .ignoresSafeArea()
@@ -97,11 +92,11 @@ struct StationPickerModal: View {
     }
     
     // 선택지 행 뷰 구성 함수
-    private func stationRow(stationText: String, isEnabled: Bool, action: (() -> Void)? = nil) -> some View {
+    private func stationRow(stationText: Int, isEnabled: Bool, action: (() -> Void)? = nil) -> some View {
         HStack {
-            Text(stationText)
-                .foregroundColor(isEnabled ? Color.gray2 : Color.gray6)
-                .font(.regular16)
+            Text("\(stationText) 정류장 전 알람")
+                .foregroundColor(isEnabled ? .gray1Dgray6 : .gray3Dgray3)
+                .font(.body2)
                 .onTapGesture {
                     if isEnabled, let action = action {
                         action()

@@ -9,71 +9,93 @@ import SwiftUI
 import SwiftData
 
 struct SelectBusStopView: View {
-//    let city: City // 도시 정보
+    //    let city: City // 도시 정보
     let bus: Bus // 선택된 버스 정보
     let cityCode: Int // ← 추가된 부분
     @Binding var busStopAlert: BusStopAlert?
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var busStopViewModel: BusStopViewModel
     @State private var stop: String = ""
-    @State private var updowncdselection: Int = 1
+    @State private var updowncdselection: Int = 1 // 상행 하행 구분
+    @State private var isAutoScroll: Bool = false // 상행 하행 버튼과 스크롤로 이동될 때의 action이 중복되지 않도록 방지하는 변수
     @Binding var showSelectBusSheet: Bool
-    
+    @State private var isAnimating = false // 버스 리스트가 아래에서 위로 올라오는 애니메이션 실행 여부
+
     var body: some View {
         VStack{
+            HStack {
+                Text("\(bus.routeno)")
+                    .padding(EdgeInsets(top: 16, leading: 20, bottom: 16, trailing: 0))
+                Spacer()
+                Image("magnifyingglass")
+                    .frame(width: 24, height: 24)
+                    .foregroundStyle(.gray3Dgray6)
+                    .padding(.trailing, 20.67)
+            }
+            .background(.gray6Dgray2)
+            .cornerRadius(20)
+            .overlay {
+                RoundedRectangle(cornerRadius: 20)
+                    .stroke(.gray5Dgray3, lineWidth: 1)
+            }
+            .padding(EdgeInsets(top: 44, leading: 0, bottom: 24, trailing: 0))
+            
             VStack {
                 HStack {
-                    Text("\(bus.routeno)")
-                        .padding(.leading, 15)
-                    Spacer()
+                    directionView(
+                        directionName: "\(bus.endnodenm)방면", // 상행
+                        isSelected: updowncdselection == 1,
+                        selectedColor: .brand,
+                        unselectedColor: .gray5Dgray3
+                    )
+                    .onTapGesture {
+                        updowncdselection = 1
+                        isAutoScroll = true // 버튼을 누르면 자동으로 해당 위치로 스크롤 되도록함
+                    }
+                    
+                    directionView(
+                        directionName: "\(bus.startnodenm)방면", // 하행
+                        isSelected: updowncdselection == 2,
+                        selectedColor: .brand,
+                        unselectedColor: .gray5Dgray3
+                    )
+                    .onTapGesture {
+                        updowncdselection = 2
+                        isAutoScroll = true // 버튼을 누르면 자동으로 해당 위치로 스크롤 되도록함
+                    }
                 }
-                .frame(height: 40)
-                .background(
-                    RoundedRectangle(cornerRadius: 8)
-                        .fill(Color.gray6) // RoundedRectangle에만 배경 색을 적용
-                )
-                .overlay(
-                    RoundedRectangle(cornerRadius: 8)
-                        .stroke(Color.gray6, lineWidth: 1)
-                )
-                .frame(maxWidth: .infinity) // Match width to TextField's width
-                .padding(.bottom, 12)
+                //BusStop 리스트 View
+                BusStopScrollView()
             }
-            .padding(.bottom, 10)
-            
-            HStack {
-                directionView(
-                    directionName: "\(bus.endnodenm)방면",
-                    isSelected: updowncdselection == 1,
-                    selectedColor: .midbrand,
-                    unselectedColor: .gray2
-                )
-                .onTapGesture {
-                    updowncdselection = 1
-                }
-                
-                directionView(
-                    directionName: "\(bus.startnodenm)방면",
-                    isSelected: updowncdselection == 2,
-                    selectedColor: .midbrand,
-                    unselectedColor: .gray2
-                )
-                .onTapGesture {
-                    updowncdselection = 2
-                }
-            }
-            //BusStop 리스트 View
-            BusStopScrollView()
+            // 버스 리스트가 아래에서 위로 올라오는 애니메이션 위치
+            .offset(y: isAnimating ? 0 : UIScreen.main.bounds.height)
+        }
+        // 버스 리스트가 아래에서 위로 올라오는 애니메이션
+        .animation(.spring(duration: 1.0, bounce: 0.1), value: isAnimating)
+        .onAppear {
+            isAnimating = true
         }
         .padding(.horizontal, 20)
-        .navigationTitle("정류장 선택")
-        .toolbar { // ← 모달 닫기 버튼 추가
-            ToolbarItem(placement: .navigationBarTrailing) {
-                Button("닫기") {
-                    showSelectBusSheet = false
+        .navigationTitle("버스 검색")
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            // 닫기 버튼
+            ToolbarItem(placement: .navigationBarLeading) {
+                Button(action: {
+                    dismiss()
+                }) {
+                    HStack {
+                        Image(systemName: "chevron.left")
+                            .font(.body1)
+                        Text("뒤로")
+                            .font(.body2)
+                            .padding(.leading, -7)
+                    }
+                    .foregroundStyle(.gray1DBrand)
                 }
             }
         }
+        .navigationBarBackButtonHidden(true)
         .task {
             await busStopViewModel.getBusStopData(cityCode: cityCode, routeId: bus.routeid)
         }
@@ -85,6 +107,9 @@ struct SelectBusStopView: View {
             ScrollView(showsIndicators: false) {
                 ForEach(busStopViewModel.busStopList, id: \.nodeord) { busstop in
                     Button(action: {
+                        DispatchQueue.main.asyncAfter(deadline: .now()) {
+                            HapticManager.shared.triggerImpactFeedback(style: .medium)
+                        }
                         storeBusStop(busStop: busstop)
                         showSelectBusSheet = false
                     }) {
@@ -93,26 +118,39 @@ struct SelectBusStopView: View {
                             HStack {
                                 Text("\(busstop.nodenm)")
                                     .padding(.leading, 24)
-                                    .foregroundStyle(.black)
-                                Text("\(busstop.nodeid)")
-                                    .font(.system(size: 10))
-                                    .foregroundStyle(.gray)
+                                    .foregroundStyle(.gray1Dgray6)
                                 
                                 Spacer()
                             }
                             Spacer()
                             Divider()
+                            // 상행의 마지막 item의 divider의 색과 굵기 변경
+                                .frame(height: busstop.nodeord == busStopViewModel.maxUpwardNodeord ? 2 : 1)
+                                .background(busstop.nodeord == busStopViewModel.maxUpwardNodeord ? .midbrand : .gray5Dgray3)
+                                .overlay(
+                                    // 상행의 마지막 item을 스크롤 할 때 상단의 방면이 자동으로 변경되도록 함
+                                    busstop.nodeord == busStopViewModel.maxUpwardNodeord ? GeometryReader { proxy in
+                                        Color.clear
+                                            .onChange(of: proxy.frame(in: .global).midY) {_, midY in
+                                                handleScrollChange(midY: midY)
+                                            }
+                                    } : nil
+                                )
                         }
                         .frame(height: 60)
                     }
                     .id(busstop.nodeid) // 각 정류장에 고유 ID를 설정
                 }
             }
-            .onChange(of: updowncdselection) { _ in
-                if updowncdselection == 1 {
-                    scrollToTop(proxy: proxy)
-                } else {
-                    scrollToMiddle(proxy: proxy)
+            .onChange(of: updowncdselection) { _, _ in
+                // 상행, 하행 버튼을 눌렀을 경우에만 자동 스크롤이 되도록 함
+                if isAutoScroll {
+                    if updowncdselection == 1 {
+                        scrollToTop(proxy: proxy)
+                    } else {
+                        scrollToMiddle(proxy: proxy)
+                    }
+                    isAutoScroll = false // 실행 후 자동 스크롤 변수 초기화
                 }
             }
         }
@@ -128,18 +166,30 @@ struct SelectBusStopView: View {
     // 하행의 첫 인덱스로 스크롤하는 함수
     private func scrollToMiddle(proxy: ScrollViewProxy) {
         // 하행의 가장 작은 order 구함
-        if let maxUpwardNodeord = busStopViewModel.busStopList.filter({ $0.updowncd == 1 }).map({ $0.nodeord }).min() {
+        if let minDownwardNodeord = busStopViewModel.busStopList.filter({ $0.updowncd == 1 }).map({ $0.nodeord }).min() {
             //해당 order로 스크롤을 이동함
-            proxy.scrollTo(maxUpwardNodeord, anchor: .center)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                withAnimation(.smooth) {
+                    proxy.scrollTo(minDownwardNodeord, anchor: .center)
+                }
+            }
         }
     }
     
-    // 최하단으로 스크롤하는 함수
-//    private func scrollToBottom(proxy: ScrollViewProxy) {
-//        if let firstStop = busStopViewModel.busStopList.last {
-//            proxy.scrollTo(firstStop.nodeid, anchor: .bottom)
-//        }
-//    }
+    private func handleScrollChange(midY: CGFloat) {
+        let screenHeight = UIScreen.main.bounds.height
+        let centerY = screenHeight / 3 * 2
+        
+        if midY > centerY && updowncdselection != 1 {
+            updowncdselection = 1 // 중앙 아래
+            HapticManager.shared.triggerImpactFeedback(style: .light)
+        } else {
+            if midY < centerY && updowncdselection != 2 { // updowncdselection의 상태가 변경될 때만 실행,
+                updowncdselection = 2 // 중앙 위
+                HapticManager.shared.triggerImpactFeedback(style: .light)
+            }
+        }
+    }
     
     // 버스 정류장 데이터 저장
     func storeBusStop(busStop: BusStop){
@@ -158,7 +208,7 @@ struct SelectBusStopView: View {
             HStack {
                 Spacer()
                 Text(directionName)
-                    .foregroundColor(isSelected ? .primary : .gray)
+                    .foregroundColor(isSelected ? .gray1Dgray7 : .gray3Dgray4)
                 Spacer()
             }
             Spacer()

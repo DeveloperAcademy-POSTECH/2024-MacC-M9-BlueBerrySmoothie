@@ -28,26 +28,37 @@
 		6300BEF02CEAE36D0004E1A4 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6300BEEF2CEAE36D0004E1A4 /* SwiftUI.framework */; };
 		6300BF012CEAE36F0004E1A4 /* LiveActWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 6300BEEB2CEAE36D0004E1A4 /* LiveActWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		63B4393C2CEB96DA00B77F4D /* LiveActivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B4393B2CEB96C800B77F4D /* LiveActivityManager.swift */; };
-		8B0860F72CDDA237007C109A /* HapticManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0860F62CDDA237007C109A /* HapticManager.swift */; };
 		8B0860F92CE1A0A9007C109A /* silentSound.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8B0860F82CE1A0A8007C109A /* silentSound.wav */; };
 		8B0860FB2CE1DDE3007C109A /* ToastMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0860FA2CE1DDE3007C109A /* ToastMessage.swift */; };
-		8B0861052CE88F4B007C109A /* AlertStopMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0861042CE88F4B007C109A /* AlertStopMapView.swift */; };
+		8B112CA32CF060C5000827C7 /* AlertLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B112CA22CF060B0000827C7 /* AlertLoadingView.swift */; };
+		8B112CED2CF41A5C000827C7 /* LottieManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B112CEC2CF41A56000827C7 /* LottieManager.swift */; };
+		8B112CF02CF41AEB000827C7 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 8B112CEF2CF41AEB000827C7 /* Lottie */; };
 		8BF2EFA82CD3A7F2008A6644 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF2EFA72CD3A7F2008A6644 /* Alert.swift */; };
 		8BF2EFAA2CD3AA2B008A6644 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF2EFA92CD3AA2B008A6644 /* NotificationManager.swift */; };
 		8BF2EFAC2CD3AA44008A6644 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF2EFAB2CD3AA44008A6644 /* LocationManager.swift */; };
 		8BF2EFB52CD92BE0008A6644 /* HapticHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF2EFB42CD92BE0008A6644 /* HapticHelper.swift */; };
 		9D0C411B2CDA3D780005A6CC /* StationPickerModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D0C411A2CDA3D780005A6CC /* StationPickerModal.swift */; };
+		9D19E4B02CEF30D90065967E /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D19E4AF2CEF30D70065967E /* City.swift */; };
+		9D19E4B22CEF321E0065967E /* SelectCityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D19E4B12CEF321A0065967E /* SelectCityView.swift */; };
+		9D19E4B42CEF62360065967E /* KeyboardDismiss.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D19E4B32CEF62270065967E /* KeyboardDismiss.swift */; };
+		9D19E4B62CEF8F610065967E /* CitySettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D19E4B52CEF8F550065967E /* CitySettingView.swift */; };
+		9D3382CA2CF2D318008F560A /* HapticManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3382C92CF2D318008F560A /* HapticManager.swift */; };
+		9D3382CC2CF2E694008F560A /* AppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3382CB2CF2E694008F560A /* AppView.swift */; };
+		9D3382CE2CF2E69F008F560A /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3382CD2CF2E69F008F560A /* OnboardingView.swift */; };
+		9D3383392CF31638008F560A /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3383382CF31638008F560A /* SplashView.swift */; };
+		9D5452A62CF4177500722B16 /* InfoCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5452A52CF4177500722B16 /* InfoCardView.swift */; };
 		9DBC2A442CDC6F4D00EB19A9 /* UsingAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DBC2A432CDC6F4D00EB19A9 /* UsingAlertView.swift */; };
 		9DEA523F2CD362CA00A3AE68 /* SelectBusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEA523E2CD362C100A3AE68 /* SelectBusView.swift */; };
-		9DEA52412CD3630200A3AE68 /* CityDecoderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEA52402CD362FC00A3AE68 /* CityDecoderModel.swift */; };
 		9DEA52432CD3637C00A3AE68 /* BusModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEA52422CD3637900A3AE68 /* BusModel.swift */; };
-		9DEA52452CD3639100A3AE68 /* CityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEA52442CD3638E00A3AE68 /* CityModel.swift */; };
-		9DEA52472CD363AD00A3AE68 /* FetchCityAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEA52462CD363A100A3AE68 /* FetchCityAPI.swift */; };
 		9DEA524C2CD3B79B00A3AE68 /* ScrollingTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEA524B2CD3B79B00A3AE68 /* ScrollingTextView.swift */; };
 		9DEA524E2CD46EF400A3AE68 /* BusDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEA524D2CD46EF400A3AE68 /* BusDetailView.swift */; };
 		9DEA52502CD4D56400A3AE68 /* busColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEA524F2CD4D56400A3AE68 /* busColor.swift */; };
 		9DEA52522CD4D57A00A3AE68 /* filterBuses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEA52512CD4D57A00A3AE68 /* filterBuses.swift */; };
 		9DEA52542CD4D5B500A3AE68 /* FetchAllBusData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEA52532CD4D5B500A3AE68 /* FetchAllBusData.swift */; };
+		B8D679822CF38D240003A86C /* AlarmLottie.json in Resources */ = {isa = PBXBuildFile; fileRef = B8D679812CF38D240003A86C /* AlarmLottie.json */; };
+		B8D679832CF38D240003A86C /* AlarmLottie.json in Resources */ = {isa = PBXBuildFile; fileRef = B8D679812CF38D240003A86C /* AlarmLottie.json */; };
+		B8D679872CF3928E0003A86C /* refreshLottie.json in Resources */ = {isa = PBXBuildFile; fileRef = B8D679862CF3928E0003A86C /* refreshLottie.json */; };
+		B8D679882CF3928E0003A86C /* refreshLottie.json in Resources */ = {isa = PBXBuildFile; fileRef = B8D679862CF3928E0003A86C /* refreshLottie.json */; };
 		D90E0C1A2CD89CB20089883F /* AlertSettingMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = D90E0C192CD89CB20089883F /* AlertSettingMain.swift */; };
 		D94BF98E2CF1CC2000973D08 /* AlarmSound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D94BF98D2CF1CC2000973D08 /* AlarmSound.mp3 */; };
 		D94BF98F2CF1CC2000973D08 /* AlarmSound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D94BF98D2CF1CC2000973D08 /* AlarmSound.mp3 */; };
@@ -109,27 +120,35 @@
 		6300BEED2CEAE36D0004E1A4 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		6300BEEF2CEAE36D0004E1A4 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		63B4393B2CEB96C800B77F4D /* LiveActivityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveActivityManager.swift; sourceTree = "<group>"; };
-		8B0860F62CDDA237007C109A /* HapticManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticManager.swift; sourceTree = "<group>"; };
 		8B0860F82CE1A0A8007C109A /* silentSound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = silentSound.wav; sourceTree = "<group>"; };
 		8B0860FA2CE1DDE3007C109A /* ToastMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastMessage.swift; sourceTree = "<group>"; };
-		8B0861042CE88F4B007C109A /* AlertStopMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertStopMapView.swift; sourceTree = "<group>"; };
+		8B112CA22CF060B0000827C7 /* AlertLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertLoadingView.swift; sourceTree = "<group>"; };
+		8B112CEC2CF41A56000827C7 /* LottieManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieManager.swift; sourceTree = "<group>"; };
 		8BF2EFA72CD3A7F2008A6644 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		8BF2EFA92CD3AA2B008A6644 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		8BF2EFAB2CD3AA44008A6644 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		8BF2EFAF2CD3AABF008A6644 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8BF2EFB42CD92BE0008A6644 /* HapticHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticHelper.swift; sourceTree = "<group>"; };
 		9D0C411A2CDA3D780005A6CC /* StationPickerModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationPickerModal.swift; sourceTree = "<group>"; };
+		9D19E4AF2CEF30D70065967E /* City.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = City.swift; sourceTree = "<group>"; };
+		9D19E4B12CEF321A0065967E /* SelectCityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCityView.swift; sourceTree = "<group>"; };
+		9D19E4B32CEF62270065967E /* KeyboardDismiss.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardDismiss.swift; sourceTree = "<group>"; };
+		9D19E4B52CEF8F550065967E /* CitySettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitySettingView.swift; sourceTree = "<group>"; };
+		9D3382C92CF2D318008F560A /* HapticManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticManager.swift; sourceTree = "<group>"; };
+		9D3382CB2CF2E694008F560A /* AppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppView.swift; sourceTree = "<group>"; };
+		9D3382CD2CF2E69F008F560A /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		9D3383382CF31638008F560A /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
+		9D5452A52CF4177500722B16 /* InfoCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoCardView.swift; sourceTree = "<group>"; };
 		9DBC2A432CDC6F4D00EB19A9 /* UsingAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsingAlertView.swift; sourceTree = "<group>"; };
 		9DEA523E2CD362C100A3AE68 /* SelectBusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectBusView.swift; sourceTree = "<group>"; };
-		9DEA52402CD362FC00A3AE68 /* CityDecoderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityDecoderModel.swift; sourceTree = "<group>"; };
 		9DEA52422CD3637900A3AE68 /* BusModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusModel.swift; sourceTree = "<group>"; };
-		9DEA52442CD3638E00A3AE68 /* CityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityModel.swift; sourceTree = "<group>"; };
-		9DEA52462CD363A100A3AE68 /* FetchCityAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchCityAPI.swift; sourceTree = "<group>"; };
 		9DEA524B2CD3B79B00A3AE68 /* ScrollingTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollingTextView.swift; sourceTree = "<group>"; };
 		9DEA524D2CD46EF400A3AE68 /* BusDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusDetailView.swift; sourceTree = "<group>"; };
 		9DEA524F2CD4D56400A3AE68 /* busColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = busColor.swift; sourceTree = "<group>"; };
 		9DEA52512CD4D57A00A3AE68 /* filterBuses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = filterBuses.swift; sourceTree = "<group>"; };
 		9DEA52532CD4D5B500A3AE68 /* FetchAllBusData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchAllBusData.swift; sourceTree = "<group>"; };
+		B8D679812CF38D240003A86C /* AlarmLottie.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = AlarmLottie.json; sourceTree = "<group>"; };
+		B8D679862CF3928E0003A86C /* refreshLottie.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = refreshLottie.json; sourceTree = "<group>"; };
 		D90E0C192CD89CB20089883F /* AlertSettingMain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertSettingMain.swift; sourceTree = "<group>"; };
 		D94BF98D2CF1CC2000973D08 /* AlarmSound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = AlarmSound.mp3; sourceTree = "<group>"; };
 		D968D5C72CD89EF4002DF70B /* SavedBus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedBus.swift; sourceTree = "<group>"; };
@@ -168,6 +187,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B112CF02CF41AEB000827C7 /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -189,6 +209,8 @@
 				D968D5F82CDB165B002DF70B /* UIfont.swift */,
 				D94BF98D2CF1CC2000973D08 /* AlarmSound.mp3 */,
 				8B0860F82CE1A0A8007C109A /* silentSound.wav */,
+				B8D679862CF3928E0003A86C /* refreshLottie.json */,
+				B8D679812CF38D240003A86C /* AlarmLottie.json */,
 				D968D5F92CDB165B002DF70B /* Fonts */,
 			);
 			path = Resource;
@@ -216,6 +238,7 @@
 		1232B3AE2CD1D3DE00C48414 /* BlueBerrySmoothie */ = {
 			isa = PBXGroup;
 			children = (
+				9D3383372CF315FC008F560A /* OnBoarding&Splash */,
 				8BF2EFAF2CD3AABF008A6644 /* Info.plist */,
 				121D49222CE1B5E600EF5269 /* Resource */,
 				D90E0C112CD89C620089883F /* Component */,
@@ -244,9 +267,8 @@
 		1232B3D92CD1D3F700C48414 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				9D19E4AF2CEF30D70065967E /* City.swift */,
 				8BF2EFA72CD3A7F2008A6644 /* Alert.swift */,
-				9DEA52402CD362FC00A3AE68 /* CityDecoderModel.swift */,
-				9DEA52442CD3638E00A3AE68 /* CityModel.swift */,
 				1232B3DA2CD1D40500C48414 /* BusDecoderModel.swift */,
 				9DEA52422CD3637900A3AE68 /* BusModel.swift */,
 				12D2B6C72CD36E94005CF771 /* BusStopModel.swift */,
@@ -261,6 +283,13 @@
 		1232B3DC2CD1D40800C48414 /* View */ = {
 			isa = PBXGroup;
 			children = (
+<<<<<<< HEAD
+=======
+				8B112CA22CF060B0000827C7 /* AlertLoadingView.swift */,
+				9D19E4B52CEF8F550065967E /* CitySettingView.swift */,
+				9D19E4B12CEF321A0065967E /* SelectCityView.swift */,
+				9DBC2A432CDC6F4D00EB19A9 /* UsingAlertView.swift */,
+>>>>>>> dev
 				9D0C411A2CDA3D780005A6CC /* StationPickerModal.swift */,
 				9DBC2A432CDC6F4D00EB19A9 /* UsingAlertView.swift */,
 				9DEA524D2CD46EF400A3AE68 /* BusDetailView.swift */,
@@ -269,7 +298,11 @@
 				9DEA523E2CD362C100A3AE68 /* SelectBusView.swift */,
 				12D2B6C52CD36E70005CF771 /* SelectBusStopView.swift */,
 				D968D5C92CD912C5002DF70B /* MainView.swift */,
+<<<<<<< HEAD
 				8B0861042CE88F4B007C109A /* AlertStopMapView.swift */,
+=======
+				D94BF93B2CEB7F7700973D08 /* AlarmTestView.swift */,
+>>>>>>> dev
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -288,7 +321,6 @@
 			isa = PBXGroup;
 			children = (
 				1232B3E32CD1D48600C48414 /* FetchBusAPI.swift */,
-				9DEA52462CD363A100A3AE68 /* FetchCityAPI.swift */,
 				12D2B6CB2CD3706F005CF771 /* fetchBusStopAPI.swift */,
 				121D49202CE1B4E000EF5269 /* FetchBusLocationAPI.swift */,
 			);
@@ -298,12 +330,14 @@
 		1232B3E52CD1D49000C48414 /* Manager */ = {
 			isa = PBXGroup;
 			children = (
+				8B112CEC2CF41A56000827C7 /* LottieManager.swift */,
+				9D3382C92CF2D318008F560A /* HapticManager.swift */,
+				9D19E4B32CEF62270065967E /* KeyboardDismiss.swift */,
 				8BF2EFA92CD3AA2B008A6644 /* NotificationManager.swift */,
 				8BF2EFAB2CD3AA44008A6644 /* LocationManager.swift */,
 				9DEA52532CD4D5B500A3AE68 /* FetchAllBusData.swift */,
 				9DEA52512CD4D57A00A3AE68 /* filterBuses.swift */,
 				9DEA524F2CD4D56400A3AE68 /* busColor.swift */,
-				8B0860F62CDDA237007C109A /* HapticManager.swift */,
 				63B4393B2CEB96C800B77F4D /* LiveActivityManager.swift */,
 			);
 			path = Manager;
@@ -333,6 +367,17 @@
 				6300BEEF2CEAE36D0004E1A4 /* SwiftUI.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9D3383372CF315FC008F560A /* OnBoarding&Splash */ = {
+			isa = PBXGroup;
+			children = (
+				9D3383382CF31638008F560A /* SplashView.swift */,
+				9D3382CB2CF2E694008F560A /* AppView.swift */,
+				9D3382CD2CF2E69F008F560A /* OnboardingView.swift */,
+				9D5452A52CF4177500722B16 /* InfoCardView.swift */,
+			);
+			path = "OnBoarding&Splash";
 			sourceTree = "<group>";
 		};
 		D90E0C112CD89C620089883F /* Component */ = {
@@ -427,6 +472,9 @@
 				Base,
 			);
 			mainGroup = 1232B3A32CD1D3DE00C48414;
+			packageReferences = (
+				8B112CEE2CF41AEB000827C7 /* XCRemoteSwiftPackageReference "lottie-ios" */,
+			);
 			productRefGroup = 1232B3AD2CD1D3DE00C48414 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -446,10 +494,12 @@
 				D968D6022CDB165B002DF70B /* SpoqaHanSansNeo-Medium.otf in Resources */,
 				D968D6032CDB165B002DF70B /* SpoqaHanSansNeo-Light.otf in Resources */,
 				8B0860F92CE1A0A9007C109A /* silentSound.wav in Resources */,
+				B8D679822CF38D240003A86C /* AlarmLottie.json in Resources */,
 				D968D6042CDB165B002DF70B /* SpoqaHanSansNeo-Thin.otf in Resources */,
 				D968D6052CDB165B002DF70B /* SpoqaHanSansNeo-Regular.otf in Resources */,
 				1232B3B72CD1D3DF00C48414 /* Preview Assets.xcassets in Resources */,
 				D94BF98F2CF1CC2000973D08 /* AlarmSound.mp3 in Resources */,
+				B8D679872CF3928E0003A86C /* refreshLottie.json in Resources */,
 				1232B3B42CD1D3DF00C48414 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -458,6 +508,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B8D679882CF3928E0003A86C /* refreshLottie.json in Resources */,
+				B8D679832CF38D240003A86C /* AlarmLottie.json in Resources */,
 				D94BF98E2CF1CC2000973D08 /* AlarmSound.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -469,23 +521,31 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+<<<<<<< HEAD
 				8B0860F72CDDA237007C109A /* HapticManager.swift in Sources */,
+=======
+				D94BF93C2CEB7F7700973D08 /* AlarmTestView.swift in Sources */,
+>>>>>>> dev
 				8BF2EFB52CD92BE0008A6644 /* HapticHelper.swift in Sources */,
 				8BF2EFAA2CD3AA2B008A6644 /* NotificationManager.swift in Sources */,
+				9D3382CC2CF2E694008F560A /* AppView.swift in Sources */,
 				8BF2EFA82CD3A7F2008A6644 /* Alert.swift in Sources */,
 				1232B3B02CD1D3DE00C48414 /* BlueBerrySmoothieApp.swift in Sources */,
 				8BF2EFAC2CD3AA44008A6644 /* LocationManager.swift in Sources */,
 				12D2B6D42CD3F5BE005CF771 /* getAPIKey.swift in Sources */,
 				1232B3DB2CD1D40500C48414 /* BusDecoderModel.swift in Sources */,
+				8B112CED2CF41A5C000827C7 /* LottieManager.swift in Sources */,
+				9D3383392CF31638008F560A /* SplashView.swift in Sources */,
 				9DEA523F2CD362CA00A3AE68 /* SelectBusView.swift in Sources */,
-				8B0861052CE88F4B007C109A /* AlertStopMapView.swift in Sources */,
 				D90E0C1A2CD89CB20089883F /* AlertSettingMain.swift in Sources */,
 				12D2B6D82CD63D6A005CF771 /* AlertModel.swift in Sources */,
 				9DEA52432CD3637C00A3AE68 /* BusModel.swift in Sources */,
-				9DEA52412CD3630200A3AE68 /* CityDecoderModel.swift in Sources */,
 				9DEA52502CD4D56400A3AE68 /* busColor.swift in Sources */,
+				8B112CA32CF060C5000827C7 /* AlertLoadingView.swift in Sources */,
+				9D19E4B22CEF321E0065967E /* SelectCityView.swift in Sources */,
 				9DEA524E2CD46EF400A3AE68 /* BusDetailView.swift in Sources */,
 				9D0C411B2CDA3D780005A6CC /* StationPickerModal.swift in Sources */,
+				9D3382CA2CF2D318008F560A /* HapticManager.swift in Sources */,
 				12D2B6CC2CD3706F005CF771 /* fetchBusStopAPI.swift in Sources */,
 				D968D5CA2CD912C5002DF70B /* MainView.swift in Sources */,
 				8B0860FB2CE1DDE3007C109A /* ToastMessage.swift in Sources */,
@@ -494,12 +554,14 @@
 				9DEA52522CD4D57A00A3AE68 /* filterBuses.swift in Sources */,
 				121D491D2CE1B49000EF5269 /* BusLocationModel.swift in Sources */,
 				12D2B6D12CD3B104005CF771 /* NetworkHelper.swift in Sources */,
-				9DEA52472CD363AD00A3AE68 /* FetchCityAPI.swift in Sources */,
 				9DEA524C2CD3B79B00A3AE68 /* ScrollingTextView.swift in Sources */,
-				9DEA52452CD3639100A3AE68 /* CityModel.swift in Sources */,
+				9D19E4B62CEF8F610065967E /* CitySettingView.swift in Sources */,
+				9D19E4B02CEF30D90065967E /* City.swift in Sources */,
 				63B4393C2CEB96DA00B77F4D /* LiveActivityManager.swift in Sources */,
 				D968D5C82CD89EF4002DF70B /* SavedBus.swift in Sources */,
 				9DEA52542CD4D5B500A3AE68 /* FetchAllBusData.swift in Sources */,
+				9D19E4B42CEF62360065967E /* KeyboardDismiss.swift in Sources */,
+				9D3382CE2CF2E69F008F560A /* OnboardingView.swift in Sources */,
 				121D491B2CE1B46B00EF5269 /* NowBusLocationViewModel.swift in Sources */,
 				12D2B6CA2CD36ED8005CF771 /* BusStopDecoderModel.swift in Sources */,
 				D968D6002CDB165B002DF70B /* UIfont.swift in Sources */,
@@ -507,6 +569,7 @@
 				9DBC2A442CDC6F4D00EB19A9 /* UsingAlertView.swift in Sources */,
 				12D2B6C62CD36E70005CF771 /* SelectBusStopView.swift in Sources */,
 				121D491F2CE1B4A300EF5269 /* BusLocationDecoderModel.swift in Sources */,
+				9D5452A62CF4177500722B16 /* InfoCardView.swift in Sources */,
 				12D2B6CF2CD3ABAF005CF771 /* BusStopViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -581,7 +644,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -638,7 +701,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -657,7 +720,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"BlueBerrySmoothie/Preview Content\"";
-				DEVELOPMENT_TEAM = V9J26YADA8;
+				DEVELOPMENT_TEAM = GF3B5LP7RQ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BlueBerrySmoothie/Info.plist;
@@ -673,7 +736,6 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -701,7 +763,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"BlueBerrySmoothie/Preview Content\"";
-				DEVELOPMENT_TEAM = V9J26YADA8;
+				DEVELOPMENT_TEAM = UW9295Z57Q;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BlueBerrySmoothie/Info.plist;
@@ -717,7 +779,6 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -748,6 +809,7 @@
 				INFOPLIST_FILE = LiveActWidget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = LiveActWidget;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -755,7 +817,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.team.blueberrySmoothie.LiveActWidget;
+				PRODUCT_BUNDLE_IDENTIFIER = com.team.blueberrySmoothie.Dev.LiveActWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -771,11 +833,12 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = V9J26YADA8;
+				DEVELOPMENT_TEAM = UW9295Z57Q;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = LiveActWidget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = LiveActWidget;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -823,6 +886,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		8B112CEE2CF41AEB000827C7 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.5.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		8B112CEF2CF41AEB000827C7 /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8B112CEE2CF41AEB000827C7 /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 1232B3A42CD1D3DE00C48414 /* Project object */;
 }
