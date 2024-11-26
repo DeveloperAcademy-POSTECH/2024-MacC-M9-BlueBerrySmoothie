@@ -103,7 +103,7 @@ struct UsingAlertView: View {
             refreshData() // 초기 로드
             currentBusViewModel.startUpdating() // 뷰가 보일 때 뷰모델에서 위치 업데이트 시작
             startRefreshTimer() // 타이머 시작
-//            notificationManager.notificationReceived = true
+            //            notificationManager.notificationReceived = true
         }
         .onChange(of: currentBusViewModel.closestBusLocation != nil) { isNotNil in
             if isNotNil {
@@ -184,27 +184,19 @@ struct UsingAlertView: View {
                                 .font(.caption2)
                                 .foregroundStyle(.gray3Dgray6)
                         }
-
-                   
-                      
-                      
-                            refreshButtonLottie
-                                .frame(width: 24, height: 24)
-
-                                .foregroundColor(isRefreshing ? .gray3 : .gray1)
-                                .onTapGesture {
-                                    refreshAction() // 새로고침 로직 호출
-                                    refreshButtonLottie.stop() // 버튼 클릭 시 애니메이션 실행
-                                    print("ㅋㅋ")
-                                    refreshButtonLottie.play() // 버튼 클릭 시 애니메이션 실행
-                                    DispatchQueue.main.asyncAfter(deadline: .now()) {
-                                        HapticManager.shared.triggerImpactFeedback(style: .medium)
-                                    }
+                        
+                        refreshButtonLottie
+                            .frame(width: 24, height: 24)
+                            .foregroundColor(isRefreshing ? .gray3 : .gray1)
+                            .onTapGesture {
+                                refreshAction() // 새로고침 로직 호출
+                                refreshButtonLottie.stop() // 버튼 클릭 시 애니메이션 실행
+                                print("ㅋㅋ")
+                                refreshButtonLottie.play() // 버튼 클릭 시 애니메이션 실행
+                                DispatchQueue.main.asyncAfter(deadline: .now()) {
+                                    HapticManager.shared.triggerImpactFeedback(style: .medium)
                                 }
-
-                        }
-                     //   .disabled(isRefreshing)
-
+                            }                        
                     }
                     .padding(.trailing, 8)
                 }
@@ -417,7 +409,7 @@ struct UsingAlertView: View {
                         .foregroundStyle(.white)
                         .font(.title2)
                         .background(RoundedRectangle(cornerRadius: 8).fill(.blackDBrand))
-
+                    
                 })
                 .padding(.bottom, 48)
                 
@@ -426,8 +418,8 @@ struct UsingAlertView: View {
                 Image("AfterAlertRectangle")
                     .resizable()
                     .frame(maxWidth: .infinity, maxHeight: 500)
-//                RoundedRectangle(cornerRadius: 30)
-//                    .fill(.thinMaterial)
+                //                RoundedRectangle(cornerRadius: 30)
+                //                    .fill(.thinMaterial)
             )
             .padding(.horizontal, 20)
             .padding(.top, 120)
