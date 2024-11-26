@@ -41,7 +41,7 @@ struct UsingAlertView: View {
                         refreshData()
                         isScrollTriggered = true // 스크롤 동작 트리거
 
-                        LiveActivityManager.shared.updateLiveActivity(progress: 0.5, currentStop: currentBusViewModel.closestBusLocation?.nodenm ?? "로딩중", stopsRemaining: 3)
+                       
                         
                     }, isScrollTriggered: $isScrollTriggered
 
@@ -62,6 +62,7 @@ struct UsingAlertView: View {
                 .edgesIgnoringSafeArea(.bottom)
             }
             .onDisappear {
+                LiveActivityManager.shared.endLiveActivity()
                 currentBusViewModel.stopUpdating() // 뷰가 사라질 때 뷰모델에서 위치 업데이트 중단
                 stopRefreshTimer() // 뷰 사라질 때 타이머 중단
             }
@@ -97,6 +98,7 @@ struct UsingAlertView: View {
                 stopRefreshTimer() // 알람 종료 시 타이머도 중단
                 notificationManager.notificationReceived = false // 오버레이 닫기
                 locationManager.unregisterBusAlert(busAlert)
+                LiveActivityManager.shared.endLiveActivity()
                 dismiss() // Dismiss the view if confirmed
             }
             Button("취소", role: .cancel){}
@@ -120,6 +122,7 @@ struct UsingAlertView: View {
             }
         }
         .onDisappear {
+            LiveActivityManager.shared.endLiveActivity()
             currentBusViewModel.stopUpdating() // 뷰가 사라질 때 뷰모델에서 위치 업데이트 중단
             stopRefreshTimer() // 뷰 사라질 때 타이머 중단
             currentBusViewModel.closestBusLocation = nil
@@ -182,7 +185,7 @@ struct UsingAlertView: View {
 
                                 .foregroundStyle(.gray1)
                                 .onAppear {
-                                        LiveActivityManager.shared.startLiveActivity(stationName: busAlert.arrivalBusStopNm, initialProgress: 99, currentStop: closestBus.nodenm, stopsRemaining: busAlert.arrivalBusStopNord - (Int(closestBus.nodeord) ?? 0) - 1 )
+                                    LiveActivityManager.shared.startLiveActivity(title: busAlert.alertLabel ?? "알 수 없는 알람" , description: busAlert.busNo, stationName: busAlert.arrivalBusStopNm, initialProgress: 99, currentStop: closestBus.nodenm, stopsRemaining: busAlert.arrivalBusStopNord - (Int(closestBus.nodeord) ?? 0) - 1 )
                                 }
                         }
                     }
@@ -367,6 +370,7 @@ struct UsingAlertView: View {
             .autoconnect()
             .sink { _ in
                 refreshData()
+                LiveActivityManager.shared.updateLiveActivity(progress: 0.5, currentStop: currentBusViewModel.closestBusLocation?.nodenm ?? "로딩중", stopsRemaining: busAlert.arrivalBusStopNord - (Int(currentBusViewModel.closestBusLocation?.nodeord ?? "0") ?? 0) - 1)
                 print("화면 새로고침")
             }
     }
