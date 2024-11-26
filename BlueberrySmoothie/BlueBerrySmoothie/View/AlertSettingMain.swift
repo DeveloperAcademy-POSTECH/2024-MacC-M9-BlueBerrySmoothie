@@ -354,7 +354,8 @@ struct AlertSettingMain: View {
             alertSound: true,
             alertHaptic: true,
             alertCycle: nil,
-            updowncd: selectedBusStop.updowncd ?? 1
+            updowncd: selectedBusStop.updowncd ?? 1,
+            routetp: selectedBus.routetp
         )
         
         // 데이터베이스에 저장

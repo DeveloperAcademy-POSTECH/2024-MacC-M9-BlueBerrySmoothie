@@ -25,17 +25,11 @@ struct SavedBus: View {
     
     var body: some View {
         ZStack {
-            LinearGradient(gradient: Gradient(colors: [Color.clear, Color.gray7.opacity(0.6)]), startPoint: .leading, endPoint: .trailing)
-                .cornerRadius(12)
-            Rectangle()
-                .foregroundColor(Color.clear)
-                .cornerRadius(12)
-                .overlay {
-                    RoundedRectangle(cornerRadius: 12)
-                        .stroke(Color.gray5, lineWidth: 1)
-                }
+            Image(busAlertBackground(for: busAlert?.routetp ?? ""))
+                .resizable()
+                .scaledToFill()
+                .frame(maxWidth: .infinity, maxHeight: 234)
             VStack {
-
                 HStack {
                     ZStack {
                         Rectangle()
@@ -90,7 +84,7 @@ struct SavedBus: View {
                     HStack {
                         Rectangle()
                             .frame(width: 12, height: 12)
-                            .foregroundColor(.green)
+                            .foregroundColor(busColor(for: busAlert?.routetp ?? ""))
                         Text("\(busAlert?.busNo ?? "버스번호없음")번")
                             .font(.title1)
                             .foregroundStyle(.blackdgray71)

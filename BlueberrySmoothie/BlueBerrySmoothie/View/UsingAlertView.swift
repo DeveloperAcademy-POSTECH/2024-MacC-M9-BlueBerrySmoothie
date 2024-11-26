@@ -147,7 +147,7 @@ struct UsingAlertView: View {
                     // 버스 정보
                     HStack(spacing: 4) {
                         Image(systemName: "square.fill")
-                            .foregroundStyle(.brand)
+                            .foregroundStyle(busColor(for: busAlert.routetp))
                             .frame(width: 12, height: 12)
                         
                         Text("\(busAlert.busNo)")
