@@ -92,8 +92,7 @@ struct AlertSettingMain: View {
                         .padding(.top, -10)
                     
                     // 버스 정류장 이름 표시
-                    Text("\(busStopAlert?.arrivalBusStop.nodenm ?? "하차 정류장")")
-                        .foregroundColor(busStopAlert?.arrivalBusStop.nodenm != nil && isEditing == false ? .blackDGray7 : .gray3Dgray3)
+                    Text(busStopText)                        .foregroundColor(busStopAlert?.arrivalBusStop.nodenm != nil && isEditing == false ? .blackDGray7 : .gray3Dgray3)
                         .font(.body2)
                         .padding(EdgeInsets(top: 2, leading: 0, bottom: 22, trailing: 20))
                         .onTapGesture {
@@ -184,7 +183,8 @@ struct AlertSettingMain: View {
                     bus: Bus(routeno: busAlert.busNo, routeid: busAlert.routeid),
                     allBusStop: [],
                     arrivalBusStop: BusStop(nodeid: busAlert.arrivalBusStopID, nodenm: busAlert.arrivalBusStopNm),
-                    alertBusStop: busAlert.alertBusStop // 필요에 따라 전체 정류장 데이터 설정
+                    alertBusStop: busAlert.alertBusStop, // 필요에 따라 전체 정류장 데이터 설정
+                    routeDirection: ""
                 )
             }
         }
@@ -249,6 +249,22 @@ struct AlertSettingMain: View {
             .foregroundColor(Color.brand)
             .bold()
             .padding(.leading, -6)
+    }
+    
+    // 선택한 버스 정류장 텍스트 표시
+    var busStopText: String {
+        guard let busStop = busStopAlert?.arrivalBusStop.nodenm else {
+            return "하차 정류장"
+        }
+        
+        let direction = busStopAlert?.routeDirection
+        let hasDirection = !(direction?.isEmpty ?? true)
+        
+        if hasDirection {
+            return "\(busStop) (\(direction!)방면)"
+        }
+        
+        return busStop
     }
     
     private func isInputValid() -> Bool {

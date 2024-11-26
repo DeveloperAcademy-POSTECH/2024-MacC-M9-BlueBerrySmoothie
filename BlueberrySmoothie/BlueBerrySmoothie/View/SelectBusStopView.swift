@@ -192,9 +192,10 @@ struct SelectBusStopView: View {
     
     // 버스 정류장 데이터 저장
     func storeBusStop(busStop: BusStop){
+        // 방면 저장
+        let routeDirect = (busStop.updowncd == 1) ? bus.startnodenm : bus.endnodenm
         // 기본 busStopAlert 데이터 저장
-        busStopAlert = BusStopAlert(cityCode: Double(cityCode), bus: bus, allBusStop: busStopViewModel.busStopList, arrivalBusStop: busStop, alertBusStop: 0)
-        
+        busStopAlert = BusStopAlert(cityCode: Double(cityCode), bus: bus, allBusStop: busStopViewModel.busStopList, arrivalBusStop: busStop, alertBusStop: 0, routeDirection: routeDirect)
         // 이전 정류장 (1~3번째) 저장
         if var unwrappedBusStopAlert = busStopAlert {
             storeBeforeBusStops(for: busStop, alert: &unwrappedBusStopAlert, busStops: busStopViewModel.busStopList)

@@ -26,8 +26,9 @@ class BusAlert {
     var alertCycle: Double? // 알람 주기 (옵셔널)
     var updowncd: Int
     var isPinned: Bool = false
+//    var routetp: String = "일반버스"
     
-    init(id: String, cityCode: Double, busNo: String, routeid: String, arrivalBusStopID: String, arrivalBusStopNm: String, arrivalBusStopNord: Int ,alertBusStop: Int, /*alertBusStopID: String, alertBusStopNm: String,*/ alertLabel: String, alertSound: Bool? = nil, alertHaptic: Bool? = nil, alertCycle: Double? = nil, updowncd: Int) {
+    init(id: String, cityCode: Double, busNo: String, routeid: String, arrivalBusStopID: String, arrivalBusStopNm: String, arrivalBusStopNord: Int ,alertBusStop: Int, /*alertBusStopID: String, alertBusStopNm: String,*/ alertLabel: String, alertSound: Bool? = nil, alertHaptic: Bool? = nil, alertCycle: Double? = nil, updowncd: Int, isPinned: Bool = false) {
         self.id = id
         self.cityCode = cityCode
         self.busNo = busNo
@@ -41,6 +42,7 @@ class BusAlert {
         self.alertHaptic = alertHaptic
         self.alertCycle = alertCycle
         self.updowncd = updowncd
+        self.isPinned = isPinned
     }
 }
 
@@ -82,6 +84,7 @@ struct BusStopAlert: Identifiable {
     var firstBeforeBusStop: BusStop? // 1번째 전 정류장
     var secondBeforeBusStop: BusStop? // 2번째 전 정류장
     var thirdBeforeBusStop: BusStop? // 3번째 전 정류장
+    var routeDirection: String
 }
 
 
