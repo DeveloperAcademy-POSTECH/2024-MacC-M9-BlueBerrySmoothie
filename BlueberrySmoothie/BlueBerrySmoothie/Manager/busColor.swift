@@ -10,11 +10,11 @@ import SwiftUI
 // 버스 타입에 따른 색상을 반환하는 함수
 func busColor(for routetp: String) -> Color {
     switch routetp {
-    case "간선버스", "일반버스" : return .blue
-    case "마을버스", "지선버스" : return .green
-    case "순환버스" : return .yellow
-    case "급행버스", "광역버스" : return .red
-    default: return .orange
+    case "간선버스", "일반버스" : return .busBlue
+    case "마을버스", "지선버스" : return .busGreen
+    case "순환버스" : return .busYellow
+    case "급행버스", "광역버스" : return .busRed
+    default: return .busOrange
     }
 }
 
