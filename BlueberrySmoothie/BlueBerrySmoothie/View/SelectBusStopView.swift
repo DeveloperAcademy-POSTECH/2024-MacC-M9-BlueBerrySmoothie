@@ -147,9 +147,13 @@ struct SelectBusStopView: View {
                     if updowncdselection == 1 {
                         scrollToTop(proxy: proxy)
                     } else {
-                        scrollToMiddle(proxy: proxy)
+                        scrollToMiddle(proxy: proxy) {
+                            // 실행 후 자동 스크롤 변수 초기화
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                                isAutoScroll = false
+                            }
+                        }
                     }
-                    isAutoScroll = false // 실행 후 자동 스크롤 변수 초기화
                 }
             }
         }
@@ -163,13 +167,14 @@ struct SelectBusStopView: View {
     }
     
     // 하행의 첫 인덱스로 스크롤하는 함수
-    private func scrollToMiddle(proxy: ScrollViewProxy) {
+    private func scrollToMiddle(proxy: ScrollViewProxy, completion: @escaping () -> Void) {
         // 하행의 가장 작은 order 구함
         if let minDownwardNodeord = busStopViewModel.busStopList.filter({ $0.updowncd == 1 }).map({ $0.nodeord }).min() {
             //해당 order로 스크롤을 이동함
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                 withAnimation(.smooth) {
                     proxy.scrollTo(minDownwardNodeord, anchor: .center)
+                    completion()
                 }
             }
         }
@@ -179,11 +184,11 @@ struct SelectBusStopView: View {
         let screenHeight = UIScreen.main.bounds.height
         let centerY = screenHeight / 3 * 2
         
-        if midY > centerY && updowncdselection != 1 {
+        if midY > centerY && updowncdselection != 1 && isAutoScroll == false {
             updowncdselection = 1 // 중앙 아래
             HapticManager.shared.triggerImpactFeedback(style: .light)
         } else {
-            if midY < centerY && updowncdselection != 2 { // updowncdselection의 상태가 변경될 때만 실행,
+            if midY < centerY && updowncdselection != 2 && isAutoScroll == false  { // updowncdselection의 상태가 변경될 때만 실행,
                 updowncdselection = 2 // 중앙 위
                 HapticManager.shared.triggerImpactFeedback(style: .light)
             }
