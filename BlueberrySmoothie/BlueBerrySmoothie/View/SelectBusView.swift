@@ -26,7 +26,6 @@ struct SelectBusView: View {
                             .textFieldStyle(.plain)
                             .focused($isTextFieldFocused)
                             .padding(EdgeInsets(top: 16, leading: 20, bottom: 16, trailing: 0))
-                            .keyboardType(.numberPad)
                             .onChange(of: routeNo) { _, newRouteNo in
                                 filteredBuses = filterBuses(by: newRouteNo, from: allBuses)
                             }
