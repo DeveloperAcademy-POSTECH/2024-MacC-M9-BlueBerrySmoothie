@@ -104,7 +104,7 @@ struct UsingAlertView: View {
             refreshData() // 초기 로드
             currentBusViewModel.startUpdating() // 뷰가 보일 때 뷰모델에서 위치 업데이트 시작
             startRefreshTimer() // 타이머 시작
-//            notificationManager.notificationReceived = true
+            //            notificationManager.notificationReceived = true
         }
         .onChange(of: currentBusViewModel.closestBusLocation != nil) { isNotNil in
             if isNotNil {
@@ -223,8 +223,7 @@ struct UsingAlertView: View {
                             }
                         
                         
-                        
-                        
+
                     }
                     .padding(.trailing, 8)
                 }
@@ -437,7 +436,7 @@ struct UsingAlertView: View {
                         .foregroundStyle(.white)
                         .font(.title2)
                         .background(RoundedRectangle(cornerRadius: 8).fill(.blackDBrand))
-
+                    
                 })
                 .padding(.bottom, 48)
                 
@@ -446,8 +445,8 @@ struct UsingAlertView: View {
                 Image("AfterAlertRectangle")
                     .resizable()
                     .frame(maxWidth: .infinity, maxHeight: 500)
-//                RoundedRectangle(cornerRadius: 30)
-//                    .fill(.thinMaterial)
+                //                RoundedRectangle(cornerRadius: 30)
+                //                    .fill(.thinMaterial)
             )
             .padding(.horizontal, 20)
             .padding(.top, 120)
