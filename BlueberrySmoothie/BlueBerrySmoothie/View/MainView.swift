@@ -26,31 +26,31 @@ struct MainView: View {
     var body: some View {
         NavigationView {
             ZStack {
-                Color.white
+                Color.whiteDBlack
                     .ignoresSafeArea()
                 VStack {
                     alertListView()
-                    Spacer()
+                    
                 }
-                .padding(20)
+                .padding(.horizontal, 20)
                 .toolbar {
                     ToolbarItem(placement: .navigationBarTrailing) {
                         HStack {
                             Button(action: {
                                 showSetting = true
                             }) {
-                                Image(systemName: "location.circle.fill")
+                                Image("mark")
 //                                    .font(.regular20)
                                     .foregroundColor(Color.gray1)
                             }
                             .sheet(isPresented: $showSetting) {
                                 NavigationView {
-                                    AlertSettingMain() // SelectCityMainView 로 바꿔야 함
+                                    CitySettingView()// SelectCityMainView 로 바꿔야 함
                                 }
                             }
                             
                             NavigationLink(destination: AlertSettingMain()){
-                                Image(systemName: "plus.square.fill")
+                                Image("plus")
 //                                    .font(.regular20)
                                     .foregroundColor(Color.gray1)
                             }
@@ -58,14 +58,17 @@ struct MainView: View {
                     }
                     //오류
                     ToolbarItem(placement: .navigationBarLeading) {
-                        Text("버스 알람: 햣챠")
+                        Text("햣챠")
                             .font(.title3)
-                            .foregroundStyle(.black)
+                            .foregroundStyle(.brand)
                     }
                 }
+                .background(.clear)
             }
         }
     }
+    
+    
     
     private func alertListView() -> some View {
         ZStack {
@@ -84,7 +87,7 @@ struct MainView: View {
                     ForEach(busAlerts.filter { $0.isPinned }, id: \.self) { alert in
                         SavedBus(busStopLocals: busStopLocal, busAlert: alert, isSelected: selectedAlert?.id == alert.id, onDelete: {
                             deleteBusAlert(alert) // 삭제 동작
-                        }, isEmptyAlert: false)
+                        })
                         .onTapGesture {
                             selectedAlert = alert
                             if let foundStop = findAlertBusStop(busAlert: alert, busStops: busStopLocal) {
@@ -98,7 +101,7 @@ struct MainView: View {
                     ForEach(busAlerts.filter { !$0.isPinned }, id: \.self) { alert in
                         SavedBus(busStopLocals: busStopLocal, busAlert: alert, isSelected: selectedAlert?.id == alert.id, onDelete: {
                             deleteBusAlert(alert) // 삭제 동작
-                        }, isEmptyAlert: false)
+                        })
                         .onTapGesture {
                             selectedAlert = alert
                             if let foundStop = findAlertBusStop(busAlert: alert, busStops: busStopLocal) {
@@ -111,6 +114,29 @@ struct MainView: View {
                 }
             }
         }
+    }
+    
+
+    /// 시작하기 버튼
+    private func startButton(arrivalBusStopLocal: BusStopLocal?) -> some View {
+        Button(action: {
+            guard let selectedAlert = selectedAlert,
+                  let alertBusStopLocal = alertStop else {
+                print("선택된 알람 또는 버스 정류장이 설정되지 않았습니다.")
+                return
+            }
+            
+
+            // 알림 설정
+            isUsingAlertActive = true // Activate navigation
+            notificationManager.notificationReceived = false
+            notificationManager.requestAuthorization()
+            locationManager.registerBusAlert(selectedAlert, busStopLocal: alertBusStopLocal)
+        }, label: {
+            // 시작하기 버튼 UI
+            startButtonUI(isEmptyAlert: selectedAlert == nil)
+        })
+        .disabled(selectedAlert == nil)
     }
     
 

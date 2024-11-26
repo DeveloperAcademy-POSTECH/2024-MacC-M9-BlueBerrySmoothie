@@ -22,7 +22,7 @@ struct UsingAlertView: View {
     @State private var isScrollTriggered: Bool = false
     @State private var isFinishedLoading: Bool = false
     var EndAlertLottie = LottieManager(filename: "AlarmLottie", loopMode: .loop)
-    
+    @State private var liveActivityManager: LiveActivityManager? = nil
     
     var body: some View {
         ZStack {
@@ -40,8 +40,11 @@ struct UsingAlertView: View {
                     refreshAction: {
                         refreshData()
                         isScrollTriggered = true // 스크롤 동작 트리거
+
+                        LiveActivityManager.shared.updateLiveActivity(progress: 0.5, currentStop: currentBusViewModel.closestBusLocation?.nodenm ?? "로딩중", stopsRemaining: 3)
                         
                     }, isScrollTriggered: $isScrollTriggered
+
                 ).padding(10)
                     .padding(.trailing, -8)
                     .padding(.top, -10)
@@ -105,6 +108,7 @@ struct UsingAlertView: View {
             currentBusViewModel.startUpdating() // 뷰가 보일 때 뷰모델에서 위치 업데이트 시작
             startRefreshTimer() // 타이머 시작
             //            notificationManager.notificationReceived = true
+
         }
         .onChange(of: currentBusViewModel.closestBusLocation != nil) { isNotNil in
             if isNotNil {
@@ -175,7 +179,13 @@ struct UsingAlertView: View {
                                 .foregroundStyle(.brand)
                             Text("입니다.")
                                 .font(.caption1)
-                                .foregroundStyle(.gray1Dgray6)
+
+                                .foregroundStyle(.gray1)
+                                .onAppear {
+                                    
+                                        LiveActivityManager.shared.startLiveActivity(stationName: busAlert.arrivalBusStopNm, initialProgress: 99, currentStop: closestBus.nodenm, stopsRemaining: busAlert.arrivalBusStopNord - (Int(closestBus.nodeord) ?? 0) - 1 )
+                                }
+
                         }
                     }
                     
