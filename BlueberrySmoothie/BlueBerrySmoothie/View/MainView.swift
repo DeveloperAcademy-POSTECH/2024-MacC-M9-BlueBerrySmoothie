@@ -30,7 +30,7 @@ struct MainView: View {
                     .ignoresSafeArea()
                 VStack {
                     alertListView()
-
+                    Spacer()
                 }
                 .padding(.horizontal, 20)
                 .toolbar {
@@ -40,7 +40,7 @@ struct MainView: View {
                                 showSetting = true
                             }) {
                                 Image("mark")
-//                                    .font(.regular20)
+                                    .font(.title3)
                                     .foregroundColor(Color.gray1)
                             }
                             .sheet(isPresented: $showSetting) {
@@ -48,10 +48,11 @@ struct MainView: View {
                                     CitySettingView()// SelectCityMainView 로 바꿔야 함
                                 }
                             }
+                            .padding(.trailing, 8)
                             
                             NavigationLink(destination: AlertSettingMain()){
                                 Image("plus")
-//                                    .font(.regular20)
+                                    .font(.title3)
                                     .foregroundColor(Color.gray1)
                             }
                         }
@@ -91,10 +92,12 @@ struct MainView: View {
         ZStack {
             if busAlerts.isEmpty {
                 VStack {
-                    Text("도착 정류장을 추가해주세요")
+                    Image("MainView")
+                        .frame(width: 200, height: 200)
+                        .padding(.bottom, 4)
+                    Text("알람을 추가해주세요")
                         .foregroundColor(.gray)
                         .italic()
-                        .padding()
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .background(Color.clear)
