@@ -30,28 +30,17 @@ struct MainView: View {
                     .ignoresSafeArea()
                 VStack {
                     alertListView()
-
                 }
                 .padding(.horizontal, 20)
                 .toolbar {
                     ToolbarItem(placement: .navigationBarTrailing) {
                         HStack {
-                            Button(action: {
-                                showSetting = true
-                            }) {
+                            NavigationLink(destination: CitySettingView()){
                                 Image("mark")
-//                                    .font(.regular20)
                                     .foregroundColor(Color.gray1)
                             }
-                            .sheet(isPresented: $showSetting) {
-                                NavigationView {
-                                    CitySettingView()// SelectCityMainView 로 바꿔야 함
-                                }
-                            }
-                            
                             NavigationLink(destination: AlertSettingMain()){
                                 Image("plus")
-//                                    .font(.regular20)
                                     .foregroundColor(Color.gray1)
                             }
                         }
@@ -86,8 +75,6 @@ struct MainView: View {
             }
         }
     }
-    
-    
     
     private func alertListView() -> some View {
         ZStack {
