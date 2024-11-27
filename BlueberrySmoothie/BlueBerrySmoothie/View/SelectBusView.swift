@@ -78,8 +78,8 @@ struct SelectBusView: View {
                 }
                 showSelectBusSheet = true
             }
+            .edgesIgnoringSafeArea(.bottom)
         }
-        .edgesIgnoringSafeArea(.bottom)
     }
     
     private func filterBuses(by routeNo: String, from buses: [Bus]) -> [Bus] {
