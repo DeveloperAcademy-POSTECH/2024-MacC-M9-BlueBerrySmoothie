@@ -8,7 +8,7 @@ struct LiveActivityUI: Widget {
             // 잠금 화면 및 홈 화면 표시 내용
             VStack(alignment: .leading) {
                 HStack {
-                    Image("AppIcon") // 앱 아이콘
+                    Image("AppIcon60") // 앱 아이콘
                         .resizable()
                         .frame(width: 24, height: 24)
                         .cornerRadius(4) // 아이콘 모서리 둥글게 처리
@@ -56,7 +56,7 @@ struct LiveActivityUI: Widget {
             // Dynamic Island 표시 내용
             DynamicIsland {
                 DynamicIslandExpandedRegion(.leading) {
-                    Image("AppIcon") // 아이콘
+                    Image("AppIcon60") // 아이콘
                         .resizable()
                         .frame(width: 20, height: 20)
                         .padding(.trailing, 5)

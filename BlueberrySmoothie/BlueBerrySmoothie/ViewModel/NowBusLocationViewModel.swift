@@ -6,11 +6,14 @@ import Combine
 class NowBusLocationViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     @Published var NowbusLocations: [NowBusLocation] = []
     @Published var closestBusLocation: NowBusLocation?
-
+    var busAlert: BusAlert?
     private var cancellables = Set<AnyCancellable>()
     private var locationManager = CLLocationManager()
     private var userLocation: CLLocation?
     private var isUpdatingLocation = false // 위치 업데이트 상태 추적
+    @State private var liveActivityManager: LiveActivityManager? = nil
+    var juju: Int = 1
+   
 
     override init() {
         super.init()
@@ -53,10 +56,12 @@ class NowBusLocationViewModel: NSObject, ObservableObject, CLLocationManagerDele
     func fetchBusLocationData(cityCode: Int, routeId: String) {
         fetchNowBusLocationData(cityCode: cityCode, routeId: routeId) { [weak self] locations in
             DispatchQueue.main.async {
-                print(locations)
-                print("------------------------------------------------------------------------------------")
+                
+                print("----------------------------------------------------------------")
                 // 좌표 검증 후 업데이트
                 self?.NowbusLocations = locations.map { self?.validateAndFixCoordinates(for: $0) ?? $0 }
+              
+                
 //                self?.findClosestBusLocation() // 데이터 가져온 후 가장 가까운 버스 위치 계산
 //                self?.printUserLocationAndClosestBus() // 사용자 위치 및 가장 가까운 버스 정보 출력
             }
@@ -74,6 +79,12 @@ class NowBusLocationViewModel: NSObject, ObservableObject, CLLocationManagerDele
 
             return userLocation.distance(from: busLocation1) < userLocation.distance(from: busLocation2)
         })
+        
+        juju += 1
+//        LiveActivityManager.shared.updateLiveActivity(progress: 0.5, currentStop: closestBusLocation?.nodenm ?? "로딩중", stopsRemaining: juju)
+        LiveActivityManager.shared.updateLiveActivity(progress: 0.5, currentStop: closestBusLocation?.nodenm ?? "로딩중", stopsRemaining: Int(busAlert?.arrivalBusStopNord ?? 1) - (Int(closestBusLocation?.nodeord ?? "0") ?? 0) - 1)
+        print("여기서 깔끔하게 업데이트")
+        print(busAlert,"여기는 모델")
         print("가장 가까운 정류장: \(closestBusLocation?.nodenm)")
     }
 

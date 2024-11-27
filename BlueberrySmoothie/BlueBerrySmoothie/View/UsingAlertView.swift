@@ -9,7 +9,7 @@ struct UsingAlertView: View {
     private let locationManager = LocationManager.shared // LocationManager 싱글톤 참조로 변경
     @Environment(\.dismiss) private var dismiss
     
-    let busAlert: BusAlert // 관련된 알림 정보
+    @State var busAlert: BusAlert // 관련된 알림 정보
     @State private var refreshTimerCancellable: Cancellable? // 타이머를 관리하기 위한 상태
     private let refreshInterval: TimeInterval = 10.0 // 새로고침 간격
     
@@ -22,6 +22,8 @@ struct UsingAlertView: View {
     @State private var isScrollTriggered: Bool = false
     @State private var isFinishedLoading: Bool = false
     var EndAlertLottie = LottieManager(filename: "AlarmLottie", loopMode: .loop)
+    
+    
     @State private var liveActivityManager: LiveActivityManager? = nil
     
     var body: some View {
@@ -109,8 +111,9 @@ struct UsingAlertView: View {
             refreshData() // 초기 로드
             currentBusViewModel.startUpdating() // 뷰가 보일 때 뷰모델에서 위치 업데이트 시작
             startRefreshTimer() // 타이머 시작
+            print(busAlert, "여기는 뷰")
             //            notificationManager.notificationReceived = true
-
+            currentBusViewModel.busAlert = busAlert
         }
         .onChange(of: currentBusViewModel.closestBusLocation?.nodeid) { closestBusNodeId in
             if let closestBusNodeId = closestBusNodeId,
@@ -216,7 +219,7 @@ struct UsingAlertView: View {
 
                                 // 애니메이션 제어
                                 refreshButtonLottie.stop() // 버튼 클릭 시 기존 애니메이션 멈춤
-                                print("ㅋㅋ") // 디버깅 메시지 출력
+
                                 refreshButtonLottie.play() // 버튼 클릭 시 새 애니메이션 실행
 
                                 // 햅틱 피드백 (진동 효과) 트리거
