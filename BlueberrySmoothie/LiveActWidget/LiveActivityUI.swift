@@ -55,12 +55,12 @@ struct LiveActivityUI: Widget {
         } dynamicIsland: { context in
             // Dynamic Island 표시 내용
             DynamicIsland {
-                DynamicIslandExpandedRegion(.leading) {
-                    Image("AppIcon24") // 아이콘
-                        .resizable()
-                        .frame(width: 20, height: 20)
-                        .padding(.trailing, 5)
-                }
+//                DynamicIslandExpandedRegion(.leading) {
+//                    Image("AppIcon24") // 아이콘
+//                        .resizable()
+//                        .frame(width: 24, height: 24)
+////                        .padding(.trailing, 5)
+//                }
 
                 DynamicIslandExpandedRegion(.center) {
                     HStack {
@@ -77,7 +77,7 @@ struct LiveActivityUI: Widget {
                     
                     
                     
-                    Spacer()
+        
 //                    Text("현재 정류장: \(context.state.currentStop)") // 현재 정류장
 //                        .font(.body)
 //                        .foregroundColor(.primary)  // 기본 색상 (다크/라이트 모드 자동 처리)
@@ -90,14 +90,23 @@ struct LiveActivityUI: Widget {
                         .padding(.top, 10)
                 }
             } compactLeading: {
-                Image("AppIcon")
+                HStack {
+                    Spacer()
+                    Image("AppIcon24")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 24, height: 24) // 이미지 크기 조정
+                    
+                        .cornerRadius(8) // 코너 라디우스 추가
+                    Spacer()
+                }
             } compactTrailing: {
-                Text("\(context.state.stopsRemaining) 정거장 전")
+                Text("\(context.state.stopsRemaining) 전")
                     .font(.body)
                     .fontWeight(.bold)  // 볼드체 설정
                     .foregroundColor(.white)  // 흰색 텍스트
             } minimal: {
-                Image("AppIcon")
+                Image("AppIcon24")
             }
         }
     }
