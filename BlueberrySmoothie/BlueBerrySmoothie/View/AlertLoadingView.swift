@@ -16,10 +16,9 @@ struct AlertLoadingView: View {
         ZStack{
             Color.gray6DGray1 // 배경 색
                 .edgesIgnoringSafeArea(.all) // 화면 전체 배경 적용
-//            
-            VStack {
+            
+            VStack(spacing: 4) {
                 Image("AlertLoadingView")
-                    .padding(.bottom, 20)
                 HStack(spacing:2) {
                     Text("버스 노선을 불러오고 있어요")
                     Text(String(repeating: ".", count: dotCount))
@@ -29,7 +28,7 @@ struct AlertLoadingView: View {
                         }
                 }.font(.body2)
                     .foregroundStyle(.gray1)
-            }
+            }.padding(.top, -100)
         }
     }
     
