@@ -25,12 +25,12 @@ struct MainView: View {
     
     var body: some View {
         NavigationView {
-            ZStack {
-                Color.whiteDBlack
-                    .ignoresSafeArea()
+//            ZStack {
+//                Color.whiteDBlack
+//                    .ignoresSafeArea()
       
                     alertListView()
-                        .padding(.top, 20)
+                        
                         .padding(.horizontal, 20)
                     
              
@@ -50,8 +50,8 @@ struct MainView: View {
                         Image("HotCha")
                     }
                 }
-                .background(.clear)
-            }
+              
+//            }
         }
     }
     
