@@ -32,10 +32,10 @@ struct OnboardingView: View {
     }
     
     var onboardingPages = [
-        OnboardingPage(imageName: "OnboardingEndView", title1: "핫챠 사용을 위해", title2: "위치 사용을 허용해 주세요.", description: "권한을 허용하지 않으면 핫챠를 사용할 수 없어요.", buttonText: "허용하기"),
-        OnboardingPage(imageName: "OnboardingEndView", title1: "핫챠 사용을 위해", title2: "위치 사용을 허용해 주세요.", description: "권한을 허용하지 않으면 핫챠를 사용할 수 없어요.", buttonText: "다음"),
-        OnboardingPage(imageName: "OnboardingStartView", title1: "평소 버스를 이용하는 지역은", title2: "어디신가요?", description: "핫챠는 정류장 위치기반 알람이에요.", buttonText: "지역 선택하기"),
-        OnboardingPage(imageName: "OnboardingEndView", title1: "지역이 부산으로 설정되었어요", title2: "", description: "항상 이용하는 버스와 정류장으로 알람을 설정해보세요.", buttonText: "시작하기")
+        OnboardingPage(imageName: "OnboardingEndView", title1: "핫챠 사용을 위해", title2: "아래 권한을 허용해 주세요.", description: "권한을 허용하지 않으면 핫챠를 사용할 수 없어요.", buttonText: "허용하기"),
+        OnboardingPage(imageName: "OnboardingEndView", title1: "핫챠 사용을 위해", title2: "아래 권한을 허용해 주세요.", description: "권한을 허용하지 않으면 핫챠를 사용할 수 없어요.", buttonText: "다음"),
+        OnboardingPage(imageName: "OnboardingStartView", title1: "평소 버스를 이용하는 지역은", title2: "어디인가요?", description: "어느 지역에서 버스를 타는지 선택해주세요.", buttonText: "지역 찾기"),
+        OnboardingPage(imageName: "OnboardingEndView", title1: "지역이 부산으로 설정되었어요!", title2: "", description: "지역은 나중에 다시 바꿀 수 있어요.\n이제 버스와 정류장으로 알람을 생성해보세요.", buttonText: "시작하기")
     ]
     
     var body: some View {
@@ -45,22 +45,20 @@ struct OnboardingView: View {
                 if currentPage == 0 || currentPage == 1 {
                     Text(onboardingPages[0].title1)
                         .font(.title2)
-                        .fontWeight(.bold)
-                        .padding(.top, 100)
+                        .foregroundStyle(.blackasset)
+                        .padding(.top, 60)
                         .frame(maxWidth: .infinity, alignment: .leading)
                     Text(onboardingPages[0].title2)
                         .font(.title2)
-                        .fontWeight(.bold)
+                        .foregroundStyle(.blackasset)
                         .padding(.bottom, 12)
                         .frame(maxWidth: .infinity, alignment: .leading)
                     Text(onboardingPages[0].description)
-                        .font(.body)
-                        .foregroundStyle(.gray)
+                        .font(.body2)
+                        .foregroundStyle(.gray3)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     
                     VStack(spacing: 12) {
-                        
-                        
                         InfoCardView(
                             icon: "mark",
                             title: "위치 (앱을 사용하는 동안 허용)",
@@ -94,17 +92,17 @@ struct OnboardingView: View {
                 else if currentPage == 2 {
                     Text(onboardingPages[2].title1)
                         .font(.title2)
-                        .fontWeight(.bold)
-                        .padding(.top, 100)
+                        .foregroundStyle(.blackasset)
+                        .padding(.top, 60)
                         .frame(maxWidth: .infinity, alignment: .leading)
                     Text(onboardingPages[2].title2)
                         .font(.title2)
-                        .fontWeight(.bold)
+                        .foregroundStyle(.blackasset)
                         .padding(.bottom, 12)
                         .frame(maxWidth: .infinity, alignment: .leading)
                     Text(onboardingPages[2].description)
-                        .font(.body)
-                        .foregroundStyle(.gray)
+                        .font(.body2)
+                        .foregroundStyle(.gray3)
                         .frame(maxWidth: .infinity, alignment: .leading)
             
                 } else if currentPage == 3 {
@@ -118,13 +116,13 @@ struct OnboardingView: View {
                       }
                   }
                       .font(.title2)
-                      .fontWeight(.bold)
-                      .padding(.top, 100)
+                      .foregroundStyle(.blackasset)
+                      .padding(.top, 60)
                       .padding(.bottom, 12)
                       .frame(maxWidth: .infinity, alignment: .leading)
                     Text(onboardingPages[3].description)
-                        .font(.body)
-                        .foregroundStyle(.gray)
+                        .font(.body2)
+                        .foregroundStyle(.gray3)
                         .frame(maxWidth: .infinity, alignment: .leading)
                     
                     
@@ -154,17 +152,15 @@ struct OnboardingView: View {
                         showSelectCityView.toggle()  // Show the city selection view again
                     }) {
                         Text("지역 다시 선택하기")  // Button text
-                            .font(.headline)
-                            .padding()
-                            .frame(maxWidth: .infinity)
-                            .background(.ultraThinMaterial) // Change to your preferred color
+                            .font(.caption1)
+                            .underline()
                             .foregroundColor(.gray3)
                             .cornerRadius(10)
                             
                     }
                 }
                 
-                Spacer()
+                
                 
                 // 버튼 클릭 시 페이지 변경
                 Button(action: {
@@ -185,13 +181,14 @@ struct OnboardingView: View {
                     }
                 }) {
                     Text(onboardingPages[currentPage].buttonText)
-                        .font(.headline)
+                        .font(.body1)
                         .padding()
                         .frame(maxWidth: .infinity)
                         .background(.darkgray1)
                         .foregroundColor(.white)
                         .cornerRadius(10)
                 }
+                .padding(.top, 24)
                 .padding(.bottom,30)
                 .sheet(isPresented: $showSelectCityView) {
                     // sheet로 SelectCityView를 띄움
