@@ -102,6 +102,8 @@ struct SelectBusStopView: View {
         .task {
             await busStopViewModel.getBusStopData(cityCode: cityCode, routeId: bus.routeid)
         }
+        .backgroundStyle(.whiteDgray1)
+        .edgesIgnoringSafeArea(.horizontal)
     }
     
     /// Bus List 뷰
@@ -141,6 +143,7 @@ struct SelectBusStopView: View {
                                 )
                         }
                         .frame(height: 60)
+                        .backgroundStyle(.whiteDgray1)
                     }
                     .id(busstop.nodeid) // 각 정류장에 고유 ID를 설정
                 }
