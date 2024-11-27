@@ -37,12 +37,10 @@ struct MainView: View {
                     ToolbarItem(placement: .navigationBarTrailing) {
                         HStack {
                             NavigationLink(destination: CitySettingView()){
-                                Image("mark")
-                                    .foregroundColor(Color.gray1)
+                                Image("mainMark")
                             }
                             NavigationLink(destination: AlertSettingMain()){
-                                Image("plus")
-                                    .foregroundColor(Color.gray1)
+                                Image("mainPlus")
                             }
                         }
                     }
