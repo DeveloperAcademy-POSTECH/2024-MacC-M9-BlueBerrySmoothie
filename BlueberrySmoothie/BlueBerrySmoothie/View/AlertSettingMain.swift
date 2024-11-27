@@ -11,7 +11,7 @@ struct AlertSettingMain: View {
     var isEditing: Bool = false // Edit 모드인지 구분
     
     // 초기화 데이터들
-    @State private var label: String = "알람"
+    @State private var label: String = ""
     @State private var selectedStation: String = "정류장 수"
   
     // 설정된 cityCode 가져오기
@@ -150,9 +150,9 @@ struct AlertSettingMain: View {
                     
                     Spacer()
                     
-                    TextField("통학", text: $label, prompt: Text("알람").foregroundColor(.gray3Dgray3))
+                    TextField("알람", text: $label, prompt: Text("알람").foregroundColor(.gray3Dgray3))
                         .multilineTextAlignment(.trailing)
-                        .foregroundStyle(label == "알람" ? .gray3Dgray3 : .blackDGray7)
+                        .foregroundStyle(label == "" ? .gray3Dgray3 : .blackDGray7)
                         .font(.body2)
                         .focused($isFieldFocused) // stroke 색 변경을 위한 활성 비활성 구분
                         .padding(EdgeInsets(top: 22, leading: 20, bottom: 22, trailing: 20))
