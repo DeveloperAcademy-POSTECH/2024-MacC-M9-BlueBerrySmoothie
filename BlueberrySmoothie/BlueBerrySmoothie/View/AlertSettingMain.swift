@@ -13,7 +13,7 @@ struct AlertSettingMain: View {
     // 초기화 데이터들
     @State private var label: String = ""
     @State private var selectedStation: String = "정류장 수"
-  
+    
     // 설정된 cityCode 가져오기
     @State private var cityCodeInput: String = "12"
     @State private var cityNameInput: String = "세종시"
@@ -51,7 +51,7 @@ struct AlertSettingMain: View {
             VStack {
                 HStack {
                     Text("알람 설정")
-                        .font(.body2)
+                        .font(.title2)
                         .foregroundColor(.blackDGray7)
                     Spacer()
                 }
@@ -113,7 +113,9 @@ struct AlertSettingMain: View {
                     RoundedRectangle(cornerRadius: 20)
                         .stroke(selectedField == 1 && isFieldFocused != true ? .brand : .gray5Dgray3, lineWidth: 1)
                 }
-                .sheet(isPresented: $showSelectBusSheet) { // ← 수정된 부분
+                .sheet(isPresented: $showSelectBusSheet, onDismiss: {
+                    selectedField = nil  // sheet가 닫힐 때 초기화
+                }) { // ← 수정된 부분
                     SelectBusView(cityCode: Int(cityCodeInput) ?? 21, busStopAlert: $busStopAlert, showSelectBusSheet: $showSelectBusSheet)
                 }
                 // 일어날 정류장 선택
@@ -178,7 +180,7 @@ struct AlertSettingMain: View {
             if let busAlert = busAlert {
                 // `busAlert` 데이터로 초기 상태 설정
                 label = busAlert.alertLabel ?? "알람"
-                selectedStation = "\(busAlert.alertBusStop) 정류장 전"
+                selectedStation = "\(busAlert.alertBusStop) 정류장 전 알람"
                 
                 busStopAlert = BusStopAlert(
                     cityCode: busAlert.cityCode,
@@ -198,11 +200,14 @@ struct AlertSettingMain: View {
             }
         }
         .onChange(of: busStopAlert?.arrivalBusStop) {
-            selectedStation = "정류장 수"
+            if (isEditing != true) {
+                selectedStation = "정류장 수"
+            }
         }
         .overlay {
             if showSheet {
-                StationPickerModal(isPresented: $showSheet, selectedStation: $selectedStation, alert: $busStopAlert, nodeord: busAlert?.arrivalBusStopNord ?? 0)
+                StationPickerModal(isPresented: $showSheet, selectedStation: $selectedStation, alert: $busStopAlert, nodeord: busAlert?.arrivalBusStopNord ?? 0, onDismiss: {
+                    selectedField = nil })
             } else {
                 EmptyView()
             }
@@ -375,7 +380,7 @@ struct AlertSettingMain: View {
         cityCodeInput = savedCityID
         cityNameInput = savedCityName
     }
-
+    
     
     // 선택한 버스의 정류장 List 저장 함수 - UsingAlertView에서 정류장 노선을 띄우는데 사용됨
     private func saveBusstop() {

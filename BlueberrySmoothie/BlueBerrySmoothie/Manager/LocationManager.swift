@@ -46,17 +46,7 @@ class LocationManager: NSObject, ObservableObject {
         // 알람을 시작하도록 기존의 startNotifications(for:) 메서드를 호출
         startNotifications(for: busAlert)
     }
-    
-    
-    
-    // Region 진입 시 호출되는 delegate 메서드
-    func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
-        print("Entered region: \(region.identifier) emfdjdhdkdjdkjdkjdjdkdjdkf")
-        if let busAlert = getBusAlert(for: region.identifier) {
-            startNotifications(for: busAlert)
-        }
-    }
-    
+
     /// 정류장 근처에 왔을 때 실행되는 함수
     private func startNotifications(for busAlert: BusAlert) {
         guard !activeNotifications.contains(busAlert.id) else { return }
@@ -157,13 +147,15 @@ class LocationManager: NSObject, ObservableObject {
         // Region Monitoring 설정
         let region = CLCircularRegion(
             center: CLLocationCoordinate2D(latitude: busStopLocal.gpslati, longitude: busStopLocal.gpslong),
-            radius: 15.0,
+            radius: 25.0, //반경 넓히기
             identifier: busAlert.id)
         
         region.notifyOnEntry = true
-        region.notifyOnExit = true
+        region.notifyOnExit = false
         
-        // 현재 위치가 이미 region 안에 있는지 확인
+        manager.startUpdatingLocation()
+        print("!!!!!!!!!!!!!!!Location updated 시작한다!!!!!!!!!!!!!!!")
+//         현재 위치가 이미 region 안에 있는지 확인
         if let currentLocation = location?.coordinate {
             let locationIsInRegion = region.contains(currentLocation)
             if locationIsInRegion {
@@ -237,9 +229,6 @@ class LocationManager: NSObject, ObservableObject {
         checkLocationAuthorization()
     }
     
-
-
-    
     // BusAlert 조회 메서드
     private func getBusAlert(for identifier: String) -> BusAlert? {
         return activeBusAlerts[identifier]
@@ -253,11 +242,6 @@ class LocationManager: NSObject, ObservableObject {
         activeBusAlerts.removeAll()
         activeNotifications.removeAll()
     }
-    
-////     알림이 현재 활성화되어 있는지 확인하는 메서드
-//    func isNotificationActive(for busAlert: BusAlert) -> Bool {
-//        return activeNotifications.contains(busAlert.id)
-//    }
     
     private func setupAudioSession() {
         do {
@@ -336,28 +320,48 @@ class LocationManager: NSObject, ObservableObject {
 
 extension LocationManager: CLLocationManagerDelegate {
     
-    /// 위치가 업데이트될 때마다 호출되는 함수
-    /// 위치가 유효한 경우(horizontalAccuracy > 0), 위치 데이터를 저장하고, CLGeocoder를 통해 주소를 역지오코딩하여 address와 detailedAddress를 업데이트
+    // Region 진입 시 호출되는 delegate 메서드
+    func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
+        print("Entered region: \(region.identifier) emfdjdhdkdjdkjdkjdjdkdjdkf")
+        if let busAlert = getBusAlert(for: region.identifier) {
+            startNotifications(for: busAlert)
+        }
+    }
+    
+    // 위치 업데이트 때 마다 호출되는 delegate 메서드
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.last else { return }
         
+        // 유효한 위치 데이터인지 확인
         if location.horizontalAccuracy > 0 {
             self.location = location
             self.region = CLLocation(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
-            self.manager.stopUpdatingLocation()
+            print("!!!!!!!!!!!!!!!Location updated!!!!!!!!!!!!!!!")
+            print(manager.monitoredRegions)
+            
+            // 등록된 모든 region에 대해 현재 위치 확인
+            for monitoredRegion in manager.monitoredRegions {
+                guard let circularRegion = monitoredRegion as? CLCircularRegion else { continue }
+                
+                if circularRegion.contains(location.coordinate) {
+                    print(circularRegion.center)
+                    print("현재 위치가 \(circularRegion.identifier) 영역 안에 있습니다.")
+                    // 진입 이벤트 처리
+                    if let busAlert = getBusAlert(for: circularRegion.identifier) {
+                        startNotifications(for: busAlert)
+                    }
+                } else {
+                    print("현재 위치가 \(circularRegion.identifier) 영역 밖에 있습니다.")
+                }
+            }
         }
     }
     
     /// 위치 갱신 실패 시 오류 메시지를 설정하고 콘솔에 출력
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print("Location error: \(error.localizedDescription)")
-        errorMessage = "위치를 찾을 수 없습니다: \(error.localizedDescription)"
+//        print("Location error: \(error.localizedDescription)")
+//        errorMessage = "위치를 찾을 수 없습니다: \(error.localizedDescription)"
+        print("Location update failed with error: \(error.localizedDescription)")
     }
-//    
-//    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-//        locationStatus = status
-//        checkLocationAuthorization()
-//    }
-
 }
 
