@@ -149,7 +149,7 @@ struct UsingAlertView: View {
                 
                 VStack(alignment: .leading, spacing: 3) {
                     // 버스 정보
-                    HStack(spacing: 4) {
+                    HStack(spacing: 5) {
                         Image(systemName: "square.fill")
                             .foregroundStyle(busColor(for: busAlert.routetp))
                             .frame(width: 12, height: 12)
@@ -165,7 +165,7 @@ struct UsingAlertView: View {
                         Text(busAlert.arrivalBusStopNm)
                             .font(.caption2)
                             .foregroundStyle(.gray3Dgray6)
-                    }.padding(.bottom, 16)
+                    }.padding(.bottom, 20)
                     
                     // 현재 위치 정보
                     if let closestBus = viewModel.closestBusLocation {
@@ -230,7 +230,7 @@ struct UsingAlertView: View {
                                 }
                             }
                     }
-                    .padding(.trailing, 8)
+                    .padding(.trailing, 4)
                 }
                 .padding(24)
             }
