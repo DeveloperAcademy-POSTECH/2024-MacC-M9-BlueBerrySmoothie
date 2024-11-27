@@ -18,7 +18,7 @@ struct CitySettingView: View {
             // 현재 선택된 도시 표시
             HStack {
                 Text("지역 설정")
-                    .font(.body2)
+                    .font(.title2)
                     .padding(.vertical, 8)
                 Spacer()
                 
