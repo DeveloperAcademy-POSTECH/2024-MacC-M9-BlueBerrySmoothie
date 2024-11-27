@@ -66,8 +66,9 @@ struct SavedBus: View {
                         })
                     } label: {
                         Image(systemName: "ellipsis")
-                            .font(.title3)
+                            .font(.title2)
                             .foregroundColor(Color.gray3Dgray6)
+                            .padding(5)
                     }
                 }
                 .padding(.top, 7)
