@@ -71,8 +71,8 @@ struct SelectBusView: View {
             }
             .onAppear {
                 fetchAllBusData(citycode: cityCode) { fetchedBuses in
-                    self.allBuses = fetchedBuses
-                    self.filteredBuses = fetchedBuses
+                    self.allBuses = fetchedBuses.sorted(using: KeyPathComparator(\.routeno))
+                    self.filteredBuses = fetchedBuses.sorted(using: KeyPathComparator(\.routeno))
                 }
                 showSelectBusSheet = true
             }
