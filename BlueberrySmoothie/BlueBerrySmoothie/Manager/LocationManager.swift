@@ -174,18 +174,18 @@ class LocationManager: NSObject, ObservableObject {
         region.notifyOnExit = false
         
         manager.startUpdatingLocation()
+        print("!!!!!!!!!!!!!!!Location updated 시작한다!!!!!!!!!!!!!!!")
+//         현재 위치가 이미 region 안에 있는지 확인
+        if let currentLocation = location?.coordinate {
+            let locationIsInRegion = region.contains(currentLocation)
+            if locationIsInRegion {
+                startNotifications(for: busAlert)
+            }
+        }
         
-        // 현재 위치가 이미 region 안에 있는지 확인
-//        if let currentLocation = location?.coordinate {
-//            let locationIsInRegion = region.contains(currentLocation)
-//            if locationIsInRegion {
-//                startNotifications(for: busAlert)
-//            }
-//        }
-//        
-//        // 새로운 region 모니터링 시작
-//        manager.startMonitoring(for: region)
-//        print("Started monitoring region for \(busAlert.alertLabel ?? "")")
+        // 새로운 region 모니터링 시작
+        manager.startMonitoring(for: region)
+        print("Started monitoring region for \(busAlert.alertLabel ?? "")")
     }
     
     // 버스 알람 해제
@@ -352,10 +352,28 @@ extension LocationManager: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.last else { return }
         
+        // 유효한 위치 데이터인지 확인
         if location.horizontalAccuracy > 0 {
             self.location = location
             self.region = CLLocation(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
-//            self.manager.stopUpdatingLocation() // 위치 업데이트 즉시 중지
+            print("!!!!!!!!!!!!!!!Location updated!!!!!!!!!!!!!!!")
+            print(manager.monitoredRegions)
+            
+            // 등록된 모든 region에 대해 현재 위치 확인
+            for monitoredRegion in manager.monitoredRegions {
+                guard let circularRegion = monitoredRegion as? CLCircularRegion else { continue }
+                
+                if circularRegion.contains(location.coordinate) {
+                    print(circularRegion.center)
+                    print("현재 위치가 \(circularRegion.identifier) 영역 안에 있습니다.")
+                    // 진입 이벤트 처리
+                    if let busAlert = getBusAlert(for: circularRegion.identifier) {
+                        startNotifications(for: busAlert)
+                    }
+                } else {
+                    print("현재 위치가 \(circularRegion.identifier) 영역 밖에 있습니다.")
+                }
+            }
         }
     }
     
