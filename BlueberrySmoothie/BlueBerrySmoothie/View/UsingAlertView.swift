@@ -54,6 +54,19 @@ struct UsingAlertView: View {
                     .padding(.trailing, -8)
                     .padding(.top, -10)
                 
+//                Button(action: {
+//                            // 예시: triggerAlarm 메서드를 호출하여 알람을 울리도록 설정
+//                            if let busAlert = getSampleBusAlert() {
+//                                LocationManager.shared.triggerAlarm(for: busAlert)
+//                            }
+//                        }) {
+//                            Text("알람 울리기")
+//                                .font(.title)
+//                                .padding()
+//                                .background(Color.blue)
+//                                .foregroundColor(.white)
+//                                .cornerRadius(10)
+//                        }
                 // 노션뷰
                 BusStopScrollView(
                     closestBus: $currentBusViewModel.closestBusLocation,
@@ -175,7 +188,7 @@ struct UsingAlertView: View {
                     
                     // 현재 위치 정보
                     if let closestBus = viewModel.closestBusLocation {
-                        Text("알람까지 \(busAlert.arrivalBusStopNord - (Int(closestBus.nodeord) ?? 0) - 1 ) 정류장 남았습니다.")
+                        Text("알람까지 \(busAlert.arrivalBusStopNord - (Int(closestBus.nodeord) ?? 0 - Int(busAlert.alertBusStop)) - busAlert.alertBusStop  ) 정류장 남았습니다.")
                             .font(.title2)
                             .foregroundStyle(.blackDGray7)
                             .padding(.bottom, 10)
@@ -440,6 +453,12 @@ struct UsingAlertView: View {
             }
         }
     }
+    
+    // 예시로 사용할 버스 알림을 반환하는 메서드
+   private func getSampleBusAlert() -> BusAlert? {
+       // 실제로는 등록된 버스 알림을 찾거나 데이터를 받아올 필요가 있음
+       return busAlert
+   }
     
     // 알람 비활성화 뷰
     @ViewBuilder

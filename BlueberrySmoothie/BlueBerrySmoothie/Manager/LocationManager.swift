@@ -41,6 +41,14 @@ class LocationManager: NSObject, ObservableObject {
         checkIfLocationServicesIsEnabled()
     }
     
+    // LocationManager.swift
+    func triggerAlarm(for busAlert: BusAlert) {
+        // 알람을 시작하도록 기존의 startNotifications(for:) 메서드를 호출
+        startNotifications(for: busAlert)
+    }
+    
+    
+    
     // Region 진입 시 호출되는 delegate 메서드
     func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
         print("Entered region: \(region.identifier) emfdjdhdkdjdkjdkjdjdkdjdkf")
