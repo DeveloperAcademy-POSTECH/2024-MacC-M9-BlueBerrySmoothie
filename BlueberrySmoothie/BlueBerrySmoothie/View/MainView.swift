@@ -28,12 +28,12 @@ struct MainView: View {
             ZStack {
                 Color.whiteDBlack
                     .ignoresSafeArea()
-                VStack {
+      
                     alertListView()
-                        .padding(.top, 12)
+                        .padding(.top, 20)
                         .padding(.horizontal, 20)
-                    Spacer()
-                }
+                    
+             
                 .toolbar {
                     ToolbarItem(placement: .navigationBarTrailing) {
                         HStack {
@@ -54,6 +54,9 @@ struct MainView: View {
             }
         }
     }
+    
+    
+    
     
     private func alertListView() -> some View {
         ZStack {
