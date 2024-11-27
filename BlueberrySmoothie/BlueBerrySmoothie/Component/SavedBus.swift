@@ -24,23 +24,13 @@ struct SavedBus: View {
     @State private var alertStop: BusStopLocal?
     
     var body: some View {
-        
-        ZStack {
-            Rectangle()
-                .foregroundColor(Color.clear)
-                .cornerRadius(12)
-                .overlay {
-                    Image(busAlertBackground(for: busAlert?.routetp ?? ""))
-                        .resizable()
-                        .scaledToFit()
-                        .frame(maxWidth: .infinity, maxHeight: .infinity) // 크기를 최대한 늘림
-                        .cornerRadius(12) // 모서리 반경을 Rectangle과 동일하게 맞춤
-                }
+
             VStack {
+                //알람 이름 , 메뉴버튼
                 HStack {
                     ZStack {
                         Rectangle()
-                            .foregroundColor(Color.lightbrandfix)
+                            .foregroundColor(Color.lightbrand)
                             .cornerRadius(4)
                         Text(busAlert?.alertLabel ?? "알림")
                             .font(.caption2)
@@ -48,7 +38,7 @@ struct SavedBus: View {
                             .foregroundColor(Color.brand)
                     }
                     .fixedSize(horizontal: true, vertical: true)
-                    .padding(.top, 8)
+                    .padding(.top, 9)
                     
                     Spacer()
                     
@@ -77,22 +67,22 @@ struct SavedBus: View {
                     } label: {
                         Image(systemName: "ellipsis")
                             .font(.title3)
-                            .foregroundColor(Color.gray3)
-                            .padding(.vertical, 20)
+                            .foregroundColor(Color.gray3Dgray6)
                     }
-                    
                 }
+                .padding(.top, 7)
                 .padding(.bottom, 20)
+                .padding(.horizontal, 20)
                 
-                VStack(spacing: 0) {
-                    HStack {
-                        Rectangle()
+                // 버스 번호, 정류장
+                VStack(spacing: 4) {
+                    HStack(spacing: 8) {
+                        Image(systemName: "square.fill")
                             .frame(width: 12, height: 12)
-                            .foregroundColor(busColor(for: busAlert?.routetp ?? ""))
+                            .foregroundStyle(busColor(for: busAlert?.routetp ?? ""))
                         Text(busAlert?.busNo ?? "버스번호없음")
                             .font(.title1)
                             .foregroundStyle(.blackdgray71)
-                        
                         // 고정핀 위치
                         if busAlert?.isPinned == true {
                             Image("pin")
@@ -108,6 +98,7 @@ struct SavedBus: View {
                         Spacer()
                     }
                 }
+                .padding(.horizontal, 20)
                 
                 Spacer()
                 
@@ -118,11 +109,10 @@ struct SavedBus: View {
                     Text("\(busAlert!.alertBusStop) 정류장 전")
                         .font(.caption1)
                         .foregroundColor(Color.gray2)
-                    
                     Spacer()
                 }
-                .padding(.bottom, -4)
-                .padding(.top, 4)
+                .padding(.top, 10)
+                .padding(.horizontal, 20)
                 Spacer()
                 
                 HStack {
@@ -163,29 +153,31 @@ struct SavedBus: View {
                     .simultaneousGesture(TapGesture().onEnded {
                         startAlert()
                     })
-                    .padding(.top, 24)
+                    .padding(.bottom, 16)
                     Spacer()
                 }
+                .padding(.top, 10)
+                .padding(.horizontal, 20)
             }
-            .padding(.horizontal, 20)
-            .padding(.bottom)
-            
-        }
-        .padding(.top, 20)
-        .fixedSize(horizontal: false, vertical: true)
-        .sheet(isPresented: $isEditing) {
-            NavigationView{
-                AlertSettingMain(busAlert: busAlert, isEditing: true) // `busAlert`을 `AlertSettingMain`으로 전달
+            .background{
+                Image(busAlertBackground(for: busAlert?.routetp ?? ""))
+                    .resizable()
+                    .frame(maxWidth: .infinity, maxHeight: .infinity) // 크기를 최대한 늘림
             }
-        }
-        .alert("알람 삭제", isPresented: $alertShowing) {
-            Button("삭제", role: .destructive) {
-                onDelete()
+            .padding(.top, 8)
+            .sheet(isPresented: $isEditing) {
+                NavigationView{
+                    AlertSettingMain(busAlert: busAlert, isEditing: true) // `busAlert`을 `AlertSettingMain`으로 전달
+                }
             }
-            Button("취소", role: .cancel){}
-        } message: {
-            Text("알람을 삭제하시겠습니까?")
-        }
+            .alert("알람 삭제", isPresented: $alertShowing) {
+                Button("삭제", role: .destructive) {
+                    onDelete()
+                }
+                Button("취소", role: .cancel){}
+            } message: {
+                Text("알람을 삭제하시겠습니까?")
+            }
     }
     
     // MARK: - 알람 시작 함수

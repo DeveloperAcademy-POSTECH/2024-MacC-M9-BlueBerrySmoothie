@@ -282,13 +282,10 @@ struct UsingAlertView: View {
                             ProgressView("가장 가까운 버스 위치를 찾고 있습니다...")
                                 .foregroundColor(Color.black)
                                 .font(.caption1)
-//                            AlertLoadingView()
                         } else {
                             Text("가장 가까운 버스 위치를 찾고 있습니다...")
                                 .foregroundColor(Color.black)
                                 .font(.caption1)
-                            //                            AlertLoadingView()
-
                         }
                         Spacer()
                     }
@@ -361,21 +358,17 @@ struct UsingAlertView: View {
                         .font(isCurrentLocation || busStop.nodeid == arrivalBusStopID || busStop.nodeid == alertStop?.nodeid ? .body1 : .caption1)
                     if busStop.nodeid == alertStop?.nodeid {
                         // TODO: 알람 레이블 여기 넣기
-                        HStack{
-                            Rectangle()
-                                .frame(minWidth: 34, maxHeight: 23)
-                                .fixedSize(horizontal: true, vertical: false)
-                                .foregroundColor(Color.lightbrand)
-                                .cornerRadius(4)
-                                .overlay {
-                                    Text(alertLabel ?? "") // alertLabel 표시
-                                        .font(.caption2)
-                                        .padding(4)
-                                        .foregroundColor(Color.brand)
-                                }
-                                .padding(.leading, 20)
-                            Spacer()
-                        }
+                        Rectangle()
+                            .frame(height: 23)
+                            .foregroundColor(Color.lightbrand)
+                            .cornerRadius(4)
+                            .overlay {
+                                Text(alertLabel ?? "")
+                                    .font(.system(size: 12))
+                                    .padding(4)
+                                    .foregroundColor(Color.brand)
+                            }
+                            .padding(.leading, 20)
                     }
                 }
                 Spacer()
