@@ -30,6 +30,7 @@ struct MainView: View {
                     .ignoresSafeArea()
                 VStack {
                     alertListView()
+                    Spacer()
                 }
                 .padding(.horizontal, 20)
                 .toolbar {
@@ -47,9 +48,7 @@ struct MainView: View {
                     }
                     //오류
                     ToolbarItem(placement: .navigationBarLeading) {
-                        Text("햣챠")
-                            .font(.title3)
-                            .foregroundStyle(.brand)
+                        Image("HotCha")
                     }
                 }
                 .background(.clear)
@@ -80,10 +79,12 @@ struct MainView: View {
         ZStack {
             if busAlerts.isEmpty {
                 VStack {
-                    Text("도착 정류장을 추가해주세요")
+                    Image("MainView")
+                        .frame(width: 200, height: 200)
+                        .padding(.bottom, 4)
+                    Text("알람을 추가해주세요")
                         .foregroundColor(.gray)
                         .italic()
-                        .padding()
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .background(Color.clear)

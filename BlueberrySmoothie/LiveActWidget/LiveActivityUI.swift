@@ -21,7 +21,7 @@ struct LiveActivityUI: Widget {
                     
                     Spacer()
                     
-                    Text("등교알람")
+                    Text("\(context.attributes.title)")
                         .font(.subheadline) // 글씨 크기 설정
                         .fontWeight(.light) // 얇은 글씨체 설정
                         .foregroundColor(.brand) // 텍스트 색상 설정

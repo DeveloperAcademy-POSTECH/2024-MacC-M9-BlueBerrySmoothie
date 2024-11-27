@@ -25,15 +25,21 @@ class LiveActivityManager {
     private var currentActivity: Activity<MyLiveActivityAttributes>?
 
     // 라이브 액티비티 시작
-    func startLiveActivity(stationName: String, initialProgress: Double, currentStop: String, stopsRemaining: Int) {
+    func startLiveActivity(
+        title: String,
+        description: String,
+        stationName: String,
+        initialProgress: Double,
+        currentStop: String,
+        stopsRemaining: Int) {
         guard ActivityAuthorizationInfo().areActivitiesEnabled else {
             print("라이브 액티비티 실행 불가: 권한이 비활성화되어 있습니다.")
             return
         }
 
         let activityAttributes = MyLiveActivityAttributes(
-            title: "Tracking Progress",
-            description: "Your journey is in progress"
+            title: title,
+            description: description
         )
 
         let initialState = MyLiveActivityAttributes.ContentState(

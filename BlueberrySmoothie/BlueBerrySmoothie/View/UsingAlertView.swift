@@ -26,7 +26,7 @@ struct UsingAlertView: View {
     
     var body: some View {
         ZStack {
-            Color.lightbrand
+            Color.usingAlertViewBG
                 .ignoresSafeArea()
             
             VStack {
@@ -41,7 +41,7 @@ struct UsingAlertView: View {
                         refreshData()
                         isScrollTriggered = true // 스크롤 동작 트리거
 
-                        LiveActivityManager.shared.updateLiveActivity(progress: 0.5, currentStop: currentBusViewModel.closestBusLocation?.nodenm ?? "로딩중", stopsRemaining: 3)
+                       
                         
                     }, isScrollTriggered: $isScrollTriggered
 
@@ -62,6 +62,7 @@ struct UsingAlertView: View {
                 .edgesIgnoringSafeArea(.bottom)
             }
             .onDisappear {
+                LiveActivityManager.shared.endLiveActivity()
                 currentBusViewModel.stopUpdating() // 뷰가 사라질 때 뷰모델에서 위치 업데이트 중단
                 stopRefreshTimer() // 뷰 사라질 때 타이머 중단
             }
@@ -97,6 +98,7 @@ struct UsingAlertView: View {
                 stopRefreshTimer() // 알람 종료 시 타이머도 중단
                 notificationManager.notificationReceived = false // 오버레이 닫기
                 locationManager.unregisterBusAlert(busAlert)
+                LiveActivityManager.shared.endLiveActivity()
                 dismiss() // Dismiss the view if confirmed
             }
             Button("취소", role: .cancel){}
@@ -110,9 +112,10 @@ struct UsingAlertView: View {
             //            notificationManager.notificationReceived = true
 
         }
-        .onChange(of: currentBusViewModel.closestBusLocation != nil) { isNotNil in
-            if isNotNil {
-                print("온체인지 감지")
+        .onChange(of: currentBusViewModel.closestBusLocation?.nodeid) { closestBusNodeId in
+            if let closestBusNodeId = closestBusNodeId,
+               busStops.contains(where: { $0.nodeid == closestBusNodeId }) {
+                print("온체인지 감지 - closestBus가 busStops에 있음")
                 isFinishedLoading = true
                 isScrollTriggered = true
                 print(isFinishedLoading)
@@ -120,6 +123,7 @@ struct UsingAlertView: View {
             }
         }
         .onDisappear {
+            LiveActivityManager.shared.endLiveActivity()
             currentBusViewModel.stopUpdating() // 뷰가 사라질 때 뷰모델에서 위치 업데이트 중단
             stopRefreshTimer() // 뷰 사라질 때 타이머 중단
             currentBusViewModel.closestBusLocation = nil
@@ -179,10 +183,9 @@ struct UsingAlertView: View {
                                 .foregroundStyle(.brand)
                             Text("입니다.")
                                 .font(.caption1)
-
                                 .foregroundStyle(.gray1)
                                 .onAppear {
-                                        LiveActivityManager.shared.startLiveActivity(stationName: busAlert.arrivalBusStopNm, initialProgress: 99, currentStop: closestBus.nodenm, stopsRemaining: busAlert.arrivalBusStopNord - (Int(closestBus.nodeord) ?? 0) - 1 )
+                                    LiveActivityManager.shared.startLiveActivity(title: busAlert.alertLabel ?? "알 수 없는 알람" , description: busAlert.busNo, stationName: busAlert.arrivalBusStopNm, initialProgress: 99, currentStop: closestBus.nodenm, stopsRemaining: busAlert.arrivalBusStopNord - (Int(closestBus.nodeord) ?? 0) - 1 )
                                 }
                         }
                     }
@@ -226,9 +229,6 @@ struct UsingAlertView: View {
                                     isRefreshDisabled = false // 비활성화 플래그 해제
                                 }
                             }
-                        
-                        
-
                     }
                     .padding(.trailing, 8)
                 }
@@ -270,7 +270,8 @@ struct UsingAlertView: View {
                                     isCurrentLocation: busStop.nodeid == closestBus.nodeid,
                                     arrivalBusStopID: busAlert.arrivalBusStopID,
                                     alertStop: alertStop,
-                                    isLastBusStop: busStop.nodeord == maxNodeord // 현재 정류장의 nodeord가 최대값과 같은지 비교
+                                    isLastBusStop: busStop.nodeord == maxNodeord, // 현재 정류장의 nodeord가 최대값과 같은지 비교
+                                    alertLabel: busAlert.alertLabel
                                 )
                             }
                         } else if isRefreshing {
@@ -278,10 +279,13 @@ struct UsingAlertView: View {
                             ProgressView("가장 가까운 버스 위치를 찾고 있습니다...")
                                 .foregroundColor(Color.black)
                                 .font(.caption1)
+//                            AlertLoadingView()
                         } else {
                             Text("가장 가까운 버스 위치를 찾고 있습니다...")
                                 .foregroundColor(Color.black)
                                 .font(.caption1)
+                            //                            AlertLoadingView()
+
                         }
                         Spacer()
                     }
@@ -310,6 +314,7 @@ struct UsingAlertView: View {
         let arrivalBusStopID: String
         let alertStop: BusStopLocal?
         let isLastBusStop: Bool
+        let alertLabel: String? // 추가된 busAlertLabel
         
         var body: some View {
             HStack {
@@ -346,13 +351,29 @@ struct UsingAlertView: View {
                         Image("Line_NormalBusStop")
                     }
                 }
-                Text(busStop.nodenm)
-                    .padding(.leading, 20)
-                    .foregroundStyle(.gray1Dgray6)
-                    .font(isCurrentLocation || busStop.nodeid == arrivalBusStopID || busStop.nodeid == alertStop?.nodeid ? .body1 : .caption1)
-                if busStop.nodeid == alertStop?.nodeid {
-                    // TODO: 알람 레이블 여기 넣기
-                    Text("알람레이블")
+                VStack(alignment: .leading){
+                    Text(busStop.nodenm)
+                        .padding(.leading, 20)
+                        .foregroundStyle(.gray1Dgray6)
+                        .font(isCurrentLocation || busStop.nodeid == arrivalBusStopID || busStop.nodeid == alertStop?.nodeid ? .body1 : .caption1)
+                    if busStop.nodeid == alertStop?.nodeid {
+                        // TODO: 알람 레이블 여기 넣기
+                        HStack{
+                            Rectangle()
+                                .frame(minWidth: 34, maxHeight: 23)
+                                .fixedSize(horizontal: true, vertical: false)
+                                .foregroundColor(Color.lightbrand)
+                                .cornerRadius(4)
+                                .overlay {
+                                    Text(alertLabel ?? "") // alertLabel 표시
+                                        .font(.caption2)
+                                        .padding(4)
+                                        .foregroundColor(Color.brand)
+                                }
+                                .padding(.leading, 20)
+                            Spacer()
+                        }
+                    }
                 }
                 Spacer()
             }
@@ -367,6 +388,7 @@ struct UsingAlertView: View {
             .autoconnect()
             .sink { _ in
                 refreshData()
+                LiveActivityManager.shared.updateLiveActivity(progress: 0.5, currentStop: currentBusViewModel.closestBusLocation?.nodenm ?? "로딩중", stopsRemaining: busAlert.arrivalBusStopNord - (Int(currentBusViewModel.closestBusLocation?.nodeord ?? "0") ?? 0) - 1)
                 print("화면 새로고침")
             }
     }
@@ -450,8 +472,6 @@ struct UsingAlertView: View {
                 Image("AfterAlertRectangle")
                     .resizable()
                     .frame(maxWidth: .infinity, maxHeight: 500)
-                //                RoundedRectangle(cornerRadius: 30)
-                //                    .fill(.thinMaterial)
             )
             .padding(.horizontal, 20)
             .padding(.top, 120)

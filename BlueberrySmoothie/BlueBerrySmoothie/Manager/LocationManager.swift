@@ -100,9 +100,23 @@ class LocationManager: NSObject, ObservableObject {
         let content = UNMutableNotificationContent()
         content.title = "\(busAlert.arrivalBusStopNm) \(busAlert.alertBusStop)정거장 전입니다."
         content.body = "일어나서 내릴 준비를 해야해요!"
-        content.sound = .default
         
-        playAudio()
+        let isHeadphonesConnected = {
+            let audioSession = AVAudioSession.sharedInstance()
+            let outputs = audioSession.currentRoute.outputs
+            for output in outputs where output.portType == .headphones || output.portType == .bluetoothA2DP {
+                return true
+            }
+            return false
+        }()
+        
+        if isHeadphonesConnected {
+            content.sound = .default
+            playAudio()
+        } else {
+            content.sound = nil
+        }
+        
         
         // 앱이 포그라운드 상태일 때
         if UIApplication.shared.applicationState == .active {
