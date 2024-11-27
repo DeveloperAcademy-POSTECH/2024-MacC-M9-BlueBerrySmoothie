@@ -50,7 +50,6 @@ class NowBusLocationViewModel: NSObject, ObservableObject, CLLocationManagerDele
         userLocation = location
         print("locationManager(didUpdateLocations)")
         findClosestBusLocation()
-//        printUserLocationAndClosestBus() // 사용자 위치 및 가장 가까운 버스 정보 출력
     }
 
     // API를 호출하여 버스 위치 데이터를 가져옴
@@ -81,9 +80,15 @@ class NowBusLocationViewModel: NSObject, ObservableObject, CLLocationManagerDele
             return userLocation.distance(from: busLocation1) < userLocation.distance(from: busLocation2)
         })
         
-        juju += 1
-//        LiveActivityManager.shared.updateLiveActivity(progress: 0.5, currentStop: closestBusLocation?.nodenm ?? "로딩중", stopsRemaining: juju)
-        LiveActivityManager.shared.updateLiveActivity(progress: 0.5, currentStop: closestBusLocation?.nodenm ?? "로딩중", stopsRemaining: Int(busAlert?.arrivalBusStopNord ?? 1) - (Int(closestBusLocation?.nodeord ?? "0") ?? 0) - 1)
+        let currentDate = Date()  // 현재 시간을 가져옵니다.
+
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HH:mm:ss"  // 원하는 시간 포맷을 지정합니다.
+        let formattedTime = formatter.string(from: currentDate)
+
+        print(formattedTime)  // 예: 15:30:45
+//          LiveActivityManager.shared.updateLiveActivity(progress: 0.5, currentStop: closestBusLocation?.nodenm ?? "로딩중", stopsRemaining: juju)
+        LiveActivityManager.shared.updateLiveActivity(progress: 0.5, currentStop: closestBusLocation?.nodenm ?? "로딩중", stopsRemaining: Int(busAlert?.arrivalBusStopNord ?? 1) - (Int(closestBusLocation?.nodeord ?? "0") ?? 0) - 1, Updatetime: formattedTime)
         print("여기서 깔끔하게 업데이트")
         print(busAlert,"여기는 모델")
         print("가장 가까운 정류장: \(closestBusLocation?.nodenm)")
