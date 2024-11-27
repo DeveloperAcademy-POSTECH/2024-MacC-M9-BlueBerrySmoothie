@@ -56,7 +56,7 @@ struct LiveActivityUI: Widget {
             // Dynamic Island 표시 내용
             DynamicIsland {
                 DynamicIslandExpandedRegion(.leading) {
-                    Image("AppIcon60") // 아이콘
+                    Image("AppIcon24") // 아이콘
                         .resizable()
                         .frame(width: 20, height: 20)
                         .padding(.trailing, 5)
