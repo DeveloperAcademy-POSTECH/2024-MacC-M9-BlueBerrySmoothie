@@ -32,9 +32,8 @@ struct SavedBus: View {
                 .overlay {
                     Image(busAlertBackground(for: busAlert?.routetp ?? ""))
                         .resizable()
-                        .scaledToFill()
+                        .scaledToFit()
                         .frame(maxWidth: .infinity, maxHeight: .infinity) // 크기를 최대한 늘림
-                        .clipped() // 넘치는 부분을 잘라냄
                         .cornerRadius(12) // 모서리 반경을 Rectangle과 동일하게 맞춤
                 }
             VStack {
