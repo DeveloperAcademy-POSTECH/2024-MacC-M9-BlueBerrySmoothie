@@ -11,7 +11,7 @@ struct UsingAlertView: View {
     
     @State var busAlert: BusAlert // 관련된 알림 정보
     @State private var refreshTimerCancellable: Cancellable? // 타이머를 관리하기 위한 상태
-    private let refreshInterval: TimeInterval = 10.0 // 새로고침 간격
+    private let refreshInterval: TimeInterval = 5.0 // 새로고침 간격
     
     @State private var isAlertEnabled: Bool = false // 스위치 상태 관리
     @State private var isRefreshing: Bool = false // 새로고침 상태 관리
@@ -25,6 +25,9 @@ struct UsingAlertView: View {
     
     
     @State private var liveActivityManager: LiveActivityManager? = nil
+    
+    
+    
     
     var body: some View {
         ZStack {
@@ -188,7 +191,12 @@ struct UsingAlertView: View {
                                 .font(.caption1)
                                 .foregroundStyle(.gray1)
                                 .onAppear {
-                                    LiveActivityManager.shared.startLiveActivity(title: busAlert.alertLabel ?? "알 수 없는 알람" , description: busAlert.busNo, stationName: busAlert.arrivalBusStopNm, initialProgress: 99, currentStop: closestBus.nodenm, stopsRemaining: busAlert.arrivalBusStopNord - (Int(closestBus.nodeord) ?? 0) - 1 )
+                                    let currentDate = Date()  // 현재 시간을 가져옵니다.
+
+                                    let formatter = DateFormatter()
+                                    formatter.dateFormat = "HH:mm:ss"  // 원하는 시간 포맷을 지정합니다.
+                                    let formattedTime = formatter.string(from: currentDate)
+                                    LiveActivityManager.shared.startLiveActivity(title: busAlert.alertLabel ?? "알 수 없는 알람" , description: busAlert.busNo, stationName: busAlert.arrivalBusStopNm, initialProgress: 99, currentStop: closestBus.nodenm, stopsRemaining: busAlert.arrivalBusStopNord - (Int(closestBus.nodeord) ?? 0) - 1, Updatetime: formattedTime)
                                 }
                         }
                     }
@@ -383,7 +391,7 @@ struct UsingAlertView: View {
             .autoconnect()
             .sink { _ in
                 refreshData()
-                LiveActivityManager.shared.updateLiveActivity(progress: 0.5, currentStop: currentBusViewModel.closestBusLocation?.nodenm ?? "로딩중", stopsRemaining: busAlert.arrivalBusStopNord - (Int(currentBusViewModel.closestBusLocation?.nodeord ?? "0") ?? 0) - 1)
+
                 print("화면 새로고침")
             }
     }
