@@ -353,24 +353,23 @@ struct UsingAlertView: View {
                 }
                 VStack(alignment: .leading){
                     Text(busStop.nodenm)
-                        .padding(.leading, 20)
+                       
                         .foregroundStyle(.gray1Dgray6)
                         .font(isCurrentLocation || busStop.nodeid == arrivalBusStopID || busStop.nodeid == alertStop?.nodeid ? .body1 : .caption1)
                     if busStop.nodeid == alertStop?.nodeid {
                         // TODO: 알람 레이블 여기 넣기
-                        Rectangle()
-                            .frame(height: 23)
-                            .foregroundColor(Color.lightbrand)
-                            .cornerRadius(4)
-                            .overlay {
-                                Text(alertLabel ?? "")
-                                    .font(.system(size: 12))
-                                    .padding(4)
-                                    .foregroundColor(Color.brand)
-                            }
-                            .padding(.leading, 20)
+                        HStack {
+                            Text(alertLabel ?? "")
+                                .font(.system(size: 12))
+                                .padding(4)
+                                .foregroundColor(Color.brand)
+                        }
+                        .background(Color.lightbrand)
+                        .cornerRadius(4)
+                        .frame(height: 23)
                     }
                 }
+                .padding(.leading, 20)
                 Spacer()
             }
             .frame(height: busStop.nodeid == alertStop?.nodeid ? 88 : 60)
