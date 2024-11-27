@@ -18,7 +18,18 @@ func busColor(for routetp: String) -> Color {
     }
 }
 
-// 버스 타입에 따른 색상을 반환하는 함수
+// 버스 타입에 따른 텍스트 색상을 반환하는 함수
+func busTextColor(for routetp: String) -> Color {
+    switch routetp {
+    case "간선버스", "일반버스" : return .blue
+    case "마을버스", "지선버스" : return .green
+    case "순환버스" : return .yellow
+    case "급행버스", "광역버스" : return .red
+    default: return .orange
+    }
+}
+
+// 버스 타입에 따른 배경을 반환하는 함수
 func busAlertBackground(for routetp: String) -> String {
     switch routetp {
     case "간선버스", "일반버스" : return "MainCardBlue"
