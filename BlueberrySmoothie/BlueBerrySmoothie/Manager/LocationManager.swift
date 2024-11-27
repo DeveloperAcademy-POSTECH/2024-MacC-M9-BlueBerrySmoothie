@@ -41,31 +41,11 @@ class LocationManager: NSObject, ObservableObject {
         checkIfLocationServicesIsEnabled()
     }
     
-//    // Region 진입 시 호출되는 delegate 메서드
-//    func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
-//        print("Entered region: \(region.identifier) emfdjdhdkdjdkjdkjdjdkdjdkf")
-//        if let busAlert = getBusAlert(for: region.identifier) {
-//            startNotifications(for: busAlert)
-//        }
-//    }
-//    
-//    // 위치 업데이트 때 마다 호출되는 delegate 메서드
-//    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-//        guard let location = locations.last else { return }
-//        
-//        if location.horizontalAccuracy > 0 {
-//            self.location = location
-//            self.region = CLLocation(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
-//            self.manager.stopUpdatingLocation() // 위치 업데이트 즉시 중지
-//        }
-//    }
-//    
-//    /// 위치 갱신 실패 시 오류 메시지를 설정하고 콘솔에 출력
-//    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-////        print("Location error: \(error.localizedDescription)")
-////        errorMessage = "위치를 찾을 수 없습니다: \(error.localizedDescription)"
-//        print("Location update failed with error: \(error.localizedDescription)")
-//    }
+    // LocationManager.swift
+    func triggerAlarm(for busAlert: BusAlert) {
+        // 알람을 시작하도록 기존의 startNotifications(for:) 메서드를 호출
+        startNotifications(for: busAlert)
+    }
 
     /// 정류장 근처에 왔을 때 실행되는 함수
     private func startNotifications(for busAlert: BusAlert) {
@@ -383,29 +363,5 @@ extension LocationManager: CLLocationManagerDelegate {
 //        errorMessage = "위치를 찾을 수 없습니다: \(error.localizedDescription)"
         print("Location update failed with error: \(error.localizedDescription)")
     }
-//
-//    /// 위치가 업데이트될 때마다 호출되는 함수
-//    /// 위치가 유효한 경우(horizontalAccuracy > 0), 위치 데이터를 저장하고, CLGeocoder를 통해 주소를 역지오코딩하여 address와 detailedAddress를 업데이트
-////    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-////        guard let location = locations.last else { return }
-////        
-////        if location.horizontalAccuracy > 0 {
-////            self.location = location
-////            self.region = CLLocation(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
-////            self.manager.stopUpdatingLocation()
-////        }
-////        guard let location = locations.last else { return }
-////                currentLocation = location
-////                print("Updated Location: \(location.coordinate.latitude), \(location.coordinate.longitude)")
-////    }
-//    
-////    /// 위치 갱신 실패 시 오류 메시지를 설정하고 콘솔에 출력
-////    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-//////        print("Location error: \(error.localizedDescription)")
-//////        errorMessage = "위치를 찾을 수 없습니다: \(error.localizedDescription)"
-////        print("Location update failed with error: \(error.localizedDescription)")
-////    }
-//
-//
 }
 

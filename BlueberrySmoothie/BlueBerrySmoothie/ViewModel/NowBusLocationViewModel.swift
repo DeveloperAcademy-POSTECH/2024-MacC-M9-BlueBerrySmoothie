@@ -20,7 +20,8 @@ class NowBusLocationViewModel: NSObject, ObservableObject, CLLocationManagerDele
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
         print("NowBusLocationViewModel initialized.")
-
+        locationManager.pausesLocationUpdatesAutomatically = false
+        locationManager.allowsBackgroundLocationUpdates = true
         fetchBusLocationData(cityCode: 21, routeId: "BSB5200043000")
     }
     
@@ -49,7 +50,6 @@ class NowBusLocationViewModel: NSObject, ObservableObject, CLLocationManagerDele
         userLocation = location
         print("locationManager(didUpdateLocations)")
         findClosestBusLocation()
-//        printUserLocationAndClosestBus() // 사용자 위치 및 가장 가까운 버스 정보 출력
     }
 
     // API를 호출하여 버스 위치 데이터를 가져옴
@@ -80,13 +80,45 @@ class NowBusLocationViewModel: NSObject, ObservableObject, CLLocationManagerDele
             return userLocation.distance(from: busLocation1) < userLocation.distance(from: busLocation2)
         })
         
-        juju += 1
-//        LiveActivityManager.shared.updateLiveActivity(progress: 0.5, currentStop: closestBusLocation?.nodenm ?? "로딩중", stopsRemaining: juju)
-        LiveActivityManager.shared.updateLiveActivity(progress: 0.5, currentStop: closestBusLocation?.nodenm ?? "로딩중", stopsRemaining: Int(busAlert?.arrivalBusStopNord ?? 1) - (Int(closestBusLocation?.nodeord ?? "0") ?? 0) - 1)
+        let currentDate = Date()  // 현재 시간을 가져옵니다.
+
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HH:mm:ss"  // 원하는 시간 포맷을 지정합니다.
+        let formattedTime = formatter.string(from: currentDate)
+
+        print(formattedTime)  // 예: 15:30:45
+//          LiveActivityManager.shared.updateLiveActivity(progress: 0.5, currentStop: closestBusLocation?.nodenm ?? "로딩중", stopsRemaining: juju)
+        LiveActivityManager.shared.updateLiveActivity(progress: 0.5, currentStop: closestBusLocation?.nodenm ?? "로딩중", stopsRemaining: Int(busAlert?.arrivalBusStopNord ?? 1) - (Int(closestBusLocation?.nodeord ?? "0") ?? 0) - Int(busAlert?.alertBusStop ?? 1 ), Updatetime: formattedTime)
+
+        
+        if  (Int(busAlert?.arrivalBusStopNord ?? 1) - (Int(closestBusLocation?.nodeord ?? "0") ?? 0) - Int(busAlert?.alertBusStop ?? 1 )) == 0 {
+            LocationManager.shared.triggerAlarm(for: busAlert ?? BusAlert(
+                id: "1", // id (고유 식별자)
+                cityCode: 82, // 도시 코드 (예시 값)
+                busNo: "싼", // 버스 번호
+                routeid: "벨라", // 노선 ID
+                arrivalBusStopID: "시로", // 도착 정류소 ID
+                arrivalBusStopNm: "데이지", // 도착 정류소명
+                arrivalBusStopNord: 82, // 도착 정류소 번호 (정류소 순서)
+                alertBusStop: 82, // 알람이 울릴 정류소 전
+                alertLabel: "", // 알람 이름
+                alertSound: true, // 알람 사운드 (옵셔널, true로 설정)
+                alertHaptic: true, // 알람 진동 (옵셔널, true로 설정)
+                alertCycle: 10.0, // 알람 주기 (옵셔널, 10초)
+                updowncd: 1, // 상하행 코드 (예시 값)
+                isPinned: true, // 고정 여부
+                routetp: "헤일" // 노선 유형
+            ))
+        }
         print("여기서 깔끔하게 업데이트")
         print(busAlert,"여기는 모델")
         print("가장 가까운 정류장: \(closestBusLocation?.nodenm)")
     }
+    // 예시로 사용할 버스 알림을 반환하는 메서드
+   private func getSampleBusAlert() -> BusAlert? {
+       // 실제로는 등록된 버스 알림을 찾거나 데이터를 받아올 필요가 있음
+       return busAlert
+   }
 
     // 사용자 위치와 가장 가까운 버스 정보를 출력
     private func printUserLocationAndClosestBus() {

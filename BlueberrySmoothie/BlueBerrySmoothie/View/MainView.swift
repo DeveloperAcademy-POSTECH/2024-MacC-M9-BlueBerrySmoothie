@@ -25,15 +25,15 @@ struct MainView: View {
     
     var body: some View {
         NavigationView {
-            ZStack {
-                Color.whiteDBlack
-                    .ignoresSafeArea()
-                VStack {
+//            ZStack {
+//                Color.whiteDBlack
+//                    .ignoresSafeArea()
+      
                     alertListView()
-                        .padding(.top, 12)
+                        
                         .padding(.horizontal, 20)
-                    Spacer()
-                }
+                    
+             
                 .toolbar {
                     ToolbarItem(placement: .navigationBarTrailing) {
                         HStack {
@@ -50,10 +50,13 @@ struct MainView: View {
                         Image("HotCha")
                     }
                 }
-                .background(.clear)
-            }
+              
+//            }
         }
     }
+    
+    
+    
     
     private func alertListView() -> some View {
         ZStack {

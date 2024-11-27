@@ -11,7 +11,7 @@ struct UsingAlertView: View {
     
     @State var busAlert: BusAlert // 관련된 알림 정보
     @State private var refreshTimerCancellable: Cancellable? // 타이머를 관리하기 위한 상태
-    private let refreshInterval: TimeInterval = 10.0 // 새로고침 간격
+    private let refreshInterval: TimeInterval = 5.0 // 새로고침 간격
     
     @State private var isAlertEnabled: Bool = false // 스위치 상태 관리
     @State private var isRefreshing: Bool = false // 새로고침 상태 관리
@@ -25,6 +25,9 @@ struct UsingAlertView: View {
     
     
     @State private var liveActivityManager: LiveActivityManager? = nil
+    
+    
+    
     
     var body: some View {
         ZStack {
@@ -51,6 +54,19 @@ struct UsingAlertView: View {
                     .padding(.trailing, -8)
                     .padding(.top, -10)
                 
+//                Button(action: {
+//                            // 예시: triggerAlarm 메서드를 호출하여 알람을 울리도록 설정
+//                            if let busAlert = getSampleBusAlert() {
+//                                LocationManager.shared.triggerAlarm(for: busAlert)
+//                            }
+//                        }) {
+//                            Text("알람 울리기")
+//                                .font(.title)
+//                                .padding()
+//                                .background(Color.blue)
+//                                .foregroundColor(.white)
+//                                .cornerRadius(10)
+//                        }
                 // 노션뷰
                 BusStopScrollView(
                     closestBus: $currentBusViewModel.closestBusLocation,
@@ -172,7 +188,7 @@ struct UsingAlertView: View {
                     
                     // 현재 위치 정보
                     if let closestBus = viewModel.closestBusLocation {
-                        Text("알람까지 \(busAlert.arrivalBusStopNord - (Int(closestBus.nodeord) ?? 0) - 1 ) 정류장 남았습니다.")
+                        Text("알람까지 \(busAlert.arrivalBusStopNord - (Int(closestBus.nodeord) ?? 0 - Int(busAlert.alertBusStop)) - busAlert.alertBusStop  ) 정류장 남았습니다.")
                             .font(.title2)
                             .foregroundStyle(.blackDGray7)
                             .padding(.bottom, 10)
@@ -188,7 +204,12 @@ struct UsingAlertView: View {
                                 .font(.caption1)
                                 .foregroundStyle(.gray1)
                                 .onAppear {
-                                    LiveActivityManager.shared.startLiveActivity(title: busAlert.alertLabel ?? "알 수 없는 알람" , description: busAlert.busNo, stationName: busAlert.arrivalBusStopNm, initialProgress: 99, currentStop: closestBus.nodenm, stopsRemaining: busAlert.arrivalBusStopNord - (Int(closestBus.nodeord) ?? 0) - 1 )
+                                    let currentDate = Date()  // 현재 시간을 가져옵니다.
+
+                                    let formatter = DateFormatter()
+                                    formatter.dateFormat = "HH:mm:ss"  // 원하는 시간 포맷을 지정합니다.
+                                    let formattedTime = formatter.string(from: currentDate)
+                                    LiveActivityManager.shared.startLiveActivity(title: busAlert.alertLabel ?? "알 수 없는 알람" , description: busAlert.busNo, stationName: busAlert.arrivalBusStopNm, initialProgress: 99, currentStop: closestBus.nodenm, stopsRemaining: busAlert.arrivalBusStopNord - (Int(closestBus.nodeord) ?? 0) - 1, Updatetime: formattedTime)
                                 }
                         }
                     }
@@ -383,7 +404,7 @@ struct UsingAlertView: View {
             .autoconnect()
             .sink { _ in
                 refreshData()
-                LiveActivityManager.shared.updateLiveActivity(progress: 0.5, currentStop: currentBusViewModel.closestBusLocation?.nodenm ?? "로딩중", stopsRemaining: busAlert.arrivalBusStopNord - (Int(currentBusViewModel.closestBusLocation?.nodeord ?? "0") ?? 0) - 1)
+
                 print("화면 새로고침")
             }
     }
@@ -432,6 +453,12 @@ struct UsingAlertView: View {
             }
         }
     }
+    
+    // 예시로 사용할 버스 알림을 반환하는 메서드
+   private func getSampleBusAlert() -> BusAlert? {
+       // 실제로는 등록된 버스 알림을 찾거나 데이터를 받아올 필요가 있음
+       return busAlert
+   }
     
     // 알람 비활성화 뷰
     @ViewBuilder

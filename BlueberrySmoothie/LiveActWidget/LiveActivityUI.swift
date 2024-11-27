@@ -40,14 +40,23 @@ struct LiveActivityUI: Widget {
                                         Color(UIColor { $0.userInterfaceStyle == .dark ? .white : .black })
                                     ) // 다크 모드일 때 하얀색, 라이트 모드일 때 검은색
                                     .padding(.bottom, 10)
-                
-                VStack(alignment: .leading) {
-                    Text("현재 정류장은")
-                        .font(.subheadline)
-                        .foregroundColor(.gray1)
-                    Text("\(context.state.currentStop)입니다.") // 현재 정류장 + "입니다."
-                        .font(.subheadline)
-                        .foregroundColor(.brand)
+                HStack {
+                    
+                    VStack(alignment: .leading) {
+                        Text("현재 정류장은")
+                            .font(.subheadline)
+                            .foregroundColor(.gray1)
+                        Text("\(context.state.currentStop)입니다.") // 현재 정류장 + "입니다."
+                            .font(.subheadline)
+                            .foregroundColor(.brand)
+                    }
+                    Spacer()
+                    VStack {
+                        Spacer()
+                        Text("최근 업데이트: \(context.state.Updatetime)") // 현재 정류장 + "입니다."
+                            .font(.system(size: 10))
+                            .foregroundColor(.gray6)
+                    }
                 }
                 .padding(.bottom, 5)
             }
@@ -111,3 +120,4 @@ struct LiveActivityUI: Widget {
         }
     }
 }
+
