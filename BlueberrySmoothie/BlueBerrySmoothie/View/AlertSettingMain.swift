@@ -178,7 +178,7 @@ struct AlertSettingMain: View {
             if let busAlert = busAlert {
                 // `busAlert` 데이터로 초기 상태 설정
                 label = busAlert.alertLabel ?? "알람"
-                selectedStation = "\(busAlert.alertBusStop) 정류장 전에 알람"
+                selectedStation = "\(busAlert.alertBusStop) 정류장 전"
                 
                 busStopAlert = BusStopAlert(
                     cityCode: busAlert.cityCode,
@@ -283,7 +283,7 @@ struct AlertSettingMain: View {
         // 기존 알람 수정
         if isEditing == true {
             // 기존 `busAlert` 업데이트
-            busAlert?.alertLabel = label
+            busAlert?.alertLabel = ( label == "" ? "알람" : label )
             busAlert?.alertBusStop = busStopAlert?.alertBusStop ?? 3
             // 추가 필드 업데이트
             print("알람이 업데이트되었습니다.")
@@ -352,7 +352,7 @@ struct AlertSettingMain: View {
             arrivalBusStopNm: selectedBusStop.nodenm,
             arrivalBusStopNord: selectedBusStop.nodeord,
             alertBusStop: busStopAlert!.alertBusStop,
-            alertLabel: label,
+            alertLabel: label == "" ? "알람" : label,
             alertSound: true,
             alertHaptic: true,
             alertCycle: nil,
