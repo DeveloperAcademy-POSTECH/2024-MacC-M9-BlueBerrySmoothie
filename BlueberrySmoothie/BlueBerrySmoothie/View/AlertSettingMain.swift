@@ -198,7 +198,9 @@ struct AlertSettingMain: View {
             }
         }
         .onChange(of: busStopAlert?.arrivalBusStop) {
-            selectedStation = "정류장 수"
+            if (isEditing != true) {
+                selectedStation = "정류장 수"
+            }
         }
         .overlay {
             if showSheet {
