@@ -13,6 +13,7 @@ struct SavedBus: View {
     let busAlert: BusAlert?
     var isSelected: Bool = false
     var onDelete: () -> Void // 삭제 핸들러
+    let createdAt: Date?
     
     let notificationManager = NotificationManager.instance
     @StateObject private var locationManager = LocationManager.shared
