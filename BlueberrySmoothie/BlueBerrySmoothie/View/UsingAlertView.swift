@@ -110,9 +110,10 @@ struct UsingAlertView: View {
             //            notificationManager.notificationReceived = true
 
         }
-        .onChange(of: currentBusViewModel.closestBusLocation != nil) { isNotNil in
-            if isNotNil {
-                print("온체인지 감지")
+        .onChange(of: currentBusViewModel.closestBusLocation?.nodeid) { closestBusNodeId in
+            if let closestBusNodeId = closestBusNodeId,
+               busStops.contains(where: { $0.nodeid == closestBusNodeId }) {
+                print("온체인지 감지 - closestBus가 busStops에 있음")
                 isFinishedLoading = true
                 isScrollTriggered = true
                 print(isFinishedLoading)
@@ -259,7 +260,6 @@ struct UsingAlertView: View {
                             let filteredBusStops = busStops.filter { $0.routeid == busAlert.routeid }
                                 .sorted(by: { $0.nodeord < $1.nodeord })
                             let maxNodeord = filteredBusStops.last?.nodeord // 마지막 정류장의 nodeord
-//                            let busAlertLable = busAlert.alertLabel
                             
                             ForEach(filteredBusStops, id: \.id) { busStop in
                                 BusStopRow(
@@ -276,10 +276,13 @@ struct UsingAlertView: View {
                             ProgressView("가장 가까운 버스 위치를 찾고 있습니다...")
                                 .foregroundColor(Color.black)
                                 .font(.caption1)
+//                            AlertLoadingView()
                         } else {
                             Text("가장 가까운 버스 위치를 찾고 있습니다...")
                                 .foregroundColor(Color.black)
                                 .font(.caption1)
+                            //                            AlertLoadingView()
+
                         }
                         Spacer()
                     }
