@@ -27,6 +27,7 @@ class BusAlert {
     var updowncd: Int
     var isPinned: Bool = false
     var routetp: String = ""
+    var createdAt: Date
     
     init(id: String, cityCode: Double, busNo: String, routeid: String, arrivalBusStopID: String, arrivalBusStopNm: String, arrivalBusStopNord: Int ,alertBusStop: Int, /*alertBusStopID: String, alertBusStopNm: String,*/ alertLabel: String, alertSound: Bool? = nil, alertHaptic: Bool? = nil, alertCycle: Double? = nil, updowncd: Int, isPinned: Bool = false, routetp: String = "") {
         self.id = id
@@ -44,6 +45,7 @@ class BusAlert {
         self.updowncd = updowncd
         self.isPinned = isPinned
         self.routetp = routetp
+        self.createdAt = Date()
     }
 }
 
