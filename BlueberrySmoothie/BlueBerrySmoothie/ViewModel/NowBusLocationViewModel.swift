@@ -20,7 +20,8 @@ class NowBusLocationViewModel: NSObject, ObservableObject, CLLocationManagerDele
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
         print("NowBusLocationViewModel initialized.")
-
+        locationManager.pausesLocationUpdatesAutomatically = false
+        locationManager.allowsBackgroundLocationUpdates = true
         fetchBusLocationData(cityCode: 21, routeId: "BSB5200043000")
     }
     
