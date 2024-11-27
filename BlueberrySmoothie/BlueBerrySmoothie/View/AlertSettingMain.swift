@@ -51,7 +51,7 @@ struct AlertSettingMain: View {
             VStack {
                 HStack {
                     Text("알람 설정")
-                        .font(.body2)
+                        .font(.title2)
                         .foregroundColor(.blackDGray7)
                     Spacer()
                 }
