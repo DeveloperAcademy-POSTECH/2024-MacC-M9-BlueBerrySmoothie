@@ -20,7 +20,7 @@ struct SelectBusStopView: View {
     @State private var isAutoScroll: Bool = false // 상행 하행 버튼과 스크롤로 이동될 때의 action이 중복되지 않도록 방지하는 변수
     @Binding var showSelectBusSheet: Bool
     @State private var isAnimating = false // 버스 리스트가 아래에서 위로 올라오는 애니메이션 실행 여부
-
+    
     var body: some View {
         VStack{
             HStack {
@@ -69,6 +69,8 @@ struct SelectBusStopView: View {
             // 버스 리스트가 아래에서 위로 올라오는 애니메이션 위치
             .offset(y: isAnimating ? 0 : UIScreen.main.bounds.height)
         }
+        .backgroundStyle(.whiteDgray1)
+        .background(ignoresSafeAreaEdges: .bottom)
         // 버스 리스트가 아래에서 위로 올라오는 애니메이션
         .animation(.spring(duration: 1.0, bounce: 0.1), value: isAnimating)
         .onAppear {
@@ -94,6 +96,8 @@ struct SelectBusStopView: View {
                 }
             }
         }
+        .toolbarBackground(Color(.whiteDgray1), for: .navigationBar)
+        .toolbarBackground(.visible, for: .navigationBar)
         .navigationBarBackButtonHidden(true)
         .task {
             await busStopViewModel.getBusStopData(cityCode: cityCode, routeId: bus.routeid)
@@ -162,7 +166,11 @@ struct SelectBusStopView: View {
     // 최상단으로 스크롤하는 함수
     private func scrollToTop(proxy: ScrollViewProxy) {
         if let firstStop = busStopViewModel.busStopList.first {
-            proxy.scrollTo(firstStop.nodeid, anchor: .top)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                withAnimation(.smooth) {
+                    proxy.scrollTo(firstStop.nodeid, anchor: .top)
+                }
+            }
         }
     }
     

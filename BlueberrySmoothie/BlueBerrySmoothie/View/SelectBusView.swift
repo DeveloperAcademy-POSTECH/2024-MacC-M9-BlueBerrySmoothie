@@ -69,14 +69,17 @@ struct SelectBusView: View {
                     }
                 }
             }
+            .toolbarBackground(Color(.whiteDgray1), for: .navigationBar)
+            .toolbarBackground(.visible, for: .navigationBar)
             .onAppear {
                 fetchAllBusData(citycode: cityCode) { fetchedBuses in
-                    self.allBuses = fetchedBuses
-                    self.filteredBuses = fetchedBuses
+                    self.allBuses = fetchedBuses.sorted(using: KeyPathComparator(\.routeno))
+                    self.filteredBuses = fetchedBuses.sorted(using: KeyPathComparator(\.routeno))
                 }
                 showSelectBusSheet = true
             }
         }
+        .edgesIgnoringSafeArea(.bottom)
     }
     
     private func filterBuses(by routeNo: String, from buses: [Bus]) -> [Bus] {
@@ -100,7 +103,7 @@ struct SelectBusView: View {
                             VStack(alignment: .leading) {
                                 Text("\(bus.routeno)")
                                     .font(.body)
-                                    .foregroundStyle(busColor(for: bus.routetp))
+                                    .foregroundStyle(busTextColor(for: bus.routetp))
                                     .padding(.bottom, 4)
                                 HStack {
                                     Text("\(bus.startnodenm) - \(bus.endnodenm)")

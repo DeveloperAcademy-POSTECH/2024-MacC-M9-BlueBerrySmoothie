@@ -36,23 +36,12 @@ struct MainView: View {
                 .toolbar {
                     ToolbarItem(placement: .navigationBarTrailing) {
                         HStack {
-                            Button(action: {
-                                showSetting = true
-                            }) {
+                            NavigationLink(destination: CitySettingView()){
                                 Image("mark")
-                                    .font(.title3)
                                     .foregroundColor(Color.gray1)
                             }
-                            .sheet(isPresented: $showSetting) {
-                                NavigationView {
-                                    CitySettingView()// SelectCityMainView 로 바꿔야 함
-                                }
-                            }
-                            .padding(.trailing, 8)
-                            
                             NavigationLink(destination: AlertSettingMain()){
                                 Image("plus")
-                                    .font(.title3)
                                     .foregroundColor(Color.gray1)
                             }
                         }
@@ -85,8 +74,6 @@ struct MainView: View {
             }
         }
     }
-    
-    
     
     private func alertListView() -> some View {
         ZStack {

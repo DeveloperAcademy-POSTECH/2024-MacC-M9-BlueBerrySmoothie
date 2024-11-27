@@ -30,11 +30,10 @@ struct SavedBus: View {
                 .foregroundColor(Color.clear)
                 .cornerRadius(12)
                 .overlay {
-                    Image("MainCardBlue")
+                    Image(busAlertBackground(for: busAlert?.routetp ?? ""))
                         .resizable()
-                        .scaledToFill()
+                        .scaledToFit()
                         .frame(maxWidth: .infinity, maxHeight: .infinity) // 크기를 최대한 늘림
-                        .clipped() // 넘치는 부분을 잘라냄
                         .cornerRadius(12) // 모서리 반경을 Rectangle과 동일하게 맞춤
                 }
             VStack {
@@ -75,7 +74,6 @@ struct SavedBus: View {
                         }, label: {
                             Label("삭제", image: "trash")
                         })
-                        
                     } label: {
                         Image(systemName: "ellipsis")
                             .font(.title3)
@@ -90,7 +88,7 @@ struct SavedBus: View {
                     HStack {
                         Rectangle()
                             .frame(width: 12, height: 12)
-                            .foregroundColor(.green)
+                            .foregroundColor(busColor(for: busAlert?.routetp ?? ""))
                         Text(busAlert?.busNo ?? "버스번호없음")
                             .font(.title1)
                             .foregroundStyle(.blackdgray71)
