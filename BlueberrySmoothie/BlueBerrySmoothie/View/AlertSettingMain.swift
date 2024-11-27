@@ -15,7 +15,8 @@ struct AlertSettingMain: View {
     @State private var selectedStation: String = "정류장 수"
   
     // 설정된 cityCode 가져오기
-    @State private var cityCodeInput: String = UserDefaults.standard.string(forKey: "CityCodeKeyID") ?? "설정 안됨"
+    @State private var cityCodeInput: String = "12"
+    @State private var cityNameInput: String = "세종시"
     
     @State private var showSelectBusSheet: Bool = false // SelectBusView를 sheet로 표시할지 여부
     @State private var busStopAlert: BusStopAlert? // 사용자 선택 사항
@@ -168,6 +169,7 @@ struct AlertSettingMain: View {
             Spacer()
         }
         .onAppear {
+            loadCityCode()
             // 이전 정류장 수 선택이 안되어있는 경우
             if busStopAlert?.alertBusStop == 0 {
                 selectedStation = "정류장 수"
@@ -366,6 +368,14 @@ struct AlertSettingMain: View {
             print("알람 저장 실패: \(error)")
         }
     }
+    
+    private func loadCityCode() {
+        let savedCityID = UserDefaults.standard.string(forKey: "CityCodeKeyID") ?? "1"
+        let savedCityName = UserDefaults.standard.string(forKey: "CityCodeKeyName") ?? "선택된 도시 없음"
+        cityCodeInput = savedCityID
+        cityNameInput = savedCityName
+    }
+
     
     // 선택한 버스의 정류장 List 저장 함수 - UsingAlertView에서 정류장 노선을 띄우는데 사용됨
     private func saveBusstop() {
