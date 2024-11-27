@@ -114,7 +114,7 @@ class LocationManager: NSObject, ObservableObject {
             content.sound = .default
             playAudio()
         } else {
-            content.sound = nil
+            content.sound = UNNotificationSound(named: UNNotificationSoundName("silentSound.wav"))
         }
         
         
