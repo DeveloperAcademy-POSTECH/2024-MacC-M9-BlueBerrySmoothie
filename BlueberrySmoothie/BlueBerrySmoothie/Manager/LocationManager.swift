@@ -33,6 +33,7 @@ class LocationManager: NSObject, ObservableObject {
     override init() {
         super.init()
         manager.delegate = self
+        manager.requestLocation() // 현재 위치를 한 번만 요청
         manager.desiredAccuracy = kCLLocationAccuracyBest // locationManager의 정확도를 최고로 설정
         manager.allowsBackgroundLocationUpdates = true // 백그라운드에서도 위치를 업데이트하도록 설정
         manager.pausesLocationUpdatesAutomatically = false // 백그라운드에서 업데이트가 중지되지 않도록 설정
@@ -143,6 +144,8 @@ class LocationManager: NSObject, ObservableObject {
     // 버스 알람 등록 (모니터링 지역 설정, 시작)
     func registerBusAlert(_ busAlert: BusAlert, busStopLocal: BusStopLocal) {
         activeBusAlerts[busAlert.id] = busAlert
+//        manager.requestLocation() // 현재 위치를 한 번만 요청
+        print(location?.coordinate)
         
         // Region Monitoring 설정
         let region1 = CLCircularRegion(
@@ -163,16 +166,18 @@ class LocationManager: NSObject, ObservableObject {
     
         // `region2`의 식별자를 `activeAlarms`에 추가
         activeAlarms.insert(region2)
-        
+
+
         // 현재 위치 확인
             if let currentLocation = manager.location?.coordinate {
                 if region1.contains(currentLocation) {
-                    print("이미 70미터 반경 안에 있습니다: \(region1.identifier)")
-                    if let busAlert = getBusAlert(for: region1.identifier) {
-                        startNotifications(for: busAlert)
-                    }
+                    print("이미 70미터 반경 안에 있습니다: \(region1.center) 내 위치: \(location?.coordinate)")
+//                    if let busAlert = getBusAlert(for: region1.identifier) {
+//                        startNotifications(for: busAlert)
+//                    }
+                    manager.startUpdatingLocation()
                 } else {
-                    print("현재 위치는 70미터 반경 밖에 있습니다: \(region1.identifier)")
+                    print("현재 위치는 70미터 반경 밖에 있습니다: \(region1.center) 내 위치: \(location?.coordinate)")
                 }
             } else {
                 print("현재 위치를 가져올 수 없습니다. 위치 업데이트를 시작합니다.")
