@@ -113,7 +113,9 @@ struct SelectBusStopView: View {
                         DispatchQueue.main.asyncAfter(deadline: .now()) {
                             HapticManager.shared.triggerImpactFeedback(style: .medium)
                         }
+                        print(busstop)
                         storeBusStop(busStop: busstop)
+                        print(busstop)
                         showSelectBusSheet = false
                     }) {
                         VStack {
@@ -208,13 +210,16 @@ struct SelectBusStopView: View {
     func storeBusStop(busStop: BusStop){
         // 방면 저장
         let routeDirect = (busStop.updowncd == 1) ? bus.startnodenm : bus.endnodenm
+        print("123")
         // 기본 busStopAlert 데이터 저장
         busStopAlert = BusStopAlert(cityCode: Double(cityCode), bus: bus, allBusStop: busStopViewModel.busStopList, arrivalBusStop: busStop, alertBusStop: 0, routeDirection: routeDirect)
+        print("456")
         // 이전 정류장 (1~3번째) 저장
         if var unwrappedBusStopAlert = busStopAlert {
             storeBeforeBusStops(for: busStop, alert: &unwrappedBusStopAlert, busStops: busStopViewModel.busStopList)
             busStopAlert = unwrappedBusStopAlert
         }
+        print("456")
     }
     
     private func directionView(directionName: String, isSelected: Bool, selectedColor: Color, unselectedColor: Color) -> some View {
@@ -235,13 +240,34 @@ struct SelectBusStopView: View {
     
     // 차고지 - 회차지가 있는 일반적인 경우를 예외 처리하여 이전 3 정류장을 저장한다
     private func storeBeforeBusStops(for busStop: BusStop, alert: inout BusStopAlert, busStops: [BusStop]) {
-        let currentIndex: Int = busStop.nodeord// 선택한 정류장 이전의 정류장이 몇 개 남아있는지 확인하는 용도
         
+        if busStop.nodeord > 2000 {
+            // `nodeord`를 기준으로 이전 정류장을 찾는 함수
+            func findBusStop(withNodeord targetNodeord: Int) -> BusStop? {
+                return busStops.first { $0.nodeord == targetNodeord }
+            }
+
+            // 각각의 이전 정류장을 nodeord 값으로 찾기
+            alert.firstBeforeBusStop = findBusStop(withNodeord: busStop.nodeord - 1)
+            alert.secondBeforeBusStop = findBusStop(withNodeord: busStop.nodeord - 2)
+            alert.thirdBeforeBusStop = findBusStop(withNodeord: busStop.nodeord - 3)
+        } else if busStop.nodeord > 1000 {
+            let currentIndex: Int = busStop.nodeord - 1000
+            print("currentIndex: \(currentIndex)")
+            alert.firstBeforeBusStop = currentIndex > 1 ? busStops[currentIndex - 2] : nil
+            alert.secondBeforeBusStop = currentIndex > 2 ? busStops[currentIndex - 3] : nil
+            alert.thirdBeforeBusStop = currentIndex > 3 ? busStops[currentIndex - 4] : nil
+        } else {
+            let currentIndex: Int = busStop.nodeord
+            alert.firstBeforeBusStop = currentIndex > 1 ? busStops[busStop.nodeord - 2] : nil
+            alert.secondBeforeBusStop = currentIndex > 2 ? busStops[busStop.nodeord - 3] : nil
+            alert.thirdBeforeBusStop = currentIndex > 3 ? busStops[busStop.nodeord - 4] : nil
+        }
         // 이전 정류장을 최대 3개까지 저장함
         // nodeord가 1부터 시작해서 n+1 만큼 빼주어야함
-        alert.firstBeforeBusStop = currentIndex > 1 ? busStops[busStop.nodeord - 2] : nil
-        alert.secondBeforeBusStop = currentIndex > 2 ? busStops[busStop.nodeord - 3] : nil
-        alert.thirdBeforeBusStop = currentIndex > 3 ? busStops[busStop.nodeord - 4] : nil
+
+       
+        
     }
 }
 

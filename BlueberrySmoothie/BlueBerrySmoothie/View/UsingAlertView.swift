@@ -209,7 +209,8 @@ struct UsingAlertView: View {
                                     let formatter = DateFormatter()
                                     formatter.dateFormat = "HH:mm:ss"  // 원하는 시간 포맷을 지정합니다.
                                     let formattedTime = formatter.string(from: currentDate)
-                                    LiveActivityManager.shared.startLiveActivity(title: busAlert.alertLabel ?? "알 수 없는 알람" , description: busAlert.busNo, stationName: busAlert.arrivalBusStopNm, initialProgress: 99, currentStop: closestBus.nodenm, stopsRemaining: busAlert.arrivalBusStopNord - (Int(closestBus.nodeord) ?? 0) - 1, Updatetime: formattedTime)
+                                    
+                                    LiveActivityManager.shared.startLiveActivity(title: busAlert.alertLabel ?? "알 수 없는 알람" , description: busAlert.busNo, stationName: busAlert.arrivalBusStopNm, initialProgress: 99, currentStop: closestBus.nodenm, stopsRemaining: busAlert.arrivalBusStopNord - (Int(closestBus.nodeord) ?? 0)  - Int(busAlert.alertBusStop), Updatetime: formattedTime)
                                 }
                         }
                     }

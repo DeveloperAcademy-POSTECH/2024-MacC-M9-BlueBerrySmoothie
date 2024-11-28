@@ -4,6 +4,7 @@
 //
 //  Created by Yeji Seo on 10/31/24.
 //
+//
 import Foundation
 
 // MARK: - Items
@@ -27,26 +28,46 @@ struct BusStop: Codable, Identifiable, Hashable {
         case routeid, nodeid, nodenm, nodeno, nodeord, gpslati, gpslong, updowncd
     }
         
-    // nodeno의 커스텀 디코딩 구현
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
+        
         routeid = try container.decode(String.self, forKey: .routeid)
         nodeid = try container.decode(String.self, forKey: .nodeid)
         nodenm = try container.decode(String.self, forKey: .nodenm)
-        nodeord = try container.decode(Int.self, forKey: .nodeord)
-        gpslati = try container.decode(Double.self, forKey: .gpslati)
-        gpslong = try container.decode(Double.self, forKey: .gpslong)
         
-        // updowncd가 없을 경우 nil로 처리
-        updowncd = try container.decodeIfPresent(Int.self, forKey: .updowncd)
-
-        // `nodeno`가 String 또는 Int일 수 있으므로, String으로 먼저 시도한 뒤 실패하면 Int로 처리
+        // nodeno 처리
         if let nodenoString = try? container.decode(String.self, forKey: .nodeno),
            let nodenoInt = Int(nodenoString) {
             nodeno = nodenoInt
         } else {
             nodeno = try? container.decode(Int.self, forKey: .nodeno)
         }
+        
+        // nodeord 처리
+        if let nodeordString = try? container.decode(String.self, forKey: .nodeord),
+           let nodeordInt = Int(nodeordString) {
+            nodeord = nodeordInt
+        } else {
+            nodeord = try container.decode(Int.self, forKey: .nodeord)
+        }
+
+        // gpslati 처리
+        if let gpslatiString = try? container.decode(String.self, forKey: .gpslati),
+           let gpslatiDouble = Double(gpslatiString) {
+            gpslati = gpslatiDouble
+        } else {
+            gpslati = try container.decode(Double.self, forKey: .gpslati)
+        }
+
+        // gpslong 처리
+        if let gpslongString = try? container.decode(String.self, forKey: .gpslong),
+           let gpslongDouble = Double(gpslongString) {
+            gpslong = gpslongDouble
+        } else {
+            gpslong = try container.decode(Double.self, forKey: .gpslong)
+        }
+        
+        updowncd = try container.decodeIfPresent(Int.self, forKey: .updowncd)
     }
     
     // 기본 이니셜라이저 추가

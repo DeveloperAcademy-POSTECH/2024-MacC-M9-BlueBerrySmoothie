@@ -87,6 +87,10 @@ class NowBusLocationViewModel: NSObject, ObservableObject, CLLocationManagerDele
         let formattedTime = formatter.string(from: currentDate)
 
         print(formattedTime)  // 예: 15:30:45
+//        var CalculateStops = Int(busAlert?.arrivalBusStopNord ?? 1) - (Int(closestBusLocation?.nodeord ?? "0") ?? 0) - Int(busAlert?.alertBusStop ?? 1 )
+//        if CalculateStops > 2000 {
+//            
+//        }
 //          LiveActivityManager.shared.updateLiveActivity(progress: 0.5, currentStop: closestBusLocation?.nodenm ?? "로딩중", stopsRemaining: juju)
         LiveActivityManager.shared.updateLiveActivity(progress: 0.5, currentStop: closestBusLocation?.nodenm ?? "로딩중", stopsRemaining: Int(busAlert?.arrivalBusStopNord ?? 1) - (Int(closestBusLocation?.nodeord ?? "0") ?? 0) - Int(busAlert?.alertBusStop ?? 1 ), Updatetime: formattedTime)
 

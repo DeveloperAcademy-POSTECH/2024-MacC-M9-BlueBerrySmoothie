@@ -75,6 +75,9 @@ struct SelectBusView: View {
                 fetchAllBusData(citycode: cityCode) { fetchedBuses in
                     self.allBuses = fetchedBuses.sorted(using: KeyPathComparator(\.routeno))
                     self.filteredBuses = fetchedBuses.sorted(using: KeyPathComparator(\.routeno))
+                    print(busStopAlert)
+                    print("어피어 되었을때")
+
                 }
                 showSelectBusSheet = true
             }
