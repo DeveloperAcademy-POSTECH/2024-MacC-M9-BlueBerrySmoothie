@@ -71,7 +71,7 @@ class LocationManager: NSObject, ObservableObject {
         RunLoop.main.add(timer, forMode: .common)
         notificationTimers[busAlert.id] = timer
         
-        print("Started notifications for \(busAlert.alertLabel ?? "")")
+//        print("Started notifications for \(busAlert.alertLabel ?? "")")
     }
     
     func stopNotifications(for busAlert: BusAlert) {
@@ -92,7 +92,7 @@ class LocationManager: NSObject, ObservableObject {
         UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [busAlert.id])
         UNUserNotificationCenter.current().removeDeliveredNotifications(withIdentifiers: [busAlert.id])
         
-        print("Stopped notifications for \(busAlert.alertLabel ?? "")")
+//        print("Stopped notifications for \(busAlert.alertLabel ?? "")")
     }
     
     private func scheduleNotification(for busAlert: BusAlert) {
@@ -186,7 +186,7 @@ class LocationManager: NSObject, ObservableObject {
         
         // 새로운 region 모니터링 시작
         manager.startMonitoring(for: region1)
-        print("(70미터 반경 확인합니다)Started monitoring region1 for \(busAlert.alertLabel ?? "")")
+//        print("(70미터 반경 확인합니다)Started monitoring region1 for \(busAlert.alertLabel ?? "")")
     }
     
     // 버스 알람 해제
@@ -292,7 +292,7 @@ class LocationManager: NSObject, ObservableObject {
                 player?.prepareToPlay()
                 // 볼륨을 최대로 설정
                 player?.volume = 0.8
-                print("오디오 파일 로드 성공")
+//                print("오디오 파일 로드 성공")
             } catch {
                 print("오디오 파일 로드 실패: \(error)")
                 print("파일 경로: \(path)")
@@ -340,12 +340,12 @@ extension LocationManager: CLLocationManagerDelegate {
     
     // Region 진입 시 호출되는 delegate 메서드
     func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
-        print("(70미터 반경 안에 들어왔음)Entered region: \(region.identifier)")
+//        print("(70미터 반경 안에 들어왔음)Entered region: \(region.identifier)")
         if let busAlert = getBusAlert(for: region.identifier) {
 //            startNotifications(for: busAlert)
             manager.startUpdatingLocation()
-            print("1초마다 업데이트 시작")
-            print("!!!!!!!!!!!!!!!Location updated 시작한다!!!!!!!!!!!!!!!")
+//            print("1초마다 업데이트 시작")
+//            print("!!!!!!!!!!!!!!!Location updated 시작한다!!!!!!!!!!!!!!!")
         }
     }
     
@@ -357,17 +357,17 @@ extension LocationManager: CLLocationManagerDelegate {
         if location.horizontalAccuracy > 0 {
             self.location = location
             self.region = CLLocation(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
-            print("!!!!!!!!!!!!!!!Location updated!!!!!!!!!!!!!!!")
-            print(activeAlarms)
+//            print("!!!!!!!!!!!!!!!Location updated!!!!!!!!!!!!!!!")
+//            print(activeAlarms)
             
             // 등록된 모든 region에 대해 현재 위치 확인
             for monitoredRegion in activeAlarms {
                 if monitoredRegion.contains(location.coordinate) {
-                    print(monitoredRegion.center)
-                    print("현재 위치가 \(monitoredRegion.identifier) 영역 안에 있습니다.")
+//                    print(monitoredRegion.center)
+//                    print("현재 위치가 \(monitoredRegion.identifier) 영역 안에 있습니다.")
                     // 진입 이벤트 처리
                     if let busAlert = getBusAlert(for: monitoredRegion.identifier) {
-                            print("BusAlert 가져오기 성공: \(busAlert.alertLabel ?? "")")
+//                            print("BusAlert 가져오기 성공: \(busAlert.alertLabel ?? "")")
                             startNotifications(for: busAlert)
                         } else {
                             print("BusAlert를 찾을 수 없습니다: \(monitoredRegion.identifier)")

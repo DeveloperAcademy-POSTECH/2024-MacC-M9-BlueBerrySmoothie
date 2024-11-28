@@ -11,7 +11,7 @@ import Foundation
 // BusLocation 데이터를 가져오는 함수
 func fetchNowBusLocationData(cityCode: Int, routeId: String, completion: @escaping ([NowBusLocation]) -> Void) {
     do {
-        print("Starting fetchBusLocationData with cityCode: \(cityCode), routeId: \(routeId)")
+//        print("Starting fetchBusLocationData with cityCode: \(cityCode), routeId: \(routeId)")
 
         guard let serviceKey = getAPIKey() else {
             print("API Key Error: Invalid API Key")

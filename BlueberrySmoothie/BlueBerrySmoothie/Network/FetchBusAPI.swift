@@ -47,7 +47,7 @@ func fetchBusData(citycode: Int, routeNo: String, completion: @escaping ([Bus]) 
                 let singleObjectResponse = try JSONDecoder().decode(BusResponsenotarray.self, from: data)
                 if let singleBus = singleObjectResponse.response.body.items?.item {
                     DispatchQueue.main.async {
-                        print("한개") // Single bus object found
+//                        print("한개") // Single bus object found
                         completion([singleBus]) // Return an array containing the single Bus object
                     }
                     return // Exit the function after a successful completion

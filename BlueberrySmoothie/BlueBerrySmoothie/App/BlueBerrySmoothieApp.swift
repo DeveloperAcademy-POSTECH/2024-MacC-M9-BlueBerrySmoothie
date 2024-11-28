@@ -62,7 +62,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
         // Background Fetch 설정
         UIApplication.shared.setMinimumBackgroundFetchInterval(UIApplication.backgroundFetchIntervalMinimum)
-        print("Background Fetch 및 Location Updates 설정 완료.")
+//        print("Background Fetch 및 Location Updates 설정 완료.")
         
         // 푸시 알림 관련 설정
         UNUserNotificationCenter.current().delegate = NotificationManager.instance

@@ -19,7 +19,7 @@ class NowBusLocationViewModel: NSObject, ObservableObject, CLLocationManagerDele
         super.init()
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
-        print("NowBusLocationViewModel initialized.")
+//        print("NowBusLocationViewModel initialized.")
         locationManager.pausesLocationUpdatesAutomatically = false
         locationManager.allowsBackgroundLocationUpdates = true
         fetchBusLocationData(cityCode: 21, routeId: "BSB5200043000")
@@ -29,26 +29,26 @@ class NowBusLocationViewModel: NSObject, ObservableObject, CLLocationManagerDele
         guard !isUpdatingLocation else { return } // 이미 활성 상태라면 무시
         locationManager.startUpdatingLocation()
         isUpdatingLocation = true
-        print("Location updates started.")
+//        print("Location updates started.")
     }
 
     func stopUpdating() {
         guard isUpdatingLocation else { return } // 이미 중지 상태라면 무시
         locationManager.stopUpdatingLocation()
         isUpdatingLocation = false
-        print("Location updates stopped.")
+//        print("Location updates stopped.")
     }
 
     deinit {
         stopUpdating()
-        print("NowBusLocationViewModel deinitialized.")
+//        print("NowBusLocationViewModel deinitialized.")
     }
 
     // CLLocationManagerDelegate 메서드 - 사용자 위치 업데이트 시 호출
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.last else { return }
         userLocation = location
-        print("locationManager(didUpdateLocations)")
+//        print("locationManager(didUpdateLocations)")
         findClosestBusLocation()
     }
 
@@ -71,7 +71,7 @@ class NowBusLocationViewModel: NSObject, ObservableObject, CLLocationManagerDele
     // 사용자 위치와 가장 가까운 버스 위치를 찾음
     private func findClosestBusLocation() {
         guard let userLocation = userLocation else { return }
-        print("userLocation: \(userLocation)")
+//        print("userLocation: \(userLocation)")
 
         closestBusLocation = NowbusLocations.min(by: { bus1, bus2 in
             let busLocation1 = CLLocation(latitude: Double(bus1.gpslati) ?? 0, longitude: Double(bus1.gpslong) ?? 0)
@@ -86,7 +86,7 @@ class NowBusLocationViewModel: NSObject, ObservableObject, CLLocationManagerDele
         formatter.dateFormat = "HH:mm:ss"  // 원하는 시간 포맷을 지정합니다.
         let formattedTime = formatter.string(from: currentDate)
 
-        print(formattedTime)  // 예: 15:30:45
+//        print(formattedTime)  // 예: 15:30:45
 //          LiveActivityManager.shared.updateLiveActivity(progress: 0.5, currentStop: closestBusLocation?.nodenm ?? "로딩중", stopsRemaining: juju)
         LiveActivityManager.shared.updateLiveActivity(progress: 0.5, currentStop: closestBusLocation?.nodenm ?? "로딩중", stopsRemaining: Int(busAlert?.arrivalBusStopNord ?? 1) - (Int(closestBusLocation?.nodeord ?? "0") ?? 0) - Int(busAlert?.alertBusStop ?? 1 ), Updatetime: formattedTime)
 
@@ -112,7 +112,7 @@ class NowBusLocationViewModel: NSObject, ObservableObject, CLLocationManagerDele
         }
         print("여기서 깔끔하게 업데이트")
         print(busAlert,"여기는 모델")
-        print("가장 가까운 정류장: \(closestBusLocation?.nodenm)")
+//        print("가장 가까운 정류장: \(closestBusLocation?.nodenm)")
     }
     // 예시로 사용할 버스 알림을 반환하는 메서드
    private func getSampleBusAlert() -> BusAlert? {

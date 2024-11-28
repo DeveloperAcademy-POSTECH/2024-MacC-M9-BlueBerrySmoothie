@@ -78,13 +78,13 @@ class NotificationManager: NSObject, CLLocationManagerDelegate, ObservableObject
     func cancelAllNotifications(for busAlert: BusAlert) {
         UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
         UNUserNotificationCenter.current().removeAllDeliveredNotifications()
-        print("All notifications for \(busAlert.alertLabel) have been canceled")
+//        print("All notifications for \(busAlert.alertLabel) have been canceled")
     }
     
     
     // Foreground(앱 켜진 상태)에서도 알림 오는 설정
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        print("Foreground 상태에서 알림 수신") // Foreground 상태에서 알림 수신 확인
+//        print("Foreground 상태에서 알림 수신") // Foreground 상태에서 알림 수신 확인
         //        hapticManager.playPattern()
         notificationReceived = true // 알림 수신 상태 업데이트
         completionHandler([.list, .sound, .banner])
@@ -92,7 +92,7 @@ class NotificationManager: NSObject, CLLocationManagerDelegate, ObservableObject
     
     // 사용자가 Notification을 탭하면 호출되는 메서드
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-        print("알림 수신")
+//        print("알림 수신")
         //        hapticManager.playPattern()
         notificationReceived = true // 알림 수신 상태 업데이트
         completionHandler()

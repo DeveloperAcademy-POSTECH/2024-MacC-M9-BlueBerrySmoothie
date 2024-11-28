@@ -186,7 +186,7 @@ struct SavedBus: View {
     private func startAlert() {
         guard let busAlert = busAlert,
               let foundStop = findAlertBusStop(busAlert: busAlert, busStops: busStopLocals) else {
-            print("알람 또는 버스 정류장 정보가 없습니다.")
+//            print("알람 또는 버스 정류장 정보가 없습니다.")
             return
         }
         

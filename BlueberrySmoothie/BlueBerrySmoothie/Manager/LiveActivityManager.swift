@@ -57,7 +57,7 @@ class LiveActivityManager {
                 content: .init(state: initialState, staleDate: Date().addingTimeInterval(3600)) // 1시간 만료
             )
             currentActivity = activity
-            print("라이브 액티비티 시작됨: \(activity.id)")
+//            print("라이브 액티비티 시작됨: \(activity.id)")
         } catch {
             print("라이브 액티비티 시작 실패: \(error.localizedDescription)")
         }
@@ -80,7 +80,7 @@ class LiveActivityManager {
         Task {
             do {
                 try await activity.update(using: newState)
-                print("라이브 액티비티 업데이트 완료: \(progress)")
+//                print("라이브 액티비티 업데이트 완료: \(progress)")
             } catch {
                 print("라이브 액티비티 업데이트 실패: \(error.localizedDescription)")
             }
@@ -97,7 +97,7 @@ class LiveActivityManager {
         Task {
             do {
                 await activity.end(dismissalPolicy: .immediate)
-                print("라이브 액티비티 종료됨: \(activity.id)")
+//                print("라이브 액티비티 종료됨: \(activity.id)")
                 currentActivity = nil
             } catch {
                 print("라이브 액티비티 종료 실패: \(error.localizedDescription)")

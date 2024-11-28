@@ -127,18 +127,18 @@ struct UsingAlertView: View {
             refreshData() // 초기 로드
             currentBusViewModel.startUpdating() // 뷰가 보일 때 뷰모델에서 위치 업데이트 시작
             startRefreshTimer() // 타이머 시작
-            print(busAlert, "여기는 뷰")
+//            print(busAlert, "여기는 뷰")
             //            notificationManager.notificationReceived = true
             currentBusViewModel.busAlert = busAlert
         }
         .onChange(of: currentBusViewModel.closestBusLocation?.nodeid) { closestBusNodeId in
             if let closestBusNodeId = closestBusNodeId,
                busStops.contains(where: { $0.nodeid == closestBusNodeId }) {
-                print("온체인지 감지 - closestBus가 busStops에 있음")
+//                print("온체인지 감지 - closestBus가 busStops에 있음")
                 isFinishedLoading = true
                 isScrollTriggered = true
-                print(isFinishedLoading)
-                print(isScrollTriggered)
+//                print(isFinishedLoading)
+//                print(isScrollTriggered)
             }
         }
         .onDisappear {

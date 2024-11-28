@@ -291,7 +291,7 @@ struct AlertSettingMain: View {
             busAlert?.alertLabel = ( label == "" ? "알람" : label )
             busAlert?.alertBusStop = busStopAlert?.alertBusStop ?? 3
             // 추가 필드 업데이트
-            print("알람이 업데이트되었습니다.")
+//            print("알람이 업데이트되었습니다.")
         } else {
             // 새 알림을 저장 (편집 모드가 아닌 경우)
             saveAlert()
@@ -307,7 +307,7 @@ struct AlertSettingMain: View {
     private func saveAlert() {
         guard let selectedBus = busStopAlert?.bus,
               let selectedBusStop = busStopAlert?.arrivalBusStop else {
-            print("버스와 정류장을 선택하세요.")
+//            print("버스와 정류장을 선택하세요.")
             return
         }
         
@@ -315,19 +315,19 @@ struct AlertSettingMain: View {
         
         if busStopAlert!.alertBusStop == 1 {
             guard let alertBusStop = busStopAlert?.firstBeforeBusStop else {
-                print("다시")
+//                print("다시")
                 return
             }
             selectedAlertBusStop = alertBusStop
         } else if busStopAlert!.alertBusStop == 2 {
             guard let alertBusStop = busStopAlert?.secondBeforeBusStop else {
-                print("다시")
+//                print("다시")
                 return
             }
             selectedAlertBusStop = alertBusStop
         } else {
             guard let alertBusStop = busStopAlert?.thirdBeforeBusStop else {
-                print("다시")
+//                print("다시")
                 return
             }
             selectedAlertBusStop = alertBusStop
@@ -335,14 +335,14 @@ struct AlertSettingMain: View {
         
         // Ensure selectedAlertBusStop is non-nil before proceeding
         guard let finalAlertBusStop = selectedAlertBusStop else {
-            print("알람 정류장 선택 오류")
+//            print("알람 정류장 선택 오류")
             return
         }
         
         
         let cityCode = Int(cityCodeInput) ?? -1 // 도시 코드 유효성 확인
         guard cityCode > 0 else {
-            print("유효한 도시 코드를 입력하세요.")
+//            print("유효한 도시 코드를 입력하세요.")
             showToastMessage("유효한 도시 코드를 입력하세요.")
             return
         }
@@ -368,7 +368,7 @@ struct AlertSettingMain: View {
         // 데이터베이스에 저장
         do {
             try modelContext.insert(newAlert)
-            print("알람이 저장되었습니다.")
+//            print("알람이 저장되었습니다.")
         } catch {
             print("알람 저장 실패: \(error)")
         }
@@ -385,7 +385,7 @@ struct AlertSettingMain: View {
     // 선택한 버스의 정류장 List 저장 함수 - UsingAlertView에서 정류장 노선을 띄우는데 사용됨
     private func saveBusstop() {
         guard !(busStopAlert?.allBusStop.isEmpty)! else {
-            print("버스를 선택하세요.")
+//            print("버스를 선택하세요.")
             return
         }
         
