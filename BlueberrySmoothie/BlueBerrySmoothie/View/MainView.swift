@@ -25,15 +25,15 @@ struct MainView: View {
     
     var body: some View {
         NavigationView {
-            ZStack {
-                Color.whiteDBlack
-                    .ignoresSafeArea()
-                VStack {
+//            ZStack {
+//                Color.whiteDBlack
+//                    .ignoresSafeArea()
+      
                     alertListView()
-                        .padding(.top, 12)
+                        
                         .padding(.horizontal, 20)
-                    Spacer()
-                }
+                    
+             
                 .toolbar {
                     ToolbarItem(placement: .navigationBarTrailing) {
                         HStack {
@@ -50,10 +50,13 @@ struct MainView: View {
                         Image("HotCha")
                     }
                 }
-                .background(.clear)
-            }
+              
+//            }
         }
     }
+    
+    
+    
     
     private func alertListView() -> some View {
         ZStack {
@@ -71,10 +74,10 @@ struct MainView: View {
             } else {
                 ScrollView(showsIndicators: false) {
                     // 고정된 알림들을 먼저 표시
-                    ForEach(busAlerts.filter { $0.isPinned }, id: \.self) { alert in
+                    ForEach(busAlerts.filter { $0.isPinned }.sorted(by: { $0.createdAt > $1.createdAt }), id: \.self) { alert in
                         SavedBus(busStopLocals: busStopLocal, busAlert: alert, isSelected: selectedAlert?.id == alert.id, onDelete: {
                             deleteBusAlert(alert) // 삭제 동작
-                        })
+                        }, createdAt: alert.createdAt)
                         .onTapGesture {
                             selectedAlert = alert
                             if let foundStop = findAlertBusStop(busAlert: alert, busStops: busStopLocal) {
@@ -85,10 +88,10 @@ struct MainView: View {
                         .padding(.bottom, 1)
                     }
                     
-                    ForEach(busAlerts.filter { !$0.isPinned }, id: \.self) { alert in
+                    ForEach(busAlerts.filter { !$0.isPinned }.sorted(by: { $0.createdAt > $1.createdAt }), id: \.self) { alert in
                         SavedBus(busStopLocals: busStopLocal, busAlert: alert, isSelected: selectedAlert?.id == alert.id, onDelete: {
                             deleteBusAlert(alert) // 삭제 동작
-                        })
+                        }, createdAt: alert.createdAt)
                         .onTapGesture {
                             selectedAlert = alert
                             if let foundStop = findAlertBusStop(busAlert: alert, busStops: busStopLocal) {

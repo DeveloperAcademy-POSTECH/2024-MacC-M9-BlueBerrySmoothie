@@ -69,8 +69,6 @@ struct SelectBusStopView: View {
             // 버스 리스트가 아래에서 위로 올라오는 애니메이션 위치
             .offset(y: isAnimating ? 0 : UIScreen.main.bounds.height)
         }
-        .backgroundStyle(.whiteDgray1)
-        .background(ignoresSafeAreaEdges: .bottom)
         // 버스 리스트가 아래에서 위로 올라오는 애니메이션
         .animation(.spring(duration: 1.0, bounce: 0.1), value: isAnimating)
         .onAppear {
@@ -102,8 +100,8 @@ struct SelectBusStopView: View {
         .task {
             await busStopViewModel.getBusStopData(cityCode: cityCode, routeId: bus.routeid)
         }
-        .backgroundStyle(.whiteDgray1)
-        .edgesIgnoringSafeArea(.horizontal)
+        .background(.whiteDgray1)
+        .background(ignoresSafeAreaEdges: .horizontal)
     }
     
     /// Bus List 뷰

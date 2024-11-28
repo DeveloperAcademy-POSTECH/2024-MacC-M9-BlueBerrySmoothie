@@ -11,6 +11,7 @@ struct StationPickerModal: View {
     @Binding var selectedStation: String
     @Binding var alert: BusStopAlert? // BusStopAlert 값을 받아옴
     @State var nodeord: Int
+    var onDismiss: (() -> Void)?  // 선택이 완료되어서 모달창이 닫히면 alertSettingMain에서 selectedField = nil을 실행해주기 위함
     
     var body: some View {
         ZStack(alignment: .bottom) {
@@ -49,6 +50,7 @@ struct StationPickerModal: View {
                             withAnimation {
                                 isPresented = false
                             }
+                            onDismiss?()
                         }
                     } else {
                         stationRow(stationText: 1, isEnabled: false)
@@ -61,6 +63,7 @@ struct StationPickerModal: View {
                             withAnimation {
                                 isPresented = false
                             }
+                            onDismiss?()
                         }
                     } else {
                         stationRow(stationText: 2, isEnabled: false)
@@ -73,6 +76,7 @@ struct StationPickerModal: View {
                             withAnimation {
                                 isPresented = false
                             }
+                            onDismiss?()
                         }
                     } else {
                         stationRow(stationText: 3, isEnabled: false)
