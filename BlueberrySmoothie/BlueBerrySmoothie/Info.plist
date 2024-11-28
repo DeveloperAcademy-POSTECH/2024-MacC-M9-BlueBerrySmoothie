@@ -27,6 +27,10 @@
 		<string>fetch</string>
 		<string>processing</string>
 	</array>
+    <key>BGTaskSchedulerPermittedIdentifiers</key>
+    <array>
+        <string>com.team.blueberrySmoothie.taskIdentifier</string>
+    </array>
 	<key>kTCCServiceMediaLibrary</key>
 	<string>앱에서 음악을 재생하고 관리하기 위한 권한이 필요합니다.</string>
 

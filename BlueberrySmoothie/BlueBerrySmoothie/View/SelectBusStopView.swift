@@ -244,4 +244,3 @@ struct SelectBusStopView: View {
         alert.thirdBeforeBusStop = currentIndex > 3 ? busStops[busStop.nodeord - 4] : nil
     }
 }
-
