@@ -147,7 +147,7 @@ class LocationManager: NSObject, ObservableObject {
         // Region Monitoring 설정
         let region1 = CLCircularRegion(
             center: CLLocationCoordinate2D(latitude: busStopLocal.gpslati, longitude: busStopLocal.gpslong),
-            radius: 50.0, //반경 넓히기
+            radius: 70.0, // 70m 반경
             identifier: busAlert.id)
         
         region1.notifyOnEntry = true
@@ -155,7 +155,7 @@ class LocationManager: NSObject, ObservableObject {
         
         let region2 = CLCircularRegion(
             center: CLLocationCoordinate2D(latitude: busStopLocal.gpslati, longitude: busStopLocal.gpslong),
-            radius: 10.0,
+            radius: 30.0, // 30m 반경
             identifier: busAlert.id + "_region2") // region2에 고유한 식별자를 추가)
         
         region2.notifyOnEntry = true
@@ -164,29 +164,31 @@ class LocationManager: NSObject, ObservableObject {
         // `region2`의 식별자를 `activeAlarms`에 추가
         activeAlarms.insert(region2)
         
-//        manager.startUpdatingLocation()
-//        print("!!!!!!!!!!!!!!!Location updated 시작한다!!!!!!!!!!!!!!!")
-//         현재 위치가 이미 region 안에 있는지 확인
-        if let currentLocation = location?.coordinate {
-            let locationIsInRegion = region1.contains(currentLocation)
-            if locationIsInRegion {
-                print("이미 들어와있어!!!!!!!!!!!!!!!!!!")
-//                startNotifications(for: busAlert)
-                manager.startUpdatingLocation()
+        // 현재 위치 확인
+            if let currentLocation = manager.location?.coordinate {
+                if region1.contains(currentLocation) {
+                    print("이미 70미터 반경 안에 있습니다: \(region1.identifier)")
+                    if let busAlert = getBusAlert(for: region1.identifier) {
+                        startNotifications(for: busAlert)
+                    }
+                } else {
+                    print("현재 위치는 70미터 반경 밖에 있습니다: \(region1.identifier)")
+                }
+            } else {
+                print("현재 위치를 가져올 수 없습니다. 위치 업데이트를 시작합니다.")
+//                manager.startUpdatingLocation()
             }
-        } else {
-            print("50미터 밖에 있어!!!!!!!!")
-        }
         
         // 새로운 region 모니터링 시작
         manager.startMonitoring(for: region1)
-        print("(50미터 반경 확인합니다)Started monitoring region1 for \(busAlert.alertLabel ?? "")")
+        print("(70미터 반경 확인합니다)Started monitoring region1 for \(busAlert.alertLabel ?? "")")
     }
     
     // 버스 알람 해제
     func unregisterBusAlert(_ busAlert: BusAlert) {
         stopNotifications(for: busAlert)
         activeBusAlerts.removeValue(forKey: busAlert.id)
+        activeAlarms.removeAll()
         
         // Region 모니터링 중지
         manager.monitoredRegions.forEach { region in
@@ -194,6 +196,7 @@ class LocationManager: NSObject, ObservableObject {
                 manager.stopMonitoring(for: region)
             }
         }
+        manager.stopUpdatingLocation()
     }
     
     /// 위치 서비스가 활성화되었는지 확인하고, 활성화되지 않았을 경우 오류 메시지를 설정
@@ -244,9 +247,10 @@ class LocationManager: NSObject, ObservableObject {
         checkLocationAuthorization()
     }
     
-    // BusAlert 조회 메서드
     private func getBusAlert(for identifier: String) -> BusAlert? {
-        return activeBusAlerts[identifier]
+        // "_region2" 접미사를 제거한 식별자로 검색
+        let cleanIdentifier = identifier.replacingOccurrences(of: "_region2", with: "")
+        return activeBusAlerts[cleanIdentifier]
     }
     
     // 모든 모니터링 중지
@@ -331,7 +335,7 @@ extension LocationManager: CLLocationManagerDelegate {
     
     // Region 진입 시 호출되는 delegate 메서드
     func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
-        print("(50미터 반경 안에 들어왔음)Entered region: \(region.identifier)")
+        print("(70미터 반경 안에 들어왔음)Entered region: \(region.identifier)")
         if let busAlert = getBusAlert(for: region.identifier) {
 //            startNotifications(for: busAlert)
             manager.startUpdatingLocation()
@@ -358,8 +362,11 @@ extension LocationManager: CLLocationManagerDelegate {
                     print("현재 위치가 \(monitoredRegion.identifier) 영역 안에 있습니다.")
                     // 진입 이벤트 처리
                     if let busAlert = getBusAlert(for: monitoredRegion.identifier) {
-                        startNotifications(for: busAlert)
-                    }
+                            print("BusAlert 가져오기 성공: \(busAlert.alertLabel ?? "")")
+                            startNotifications(for: busAlert)
+                        } else {
+                            print("BusAlert를 찾을 수 없습니다: \(monitoredRegion.identifier)")
+                        }
                 } else {
                     print("현재 위치가 \(monitoredRegion.identifier) 영역 밖에 있습니다.")
                 }
@@ -369,8 +376,6 @@ extension LocationManager: CLLocationManagerDelegate {
     
     /// 위치 갱신 실패 시 오류 메시지를 설정하고 콘솔에 출력
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-//        print("Location error: \(error.localizedDescription)")
-//        errorMessage = "위치를 찾을 수 없습니다: \(error.localizedDescription)"
         print("Location update failed with error: \(error.localizedDescription)")
     }
 }
