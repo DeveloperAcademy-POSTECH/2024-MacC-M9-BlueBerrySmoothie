@@ -200,6 +200,7 @@ struct SavedBus: View {
         notificationManager.notificationReceived = false
         notificationManager.requestAuthorization()
         locationManager.registerBusAlert(busAlert, busStopLocal: foundStop)
+        locationManager.manager.requestLocation()
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             isUsingAlertActive = true
