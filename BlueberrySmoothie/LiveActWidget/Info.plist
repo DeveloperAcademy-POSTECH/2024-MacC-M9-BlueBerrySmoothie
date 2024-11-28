@@ -22,11 +22,6 @@
     <string>processing</string>
 </array>
 
-<key>UIBackgroundModes</key>
-<array>
-    <string>fetch</string>
-    <string>processing</string>
-</array>
 <key>NSLocationAlwaysUsageDescription</key>
 <string>위치 서비스를 사용하여 알림을 제공합니다.</string>
 <key>NSLocationWhenInUseUsageDescription</key>
