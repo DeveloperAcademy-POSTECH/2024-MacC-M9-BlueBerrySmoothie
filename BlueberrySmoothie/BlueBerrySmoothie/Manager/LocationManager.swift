@@ -112,7 +112,7 @@ class LocationManager: NSObject, ObservableObject {
             content.sound = .default
             playAudio()
         } else {
-            content.sound = nil
+            content.sound = UNNotificationSound(named: UNNotificationSoundName("silentSound.wav"))
         }
         
         
@@ -248,7 +248,7 @@ class LocationManager: NSObject, ObservableObject {
             try AVAudioSession.sharedInstance().setCategory(
                 .playback,
                 mode: .default,
-                options: [.mixWithOthers, .duckOthers]
+                options: [.mixWithOthers]
             )
             // 무음 모드에서도 재생되도록 설정
             try AVAudioSession.sharedInstance().setActive(true, options: .notifyOthersOnDeactivation)
@@ -280,11 +280,12 @@ class LocationManager: NSObject, ObservableObject {
     
     func playAudio() {
         // 현재 시스템 볼륨 저장
+        let currentVolume = AVAudioSession.sharedInstance().outputVolume
         originalVolume = AVAudioSession.sharedInstance().outputVolume
         
         // 볼륨이 낮으면 최대로 설정
         if originalVolume < 1 {
-            maximizeVolume()
+            setSystemVolume(0.8)
         }
         
         // 여러 번 반복 재생 설정
@@ -293,27 +294,20 @@ class LocationManager: NSObject, ObservableObject {
         
         // 20초 후에 원래 볼륨으로 복구
         DispatchQueue.main.asyncAfter(deadline: .now() + 20) { [weak self] in
-            self?.restoreVolume()
+            self?.stopAudio()
         }
     }
     
     func stopAudio() {
         player?.stop()
-        restoreVolume()
+        setSystemVolume(originalVolume)
     }
     
-    private func maximizeVolume() {
-        // MPVolumeView를 통해 시스템 볼륨을 최대로 설정
+    private func setSystemVolume(_ volume: Float) {
         if let slider = volumeView.subviews.first(where: { $0 is UISlider }) as? UISlider {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                slider.value = 0.8  // 최대 볼륨
+            DispatchQueue.main.async {
+                slider.value = volume
             }
-        }
-    }
-    
-    private func restoreVolume() {
-        if let slider = volumeView.subviews.first(where: { $0 is UISlider }) as? UISlider {
-            slider.value = originalVolume
         }
     }
 }
