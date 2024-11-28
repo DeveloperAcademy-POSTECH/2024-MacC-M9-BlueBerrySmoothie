@@ -55,12 +55,21 @@ struct SelectCityView: View {
                             .focused($isFocused)
                             .padding(EdgeInsets(top: 16, leading: 20, bottom: 16, trailing: 0))
                             .tint(.brand)
-                           
-                        Spacer()
-                        Image("magnifyingglass")
-                            .frame(width: 24, height: 24)
-                            .padding(.trailing, 20.67)
                         
+                        Spacer()
+                        
+                        // X 버튼 추가
+                        if !searchText.isEmpty {
+                            Button(action: {
+                                searchText = "" // 검색어 초기화
+                            }) {
+                                Image(systemName: "xmark.circle.fill")
+                                    .resizable()
+                                    .frame(width: 20, height: 20)
+                                    .foregroundColor(.gray5)
+                            }
+                            .padding(.trailing, 20)
+                        }
                     }
                     .background(.gray6)
                     .cornerRadius(20)
@@ -69,6 +78,7 @@ struct SelectCityView: View {
                             .stroke(isFocused == true ? .brand : .gray5, lineWidth: 1)
                     }
                     .padding(EdgeInsets(top: 12, leading: 20, bottom: 12, trailing: 20))
+
                     
                     
                      
@@ -110,6 +120,9 @@ struct SelectCityView: View {
                             
                             
                         } .padding(.horizontal, 20)
+                            .onTapGesture {
+                                    dismissKeyboard() // 스크롤을 터치하면 키보드 숨기기
+                                }
                             .onAppear {
                                 scrollViewProxy = proxy // ScrollViewProxy 초기화
                             }
@@ -220,8 +233,14 @@ struct SelectCityView: View {
         var allCategories = cities.map { $0.category }
         allCategories.insert("전체", at: 0) // "전체" 카테고리를 맨 앞에 추가
         let uniqueCategories = Array(Set(allCategories)) // 중복 제거
-        return ["전체"] + uniqueCategories.filter { $0 != "전체" }.sorted() // "전체"를 맨 앞에 두고 나머지 카테고리는 정렬
+        
+        // "광역시"를 가장 앞에 위치시키기
+        let sortedCategories = uniqueCategories.filter { $0.contains("광역시") } +
+            uniqueCategories.filter { !$0.contains("광역시") && $0 != "전체" }.sorted()
+        
+        return ["전체"] + sortedCategories
     }
+
     
     
     
@@ -253,17 +272,19 @@ struct CustomCategoryPicker: View {
     
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
-            HStack(spacing: 7) {   
+            HStack(spacing: 7) {
                 ForEach(categories, id: \.self) { category in
                     Text(category)
                         .padding(.horizontal, 16)
                         .padding(.vertical, 12.5)
-                        .background(selectedCategory == category ? Color.gray1 : .clear)
+                        .background(
+                            Capsule()
+                                .fill(selectedCategory == category ? Color.gray1 : .clear)
+                        )
                         .foregroundColor(selectedCategory == category ? .whiteasset : .blackasset)
-                        .cornerRadius(20)
                         .overlay(
-                                RoundedRectangle(cornerRadius: 20)
-                                    .stroke(.gray2, lineWidth: 0.5)
+                            Capsule()
+                                .stroke(.gray2, lineWidth: 0.5)
                         )
                         .padding(0.5)
                         .onTapGesture {
