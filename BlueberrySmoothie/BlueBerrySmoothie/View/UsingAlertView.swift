@@ -45,28 +45,28 @@ struct UsingAlertView: View {
                     refreshAction: {
                         refreshData()
                         isScrollTriggered = true // 스크롤 동작 트리거
-
-                       
+                        
+                        
                         
                     }, isScrollTriggered: $isScrollTriggered
-
+                    
                 ).padding(10)
                     .padding(.trailing, -8)
                     .padding(.top, -10)
                 
-//                Button(action: {
-//                            // 예시: triggerAlarm 메서드를 호출하여 알람을 울리도록 설정
-//                            if let busAlert = getSampleBusAlert() {
-//                                LocationManager.shared.triggerAlarm(for: busAlert)
-//                            }
-//                        }) {
-//                            Text("알람 울리기")
-//                                .font(.title)
-//                                .padding()
-//                                .background(Color.blue)
-//                                .foregroundColor(.white)
-//                                .cornerRadius(10)
-//                        }
+                //                Button(action: {
+                //                            // 예시: triggerAlarm 메서드를 호출하여 알람을 울리도록 설정
+                //                            if let busAlert = getSampleBusAlert() {
+                //                                LocationManager.shared.triggerAlarm(for: busAlert)
+                //                            }
+                //                        }) {
+                //                            Text("알람 울리기")
+                //                                .font(.title)
+                //                                .padding()
+                //                                .background(Color.blue)
+                //                                .foregroundColor(.white)
+                //                                .cornerRadius(10)
+                //                        }
                 // 노션뷰
                 BusStopScrollView(
                     closestBus: $currentBusViewModel.closestBusLocation,
@@ -188,10 +188,29 @@ struct UsingAlertView: View {
                     
                     // 현재 위치 정보
                     if let closestBus = viewModel.closestBusLocation {
-                        Text("알람까지 \(busAlert.arrivalBusStopNord - (Int(closestBus.nodeord) ?? 0 - Int(busAlert.alertBusStop)) - busAlert.alertBusStop  ) 정류장 남았습니다.")
-                            .font(.title2)
-                            .foregroundStyle(.blackDGray7)
-                            .padding(.bottom, 10)
+                        if busAlert.arrivalBusStopNord - (Int(closestBus.nodeord) ?? 0) - busAlert.alertBusStop < 0 { //
+                            if busAlert.arrivalBusStopNord - (Int(closestBus.nodeord) ?? 0) > 0 {
+                                Text("하차까지 \(busAlert.arrivalBusStopNord - (Int(closestBus.nodeord) ?? 0)) 정류장 남았습니다.")
+                                    .font(.title2)
+                                    .foregroundStyle(.blackDGray7)
+                                    .padding(.bottom, 10)
+                            } else if busAlert.arrivalBusStopNord - (Int(closestBus.nodeord) ?? 0) == 0 {
+                                Text("하차 정류장입니다! 핫챠하세요!")
+                                    .font(.title2)
+                                    .foregroundStyle(.blackDGray7)
+                                    .padding(.bottom, 10)
+                            } else if busAlert.arrivalBusStopNord - (Int(closestBus.nodeord) ?? 0) < 0 {
+                                Text("하차 정류장을 \(-(busAlert.arrivalBusStopNord - (Int(closestBus.nodeord) ?? 0))) 정류장 지났습니다.")
+                                    .font(.title2)
+                                    .foregroundStyle(.blackDGray7)
+                                    .padding(.bottom, 10)
+                            }
+                        } else {
+                            Text("알람까지 \(busAlert.arrivalBusStopNord - (Int(closestBus.nodeord) ?? 0) - busAlert.alertBusStop) 정류장 남았습니다.")
+                                .font(.title2)
+                                .foregroundStyle(.blackDGray7)
+                                .padding(.bottom, 10)
+                        }
                         
                         Text("현재 정류장은")
                             .font(.caption1)
@@ -205,7 +224,7 @@ struct UsingAlertView: View {
                                 .foregroundStyle(.gray1)
                                 .onAppear {
                                     let currentDate = Date()  // 현재 시간을 가져옵니다.
-
+                                    
                                     let formatter = DateFormatter()
                                     formatter.dateFormat = "HH:mm:ss"  // 원하는 시간 포맷을 지정합니다.
                                     let formattedTime = formatter.string(from: currentDate)
@@ -223,7 +242,7 @@ struct UsingAlertView: View {
                                 .font(.caption2)
                                 .foregroundStyle(.gray3Dgray6)
                         }
-
+                        
                         refreshButtonLottie
                             .frame(width: 24, height: 24)
                             .onTapGesture {
@@ -238,17 +257,17 @@ struct UsingAlertView: View {
                                 refreshAction() // 새로고침 동작을 수행하는 사용자 정의 함수 호출
                                 isScrollTriggered = true // 스크롤 트리거 활성화
                                 isRefreshDisabled = true // 새로고침 비활성화 설정
-
+                                
                                 // 애니메이션 제어
                                 refreshButtonLottie.stop() // 버튼 클릭 시 기존 애니메이션 멈춤
-
+                                
                                 refreshButtonLottie.play() // 버튼 클릭 시 새 애니메이션 실행
-
+                                
                                 // 햅틱 피드백 (진동 효과) 트리거
                                 DispatchQueue.main.asyncAfter(deadline: .now()) {
                                     HapticManager.shared.triggerImpactFeedback(style: .medium) // 중간 강도의 햅틱 효과 실행
                                 }
-
+                                
                                 // 5초 후 새로고침 버튼 다시 활성화
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
                                     isRefreshDisabled = false // 비활성화 플래그 해제
@@ -375,7 +394,7 @@ struct UsingAlertView: View {
                 }
                 VStack(alignment: .leading){
                     Text(busStop.nodenm)
-                       
+                    
                         .foregroundStyle(.gray1Dgray6)
                         .font(isCurrentLocation || busStop.nodeid == arrivalBusStopID || busStop.nodeid == alertStop?.nodeid ? .body1 : .caption1)
                     if busStop.nodeid == alertStop?.nodeid {
@@ -405,7 +424,7 @@ struct UsingAlertView: View {
             .autoconnect()
             .sink { _ in
                 refreshData()
-
+                
                 print("화면 새로고침")
             }
     }
@@ -456,10 +475,10 @@ struct UsingAlertView: View {
     }
     
     // 예시로 사용할 버스 알림을 반환하는 메서드
-   private func getSampleBusAlert() -> BusAlert? {
-       // 실제로는 등록된 버스 알림을 찾거나 데이터를 받아올 필요가 있음
-       return busAlert
-   }
+    private func getSampleBusAlert() -> BusAlert? {
+        // 실제로는 등록된 버스 알림을 찾거나 데이터를 받아올 필요가 있음
+        return busAlert
+    }
     
     // 알람 비활성화 뷰
     @ViewBuilder
