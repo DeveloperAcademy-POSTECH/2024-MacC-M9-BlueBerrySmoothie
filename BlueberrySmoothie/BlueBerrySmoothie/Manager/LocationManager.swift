@@ -65,7 +65,7 @@ class LocationManager: NSObject, ObservableObject {
         backgroundTasks[busAlert.id] = backgroundTask
         
         // 0.6초마다 반복되는 타이머 생성
-        let timer = Timer(timeInterval: 0.6, repeats: true) { [weak self] _ in
+        let timer = Timer(timeInterval: 1, repeats: true) { [weak self] _ in
             self?.scheduleNotification(for: busAlert)
         }
         RunLoop.main.add(timer, forMode: .common)
@@ -118,17 +118,17 @@ class LocationManager: NSObject, ObservableObject {
         
         
         // 앱이 포그라운드 상태일 때
-        if UIApplication.shared.applicationState == .active {
-            content.subtitle = "포그라운드 알림"
-        } else {
-            content.subtitle = "백그라운드 알림"
-        }
+//        if UIApplication.shared.applicationState == .active {
+//            content.subtitle = "포그라운드 알림"
+//        } else {
+//            content.subtitle = "백그라운드 알림"
+//        }
         
         // 고유한 식별자 생성 (시간값 포함)
         let identifier = "\(busAlert.id)_\(Date().timeIntervalSince1970)"
         
         // 즉시 실행되는 트리거
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 0.4, repeats: false)
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 0.1, repeats: false)
         
         let request = UNNotificationRequest(identifier: identifier,
                                             content: content,

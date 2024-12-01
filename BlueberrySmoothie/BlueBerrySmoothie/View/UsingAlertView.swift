@@ -496,6 +496,7 @@ struct UsingAlertView: View {
                 Button(action: {
                     stopRefreshTimer() // 알람 종료 시 타이머도 중단
                     notificationManager.notificationReceived = false // 오버레이 닫기
+                    locationManager.stopAllMonitoring()
                     locationManager.unregisterBusAlert(busAlert)
                     locationManager.stopAudio()
                     dismiss()
