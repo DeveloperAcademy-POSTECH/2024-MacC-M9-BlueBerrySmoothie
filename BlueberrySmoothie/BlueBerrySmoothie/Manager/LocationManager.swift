@@ -118,11 +118,11 @@ class LocationManager: NSObject, ObservableObject {
         
         
         // 앱이 포그라운드 상태일 때
-        if UIApplication.shared.applicationState == .active {
-            content.subtitle = "포그라운드 알림"
-        } else {
-            content.subtitle = "백그라운드 알림"
-        }
+//        if UIApplication.shared.applicationState == .active {
+//            content.subtitle = "포그라운드 알림"
+//        } else {
+//            content.subtitle = "백그라운드 알림"
+//        }
         
         // 고유한 식별자 생성 (시간값 포함)
         let identifier = "\(busAlert.id)_\(Date().timeIntervalSince1970)"
