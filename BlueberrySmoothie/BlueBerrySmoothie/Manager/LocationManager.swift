@@ -64,8 +64,21 @@ class LocationManager: NSObject, ObservableObject {
         }
         backgroundTasks[busAlert.id] = backgroundTask
         
+        var timeInterval: TimeInterval
+
+        switch busAlert.alertBusStop {
+        case 1:
+            timeInterval = 80
+        case 2:
+            timeInterval = 60
+        case 3:
+            timeInterval = 40
+        default:
+            timeInterval = 1 // 기본값
+        }
+        
         // 0.6초마다 반복되는 타이머 생성
-        let timer = Timer(timeInterval: 1, repeats: true) { [weak self] _ in
+        let timer = Timer(timeInterval: timeInterval, repeats: true) { [weak self] _ in
             self?.scheduleNotification(for: busAlert)
         }
         RunLoop.main.add(timer, forMode: .common)

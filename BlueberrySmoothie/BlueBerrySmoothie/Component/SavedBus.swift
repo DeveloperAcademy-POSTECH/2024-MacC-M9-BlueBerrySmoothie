@@ -195,7 +195,7 @@ struct SavedBus: View {
         
         // 라이브 액티비티 시작
         //        LiveActivityManager.shared.startLiveActivity()
-        
+        LocationManager.shared.triggerAlarm(for: busAlert)
         // 알림 설정 및 위치 모니터링 시작
         notificationManager.notificationReceived = false
         notificationManager.requestAuthorization()
