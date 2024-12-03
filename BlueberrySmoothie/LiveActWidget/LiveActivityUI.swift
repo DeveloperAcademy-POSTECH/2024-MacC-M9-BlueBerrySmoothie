@@ -13,7 +13,7 @@ struct LiveActivityUI: Widget {
                         .frame(width: 24, height: 24)
                         .cornerRadius(4) // 아이콘 모서리 둥글게 처리
                         .padding(.trailing, 8)
-
+                    
                     Text("핫챠") // 앱 이름
                         .font(.headline) // 헤드라인 글씨체
                         .foregroundColor(.brand) // 라이트 모드 및 다크 모드에서 모두 주황색
@@ -30,16 +30,32 @@ struct LiveActivityUI: Widget {
                             RoundedRectangle(cornerRadius: 8) // 둥근 모서리 사각형
                                 .fill(Color.lightbrand.opacity(0.2)) // 반투명 배경색
                         )
-
-                                   }
+                    
+                }
                 .padding(.bottom, 5)
-
-                Text("알람까지 \(context.state.stopsRemaining) 정거장 남았습니다.") // 남은 정류장
-                                    .font(.title3) // 글씨 크기를 크게 설정
-                                    .foregroundColor(
-                                        Color(UIColor { $0.userInterfaceStyle == .dark ? .white : .black })
-                                    ) // 다크 모드일 때 하얀색, 라이트 모드일 때 검은색
-                                    .padding(.bottom, 10)
+                
+                if context.state.stopsRemaining > 0 {
+                    Text("알람까지 \(context.state.stopsRemaining) 정류장 남았습니다.")
+                        .font(.title3) // 글씨 크기를 크게 설정
+                        .foregroundColor(
+                            Color(UIColor { $0.userInterfaceStyle == .dark ? .white : .black })
+                        ) // 다크 모드일 때 하얀색, 라이트 모드일 때 검은색
+                        .padding(.bottom, 10)
+                } else if context.state.stopsRemaining == 0 {
+                    Text("알람 정류장입니다! 일어나세요!")
+                        .font(.title3) // 글씨 크기를 크게 설정
+                        .foregroundColor(
+                            Color(UIColor { $0.userInterfaceStyle == .dark ? .white : .black })
+                        ) // 다크 모드일 때 하얀색, 라이트 모드일 때 검은색
+                        .padding(.bottom, 10)
+                } else if context.state.stopsRemaining < 0 {
+                    Text("알람 정류장을 \(-context.state.stopsRemaining) 정류장 지났습니다.")
+                        .font(.title3) // 글씨 크기를 크게 설정
+                        .foregroundColor(
+                            Color(UIColor { $0.userInterfaceStyle == .dark ? .white : .black })
+                        ) // 다크 모드일 때 하얀색, 라이트 모드일 때 검은색
+                        .padding(.bottom, 10)
+                }
                 HStack {
                     
                     VStack(alignment: .leading) {
@@ -64,13 +80,13 @@ struct LiveActivityUI: Widget {
         } dynamicIsland: { context in
             // Dynamic Island 표시 내용
             DynamicIsland {
-//                DynamicIslandExpandedRegion(.leading) {
-//                    Image("AppIcon24") // 아이콘
-//                        .resizable()
-//                        .frame(width: 24, height: 24)
-////                        .padding(.trailing, 5)
-//                }
-
+                //                DynamicIslandExpandedRegion(.leading) {
+                //                    Image("AppIcon24") // 아이콘
+                //                        .resizable()
+                //                        .frame(width: 24, height: 24)
+                ////                        .padding(.trailing, 5)
+                //                }
+                
                 DynamicIslandExpandedRegion(.center) {
                     HStack {
                         Text("현재 정류장:")
@@ -86,12 +102,12 @@ struct LiveActivityUI: Widget {
                     
                     
                     
-        
-//                    Text("현재 정류장: \(context.state.currentStop)") // 현재 정류장
-//                        .font(.body)
-//                        .foregroundColor(.primary)  // 기본 색상 (다크/라이트 모드 자동 처리)
+                    
+                    //                    Text("현재 정류장: \(context.state.currentStop)") // 현재 정류장
+                    //                        .font(.body)
+                    //                        .foregroundColor(.primary)  // 기본 색상 (다크/라이트 모드 자동 처리)
                 }
-
+                
                 DynamicIslandExpandedRegion(.bottom) {
                     Text("Hotcha와 함께 하차를!")
                         .font(.caption)
