@@ -50,24 +50,8 @@ struct UsingAlertView: View {
                 ).padding(10)
                     .padding(.trailing, -8)
                     .padding(.top, -10)
-                
-                //                Button(action: {
-                //                            // 예시: triggerAlarm 메서드를 호출하여 알람을 울리도록 설정
-                //                            if let busAlert = getSampleBusAlert() {
-                //                                LocationManager.shared.triggerAlarm(for: busAlert)
-                //                            }
-                //                        }) {
-                //                            Text("알람 울리기")
-                //                                .font(.title)
-                //                                .padding()
-                //                                .background(Color.blue)
-                //                                .foregroundColor(.white)
-                //                                .cornerRadius(10)
-                //                        }
                 // 노션뷰
                 BusStopScrollView(
-//                    closestBus: $currentBusViewModel.closestBusLocation,
-//                    closestBusStop: $alertStop,
                     isRefreshing: $isRefreshing,
                     busStops: busStops,
                     busAlert: busAlert,
@@ -145,7 +129,6 @@ struct UsingAlertView: View {
         let busStops: [BusStopLocal] // 버스 정류장 목록
         let alertStop: BusStopLocal? // 알림 정류장
         @Binding var isRefreshing: Bool
-//        @ObservedObject var viewModel: NowBusLocationViewModel // ViewModel을 상위 뷰에서 전달받도록 변경
         @Binding var lastRefreshTime: Date? // 상위 뷰에서 전달받은 값
         var refreshAction: () -> Void // 새로고침 액션 전달받기
         @State var refreshButtonLottie = LottieManager(filename: "refreshLottie", loopMode: .playOnce)
@@ -180,7 +163,6 @@ struct UsingAlertView: View {
                     }.padding(.bottom, 20)
                     
                     // 현재 위치 정보
-//                    if let closestBus = viewModel.closestBusLocation {
                     // closestBus를 목적지 정류장으로 설정
                     if let closestBus = busStops.first(where: {$0.routeid == busAlert.routeid && $0.nodeord == currentBusStopNord}) {
                         if busAlert.arrivalBusStopNord - (Int(closestBus.nodeord)) - busAlert.alertBusStop < 0 { //
@@ -285,8 +267,6 @@ struct UsingAlertView: View {
     
     // BusStopList가 포함된 ScrollView
     struct BusStopScrollView: View {
-//        @Binding var closestBus: NowBusLocation? // 가장 가까운 버스
-//        @Binding var closestBusStop: BusStopLocal?
         @Binding var isRefreshing: Bool // 로딩 상태
         let busStops: [BusStopLocal] // 버스 정류장 목록
         let busAlert: BusAlert // 버스 알림 정보
@@ -300,7 +280,6 @@ struct UsingAlertView: View {
                 ScrollView(showsIndicators: false) {
                     VStack(alignment: .leading, spacing: 0) {
                         // 가장 가까운 버스가 감지 되었을 경우
-//                        if let closestBus = viewModel.closestBusLocation {
                         if let closestBus = busStops.first(where: {$0.nodeord == currentBusStopNord}) {
                             let filteredBusStops = busStops.filter { $0.routeid == busAlert.routeid }
                                 .sorted(by: { $0.nodeord < $1.nodeord })
@@ -316,6 +295,7 @@ struct UsingAlertView: View {
                                     alertLabel: busAlert.alertLabel
                                 )
                             }
+                            
                         } else if isRefreshing {
                             // 로딩 중일 때 로딩 인디케이터 표시
                             ProgressView("가장 가까운 버스 위치를 찾고 있습니다...")
@@ -436,7 +416,6 @@ struct UsingAlertView: View {
         guard !isRefreshing else { return } // 이미 새로고침 중일 경우 중복 요청 방지
         isRefreshing = true
         DispatchQueue.global(qos: .background).async {
-//            currentBusViewModel.fetchBusLocationData(cityCode: Int(busAlert.cityCode), routeId: busAlert.routeid)
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 lastRefreshTime = Date() // 새로고침 시간 업데이트
                 isRefreshing = false
@@ -444,6 +423,7 @@ struct UsingAlertView: View {
                 if currentBusStopNord == alertStop?.nodeord {
                     locationManager.triggerAlarm(for: busAlert)
                 }
+                updateLiveActivity()
             }
         }
     }
@@ -478,6 +458,22 @@ struct UsingAlertView: View {
     private func getSampleBusAlert() -> BusAlert? {
         // 실제로는 등록된 버스 알림을 찾거나 데이터를 받아올 필요가 있음
         return busAlert
+    }
+    
+    func updateLiveActivity() {
+        let currentDate = Date()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HH:mm:ss"
+        let formattedTime = formatter.string(from: currentDate)
+        
+        let closestBusLocation = busStops.first { $0.routeid == busAlert.routeid && $0.nodeord == currentBusStopNord }
+        
+        LiveActivityManager.shared.updateLiveActivity(
+            progress: 0.5,
+            currentStop: closestBusLocation?.nodenm ?? "로딩중",
+            stopsRemaining: Int(busAlert.arrivalBusStopNord) - (currentBusStopNord ?? 0) - Int(busAlert.alertBusStop),
+            Updatetime: formattedTime
+        )
     }
     
     // 알람 비활성화 뷰
