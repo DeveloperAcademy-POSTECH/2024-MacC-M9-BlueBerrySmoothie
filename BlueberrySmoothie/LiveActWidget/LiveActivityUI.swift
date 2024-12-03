@@ -33,13 +33,33 @@ struct LiveActivityUI: Widget {
 
                                    }
                 .padding(.bottom, 5)
-
-                Text("알람까지 \(context.state.stopsRemaining) 정거장 남았습니다.") // 남은 정류장
-                                    .font(.title3) // 글씨 크기를 크게 설정
-                                    .foregroundColor(
-                                        Color(UIColor { $0.userInterfaceStyle == .dark ? .white : .black })
-                                    ) // 다크 모드일 때 하얀색, 라이트 모드일 때 검은색
-                                    .padding(.bottom, 10)
+                // 현재 위치 정보
+                
+                        if context.state.stopsRemaining > 0 {
+                            Text("알람까지 \(context.state.stopsRemaining) 정류장 남았습니다.")
+                                .font(.title3) // 글씨 크기를 크게 설정
+                                .foregroundColor(
+                                    Color(UIColor { $0.userInterfaceStyle == .dark ? .white : .black })
+                                ) // 다크 모드일 때 하얀색, 라이트 모드일 때 검은색
+                                .padding(.bottom, 10)
+                        } else if context.state.stopsRemaining == 0 {
+                            Text("알람 정류장입니다! 일어나세요!")
+                                .font(.title3) // 글씨 크기를 크게 설정
+                                .foregroundColor(
+                                    Color(UIColor { $0.userInterfaceStyle == .dark ? .white : .black })
+                                ) // 다크 모드일 때 하얀색, 라이트 모드일 때 검은색
+                                .padding(.bottom, 10)
+                        } else if context.state.stopsRemaining < 0 {
+                            Text("알람 정류장을 \(-context.state.stopsRemaining) 정류장 지났습니다.")
+                                .font(.title3) // 글씨 크기를 크게 설정
+                                .foregroundColor(
+                                    Color(UIColor { $0.userInterfaceStyle == .dark ? .white : .black })
+                                ) // 다크 모드일 때 하얀색, 라이트 모드일 때 검은색
+                                .padding(.bottom, 10)
+                        }
+                    
+                    
+               
                 HStack {
                     
                     VStack(alignment: .leading) {
