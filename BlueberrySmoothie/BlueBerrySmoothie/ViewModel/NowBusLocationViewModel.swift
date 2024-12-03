@@ -22,7 +22,7 @@ class NowBusLocationViewModel: NSObject, ObservableObject, CLLocationManagerDele
         print("NowBusLocationViewModel initialized.")
         locationManager.pausesLocationUpdatesAutomatically = false
         locationManager.allowsBackgroundLocationUpdates = true
-        fetchBusLocationData(cityCode: 21, routeId: "BSB5200043000")
+//        fetchBusLocationData(cityCode: 21, routeId: "BSB5200043000")
     }
     
     func startUpdating() {
@@ -49,7 +49,7 @@ class NowBusLocationViewModel: NSObject, ObservableObject, CLLocationManagerDele
         guard let location = locations.last else { return }
         userLocation = location
         print("locationManager(didUpdateLocations)")
-        findClosestBusLocation()
+//        findClosestBusLocation()
     }
 
     // API를 호출하여 버스 위치 데이터를 가져옴
@@ -60,7 +60,8 @@ class NowBusLocationViewModel: NSObject, ObservableObject, CLLocationManagerDele
                 print("----------------------------------------------------------------")
                 // 좌표 검증 후 업데이트
                 self?.NowbusLocations = locations.map { self?.validateAndFixCoordinates(for: $0) ?? $0 }
-              
+                self?.findClosestBusLocation()
+                print("가장 가까운 버스 찾음")
                 
 //                self?.findClosestBusLocation() // 데이터 가져온 후 가장 가까운 버스 위치 계산
 //                self?.printUserLocationAndClosestBus() // 사용자 위치 및 가장 가까운 버스 정보 출력
@@ -69,16 +70,19 @@ class NowBusLocationViewModel: NSObject, ObservableObject, CLLocationManagerDele
     }
 
     // 사용자 위치와 가장 가까운 버스 위치를 찾음
-    private func findClosestBusLocation() {
+    /*private*/ func findClosestBusLocation() {
         guard let userLocation = userLocation else { return }
         print("userLocation: \(userLocation)")
 
-        closestBusLocation = NowbusLocations.min(by: { bus1, bus2 in
-            let busLocation1 = CLLocation(latitude: Double(bus1.gpslati) ?? 0, longitude: Double(bus1.gpslong) ?? 0)
-            let busLocation2 = CLLocation(latitude: Double(bus2.gpslati) ?? 0, longitude: Double(bus2.gpslong) ?? 0)
-
-            return userLocation.distance(from: busLocation1) < userLocation.distance(from: busLocation2)
-        })
+//        closestBusLocation = NowbusLocations.min(by: { bus1, bus2 in
+//            let busLocation1 = CLLocation(latitude: Double(bus1.gpslati) ?? 0, longitude: Double(bus1.gpslong) ?? 0)
+//            let busLocation2 = CLLocation(latitude: Double(bus2.gpslati) ?? 0, longitude: Double(bus2.gpslong) ?? 0)
+//
+//            return userLocation.distance(from: busLocation1) < userLocation.distance(from: busLocation2)
+//        })
+        
+        closestBusLocation = NowbusLocations.filter({$0.nodeord == String(busAlert?.arrivalBusStopNord ?? 0)}).first
+        print(closestBusLocation)
         
         let currentDate = Date()  // 현재 시간을 가져옵니다.
 

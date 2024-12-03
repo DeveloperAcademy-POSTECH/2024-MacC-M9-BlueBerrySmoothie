@@ -11,7 +11,7 @@ struct UsingAlertView: View {
     
     @State var busAlert: BusAlert // 관련된 알림 정보
     @State private var refreshTimerCancellable: Cancellable? // 타이머를 관리하기 위한 상태
-    private let refreshInterval: TimeInterval = 5.0 // 새로고침 간격
+    private let refreshInterval: TimeInterval = 10.0 // 새로고침 간격
     
     @State private var isAlertEnabled: Bool = false // 스위치 상태 관리
     @State private var isRefreshing: Bool = false // 새로고침 상태 관리
@@ -25,8 +25,7 @@ struct UsingAlertView: View {
     
     
     @State private var liveActivityManager: LiveActivityManager? = nil
-    
-    
+    @State private var currentBusStopNord: Int? = nil
     
     
     var body: some View {
@@ -38,18 +37,16 @@ struct UsingAlertView: View {
                 // 상단 네모박스 정보 뷰
                 BusAlertInfoView(
                     busAlert: busAlert,
+                    busStops: busStops,
                     alertStop: alertStop,
                     isRefreshing: $isRefreshing,
-                    viewModel: currentBusViewModel,
+//                    viewModel: currentBusViewModel,
                     lastRefreshTime: $lastRefreshTime,
                     refreshAction: {
                         refreshData()
                         isScrollTriggered = true // 스크롤 동작 트리거
-                        
-                        
-                        
-                    }, isScrollTriggered: $isScrollTriggered
-                    
+                    }, isScrollTriggered: $isScrollTriggered,
+                    currentBusStopNord: $currentBusStopNord
                 ).padding(10)
                     .padding(.trailing, -8)
                     .padding(.top, -10)
@@ -69,13 +66,15 @@ struct UsingAlertView: View {
                 //                        }
                 // 노션뷰
                 BusStopScrollView(
-                    closestBus: $currentBusViewModel.closestBusLocation,
+//                    closestBus: $currentBusViewModel.closestBusLocation,
+//                    closestBusStop: $alertStop,
                     isRefreshing: $isRefreshing,
                     busStops: busStops,
                     busAlert: busAlert,
                     alertStop: alertStop,
                     viewModel: currentBusViewModel,
-                    isScrollTriggered: $isScrollTriggered
+                    isScrollTriggered: $isScrollTriggered,
+                    currentBusStopNord: $currentBusStopNord
                 )
                 .edgesIgnoringSafeArea(.bottom)
             }
@@ -124,26 +123,38 @@ struct UsingAlertView: View {
             Text("알람을 종료하시겠습니까?")
         }
         .onAppear {
-            refreshData() // 초기 로드
-            currentBusViewModel.startUpdating() // 뷰가 보일 때 뷰모델에서 위치 업데이트 시작
+//            refreshData() // 초기 로드
+//            currentBusViewModel.startUpdating() // 뷰가 보일 때 뷰모델에서 위치 업데이트 시작
             startRefreshTimer() // 타이머 시작
             print(busAlert, "여기는 뷰")
             //            notificationManager.notificationReceived = true
             currentBusViewModel.busAlert = busAlert
+//            currentBusViewModel.findClosestBusLocation()
+            isFinishedLoading = true
+            isScrollTriggered = true
+            currentBusStopNord = busAlert.arrivalBusStopNord // 현재 버스 정류장 번호를 도착 정류장 번호에서 -2로 설정
         }
-        .onChange(of: currentBusViewModel.closestBusLocation?.nodeid) { closestBusNodeId in
-            if let closestBusNodeId = closestBusNodeId,
-               busStops.contains(where: { $0.nodeid == closestBusNodeId }) {
-                print("온체인지 감지 - closestBus가 busStops에 있음")
-                isFinishedLoading = true
-                isScrollTriggered = true
-                print(isFinishedLoading)
-                print(isScrollTriggered)
-            }
-        }
+//        .onChange(of: alertStop != nil) { /*closestBusNodeId in*/
+//            if let closestBusNodeId = closestBusNodeId,
+//               busStops.contains(where: { $0.nodeid == closestBusNodeId }) {
+//                print("온체인지 감지 - closestBus가 busStops에 있음")
+//                isFinishedLoading = true
+//                isScrollTriggered = true
+//            }
+//        }
+//        .onChange(of: currentBusViewModel.closestBusLocation?.nodeid) { closestBusNodeId in
+//            if let closestBusNodeId = closestBusNodeId,
+//               busStops.contains(where: { $0.nodeid == closestBusNodeId }) {
+//                print("온체인지 감지 - closestBus가 busStops에 있음")
+//                isFinishedLoading = true
+//                isScrollTriggered = true
+//                print(isFinishedLoading)
+//                print(isScrollTriggered)
+//            }
+//        }
         .onDisappear {
             LiveActivityManager.shared.endLiveActivity()
-            currentBusViewModel.stopUpdating() // 뷰가 사라질 때 뷰모델에서 위치 업데이트 중단
+//            currentBusViewModel.stopUpdating() // 뷰가 사라질 때 뷰모델에서 위치 업데이트 중단
             stopRefreshTimer() // 뷰 사라질 때 타이머 중단
             currentBusViewModel.closestBusLocation = nil
         }
@@ -151,14 +162,16 @@ struct UsingAlertView: View {
     
     struct BusAlertInfoView: View {
         let busAlert: BusAlert
+        let busStops: [BusStopLocal] // 버스 정류장 목록
         let alertStop: BusStopLocal? // 알림 정류장
         @Binding var isRefreshing: Bool
-        @ObservedObject var viewModel: NowBusLocationViewModel // ViewModel을 상위 뷰에서 전달받도록 변경
+//        @ObservedObject var viewModel: NowBusLocationViewModel // ViewModel을 상위 뷰에서 전달받도록 변경
         @Binding var lastRefreshTime: Date? // 상위 뷰에서 전달받은 값
         var refreshAction: () -> Void // 새로고침 액션 전달받기
         @State var refreshButtonLottie = LottieManager(filename: "refreshLottie", loopMode: .playOnce)
         @Binding var isScrollTriggered: Bool // 스크롤하게 하는 트리거
         @State private var isRefreshDisabled = false // 5초 동안 새로고침 비활성화 상태를 추적
+        @Binding var currentBusStopNord: Int?
         
         var body: some View {
             ZStack {
@@ -187,26 +200,28 @@ struct UsingAlertView: View {
                     }.padding(.bottom, 20)
                     
                     // 현재 위치 정보
-                    if let closestBus = viewModel.closestBusLocation {
-                        if busAlert.arrivalBusStopNord - (Int(closestBus.nodeord) ?? 0) - busAlert.alertBusStop < 0 { //
-                            if busAlert.arrivalBusStopNord - (Int(closestBus.nodeord) ?? 0) > 0 {
-                                Text("하차까지 \(busAlert.arrivalBusStopNord - (Int(closestBus.nodeord) ?? 0)) 정류장 남았습니다.")
+//                    if let closestBus = viewModel.closestBusLocation {
+                    // closestBus를 목적지 정류장으로 설정
+                    if let closestBus = busStops.first(where: {$0.nodeord == currentBusStopNord}) {
+                        if busAlert.arrivalBusStopNord - (Int(closestBus.nodeord)) - busAlert.alertBusStop < 0 { //
+                            if busAlert.arrivalBusStopNord - (Int(closestBus.nodeord)) > 0 {
+                                Text("하차까지 \(busAlert.arrivalBusStopNord - (Int(closestBus.nodeord))) 정류장 남았습니다.")
                                     .font(.title2)
                                     .foregroundStyle(.blackDGray7)
                                     .padding(.bottom, 10)
-                            } else if busAlert.arrivalBusStopNord - (Int(closestBus.nodeord) ?? 0) == 0 {
+                            } else if busAlert.arrivalBusStopNord - (Int(closestBus.nodeord)) == 0 {
                                 Text("하차 정류장입니다! 핫챠하세요!")
                                     .font(.title2)
                                     .foregroundStyle(.blackDGray7)
                                     .padding(.bottom, 10)
-                            } else if busAlert.arrivalBusStopNord - (Int(closestBus.nodeord) ?? 0) < 0 {
-                                Text("하차 정류장을 \(-(busAlert.arrivalBusStopNord - (Int(closestBus.nodeord) ?? 0))) 정류장 지났습니다.")
+                            } else if busAlert.arrivalBusStopNord - (Int(closestBus.nodeord)) < 0 {
+                                Text("하차 정류장을 \(-(busAlert.arrivalBusStopNord - (Int(closestBus.nodeord)))) 정류장 지났습니다.")
                                     .font(.title2)
                                     .foregroundStyle(.blackDGray7)
                                     .padding(.bottom, 10)
                             }
                         } else {
-                            Text("알람까지 \(busAlert.arrivalBusStopNord - (Int(closestBus.nodeord) ?? 0) - busAlert.alertBusStop) 정류장 남았습니다.")
+                            Text("알람까지 \(busAlert.arrivalBusStopNord - (Int(closestBus.nodeord)) - busAlert.alertBusStop) 정류장 남았습니다.")
                                 .font(.title2)
                                 .foregroundStyle(.blackDGray7)
                                 .padding(.bottom, 10)
@@ -229,7 +244,7 @@ struct UsingAlertView: View {
                                     formatter.dateFormat = "HH:mm:ss"  // 원하는 시간 포맷을 지정합니다.
                                     let formattedTime = formatter.string(from: currentDate)
                                     
-                                    LiveActivityManager.shared.startLiveActivity(title: busAlert.alertLabel ?? "알 수 없는 알람" , description: busAlert.busNo, stationName: busAlert.arrivalBusStopNm, initialProgress: 99, currentStop: closestBus.nodenm, stopsRemaining: busAlert.arrivalBusStopNord - (Int(closestBus.nodeord) ?? 0)  - Int(busAlert.alertBusStop), Updatetime: formattedTime)
+                                    LiveActivityManager.shared.startLiveActivity(title: busAlert.alertLabel ?? "알 수 없는 알람" , description: busAlert.busNo, stationName: busAlert.arrivalBusStopNm, initialProgress: 99, currentStop: closestBus.nodenm, stopsRemaining: busAlert.arrivalBusStopNord - (Int(closestBus.nodeord))  - Int(busAlert.alertBusStop), Updatetime: formattedTime)
                                 }
                         }
                     }
@@ -290,28 +305,35 @@ struct UsingAlertView: View {
     
     // BusStopList가 포함된 ScrollView
     struct BusStopScrollView: View {
-        @Binding var closestBus: NowBusLocation? // 가장 가까운 버스
+//        @Binding var closestBus: NowBusLocation? // 가장 가까운 버스
+//        @Binding var closestBusStop: BusStopLocal?
         @Binding var isRefreshing: Bool // 로딩 상태
         let busStops: [BusStopLocal] // 버스 정류장 목록
         let busAlert: BusAlert // 버스 알림 정보
         let alertStop: BusStopLocal? // 알림 정류장
         @ObservedObject var viewModel: NowBusLocationViewModel // ViewModel
         @Binding var isScrollTriggered: Bool // 스크롤하게 하는 트리거
+        @Binding var currentBusStopNord: Int?
         
         var body: some View {
             ScrollViewReader { proxy in
                 ScrollView(showsIndicators: false) {
                     VStack(alignment: .leading, spacing: 0) {
                         // 가장 가까운 버스가 감지 되었을 경우
-                        if let closestBus = viewModel.closestBusLocation {
+//                        if let closestBus = viewModel.closestBusLocation {
+                        if let closestBus = busStops.first(where: {$0.nodeord == currentBusStopNord}) {
                             let filteredBusStops = busStops.filter { $0.routeid == busAlert.routeid }
                                 .sorted(by: { $0.nodeord < $1.nodeord })
                             let maxNodeord = filteredBusStops.last?.nodeord // 마지막 정류장의 nodeord
                             
+//                            DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+//                                alertStop?.nodeord+=1
+//                            }
+                            
                             ForEach(filteredBusStops, id: \.id) { busStop in
                                 BusStopRow(
                                     busStop: busStop,
-                                    isCurrentLocation: busStop.nodeid == closestBus.nodeid,
+                                    isCurrentLocation: busStop.nodeord == closestBus.nodeord,
                                     arrivalBusStopID: busAlert.arrivalBusStopID,
                                     alertStop: alertStop,
                                     isLastBusStop: busStop.nodeord == maxNodeord, // 현재 정류장의 nodeord가 최대값과 같은지 비교
@@ -440,10 +462,11 @@ struct UsingAlertView: View {
         guard !isRefreshing else { return } // 이미 새로고침 중일 경우 중복 요청 방지
         isRefreshing = true
         DispatchQueue.global(qos: .background).async {
-            currentBusViewModel.fetchBusLocationData(cityCode: Int(busAlert.cityCode), routeId: busAlert.routeid)
+//            currentBusViewModel.fetchBusLocationData(cityCode: Int(busAlert.cityCode), routeId: busAlert.routeid)
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 lastRefreshTime = Date() // 새로고침 시간 업데이트
                 isRefreshing = false
+                currentBusStopNord! += 1
             }
         }
     }

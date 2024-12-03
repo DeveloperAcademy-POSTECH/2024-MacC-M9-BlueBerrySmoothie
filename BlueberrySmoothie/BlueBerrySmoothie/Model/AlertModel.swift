@@ -18,7 +18,7 @@ class BusAlert {
     var routeid: String // 노선(버스번호) id
     var arrivalBusStopID: String // 도착 정류소 id
     var arrivalBusStopNm: String // 도착 정류소명
-    var arrivalBusStopNord: Int // 도착 정류소명
+    var arrivalBusStopNord: Int // 도착 정류소 순서
     var alertBusStop: Int // 몇 번째 전에 알람
     var alertLabel: String? // 알람 이름
     var alertSound: Bool? // 알람 사운드 (옵셔널)
