@@ -123,17 +123,20 @@ struct UsingAlertView: View {
             Text("알람을 종료하시겠습니까?")
         }
         .onAppear {
+            isScrollTriggered = false
             startRefreshTimer() // 타이머 시작
             print(busAlert, "여기는 뷰")
             currentBusViewModel.busAlert = busAlert
             isFinishedLoading = true
-            isScrollTriggered = true
             currentBusStopNord = busAlert.arrivalBusStopNord - busAlert.alertBusStop - 2 // 현재 버스 정류장 번호를 알람 정류장 번호에서 -2로 설정
         }
         .onDisappear {
             LiveActivityManager.shared.endLiveActivity()
             stopRefreshTimer() // 뷰 사라질 때 타이머 중단
             currentBusViewModel.closestBusLocation = nil
+        }
+        .onChange(of: currentBusStopNord) {
+            isScrollTriggered = true
         }
     }
     
@@ -329,10 +332,10 @@ struct UsingAlertView: View {
                 // 해당 버스 노드 위치로 스크롤하는 에니메이션
                 .onChange(of: isScrollTriggered) { value in
                     if value {
-                        if let location = viewModel.closestBusLocation {
+                        if let closestBus = busStops.first(where: { $0.routeid == busAlert.routeid && $0.nodeord == currentBusStopNord }) {
                             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                                 withAnimation(.smooth) {
-                                    proxy.scrollTo(location.nodeid, anchor: .center)
+                                    proxy.scrollTo(closestBus.nodeid, anchor: .center)
                                 }
                             }
                         }
@@ -413,11 +416,11 @@ struct UsingAlertView: View {
     
     /// 타이머 시작
     private func startRefreshTimer() {
+        isScrollTriggered = true
         refreshTimerCancellable = Timer.publish(every: refreshInterval, on: .main, in: .common)
             .autoconnect()
             .sink { _ in
                 refreshData()
-                
                 print("화면 새로고침")
             }
     }
