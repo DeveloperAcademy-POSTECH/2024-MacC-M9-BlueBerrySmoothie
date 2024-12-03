@@ -123,38 +123,15 @@ struct UsingAlertView: View {
             Text("알람을 종료하시겠습니까?")
         }
         .onAppear {
-//            refreshData() // 초기 로드
-//            currentBusViewModel.startUpdating() // 뷰가 보일 때 뷰모델에서 위치 업데이트 시작
             startRefreshTimer() // 타이머 시작
             print(busAlert, "여기는 뷰")
-            //            notificationManager.notificationReceived = true
             currentBusViewModel.busAlert = busAlert
-//            currentBusViewModel.findClosestBusLocation()
             isFinishedLoading = true
             isScrollTriggered = true
-            currentBusStopNord = busAlert.arrivalBusStopNord // 현재 버스 정류장 번호를 도착 정류장 번호에서 -2로 설정
+            currentBusStopNord = busAlert.arrivalBusStopNord - busAlert.alertBusStop - 2 // 현재 버스 정류장 번호를 알람 정류장 번호에서 -2로 설정
         }
-//        .onChange(of: alertStop != nil) { /*closestBusNodeId in*/
-//            if let closestBusNodeId = closestBusNodeId,
-//               busStops.contains(where: { $0.nodeid == closestBusNodeId }) {
-//                print("온체인지 감지 - closestBus가 busStops에 있음")
-//                isFinishedLoading = true
-//                isScrollTriggered = true
-//            }
-//        }
-//        .onChange(of: currentBusViewModel.closestBusLocation?.nodeid) { closestBusNodeId in
-//            if let closestBusNodeId = closestBusNodeId,
-//               busStops.contains(where: { $0.nodeid == closestBusNodeId }) {
-//                print("온체인지 감지 - closestBus가 busStops에 있음")
-//                isFinishedLoading = true
-//                isScrollTriggered = true
-//                print(isFinishedLoading)
-//                print(isScrollTriggered)
-//            }
-//        }
         .onDisappear {
             LiveActivityManager.shared.endLiveActivity()
-//            currentBusViewModel.stopUpdating() // 뷰가 사라질 때 뷰모델에서 위치 업데이트 중단
             stopRefreshTimer() // 뷰 사라질 때 타이머 중단
             currentBusViewModel.closestBusLocation = nil
         }
@@ -202,7 +179,7 @@ struct UsingAlertView: View {
                     // 현재 위치 정보
 //                    if let closestBus = viewModel.closestBusLocation {
                     // closestBus를 목적지 정류장으로 설정
-                    if let closestBus = busStops.first(where: {$0.nodeord == currentBusStopNord}) {
+                    if let closestBus = busStops.first(where: {$0.routeid == busAlert.routeid && $0.nodeord == currentBusStopNord}) {
                         if busAlert.arrivalBusStopNord - (Int(closestBus.nodeord)) - busAlert.alertBusStop < 0 { //
                             if busAlert.arrivalBusStopNord - (Int(closestBus.nodeord)) > 0 {
                                 Text("하차까지 \(busAlert.arrivalBusStopNord - (Int(closestBus.nodeord))) 정류장 남았습니다.")
@@ -326,10 +303,6 @@ struct UsingAlertView: View {
                                 .sorted(by: { $0.nodeord < $1.nodeord })
                             let maxNodeord = filteredBusStops.last?.nodeord // 마지막 정류장의 nodeord
                             
-//                            DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-//                                alertStop?.nodeord+=1
-//                            }
-                            
                             ForEach(filteredBusStops, id: \.id) { busStop in
                                 BusStopRow(
                                     busStop: busStop,
@@ -416,11 +389,9 @@ struct UsingAlertView: View {
                 }
                 VStack(alignment: .leading){
                     Text(busStop.nodenm)
-                    
                         .foregroundStyle(.gray1Dgray6)
                         .font(isCurrentLocation || busStop.nodeid == arrivalBusStopID || busStop.nodeid == alertStop?.nodeid ? .body1 : .caption1)
                     if busStop.nodeid == alertStop?.nodeid {
-                        // TODO: 알람 레이블 여기 넣기
                         HStack {
                             Text(alertLabel ?? "")
                                 .font(.system(size: 12))
@@ -467,6 +438,9 @@ struct UsingAlertView: View {
                 lastRefreshTime = Date() // 새로고침 시간 업데이트
                 isRefreshing = false
                 currentBusStopNord! += 1
+                if currentBusStopNord == alertStop?.nodeord {
+                    locationManager.triggerAlarm(for: busAlert)
+                }
             }
         }
     }
