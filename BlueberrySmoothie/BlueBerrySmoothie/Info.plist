@@ -4,6 +4,10 @@
 <dict>
 	<key>API_KEY</key>
 	<string>$(API_KEY)</string>
+	<key>BGTaskSchedulerPermittedIdentifiers</key>
+	<array>
+		<string>com.team.blueberrySmoothie.taskIdentifier</string>
+	</array>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
@@ -27,12 +31,7 @@
 		<string>fetch</string>
 		<string>processing</string>
 	</array>
-    <key>BGTaskSchedulerPermittedIdentifiers</key>
-    <array>
-        <string>com.team.blueberrySmoothie.taskIdentifier</string>
-    </array>
 	<key>kTCCServiceMediaLibrary</key>
-	<string>앱에서 음악을 재생하고 관리하기 위한 권한이 필요합니다.</string>
-
+	<string>앱에서 설정된 트리거에 따라 소리를 자동으로 관리하고 재생하기 위해 음악 라이브러리 접근 권한이 필요합니다.</string>
 </dict>
 </plist>
