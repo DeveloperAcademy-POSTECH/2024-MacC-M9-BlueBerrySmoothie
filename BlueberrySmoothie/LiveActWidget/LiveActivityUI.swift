@@ -34,7 +34,7 @@ struct LiveActivityUI: Widget {
                                    }
                 .padding(.bottom, 5)
 
-                Text("알람까지 \(context.state.stopsRemaining) 정거장 남았습니다.") // 남은 정류장
+                Text("알람까지 \(context.state.stopsRemaining) 정류장 남았습니다.") // 남은 정류장
                                     .font(.title3) // 글씨 크기를 크게 설정
                                     .foregroundColor(
                                         Color(UIColor { $0.userInterfaceStyle == .dark ? .white : .black })

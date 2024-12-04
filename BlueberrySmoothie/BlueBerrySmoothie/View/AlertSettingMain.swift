@@ -221,7 +221,7 @@ struct AlertSettingMain: View {
                         saveBusstop()
                         dismiss()
                     } else {
-                        showToastMessage("몇 정거장 전에 알람이 울릴지 선택해주세요")
+                        showToastMessage("몇 정류장 전에 알람이 울릴지 선택해주세요")
                     }
                 }) {
                     Text("저장")

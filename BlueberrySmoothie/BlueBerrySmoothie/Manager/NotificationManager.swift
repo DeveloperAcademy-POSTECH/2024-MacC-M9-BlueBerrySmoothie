@@ -51,7 +51,7 @@ class NotificationManager: NSObject, CLLocationManagerDelegate, ObservableObject
         let identifier = busAlert.id
         
         let content = UNMutableNotificationContent()
-        content.title = "\(busAlert.arrivalBusStopNm) \(busAlert.alertBusStop) 정거장 전입니다."
+        content.title = "\(busAlert.arrivalBusStopNm) \(busAlert.alertBusStop) 정류장 전입니다."
         content.subtitle = "일어나서 내릴 준비를 해야해요!"
         content.interruptionLevel = .timeSensitive // 설정할 interruption level
         

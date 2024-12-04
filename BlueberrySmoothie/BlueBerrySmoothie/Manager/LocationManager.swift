@@ -97,7 +97,7 @@ class LocationManager: NSObject, ObservableObject {
     
     private func scheduleNotification(for busAlert: BusAlert) {
         let content = UNMutableNotificationContent()
-        content.title = "\(busAlert.arrivalBusStopNm) \(busAlert.alertBusStop)정거장 전입니다."
+        content.title = "\(busAlert.arrivalBusStopNm) \(busAlert.alertBusStop)정류장 전입니다."
         content.body = "일어나서 내릴 준비를 해야해요!"
         
         let isHeadphonesConnected = {
